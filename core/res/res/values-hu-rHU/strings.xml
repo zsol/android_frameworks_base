@@ -1,0 +1,1829 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/* //device/apps/common/assets/res/any/strings.xml
+**
+** Copyright 2006, The Android Open Source Project
+**
+** Licensed under the Apache License, Version 2.0 (the "License");
+** you may not use this file except in compliance with the License.
+** You may obtain a copy of the License at
+**
+**     http://www.apache.org/licenses/LICENSE-2.0
+**
+** Unless required by applicable law or agreed to in writing, software
+** distributed under the License is distributed on an "AS IS" BASIS,
+** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+** See the License for the specific language governing permissions and
+** limitations under the License.
+*/
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Suffix added to a number to signify size in bytes. -->
+    <string name="byteShort">B</string>
+    <!-- Suffix added to a number to signify size in kilobytes. -->
+    <string name="kilobyteShort">KB</string>
+    <!-- Suffix added to a number to signify size in megabytes. -->
+    <string name="megabyteShort">MB</string>
+    <!-- Suffix added to a number to signify size in gigabytes. -->
+    <string name="gigabyteShort">GB</string>
+    <!-- Suffix added to a number to signify size in terabytes. -->
+    <string name="terabyteShort">TB</string>
+    <!-- Suffix added to a number to signify size in petabytes. -->
+    <string name="petabyteShort">PB</string>
+    <!-- Format string used to add a suffix like "KB" or "MB" to a number
+         to display a size in kilobytes, megabytes, or other size units.
+         Some languages (like French) will want to add a space between
+         the placeholders. -->
+    <string name="fileSizeSuffix"><xliff:g id="number" example="123">%1$s</xliff:g><xliff:g id="unit" example="KB">%2$s</xliff:g></string>
+
+    <!-- Used in Contacts for a field that has no label and in Note Pad
+         for a note with no name. -->
+    <string name="untitled">&lt;névtelen&gt;</string>
+
+    <!-- Used to replace a range of characters in text that is too wide
+         for the space allocated to it. -->
+    <string name="ellipsis">\u2026</string>
+
+    <!-- How to display the lack of a phone number -->
+    <string name="emptyPhoneNumber">(Nincs telefonszám)</string>
+
+    <!-- How to display the lack of a name -->
+    <string name="unknownName">(Ismeretlen)</string>
+
+    <!-- What the UI should display for "voice mail" unless overridden by the SIM-->
+    <string name="defaultVoiceMailAlphaTag">Hangposta</string>
+
+    <!-- What the UI should display for "Msisdn" unless overridden by the SIM-->
+    <string name="defaultMsisdnAlphaTag">MSISDN1</string>
+
+    <!-- For GsmMmiCode.java --> <skip />
+    <!-- Displayed when the user dialed an MMI code whose function
+         could not be performed. This will be displayed in a toast. -->
+    <string name="mmiError">Kapcsolati probléma vagy érvénytelen MMI kód.</string>
+    <!-- Displayed when a phone feature such as call barring was activated. -->
+    <string name="serviceEnabled">A szolgáltatás engedélyezve.</string>
+    <!-- Displayed in front of the list of a set of service classes
+         (voice, data, fax, etc.) that were enabled. -->
+    <string name="serviceEnabledFor">A következő szolgáltatások engedélyezve:</string>
+    <!-- Displayed when a phone feature such as call forwarding was deactivated. -->
+    <string name="serviceDisabled">A szolgáltatás kikapcsolva.</string>
+    <!-- Displayed when a phone property such as a SIM password was registered. -->
+    <string name="serviceRegistered">A regisztráció sikeres volt.</string>
+    <!-- Displayed when a phone property such as a SIM password was erased. -->
+    <string name="serviceErased">A törlés sikeres volt.</string>
+    <!-- Displayed when a SIM password was entered incorrectly. -->
+    <string name="passwordIncorrect">Hibás jelszó.</string>
+    <!-- Displayed when a phone feature triggered by an MMI code is complete. -->
+    <string name="mmiComplete">MMI tevékenység befejeződött.</string>
+    <!-- Displayed when a SIM PIN password is entered incorrectly. -->
+    <string name="badPin">A beírt régi PIN-kód helytelen.</string>
+    <!-- Displayed when a SIM PUK password is entered incorrectly. -->
+    <string name="badPuk">A beírt PUK-kód helytelen.</string>
+    <!-- Displayed when SIM PIN passwords are entered inconsistently. -->
+    <string name="mismatchPin">A beírt PIN-kódok nem egyeznek.</string>
+    <!-- Displayed when a SIM PIN password is too long or too short. -->
+    <string name="invalidPin">A PIN-kód hossza 4 és 8 számjegy között lehet.</string>
+    <!-- Displayed to prompt the user to type the PUK password to unlock
+         the SIM card. -->
+    <string name="needPuk">SIM kártya zárolva. Engedélyezéshez PUK-kód szükséges.</string>
+    <string name="needPuk2">A SIM kártya engedélyezéséhez a PUK2-kód szükséges.</string>
+
+    <!-- Displayed as the title for a success/failure report enabling/disabling caller ID. -->
+    <string name="ClipMmi">Bejövő hívóazonosító</string>
+    <!-- Displayed as the title for a success/failure report enabling/disabling caller ID. -->
+    <string name="ClirMmi">Kimenő hívóazonosító</string>
+    <!-- Displayed as the title for a success/failure report enabling/disabling call forwarding. -->
+    <string name="CfMmi">Hívástovábbítás</string>
+    <!-- Displayed as the title for a success/failure report enabling/disabling call waiting. -->
+    <string name="CwMmi">Hívásvárakoztatás</string>
+    <!-- Displayed as the title for a success/failure report enabling/disabling call barring. -->
+    <string name="BaMmi">Híváskorlátozás</string>
+    <!-- Displayed as the title for a success/failure report changing the SIM password. -->
+    <string name="PwdMmi">Jelszócsere</string>
+    <!-- Displayed as the title for a success/failure report changing the SIM PIN. -->
+    <string name="PinMmi">PIN-kód csere</string>
+    <string name="CnipMmi">Hívószám látható</string>
+    <string name="CnirMmi">Hívószám titkos</string>
+    <string name="ThreeWCMmi">Három irányú hívás</string>
+    <string name="RuacMmi">A kéretlen hívások visszautasítása</string>
+    <string name="CndMmi">Hívószám kézbesítés</string>
+    <string name="DndMmi">Ne zavarjanak</string>
+
+    <!-- Displayed to confirm to the user that caller ID will be restricted on the next call as usual. -->
+    <string name="CLIRDefaultOnNextCallOn">A saját szám alapértelmezetten titkos, és a következő hívásnál is az lesz.</string>
+    <!-- Displayed to confirm to the user that caller ID will be not restricted on the next call even though it usually is. -->
+    <string name="CLIRDefaultOnNextCallOff">A saját szám alapértelmezetten titkos, a következő hívásnál viszont látható lesz.</string>
+    <!-- Displayed to confirm to the user that caller ID will not be restricted on the next call but usually is. -->
+    <string name="CLIRDefaultOffNextCallOn">A saját szám alapértelmezetten látható, de a következő hívásnál titkos lesz.</string>
+    <!-- Displayed to confirm to the user that caller ID will not be restricted on the next call or in general. -->
+    <string name="CLIRDefaultOffNextCallOff">A saját szám alapértelmezetten látható, és a következő hívásnál is az lesz.</string>
+
+
+    <!-- Displayed to tell the user that caller ID is not provisioned for their SIM. -->
+    <string name="serviceNotProvisioned">A szolgáltatásról nincs rendelkezés.</string>
+    <!-- Displayed to tell the user that they cannot change the caller ID setting. -->
+    <string name="CLIRPermanent">A hívóazonosító beállítás nem változtatható.</string>
+
+    <!-- Notification title to tell the user that restricted state is changed by access control. -->
+    <string name="RestrictedChangedTitle">Korlátozott hozzáférés megváltozott</string>
+    <!-- Displayed to tell the user that data service is blocked by access control. -->
+    <string name="RestrictedOnData">Az adatkapcsolat letiltva.</string>
+    <!-- Displayed to tell the user that emergency service is blocked by access control. -->
+    <string name="RestrictedOnEmergency">A segélyhívó szolgáltatás letiltva.</string>
+    <!-- Displayed to tell the user that normal service is blocked by access control. -->
+    <string name="RestrictedOnNormal">A beszéd/SMS szolgáltatás letiltva.</string>
+    <!-- Displayed to tell the user that all voice service is blocked by access control. -->
+    <string name="RestrictedOnAll">Minden beszéd- és SMS szolgáltatás letiltva.</string>
+    
+    <!-- Mappings between TS 27.007 +CFCC/+CLCK "service classes" and human-readable strings--> <skip />
+    <!-- Example: Service was enabled for: Voice, Data -->
+    <string name="serviceClassVoice">Beszéd</string>
+    <!-- Example: Service was enabled for: Voice, Data -->
+    <string name="serviceClassData">Adat</string>
+    <!-- Example: Service was enabled for: Voice, FAX -->
+    <string name="serviceClassFAX">FAX</string>
+    <!-- Example: Service was enabled for: Voice, SMS -->
+    <string name="serviceClassSMS">SMS</string>
+    <!-- Meaning: asynchronous data.  Example: Service was enabled for: Voice, Async -->
+    <string name="serviceClassDataAsync">Aszinkron</string>
+    <!-- Meaning: synchronous data.  Example: Service was enabled for: Voice, Async -->
+    <string name="serviceClassDataSync">Szinkron</string>
+    <!-- Meaning: packet data.  Example: Service was enabled for: Voice, Packet -->
+    <string name="serviceClassPacket">Csomag</string>
+    <!-- Meaning: unknown.  Example: Service was enabled for: Voice, PAD -->
+    <string name="serviceClassPAD">PAD</string>
+
+    <!-- CDMA Roaming Indicator Strings (non ERI)--> <skip />
+    <!-- Default roaming indicator text -->
+    <string name="roamingText0">Roaming Kijelző Be</string>
+    <string name="roamingText1">Roaming Kijelző Ki</string>
+    <string name="roamingText2">Roaming Kijelző Villog</string>
+    <string name="roamingText3">Környéken Kívül</string>
+    <string name="roamingText4">Épületen Kívül</string>
+    <string name="roamingText5">Roaming - Preferált Rendszer</string>
+    <string name="roamingText6">Roaming - Elérhető Rendszer</string>
+    <string name="roamingText7">Roaming - Szövetséges Partner</string>
+    <string name="roamingText8">Roaming - Prémium Partner</string>
+    <string name="roamingText9">Roaming - Teljes Szolgáltatás</string>
+    <string name="roamingText10">Roaming - Részleges Szolgáltatás</string>
+    <string name="roamingText11">Roaming Felirat Be</string>
+    <string name="roamingText12">Roaming Felirat Ki</string>
+    <string name="roamingTextSearching">Szolgáltatás Keresése</string>
+
+
+    <!--
+        {0} is one of "bearerServiceCode*"
+        {1} is dialing number
+        {2} is time in seconds
+
+        cfTemplateRegistered and cfTemplateRegisteredTime mean that a phone number
+        has been set but forwarding is not on.
+    --> <skip />
+    <!-- Displayed when the call forwarding query was not able to be forwarded. -->
+    <string name="cfTemplateNotForwarded"><xliff:g id="bearer_service_code">{0}</xliff:g>: Sikertelen átirányítás</string>
+    <!-- Displayed when the call forwarding query was forwarded. -->
+    <string name="cfTemplateForwarded"><xliff:g id="bearer_service_code">{0}</xliff:g>: <xliff:g id="dialing_number">{1}</xliff:g></string>
+    <!-- Displayed when the call forwarding query will be forwarded after some time. -->
+    <string name="cfTemplateForwardedTime"><xliff:g id="bearer_service_code">{0}</xliff:g>: <xliff:g id="dialing_number">{1}</xliff:g> <xliff:g id="time_delay">{2}</xliff:g> másodperc múlva</string>
+    <!-- Displayed when the call forwarding query was set but forwarding is not enabled. -->
+    <string name="cfTemplateRegistered"><xliff:g id="bearer_service_code">{0}</xliff:g>: Átirányítás kikapcsolva</string>
+    <!-- Displayed when the call forwarding query was set but forwarding is not enabled. -->
+    <string name="cfTemplateRegisteredTime"><xliff:g id="bearer_service_code">{0}</xliff:g>: Átirányítás kikapcsolva</string>
+
+    <!-- android.net.http Error strings --> <skip />
+    <!-- Displayed when a feature code (non-phone number) is dialed and completes successfully. -->
+    <string name="fcComplete">Szolgáltatás kód sikeres.</string>
+    <!-- Displayed when a feature code (non-phone number) is dialed and completes unsuccessfully. -->
+    <string name="fcError">Kapcsolati probléma vagy hibás szolgáltatás kód.</string>
+    <!-- android.net.http Error strings --> <skip />
+    <!-- Displayed when a web request was successful. -->
+    <string name="httpErrorOk">OK</string>
+    <!-- Displayed when a web request failed because we don't know the exact reason. -->
+    <string name="httpError">A weboldal hibát tartalmaz.</string>
+    <!-- Displayed when a web request failed because the URL could not be found. -->
+    <string name="httpErrorLookup">Az URL nem található.</string>
+    <!-- Displayed when a web request failed because the site's authentication scheme is not supported by us. -->
+    <string name="httpErrorUnsupportedAuthScheme">Az oldal hitelesítési mechanizmusa nem támogatott.</string>
+    <!-- Displayed when a web request failed because the authentication failed. -->
+    <string name="httpErrorAuth">A hitelesítés sikertelen volt.</string>
+    <!-- Displayed when a web request failed because the authentication with the proxy failed. -->
+    <string name="httpErrorProxyAuth">A proxy szerveren keresztüli hitelesítés sikertelen.</string>
+    <!-- Displayed when a web request failed because there was a connection error. -->
+    <string name="httpErrorConnect">A kapcsolat a szerverrel meghiúsult.</string>
+    <!-- Displayed when a web request failed because there was an input or output error. -->
+    <string name="httpErrorIO">A szerver nem kommunikál megfelelően. Próbálja később!</string>
+    <!-- Displayed when a web request failed because the request timed out -->
+    <string name="httpErrorTimeout">A kapcsolat a szerverrel időtúllépés miatt meghiúsult.</string>
+    <!-- Displayed when a web request failed because the site tried to redirect us one too many times -->
+    <string name="httpErrorRedirectLoop">Az oldal túl sok átirányítást tartalmaz.</string>
+    <!-- Displayed when a web request failed because the protocol of the server is not supported. -->
+    <string name="httpErrorUnsupportedScheme">A protokoll nem támogatott.</string>
+    <!-- Displayed when a web request failed because the a secure connection couldn't be made to the server.-->
+    <string name="httpErrorFailedSslHandshake">Nem sikerült biztonságos kapcsolatot létesíteni.</string>
+    <!-- Displayed when a web request failed because the URL isn't in a valid form. -->
+    <string name="httpErrorBadUrl">Az oldalt nem lehet megnyitni, mert az URL hibás.</string>
+    <!-- Displayed when a request failed because we failed to open the file. -->
+    <string name="httpErrorFile">Nem sikerült hozzáférni a fájlhoz.</string>
+    <!-- Displayed when a request failed because the file wasn't found. -->
+    <string name="httpErrorFileNotFound">A kért fájl nem található.</string>
+    <!-- Displayed when a request failed because there are too many requests right now. -->
+    <string name="httpErrorTooManyRequests">Túl sok kérés áll feldolgozás alatt. Próbálja később!</string>
+
+    <!-- Sync notifications --> <skip />
+    <!-- A notification is shown when there is a sync error.  This is the text that will scroll through the notification bar (will be seen by the user as he uses another application). -->
+    <string name="contentServiceSync">Szinkronizációs hiba</string>
+    <!-- A notification is shown when there is a sync error.  This is the title of the notification.  It will be seen in the pull-down notification tray. -->
+    <string name="contentServiceSyncNotificationTitle">Szinkronizáció</string>
+    <!-- A notification is shown when there is a sync error.  This is the message of the notification.  It describes the error, in this case is there were too many deletes. The argument is the type of content, for example Gmail or Calendar. It will be seen in the pull-down notification tray. -->
+    <string name="contentServiceTooManyDeletesNotificationDesc">Túl sok <xliff:g id="content_type">%s</xliff:g> törlés.</string>
+
+    <!-- If MMS discovers there isn't much space left on the device, it will show a toast with this message. -->
+    <string name="low_memory">A telefon tárolója tele van. Hely felszabadításához töröljön pár fájlt.</string>
+
+
+    <!-- Display name for any time a piece of data refers to the owner of the phone. For example, this could be used in place of the phone's phone number. -->
+    <string name="me">Én</string>
+
+    <!-- Power Dialog --> <skip />
+    <!-- Title for the Phone Options dialog to lock the screen, turn off the phone etc. -->
+    <string name="power_dialog">Telefon szintű lehetőségek</string>
+    <!-- Button to turn on silent mode, within the Phone Options dialog -->
+    <string name="silent_mode">Néma üzemmód</string>
+    <!-- Button to turn on the radio, within the Phone Options dialog -->
+    <string name="turn_on_radio">Vezeték nélküli kapcsolat be</string>
+    <!-- Button to turn off the radio, within the Phone Options dialog -->
+    <string name="turn_off_radio">Vezeték nélküli kapcsolat ki</string>
+    <!-- Button to lock the screen, within the Phone Options dialog -->
+    <string name="screen_lock">Képernyőzár</string>
+    <!-- Button to turn off the phone, within the Phone Options dialog -->
+    <string name="power_off">Kikapcsolás</string>
+    <string name="reboot_system">Telefon újraindítása</string>
+
+    <!-- Shutdown Progress Dialog. This is shown if the user chooses to power off the phone. -->
+    <string name="shutdown_progress">A telefon kikapcsol\u2026</string>
+    <string name="reboot_progress">A telefon újraindul\u2026</string>
+
+    <!-- Shutdown Confirmation Dialog.  When the user chooses to power off the phone, there will be a confirmation dialog.  This is the message. -->
+    <string name="shutdown_confirm">A telefon ki fog kapcsolni.</string>
+    <string name="reboot_confirm">A telefon újra fog indulni.</string>
+
+    <!-- Recent Tasks dialog -->
+    <string name="no_recent_tasks">Nincs mostanában használt alkalmazás.</string>
+
+    <!-- Title of the Global Actions Dialog -->
+    <string name="global_actions">Telefon szintű lehetőségek</string>
+
+    <!-- label for item that locks the phone in the phone options dialog -->
+    <string name="global_action_lock">Képernyőzár</string>
+
+    <!-- label for item that turns off power in phone options dialog -->
+    <string name="global_action_power_off">Kikapcsolás</string>
+
+    <!-- label for item that enables silent mode in phone options dialog -->
+    <string name="global_action_toggle_silent_mode">Néma üzemmód</string>
+
+    <!-- status message in phone options dialog for when silent mode is enabled -->
+    <string name="global_action_silent_mode_on_status">Hangok kikapcsolva</string>
+
+    <!-- status message in phone options dialog for when silent mode is disabled -->
+    <string name="global_action_silent_mode_off_status">Hangok bekapcsolva</string>
+
+    <!-- label for item that toggles airplane mode -->
+    <string name="global_actions_toggle_airplane_mode">Repülőgép üzemmód</string>
+
+    <!-- status message in phone options dialog for when airplane mode is on -->
+    <string name="global_actions_airplane_mode_on_status">Repülőgép üzemmód bekapcsolva</string>
+
+    <!-- status message in phone options dialog for when airplane mode is off -->
+    <string name="global_actions_airplane_mode_off_status">Repülőgép üzemmód kikapcsolva</string>
+
+    <string name="global_action_reboot">Újraindítás</string>
+
+    <!-- Displayed to the user to tell them that they have started up the phone in "safe mode" -->
+    <string name="safeMode">Biztonságos üzemmód</string>
+
+    <!-- Label for the Android system components when they are shown to the user. -->
+    <string name="android_system_label">Android Rendszer</string>
+    
+    <!-- Title of a category of application permissions, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permgrouplab_costMoney">Szolgáltatások, amik pénzbe kerülnek</string>
+    <!-- Description of a category of application permissions, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permgroupdesc_costMoney">Csinálhatnak-e olyan dolgokat az alkalmazások, amik pénzbe kerülhetnek?</string>
+
+    <!-- Title of a category of application permissions, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permgrouplab_messages">Üzenetek</string>
+    <!-- Description of a category of application permissions, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permgroupdesc_messages">A saját SMS, e-mail és egyéb üzenetek olvasása és írása.</string>
+
+    <!-- Title of a category of application permissions, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permgrouplab_personalInfo">Személyes információk</string>
+    <!-- Description of a category of application permissions, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permgroupdesc_personalInfo">Közvetlen hozzáférés a telefonon tárolt kapcsolatokhoz és a naptárhoz.</string>
+
+    <!-- Title of a category of application permissions, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permgrouplab_location">Földrajzi helyzet</string>
+    <!-- Description of a category of application permissions, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permgroupdesc_location">A telefon földrajzi helyzetének figyelése.</string>
+
+    <!-- Title of a category of application permissions, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permgrouplab_network">Hálózati kommunikáció</string>
+    <!-- Description of a category of application permissions, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permgroupdesc_network">Hozzáférhetnek-e az alkalmazások a különféle hálózati szolgáltatásokhoz?</string>
+
+    <!-- Title of a category of application permissions, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permgrouplab_accounts">Saját Google fiókok</string>
+    <!-- Description of a category of application permissions, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permgroupdesc_accounts">Hozzáférés az elérhető Google fiókokhoz.</string>
+
+    <!-- Title of a category of application permissions, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permgrouplab_hardwareControls">Hardveres irányítás</string>
+    <!-- Description of a category of application permissions, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permgroupdesc_hardwareControls">Közvetlen hozzáférés a telefon hardveréhez.</string>
+
+    <!-- Title of a category of application permissions, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permgrouplab_phoneCalls">Telefonhívások</string>
+    <!-- Description of a category of application permissions, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permgroupdesc_phoneCalls">A telefonhívások figyelése, felvétele és feldolgozása.</string>
+
+    <!-- Title of a category of application permissions, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permgrouplab_systemTools">Rendszereszközök</string>
+    <!-- Description of a category of application permissions, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permgroupdesc_systemTools">Alacsonyszintű hozzáférés a rendszerhez.</string>
+
+    <!-- Title of a category of application permissions, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permgrouplab_developmentTools">Fejlesztőeszközök</string>
+    <!-- Description of a category of application permissions, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permgroupdesc_developmentTools">Alkalmazásfejlesztők számára szükséges lehetőségek.</string>
+
+    <!-- Title of a category of application permissions, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permgrouplab_storage">Tárhely</string>
+    <!-- Description of a category of application permissions, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permgroupdesc_storage">Hozzáférés az SD kártyához.</string>
+
+    <!--  Permissions -->
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_statusBar">a státusz sor kikapcsolása vagy módosítása</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_statusBar">Lehetővé teszi az alkalmazásnak, hogy kikapcsolák a státusz sort, illetve hozzáadjanak és töröljenek rendszer ikonokat.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_expandStatusBar">a státusz sor kinyitása és összecsukása</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_expandStatusBar">Engedélyezi az alkalmazásnak, hogy kinyissák és összecsukják a státusz sort.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_processOutgoingCalls">kimenő hívások módosítása</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_processOutgoingCalls">Engedélyezi az alkalmazásnak, hogy feldolgozzák a kimenő hívásokat és módosítsák a hívott számot. Rosszindulatú alkalmazások megfigyelhetik, átirányíthatják, sőt, meg is akadályozhatják a kimenő hívásokat.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_receiveSms">SMS fogadása</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_receiveSms">Engedélyezi az alkalmazásnak az SMS üzenetek fogadását és feldolgozását. Rosszindulatú alkalmazások megfigyelhetik vagy ki is törölhetik az üzeneteket olvasás előtt.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_receiveMms">MMS fogadása</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_receiveMms">Engedélyezi az alkalmazásnak az MMS üzenetek fogadását és feldolgozását. Rosszindulatú alkalmazások megfigyelhetik vagy ki is törölhetik az üzeneteket olvasás előtt.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_sendSms">SMS küldése</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_sendSms">Engedélyezi az alkalmazásnak az SMS üzenetek küldését. Rosszindulatú alkalmazások nem várt költségeket okozhatnak megerősítés nélkül elküldött üzenetek által..</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_readSms">SMS vagy MMS olvasása</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_readSms">Engedélyezi az alkalmazásnak a telefonon tárolt SMS és MMS üzenetek olvasását. Rosszindulatú alkalmazások elolvashatják a bizalmas üzeneteket.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_writeSms">SMS vagy MMS változtatása</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_writeSms">Engedélyezi az alkalmazásnak a telefonon tárolt SMS és MMS üzenetek írását. Rosszindulatú alkalmazások törölhetik az üzeneteket.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_receiveWapPush">WAP fogadása</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_receiveWapPush">Engedélyezi az alkalmazásnak a WAP üzenetek fogadását és feldolgozását. Rosszindulatú alkalmazások megfigyelhetik vagy ki is törölhetik az üzeneteket olvasás előtt.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_getTasks">futó alkalmazások lekérdezése</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_getTasks">Engedélyezi az alkalmazásnak információk lekérdezését a nemrég és éppen futó alkalmazásokról. Rosszindulatú alkalmazások személyes információkat szerezhetnek meg más alkalmazásoktól.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_reorderTasks">futó alkalmazások átrendezése</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_reorderTasks">Lehetővé teszi az alkalmazásnak folyamatok előtérbe és háttérbe mozgatását. Rosszindulatú alkalmazások előtérben tarthatják magukat.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_setDebugApp">hibakeresés bekapcsolása</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_setDebugApp">Engedélyezi az alkalmazásnak a hibakeresés bekapcsolását egy másik alkalmazás számára. Rosszindulatú alkalmazások ezt használva problémát okozhatnak más alkalmazásoknak.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_changeConfiguration">felhasználói felület beállításainak változtatása</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_changeConfiguration">Lehetővé teszi az alkalmazásnak a jelenlegi beállítások (mint a nyelv vagy az általános betűméret) megváltoztatását.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_restartPackages">más alkalmazások újraindítása</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_restartPackages">Lehetővé teszi az alkalmazásnak más alkalmazások újraindítását.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_forceBack">más alkalmazások erőszakos bezárása</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_forceBack">Lehetővé teszi az alkalmazásnak, hogy tetszőleges előtérbeli tevékenységet bezárjon. Rendes alkalmazásoknak ez sosem kell.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_dump">a rendszer belső állapotának lekérése</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_dump">Lehetővé teszi az alkalmazásnak, hogy a rendszer belső állapotát lekérdezze. Rosszindulatú alkalmazások így széleskörű privát és biztonságos információhoz juthatnak, amikre rendes alkalmazásoknak sosincs szükségük.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_shutdown">részleges kikapcsolás</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_shutdown">A tevékenység felügyelőt kikapcsolt álllapotba helyezi. Nem hajtja végre a teljes leállítási procedúrát.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_stopAppSwitches">alkalmazásváltás meggátolása</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_stopAppSwitches">Meggátolja a felhasználót egy másik alkalmazásra váltásban.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_runSetActivityWatcher">az összes alkalmazás indításának figyelése és irányítása</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_runSetActivityWatcher">Lehetővé teszi az alkalmazásnak, hogy felügyelje és irányítsa az összes tevékenység indítását. Rosszindulatú alkalmazások teljesen kompromittálhatják a rendszert. Ez az engedély csak fejlesztéshez szükséges, rendes használathoz soha.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_broadcastPackageRemoved">"csomag törölve" üzenet szétküldése</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_broadcastPackageRemoved">Lehetővé teszi az alkalmazásnak, hogy bejelentse, egy másik alkalmazás csomag törölve lett. Rosszindulatú alkalmazások ezt használva kiirthatnak egy éppen futó alkalmazást is.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_broadcastSmsReceived">"SMS érkezett" üzenet szétküldése</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_broadcastSmsReceived">Lehetővé teszi az alkalmazásnak, hogy bejelentse egy új SMS üzenet érkezését. Rosszindulatú alkalmazások ezt kihasználva készíthetnek hamis bejövő SMS üzeneteket.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_broadcastWapPush">"WAP-PUSH érkezett" üzenet szétküldése</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_broadcastWapPush">Lehetővé teszi az alkalmazásnak, hogy bejelentse egy új WAP-PUSH üzenet érkezését. Rosszindulatú alkalmazások ezt kihasználva hamis MMS üzenet visszaigazolásokat készíthetnek, illetve kicserélhetik tetszőleges weboldal tartalmát rosszindulatú tartalommal.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_setProcessLimit">futó folyamatok számának korlátozása</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_setProcessLimit">Lehetővé teszi az alkalmazásnak a futó folyamatok számának korlátozását. Rendes alkalmazásoknak sosincs ilyenre szükségük.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_setAlwaysFinish">az összes háttérben futó alkalmazás bezárása</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_setAlwaysFinish">Lehetővé teszi az alkalmazásnak, hogy bezárja a tevékenységeket, amint háttérbe kerülnek. Rendes alkalmazásoknak sosincs ilyenre szükségük.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_batteryStats">az akkumulátor statisztikáinak módosítása</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_batteryStats">Az összegyűjtött akkumulátor statisztikák módosítását teszi lehetővé. Rendes alkalmazásoknak sosincs ilyenre szükségük.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_backup">rendszermentés és -visszaállítás irányítása</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_backup">Lehetővé teszi az alkalmazásnak, hogy a rendszermentés és -visszaállítás mechanizmusát irányítsa. Rendes alkalmazásoknak sosincs ilyenre szükségük..</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_internalSystemWindow">engedély nélküli ablakok megjelenítése</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_internalSystemWindow">Olyan ablakok létrehozását teszi lehetővé, melyek a belső rendszer felület használatára lettek szánva. Rendes alkalmazásoknak sosincs ilyenre szükségük.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_systemAlertWindow">rendszer szintű figyelmeztetések megjelenítése</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_systemAlertWindow">Lehetővé teszi az alkalmazásnak rendszer szintű figyelmeztetések megjelenítését. Rosszindulatú alkalmazások átvehetik az egész képernyőt.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_setAnimationScale">a globális animáció-sebesség módosítása</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_setAnimationScale">Lehetővé teszi az alkalmazásnak, hogy megváltoztassa az összes animáció sebességét.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_manageAppTokens">manage application tokens</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_manageAppTokens">Allows applications to
+        create and manage their own tokens, bypassing their normal
+        Z-ordering. Should never be needed for normal applications.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_injectEvents">press keys and control buttons</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_injectEvents">Allows an application to deliver
+        its own input events (key presses, etc.) to other applications. Malicious
+        applications can use this to take over the phone.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_readInputState">record what you type and actions you take</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_readInputState">Allows applications to watch the
+        keys you press even when interacting with another application (such
+        as entering a password). Should never be needed for normal applications.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_bindInputMethod">bind to an input method</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_bindInputMethod">Allows the holder to bind to the top-level
+        interface of an input method. Should never be needed for normal applications.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_setOrientation">change screen orientation</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_setOrientation">Allows an application to change
+        the rotation of the screen at any time. Should never be needed for
+        normal applications.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_signalPersistentProcesses">send Linux signals to applications</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_signalPersistentProcesses">Allows application to request that the
+        supplied signal be sent to all persistent processes.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_persistentActivity">make application always run</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_persistentActivity">Allows an application to make
+        parts of itself persistent, so the system can\'t use it for other
+        applications.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_deletePackages">delete applications</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_deletePackages">Allows an application to delete
+        Android packages. Malicious applications can use this to delete important applications.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_clearAppUserData">delete other applications\' data</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_clearAppUserData">Allows an application to clear user data.</string>
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_deleteCacheFiles">delete other applications\' caches</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_deleteCacheFiles">Allows an application to delete
+        cache files.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_getPackageSize">measure application storage space</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_getPackageSize">Allows an application to retrieve
+        its code, data, and cache sizes</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_installPackages">directly install applications</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_installPackages">Allows an application to install new or updated
+        Android packages. Malicious applications can use this to add new applications with arbitrarily
+        powerful permissions.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_clearAppCache">delete all application cache data</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_clearAppCache">Allows an application to free phone storage
+        by deleting files in application cache directory. Access is very
+        restricted usually to system process.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_readLogs">read system log files</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_readLogs">Allows an application to read from the
+        system\'s various log files.  This allows it to discover general
+        information about what you are doing with the phone, but they should
+        not contain any personal or private information.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_diagnostic">read/write to resources owned by diag</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_diagnostic">Allows an application to read and write to
+    any resource owned by the diag group; for example, files in /dev. This could
+    potentially affect system stability and security. This should be ONLY be used
+    for hardware-specific diagnostics by the manufacturer or operator.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_changeComponentState">enable or disable application components</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_changeComponentState">Allows an application to change whether a
+        component of another application is enabled or not. Malicious applications can use this
+        to disable important phone capabilities. Care must be used with permission, as it is
+        possible to get application components into an unusable, inconsistent, or unstable state.
+    </string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_setPreferredApplications">set preferred applications</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_setPreferredApplications">Allows an application to
+        modify your preferred applications. This can allow malicious applications
+        to silently change the applications that are run, spoofing your
+        existing applications to collect private data from you.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_writeSettings">modify global system settings</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_writeSettings">Allows an application to modify the
+        system\'s settings data. Malicious applications can corrupt your system\'s
+        configuration.</string>
+
+    <string name="permlab_writeSecureSettings">modify secure system settings</string>
+    <string name="permdesc_writeSecureSettings">Allows an application to modify the
+        system's secure settings data. Not for use by normal applications.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_writeGservices">modify the Google services map</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_writeGservices">Allows an application to modify the
+        Google services map.  Not for use by normal applications.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_receiveBootCompleted">automatically start at boot</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_receiveBootCompleted">Allows an application to
+        have itself started as soon as the system has finished booting.
+        This can make it take longer to start the phone and allow the
+        application to slow down the overall phone by always running.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_broadcastSticky">send sticky broadcast</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_broadcastSticky">Allows an application to send
+        sticky broadcasts, which remain after the broadcast ends.
+        Malicious applications can make the phone slow or unstable by causing it
+        to use too much memory.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_readContacts">read contact data</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_readContacts">Allows an application to read all
+        of the contact (address) data stored on your phone. Malicious applications
+        can use this to send your data to other people.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_writeContacts">write contact data</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_writeContacts">Allows an application to modify the
+        contact (address) data stored on your phone. Malicious
+        applications can use this to erase or modify your contact data.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_writeOwnerData">write owner data</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_writeOwnerData">Allows an application to modify the
+        phone owner data stored on your phone. Malicious
+        applications can use this to erase or modify owner data.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_readOwnerData">read owner data</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_readOwnerData">Allows an application read the
+        phone owner data stored on your phone. Malicious
+        applications can use this to read phone owner data.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_readCalendar">read calendar data</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_readCalendar">Allows an application to read all
+        of the calendar events stored on your phone. Malicious applications
+        can use this to send your calendar events to other people.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_writeCalendar">write calendar data</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_writeCalendar">Allows an application to modify the
+        calendar events stored on your phone. Malicious
+        applications can use this to erase or modify your calendar data.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_accessMockLocation">mock location sources for testing</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_accessMockLocation">Create mock location sources for testing.
+        Malicious applications can use this to override the location and/or status returned by real
+        location sources such as GPS or Network providers.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_accessLocationExtraCommands">access extra location provider commands</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_accessLocationExtraCommands">Access extra location provider commands.
+        Malicious applications could use this to interfere with the operation of the GPS
+        or other location sources.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_installLocationProvider">permission to install a location provider</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_installLocationProvider">Create mock location sources for testing.
+        Malicious applications can use this to override the location and/or status returned by real
+        location sources such as GPS or Network providers or monitor and report your location to an external source.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_accessFineLocation">fine (GPS) location</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_accessFineLocation">Access fine location sources such as the
+        Global Positioning System on the phone, where available.
+        Malicious applications can use this to determine where you are, and may
+        consume additional battery power.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_accessCoarseLocation">coarse (network-based) location</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_accessCoarseLocation">Access coarse location sources such as the cellular
+        network database to determine an approximate phone location, where available. Malicious
+        applications can use this to determine approximately where you are.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_accessSurfaceFlinger">access SurfaceFlinger</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_accessSurfaceFlinger">Allows application to use
+        SurfaceFlinger low-level features.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_readFrameBuffer">read frame buffer</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_readFrameBuffer">Allows application to use
+        read the content of the frame buffer.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_modifyAudioSettings">change your audio settings</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_modifyAudioSettings">Allows application to modify
+        global audio settings such as volume and routing.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_recordAudio">record audio</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_recordAudio">Allows application to access
+        the audio record path.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_camera">take pictures</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_camera">Allows application to take pictures
+        with the camera. This allows the application at any time to collect
+        images the camera is seeing.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_brick">permanently disable phone</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_brick">Allows the application to
+        disable the entire phone permanently. This is very dangerous.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_reboot">force phone reboot</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_reboot">Allows the application to
+        force the phone to reboot.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_mount_unmount_filesystems">mount and unmount filesystems</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_mount_unmount_filesystems">Allows the application to mount and
+        unmount filesystems for removable storage.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_mount_format_filesystems">format external storage</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_mount_format_filesystems">Allows the application to format removable storage.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_vibrate">control vibrator</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_vibrate">Allows the application to control
+        the vibrator.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_flashlight">control flashlight</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_flashlight">Allows the application to control
+        the flashlight.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_hardware_test">test hardware</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_hardware_test">Allows the application to control
+        various peripherals for the purpose of hardware testing.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_callPhone">directly call phone numbers</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_callPhone">Allows the application to call
+        phone numbers without your intervention. Malicious applications may
+        cause unexpected calls on your phone bill. Note that this does not
+        allow the application to call emergency numbers.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_callPrivileged">directly call any phone numbers</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_callPrivileged">Allows the application to call
+        any phone number, including emergency numbers, without your intervention.
+        Malicious applications may place unnecessary and illegal calls to emergency
+        services.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_locationUpdates">control location update notifications</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_locationUpdates">Allows enabling/disabling location
+        update notifications from the radio.  Not for use by normal applications.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_checkinProperties">access checkin properties</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_checkinProperties">Allows read/write access to
+        properties uploaded by the checkin service.  Not for use by normal
+        applications.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_bindGadget">choose widgets</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_bindGadget">Allows the application to tell the system
+        which widgets can be used by which application.  With this permission,
+        applications can give access to personal data to other applications.
+        Not for use by normal applications.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_modifyPhoneState">modify phone state</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_modifyPhoneState">Allows the application to control the
+        phone features of the device. An application with this permission can switch
+        networks, turn the phone radio on and off and the like without ever notifying
+        you.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_readPhoneState">read phone state and identity</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_readPhoneState">Allows the application to access the phone
+        features of the device.  An application with this permission can determine the phone
+        number and serial number of this phone, whether a call is active, the number that call
+        is connected to and the like.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_wakeLock">prevent phone from sleeping</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_wakeLock">Allows an application to prevent
+        the phone from going to sleep.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_devicePower">power phone on or off</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_devicePower">Allows the application to turn the
+        phone on or off.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_factoryTest">run in factory test mode</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_factoryTest">Run as a low-level manufacturer test,
+        allowing complete access to the phone hardware. Only available
+        when a phone is running in manufacturer test mode.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_setWallpaper">set wallpaper</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_setWallpaper">Allows the application
+        to set the system wallpaper.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_setWallpaperHints">set wallpaper size hints</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_setWallpaperHints">Allows the application
+        to set the system wallpaper size hints.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_masterClear">reset system to factory defaults</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_masterClear">Allows an application to completely
+        reset the system to its factory settings, erasing all data,
+        configuration, and installed applications.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_setTimeZone">set time zone</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_setTimeZone">Allows an application to change
+        the phone\'s time zone.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_getAccounts">discover known accounts</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_getAccounts">Allows an application to get
+      the list of accounts known by the phone.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_accessNetworkState">view network state</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_accessNetworkState">Allows an application to view
+      the state of all networks.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_createNetworkSockets">full Internet access</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_createNetworkSockets">Allows an application to
+      create network sockets.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_writeApnSettings">write Access Point Name settings</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_writeApnSettings">Allows an application to modify the APN
+        settings, such as Proxy and Port of any APN.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_changeNetworkState">change network connectivity</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_changeNetworkState">Allows an application to change
+      the state network connectivity.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_changeBackgroundDataSetting">change background data usage setting</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_changeBackgroundDataSetting">Allows an application to change
+      the background data usage setting.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_accessWifiState">view Wi-Fi state</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_accessWifiState">Allows an application to view
+      the information about the state of Wi-Fi.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_changeWifiState">change Wi-Fi state</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_changeWifiState">Allows an application to connect
+      to and disconnect from Wi-Fi access points, and to make changes to
+      configured Wi-Fi networks.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_changeWifiMulticastState">allow Wi-Fi Multicast
+      reception</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_changeWifiMulticastState">Allows an application to
+      receive packets not directly addressed to your device.  This can be
+      useful when discovering services offered near by.  It uses more power
+      than the non-multicast mode.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_bluetoothAdmin">bluetooth administration</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_bluetoothAdmin">Allows an application to configure
+      the local Bluetooth phone, and to discover and pair with remote
+      devices.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_bluetooth">create Bluetooth connections</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_bluetooth">Allows an application to view
+      configuration of the local Bluetooth phone, and to make and accept
+      connections with paired devices.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_disableKeyguard">disable keylock</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_disableKeyguard">Allows an application to disable
+      the keylock and any associated password security. A legitimate example of
+      this is the phone disabling the keylock when receiving an incoming phone call,
+      then re-enabling the keylock when the call is finished.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_readSyncSettings">read sync settings</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_readSyncSettings">Allows an application to read the sync settings,
+        such as whether sync is enabled for Contacts.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_writeSyncSettings">write sync settings</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_writeSyncSettings">Allows an application to modify the sync
+        settings, such as whether sync is enabled for Contacts.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_readSyncStats">read sync statistics</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_readSyncStats">Allows an application to read the sync stats; e.g., the
+        history of syncs that have occurred.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_subscribedFeedsRead">read subscribed feeds</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_subscribedFeedsRead">Allows an application to get details about the currently synced feeds.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_subscribedFeedsWrite">write subscribed feeds</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_subscribedFeedsWrite">Allows an application to modify
+      your currently synced feeds. This could allow a malicious application to
+      change your synced feeds.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_readDictionary">read user defined dictionary</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_readDictionary">Allows an application to read any private
+      words, names and phrases that the user may have stored in the user dictionary.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_writeDictionary">write to user defined dictionary</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_writeDictionary">Allows an application to write new words into the
+      user dictionary.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_sdcardWrite">modify/delete SD card contents</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_sdcardWrite">Allows an application to write to the SD card.</string>
+
+    <!-- The order of these is important, don't reorder without changing Contacts.java --> <skip />
+    <!-- Phone number types from android.provider.Contacts. This could be used when adding a new phone number for a contact, for example. -->
+    <string-array name="phoneTypes">
+        <item>Otthon</item>
+        <item>Mobil</item>
+        <item>Munkahely</item>
+        <item>Munkahely Fax</item>
+        <item>Otthon Fax</item>
+        <item>Csipogó</item>
+        <item>Más</item>
+        <item>Egyedi</item>
+    </string-array>
+
+    <!-- The order of these is important, don't reorder without changing Contacts.java --> <skip />
+    <!-- Email address types from android.provider.Contacts. This could be used when adding a new e-mail address for a contact, for example. -->
+    <string-array name="emailAddressTypes">
+        <item>Otthon</item>
+        <item>Munkahely</item>
+        <item>Más</item>
+        <item>Egyedi</item>
+    </string-array>
+
+    <!-- String which means the type "mobile phone". -->
+    <string name="mobileEmailTypeName">Mobil</string>
+
+    <!-- The order of these is important, don't reorder without changing Contacts.java --> <skip />
+    <!-- Postal address types from android.provider.Contacts. This could be used when adding a new address for a contact, for example. -->
+    <string-array name="postalAddressTypes">
+        <item>Otthon</item>
+        <item>Munkahely</item>
+        <item>Más</item>
+        <item>Egyedi</item>
+    </string-array>
+
+    <!-- The order of these is important, don't reorder without changing Contacts.java --> <skip />
+    <!-- Instant Messenger ID types from android.provider.Contacts. This could be used when adding a new IM for a contact, for example. -->
+    <string-array name="imAddressTypes">
+        <item>Otthon</item>
+        <item>Munkahely</item>
+        <item>Más</item>
+        <item>Egyedi</item>
+    </string-array>
+
+    <!-- The order of these is important, don't reorder without changing Contacts.java --> <skip />
+    <!-- Organization types from android.provider.Contacts. This could be used when adding a new organization for a contact, for example. -->
+    <string-array name="organizationTypes">
+        <item>Munkahely</item>
+        <item>Más</item>
+        <item>Egyedi</item>
+    </string-array>
+
+    <!-- The order of these is important, don't reorder without changing Contacts.java --> <skip />
+    <!-- Instant Message protocols/providers from android.provider.Contacts -->
+    <string-array name="imProtocols">
+        <item>AIM</item>
+        <item>Windows Live</item>
+        <item>Yahoo</item>
+        <item>Skype</item>
+        <item>QQ</item>
+        <item>Google Talk</item>
+        <item>ICQ</item>
+        <item>Jabber</item>
+    </string-array>
+
+    <!-- Instructions telling the user to enter their pin to unlock the keyguard.
+         Displayed in one line in a large font.  -->
+    <string name="keyguard_password_enter_pin_code">Írja be a PIN-kódot!</string>
+
+    <!-- Instructions telling the user that they entered the wrong pin while trying
+         to unlock the keyguard.  Displayed in one line in a large font.  -->
+    <string name="keyguard_password_wrong_pin_code">Helytelen PIN-kód!</string>
+
+    <!-- Instructions telling the user how to unlock the phone. -->
+    <string name="keyguard_label_text">A kioldáshoz nyomja meg a Menu, majd a 0 gombokat.</string>
+
+    <!-- This can be used in any application wanting to disable the text "Emergency number" -->
+    <string name="emergency_call_dialog_number_for_display">Vészhívószám</string>
+
+    <!--
+       *** touch based lock / unlock ***
+                                          --> <skip />
+
+    <!-- On the keyguard screen, it shows the carrier the phone is connected to.  This is displayed if the phone is not connected to a carrier.-->
+    <string name="lockscreen_carrier_default">(Nincs szolgáltatás)</string>
+
+    <!-- Shown in the lock screen to tell the user that the screen is locked. -->
+    <string name="lockscreen_screen_locked">Képernyő lezárva.</string>
+
+    <!-- when pattern lock is enabled, tell them about the emergency dial -->
+    <string name="lockscreen_instructions_when_pattern_enabled">Kioldáshoz vagy vészhíváshoz nyomja meg a Menu gombot.</string>
+
+    <!-- On the keyguard screen, when pattern lock is disabled, only tell them to press menu to unlock.  This is shown in small font at the bottom. -->
+    <string name="lockscreen_instructions_when_pattern_disabled">Kioldáshoz nyomja meg a Menu gombot.</string>
+
+    <!-- On the unlock pattern screen, shown at the top of the unlock screen to tell the user what to do. Below this text is the place for theu ser to draw the pattern. -->
+    <string name="lockscreen_pattern_instructions">Kioldáshoz rajzolja le a mintát</string>
+    <!-- Button at the bottom of the unlock screen to make an emergency call. -->
+    <string name="lockscreen_emergency_call">Vészhívás</string>
+    <!-- Shown to confirm that the user entered their lock pattern correctly. -->
+    <string name="lockscreen_pattern_correct">Helyes!</string>
+    <!-- On the unlock pattern screen, shown when the user enters the wrong lock pattern and must try again. -->
+    <string name="lockscreen_pattern_wrong">Próbálja újra</string>
+
+    <!-- When the lock screen is showing and the phone plugged in, and the battery
+         is not fully charged, show the current charge %.  -->
+    <string name="lockscreen_plugged_in">Töltés (<xliff:g id="number">%d</xliff:g><xliff:g id="percent">%%</xliff:g>)</string>
+    <!-- When the lock screen is showing, the phone is plugged in and the battery is fully
+         charged, say that it is charged. -->
+    <string name="lockscreen_charged">Feltöltve.</string>
+
+    <!-- When the lock screen is showing and the battery is low, warn user to plug
+         in the phone soon. -->
+    <string name="lockscreen_low_battery">Csatlakoztassa a töltőt.</string>
+
+    <!-- Shown in the lock screen when there is no SIM card. -->
+    <string name="lockscreen_missing_sim_message_short">Nincs SIM-kártya.</string>
+    <!-- Shown in the lock screen when there is no SIM card. -->
+    <string name="lockscreen_missing_sim_message">Nincs SIM-kártya a telefonban.</string>
+    <!-- Shown in the lock screen to ask the user to insert a SIM card. -->
+    <string name="lockscreen_missing_sim_instructions">Kérem helyezzen be egy SIM-kártyát.</string>
+
+
+    <!-- When the user inserts a sim card from an unsupported network, it becomes network
+         locked -->
+    <string name="lockscreen_network_locked_message">Hálózat zárolva</string>
+
+
+    <!-- When the user enters a wrong sim pin too many times, it becomes
+         PUK locked (Pin Unlock Kode) -->
+    <string name="lockscreen_sim_puk_locked_message">SIM-kártya PUK-kóddal zárolva.</string>
+    <!-- Shown in the lock screen when the SIM has become PUK locked and the user must call customer care to unlock it. -->
+    <string name="lockscreen_sim_puk_locked_instructions">További teendők a Kézikönyvben illetve az Ügyfélszolgálaton keresztül találhatók.</string>
+
+    <!-- Shown in the lock screen to tell the user that their SIM is locked and they must unlock it. -->
+    <string name="lockscreen_sim_locked_message">SIM-kártya zárolva.</string>
+
+    <!-- For the unlock screen, When the user enters a sim unlock code, it takes a little while to check
+         whether it is valid, and to unlock the sim if it is valid.  we display a
+         progress dialog in the meantime.  this is the emssage. -->
+    <string name="lockscreen_sim_unlock_progress_dialog_message">SIM-kártya kioldása folyamatban\u2026</string>
+
+    <!-- For the unlock screen, Information message shown in dialog when user has too many failed attempts -->
+    <string name="lockscreen_too_many_failed_attempts_dialog_message">
+        <xliff:g id="number">%d</xliff:g> alkalommal rosszul rajzolta le a kioldáshoz szükséges mintát.
+        \n\nPróbálja újra <xliff:g id="number">%d</xliff:g> másodperc múlva.
+    </string>
+
+    <!-- For the unlock screen, Information message shown in dialog when user is almost at the limit
+         where they will be locked out and may have to enter an alternate username/password to unlock the phone -->
+    <string name="lockscreen_failed_attempts_almost_glogin">
+        <xliff:g id="number">%d</xliff:g> alkalommal rosszul rajzolta le a kioldáshoz szükséges mintát.
+       Még <xliff:g id="number">%d</xliff:g> sikertelen próbálkozás után a Google jelszóval lehet csak kioldani a telefont.\n\n
+       Újrapróbálhatja <xliff:g id="number">%d</xliff:g> másodperc múlva.
+    </string>
+
+    <!-- On the unlock screen, countdown message shown while user is waiting to try again after too many
+         failed attempts -->
+    <string name="lockscreen_too_many_failed_attempts_countdown">Újrapróbálhatja <xliff:g id="number">%d</xliff:g> másodperc múlva.</string>
+
+    <!-- On the unlock screen, message shown on button that appears once it's apparent the user may have forgotten
+         their lock gesture -->
+    <string name="lockscreen_forgot_pattern_button_text">Elfelejtette a mintát?</string>
+
+    <!-- Title of the unlock screen that uses your Google login and password -->
+    <string name="lockscreen_glogin_too_many_attempts">Túl sok sikertelen próbálkozás!</string>
+    <!-- In the unlock screen, message telling the user that they need to use their Google login and password to unlock the phone -->
+    <string name="lockscreen_glogin_instructions">A kioldáshoz jelentkezzen be a Google jelszavával</string>
+    <!-- Hint caption for the username field when unlocking the phone using login and password -->
+    <string name="lockscreen_glogin_username_hint">Felhasználónév (email)</string>
+    <!-- Hint caption for the password field when unlocking the phone using login and password -->
+    <string name="lockscreen_glogin_password_hint">Jelszó</string>
+    <!-- Button to try to unlock the phone using username and password -->
+    <string name="lockscreen_glogin_submit_button">Bejelentkezés</string>
+    <!-- Displayed to the user when unlocking the phone with a username and password fails. -->
+    <string name="lockscreen_glogin_invalid_input">Helytelen felhasználónév vagy jelszó.</string>
+
+    <!-- A format string for 12-hour time of day, just the hour, not the minute, with lower-case "am" or "pm" (example: "3pm"). -->
+    <string name="hour_ampm">"<xliff:g id="hour" example="3">%-l</xliff:g><xliff:g id="ampm" example="pm">%P</xliff:g>"</string>
+
+    <!-- A format string for 12-hour time of day, just the hour, not the minute, with capital "AM" or "PM" (example: "3PM"). -->
+    <string name="hour_cap_ampm">"<xliff:g id="hour" example="3">%-l</xliff:g><xliff:g id="ampm" example="PM">%p</xliff:g>"</string>
+
+    <!-- The text for the button in the notification window-shade that clears
+         all of the currently visible notifications. -->
+    <string name="status_bar_clear_all_button">Törlés</string>
+
+    <!-- The label in the bar at the top of the status bar when there are no notifications
+         showing. -->
+    <string name="status_bar_no_notifications_title">Nincs értesítés</string>
+
+    <!-- The label for the group of notifications for ongoing events in the opened version of
+         the status bar.  An ongoing call is the prime example of this.  The MP3 music player
+         might be another example.  -->
+    <string name="status_bar_ongoing_events_title">Folyamatban</string>
+
+    <!-- The label for the group of notifications for recent events in the opened version of
+         the status bar.  Recently received text messsages (SMS), emails, calendar alerts, etc. -->
+    <string name="status_bar_latest_events_title">Értesítések</string>
+
+    <!-- The big percent text in the middle of the battery icon that appears when you plug in
+         the charger. -->
+    <string name="battery_status_text_percent_format"><xliff:g id="number" example="50">%d</xliff:g><xliff:g id="percent" example="%">%%</xliff:g></string>
+
+    <!-- The big percent text in the middle of the battery icon that appears when you plug in
+         the charger. This indicates the current status of the battery.  -->
+    <string name="battery_status_charging">Töltés\u2026</string>
+
+    <!-- When the battery is low, this is displayed to the user in a dialog.  The title of the low battery alert. -->
+    <string name="battery_low_title">Kérem, csatlakoztassa a töltőt</string>
+
+    <!-- When the battery is low, this is displayed to the user in a dialog. The subtitle of the low battery alert. -->
+    <string name="battery_low_subtitle">Az akkumulátor nemsokára lemerül:</string>
+
+    <!-- A message that appears when the battery level is getting low in a dialog.  This is appened to the subtitle of the low battery alert. -->
+    <string name="battery_low_percent_format">kevesebb, mint <xliff:g id="number">%d%%</xliff:g>
+     a kapacitás.</string>
+
+    <!-- When the battery is low, this is the label of the button to go to the
+         power usage activity to find out what drained the battery. -->
+    <string name="battery_low_why">Miért?</string>
+
+    <!-- Title of the alert when something went wrong in the factory test. -->
+    <string name="factorytest_failed">Gyári ellenőrzés sikertelen</string>
+    <!-- Error message displayed when a non-system application tries to start a factory test. -->
+    <string name="factorytest_not_system">A FACTORY_TEST tevékenység csak a /system/app alá telepített csomagoknak engedélyezett.</string>
+    <!-- Error message displayed when the factory test could not be started. -->
+    <string name="factorytest_no_action">Nincs olyan csomag, ami elvégezné a FACTORY_TEST tevékenységet.</string>
+    <!-- Button to restart the device after the factory test. -->
+    <string name="factorytest_reboot">Újraindítás</string>
+
+    <!-- Do not translate.  WebView User Agent string -->
+    <string name="web_user_agent"><xliff:g id="x">Mozilla/5.0 (Linux; U; Android %s)
+        AppleWebKit/528.5+ (KHTML, like Gecko) Version/3.1.2 Mobile Safari/525.20.1</xliff:g></string>
+
+    <!-- Title for a JavaScript dialog. "The page at <url of current page> says:" -->
+    <string name="js_dialog_title">A \'<xliff:g id="title">%s</xliff:g>\' oldal közli:</string>
+    <!-- Default title for a javascript dialog -->
+    <string name="js_dialog_title_default">JavaScript</string>
+    <!-- Message in a javascript dialog asking if the user wishes to leave the
+             current page -->
+    <string name="js_dialog_before_unload">Elhagyjuk ezt az oldalt?\n\n<xliff:g id="message">%s</xliff:g>\n\nVálassza az OK-t az elhagyáshoz vagy a Mégsét az oldalon maradáshoz.</string>
+
+    <!-- Title of the WebView save password dialog.  If the user enters a password in a form on a website, a dialog will come up asking if they want to save the password. -->
+    <string name="save_password_label">Megerősítés</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether
+        they want to allow the application to do this. -->
+    <string name="permlab_readHistoryBookmarks">a Böngésző könyvjelzőinek és történetének olvasása</string>
+    <!-- Description of an application permission, listed so the user can choose whether
+        they want to allow the application to do this. -->
+    <string name="permdesc_readHistoryBookmarks">Lehetővé teszi az alkalmazásnak, hogy az összes múltban meglátogatott oldal URL-jét, illetve a könyvjelzőket lekérdezze.</string>
+    <!-- Title of an application permission, listed so the user can choose whether
+        they want to allow the application to do this. -->
+    <string name="permlab_writeHistoryBookmarks">a Böngésző könyvjelzőinek és történetének írása</string>
+    <!-- Description of an application permission, listed so the user can choose whether
+        they want to allow the application to do this. -->
+    <string name="permdesc_writeHistoryBookmarks">Lehetővé teszi az alkalmazásnak, hogy az összes múltban meglátogatott oldal URL-jét, illetve a könyvjelzőket megváltoztassa.</string>
+
+    <!-- If the user enters a password in a form on a website, a dialog will come up asking if they want to save the password. Text in the save password dialog, asking if the browser should remember a password. -->
+    <string name="save_password_message">Szeretné, hogy a böngésző megjegyezze ezt a jelszót?</string>
+    <!-- If the user enters a password in a form on a website, a dialog will come up asking if they want to save the password. Button in the save password dialog, saying not to remember this password. -->
+    <string name="save_password_notnow">Most ne</string>
+    <!-- If the user enters a password in a form on a website, a dialog will come up asking if they want to save the password. Button in the save password dialog, saying to remember this password. -->
+    <string name="save_password_remember">Emlékezzen!</string>
+    <!-- Button in the save password dialog, saying never to remember this password. This should be short. Should be "Never for this site". But it is too long, use "Never" instead -->
+    <string name="save_password_never">Itt soha</string>
+
+    <!-- Displayed to the user when they do not have permission to open a particular web page. -->
+    <string name="open_permission_deny">Nincs jogosultsága ezt az oldalt megnyitni.</string>
+
+    <!-- Displayed to the user to confirm that they have copied text from a web page to the clipboard. -->
+    <string name="text_copied">A szöveg vágolapra másolva.</string>
+
+    <!-- Menu item displayed at the end of a menu to allow users to see another page worth of menu items. This is shown on any app's menu as long as the app has too many items in the menu.-->
+    <string name="more_item_label">Továbbiak</string>
+    <!-- Prepended to the shortcut for a menu item to indicate that the user should hold the MENU button together with the shortcut to invoke the item. For example, if the shortcut to open a new tab in browser is MENU and B together, then this would be prepended to the letter "B" -->
+    <string name="prepend_shortcut_label">Menu+</string>
+    <!-- Displayed in place of the regular shortcut letter when a menu item has Menu+space for the shortcut. -->
+    <string name="menu_space_shortcut_label">szóköz</string>
+    <!-- Displayed in place of the regular shortcut letter when a menu item has Menu+enter for the shortcut. -->
+    <string name="menu_enter_shortcut_label">enter</string>
+    <!-- Displayed in place of the regular shortcut letter when a menu item has Menu+delete for the shortcut. -->
+    <string name="menu_delete_shortcut_label">törlés</string>
+
+    <!-- Strings used for search bar --><skip />
+    
+    <!-- This is the default button label in the system-wide search UI. 
+         It is also used by the home screen's search "widget". It should be short -->
+    <string name="search_go">Keresés</string>
+
+    <!-- String used to display the date. This is the string to say something happened 1 month ago. -->
+    <string name="oneMonthDurationPast">1 hónapja</string>
+    <!-- String used to display the date. This is the string to say something happened more than 1 month ago. -->
+    <string name="beforeOneMonthDurationPast">1 hónapnál régebben</string>
+
+    <!-- This is used to express that something occurred some number of seconds in the past (e.g., 5 seconds ago). -->
+    <plurals name="num_seconds_ago">
+        <item quantity="one">1 másodperce</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> másodperce</item>
+    </plurals>
+
+    <!-- This is used to express that something occurred some number of minutes in the past (e.g., 5 minutes ago). -->
+    <plurals name="num_minutes_ago">
+        <item quantity="one">1 perce</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> perce</item>
+    </plurals>
+
+    <!-- This is used to express that something occurred some number of hours in the past (e.g., 5 hours ago). -->
+    <plurals name="num_hours_ago">
+        <item quantity="one">1 órája</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> órája</item>
+    </plurals>
+
+    <!-- This is used to express that something occurred some number of days in the past (e.g., 5 days ago). -->
+    <plurals name="num_days_ago">
+        <item quantity="one">tegnap</item>
+	<item quantity="two">tegnapelőtt</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> napja</item>
+    </plurals>
+
+    <!-- This is used to express that something will occur some number of seconds in the future (e.g., in 5 seconds). -->
+    <plurals name="in_num_seconds">
+        <item quantity="one">1 másodperc múlva</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> másodperc múlva</item>
+    </plurals>
+
+    <!-- This is used to express that something will occur some number of minutes in the future (e.g., in 5 minutes). -->
+    <plurals name="in_num_minutes">
+        <item quantity="one">1 perc múlva</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> perc múlva</item>
+    </plurals>
+
+    <!-- This is used to express that something will occur some number of hours in the future (e.g., in 5 hours). -->
+    <plurals name="in_num_hours">
+        <item quantity="one">1 óra múlva</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> óra múlva</item>
+    </plurals>
+
+    <!-- This is used to express that something will occur some number of days in the future (e.g., in 5 days). -->
+    <plurals name="in_num_days">
+        <item quantity="one">holnap</item>
+	<item quantity="two">holnapután</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> nap múlva</item>
+    </plurals>
+    
+    <!-- This is used to express that something occurred some number of abbreviated seconds in the past (e.g., 5 secs ago). -->
+    <plurals name="abbrev_num_seconds_ago">
+        <item quantity="one">1 mp-e</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> mp-e</item>
+    </plurals>
+
+    <!-- This is used to express that something occurred some number of abbreviated minutes in the past (e.g., 5 mins ago). -->
+    <plurals name="abbrev_num_minutes_ago">
+        <item quantity="one">1 perce</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> perce</item>
+    </plurals>
+
+    <!-- This is used to express that something occurred some number of abbreviated hours in the past (e.g., 5 hrs ago). -->
+    <plurals name="abbrev_num_hours_ago">
+        <item quantity="one">1 órája</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> órája</item>
+    </plurals>
+
+    <!-- This is used to express that something occurred some number of abbreviated days in the past (e.g., 5 days ago). -->
+    <plurals name="abbrev_num_days_ago">
+        <item quantity="one">tegnap</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> napja</item>
+    </plurals>
+
+    <!-- This is used to express that something will occur some number of abbreviated seconds in the future (e.g., in 5 secs). -->
+    <plurals name="abbrev_in_num_seconds">
+        <item quantity="one">1 mp múlva</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> mp múlva</item>
+    </plurals>
+
+    <!-- This is used to express that something will occur some number of abbreviated minutes in the future (e.g., in 5 mins). -->
+    <plurals name="abbrev_in_num_minutes">
+        <item quantity="one">1 perc múlva</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> perc múlva</item>
+    </plurals>
+
+    <!-- This is used to express that something will occur some number of abbreviated hours in the future (e.g., in 5 hrs). -->
+    <plurals name="abbrev_in_num_hours">
+        <item quantity="one">1 óra múlva</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> óra múlva</item>
+    </plurals>
+
+    <!-- This is used to express that something will occur some number of abbreviated days in the future (e.g., in 5 days). -->
+    <plurals name="abbrev_in_num_days">
+        <item quantity="one">holnap</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> nap múlva</item>
+    </plurals>
+
+    <!-- String used to display the date. Preposition for date display ("on May 29") -->
+    <string name="preposition_for_date">%s</string>
+    <!-- String used to display the date. Preposition for time display ("at 2:33am") -->
+    <string name="preposition_for_time">%s-kor</string>
+    <!-- String used to display the date. Preposition for year display ("in 2008") -->
+    <string name="preposition_for_year">%s évben</string>
+
+    <!-- Appened to express the value is this unit of time: singular day -->
+    <string name="day">nap</string>
+    <!-- Appened to express the value is this unit of time: plural days -->
+    <string name="days">nap</string>
+    <!-- Appened to express the value is this unit of time: singular hour -->
+    <string name="hour">óra</string>
+    <!-- Appened to express the value is this unit of time: plural hours -->
+    <string name="hours">óra</string>
+    <!-- Appened to express the value is this unit of time: singular minute -->
+    <string name="minute">perc</string>
+    <!-- Appened to express the value is this unit of time: plural minutes -->
+    <string name="minutes">perc</string>
+    <!-- Appened to express the value is this unit of time. -->
+    <string name="second">mp</string>
+    <!-- Appened to express the value is this unit of time. -->
+    <string name="seconds">mp</string>
+    <!-- Appened to express the value is this unit of time. -->
+    <string name="week">hét</string>
+    <!-- Appened to express the value is this unit of time. -->
+    <string name="weeks">hét</string>
+    <!-- Appened to express the value is this unit of time. -->
+    <string name="year">év</string>
+    <!-- Appened to express the value is this unit of time. -->
+    <string name="years">év</string>
+
+    <!-- Calendar spinner item, to select that an event recurs every weekday. -->
+    <string name="every_weekday">"Minden hétköznap (Hétfő\u2013Péntek)"</string>
+    <!-- Calendar spinner item, to select that an event recurs every day. -->
+    <string name="daily">Naponta</string>
+    <!-- Calendar spinner item, to select that an event recurs every week on a particular day of the week. -->
+    <string name="weekly">"Hetente <xliff:g id="day">%s</xliff:g>i napon"</string>
+    <!-- Calendar spinner item, to select that an event recurs every month. -->
+    <string name="monthly">Havonta</string>
+    <!-- Calendar spinner item, to select that an event recurs every year. -->
+    <string name="yearly">Évente</string>
+
+
+    <!-- Title for error alert when a video cannot be played.  it can be used by any app. -->
+    <string name="VideoView_error_title">Videolejátszás sikertelen</string>
+    <!-- Text for error alert when a video container is not valid for progressive download/playback. -->
+    <string name="VideoView_error_text_invalid_progressive_playback">Sajnálom, ez a video nem sugározható erre az eszközre.</string>
+    <!-- Text for error alert when a video cannot be played. it can be used by any app. -->
+    <string name="VideoView_error_text_unknown">Sajnálom, ez a video lejátszhatatlan.</string>
+    <!-- Button to close error alert when a video cannot be played -->
+    <string name="VideoView_error_button">OK</string>
+
+
+
+
+    <!-- Format indicating a relative expression and time.
+         Example: "4 hours ago, 11:00 am" -->
+    <string name="relative_time">"<xliff:g id="date" example="4 hours ago">%1$s</xliff:g>, ekkor: <xliff:g id="time" example="11:00 am">%2$s</xliff:g>"</string>
+
+
+    <!-- Quoted name for 12pm, lowercase -->
+    <string name="noon">"dél"</string>
+    <!-- Quoted name for 12pm, uppercase first letter -->
+    <string name="Noon">"Dél"</string>
+    <!-- Quoted name for 12am, lowercase -->
+    <string name="midnight">"éjfél"</string>
+    <!-- Quoted name for 12am, uppercase first letter -->
+    <string name="Midnight">"Éjfél"</string>
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Format string for durations like "01:23" (1 minute, 23 seconds) -->
+    <string name="elapsed_time_short_format_mm_ss"><xliff:g id="minutes" example="1">%1$02d</xliff:g>:<xliff:g id="seconds" example="23">%2$02d</xliff:g></string>
+
+    <!-- Format string for times like "1:43:33" (1 hour, 43 minutes, 33 seconds) -->
+    <string name="elapsed_time_short_format_h_mm_ss"><xliff:g id="hours" example="1">%1$d</xliff:g>:<xliff:g id="minutes" example="43">%2$02d</xliff:g>:<xliff:g id="seconds" example="33">%3$02d</xliff:g></string>
+
+    <!-- Item on EditText context menu. This action is used to select all text in the edit field. -->
+    <string name="selectAll">Mindent kijelöl</string>
+
+    <!-- Item on EditText context menu. This action is used to start selecting text in the edit field. -->
+    <string name="selectText">Szöveg kijelölése</string>
+
+    <!-- Item on EditText context menu. This action is used to start selecting text in the edit field. -->
+    <string name="stopSelectingText">Szöveg kijelölés befejezése</string>
+
+    <!-- Item on EditText context menu.  This action is used to cut selected the text into the clipboard.  -->
+    <string name="cut">Kivág</string>
+
+    <!-- Item on EditText context menu. This action is used to cut all the text into the clipboard. -->
+    <string name="cutAll">Mindent kivág</string>
+
+    <!-- Item on EditText context menu. This action is used to cut selected the text into the clipboard. -->
+    <string name="copy">Másol</string>
+
+    <!-- Item on EditText context menu. This action is used to copy all the text into the clipboard. -->
+    <string name="copyAll">Mindent másol</string>
+
+    <!-- Item on EditText context menu. This action is used t o paste from the clipboard into the eidt field -->
+    <string name="paste">Beilleszt</string>
+
+    <!-- Item on EditText context menu. This action is used to copy a URL from the edit field into the clipboard. -->
+    <string name="copyUrl">URL másolása</string>
+
+    <!-- EditText context menu -->
+    <string name="inputMethod">Beviteli módszer</string>
+
+    <!-- Item on EditText context menu, used to add a word to the
+         input method dictionary. -->
+    <string name="addToDictionary">"\"%s\" hozzádása a szótárhoz</string>
+
+    <!-- Title for EditText context menu -->
+    <string name="editTextMenuTitle">Szöveg módosítása</string>
+
+    <!-- If the device is getting low on internal storage, a notification is shown to the user.  This is the title of that notification. -->
+    <string name="low_internal_storage_view_title">Kevés a hely</string>
+    <!-- If the device is getting low on internal storage, a notification is shown to the user.  This is the message of that notification. -->
+    <string name="low_internal_storage_view_text">A telefonon található szabad tárhely egyre kevesebb.</string>
+
+    <!-- Preference framework strings. -->
+    <string name="ok">OK</string>
+    <!-- Preference framework strings. -->
+    <string name="cancel">Mégse</string>
+    <!-- Preference framework strings. -->
+    <string name="yes">OK</string>
+    <!-- Preference framework strings. -->
+    <string name="no">Mégse</string>
+    <!-- This is the generic "attention" string to be used in attention dialogs.  Typically
+         combined with setIcon(android.R.drawable.ic_dialog_alert) -->
+    <string name="dialog_alert_title">Figyelem</string>
+
+    <!-- Default text for a button that can be toggled on and off. -->
+    <string name="capital_on">BE</string>
+    <!-- Default text for a button that can be toggled on and off. -->
+    <string name="capital_off">KI</string>
+
+    <!-- Title of intent resolver dialog when selecting an application to run. -->
+    <string name="whichApplication">Tevékenység végre hajtása ezzel\u2026</string>
+    <!-- Option to always use the selected application resolution in the future. See the "Complete action using" dialog title-->
+    <string name="alwaysUse">Ehhez a tevékenységhez mindig ezt választom.</string>
+    <!-- Text displayed when the user selects the check box for setting default application.  See the "Use by default for this action" check box. -->
+    <string name="clearDefaultHintMsg">Ezt a beállítást törölni lehet a Beállítások &gt; Alkalmazások &gt; Alkalmazások karbantartása menüpontban.</string>
+    <!-- Default title for the activity chooser, when one is not given. Android allows multiple activities to perform an action.  for example, there may be many ringtone pickers installed.  A dialog is shown to the user allowing him to pick which activity should be used.  This is the title. -->
+    <string name="chooseActivity">Tevékenység választása</string>
+    <!-- Text to display when there are no activities found to display in the
+         activity chooser. See the "Select an action" title. -->
+    <string name="noApplications">Egy alkalmazás se képes végrehajtani ezt a tevékenységet.</string>
+    <!-- Title of the alert when an application has crashed. -->
+    <string name="aerr_title">Sajnálom!</string>
+    <!-- Text of the alert that is displayed when an application is not responding. -->
+    <string name="aerr_application">A <xliff:g id="application">%1$s</xliff:g> nevű alkalmazás
+        (a <xliff:g id="process">%2$s</xliff:g> folyamat) váratlanul leállt.</string>
+    <!-- Text of the alert that is displayed when an application has crashed. -->
+    <string name="aerr_process">A <xliff:g id="process">%1$s</xliff:g> nevű folyamat váratlanul leállt. Próbálja újra!</string>
+    <!-- Title of the alert when an application is not responding. -->
+    <string name="anr_title">Sajnálom!</string>
+    <!-- Text of the alert that is displayed when an application is not responding. -->
+    <string name="anr_activity_application">A <xliff:g id="activity">%1$s</xliff:g> tevékenység (a <xliff:g id="application">%2$s</xliff:g> alkalmazásban) nem válaszol.</string>
+    <!-- Text of the alert that is displayed when an application is not responding. -->
+    <string name="anr_activity_process">A <xliff:g id="activity">%1$s</xliff:g> tevékenység (a <xliff:g id="process">%2$s</xliff:g> folyamatban) nem válaszol.</string>
+    <!-- Text of the alert that is displayed when an application is not responding. -->
+    <string name="anr_application_process">A <xliff:g id="application">%1$s</xliff:g> nevű alkalmazás (a <xliff:g id="process">%2$s</xliff:g> folyamatban) nem válaszol.</string>
+    <!-- Text of the alert that is displayed when an application is not responding. -->
+    <string name="anr_process">A <xliff:g id="process">%1$s</xliff:g> folyamat nem válaszol.</string>
+    <!-- Button allowing the user to close an application that is not responding. This will kill the application. -->
+    <string name="force_close">Kényszerített bezárás</string>
+    <!-- Button allowing the user to send a bug report for application which has encountered an error. -->
+    <string name="report">Hibajelentés</string>
+    <!-- Button allowing the user to choose to wait for an application that is not responding to become responsive again. -->
+    <string name="wait">Várakozás</string>
+    <!-- Button allowing a developer to connect a debugger to an application that is not responding. -->
+    <string name="debug">Hibakeresés</string>
+
+    <!-- Displayed in the title of the chooser for things to do with text that
+         is to be sent to another application. For example, I can send text through SMS or IM.  A dialog with those choices would be shown, and this would be the title. -->
+    <string name="sendText">Tevékenység választása a szöveghez</string>
+
+    <!-- Title of the dialog where the user is adjusting the phone ringer volume -->
+    <string name="volume_ringtone">Csengés hangereje</string>
+    <!-- Title of the dialog where the user is adjusting the music volume -->
+    <string name="volume_music">Multimédia hangereje</string>
+    <!-- Hint shown in the volume toast to inform the user that the media audio is playing through Bluetooth. -->
+    <string name="volume_music_hint_playing_through_bluetooth">A hang Bluetooth-on keresztül hallható</string>
+    <!-- Title of the dialog where the user is adjusting the phone call volume -->
+    <string name="volume_call">Telefonhívás hangereje</string>
+    <!-- Title of the dialog where the user is adjusting the phone call volume when connected on bluetooth-->
+    <string name="volume_bluetooth_call">Bluetooth telefonhívás hangereje</string>
+    <!-- Title of the dialog where the user is adjusting the audio volume for alarms -->
+    <string name="volume_alarm">Ébresztő hangereje</string>
+    <!-- Title of the dialog where the user is adjusting the audio volume for notifications -->
+    <string name="volume_notification">Értesítések hangereje</string>
+    <!-- Title of the dialog where the user is adjusting the general audio volume -->
+    <string name="volume_unknown">Hangerő</string>
+
+    <!-- Ringtone picker strings --> <skip />
+    <!-- Choice in the ringtone picker.  If chosen, the default ringtone will be used. -->
+    <string name="ringtone_default">Alapértelmezett csengőhang</string>
+    <!-- Choice in the ringtone picker.  If chosen, the default ringtone will be used. This fills in the actual ringtone's title into the message. -->
+    <string name="ringtone_default_with_actual">Alapértelmezett csengőhang (<xliff:g id="actual_ringtone">%1$s</xliff:g>)</string>
+    <!-- Choice in the ringtone picker.  If chosen, there will be silence instead of a ringtone played. -->
+    <string name="ringtone_silent">Néma</string>
+    <!-- The title of the ringtone picker dialog. -->
+    <string name="ringtone_picker_title">Csengőhangok</string>
+    <!-- If there is ever a ringtone set for some setting, but that ringtone can no longer be resolved, t his is shown instead.  For example, if the ringtone was on a SD card and it had been removed, this woudl be shown for ringtones on that SD card. -->
+    <string name="ringtone_unknown">Ismeretlen csengőhang</string>
+
+    <!-- A notification is shown when there are open wireless networks nearby.  This is the notification's title. -->
+    <plurals name="wifi_available">
+        <item quantity="one">Wi-Fi hálózat elérhető</item>
+        <item quantity="other">Wi-Fi hálózatok elérhetőek</item>
+    </plurals>
+    <!-- A notification is shown when there are open wireless networks nearby.  This is the notification's message. -->
+    <plurals name="wifi_available_detailed">
+        <item quantity="one">Elérhető egy titkosítatlan Wi-Fi hálózat</item>
+        <item quantity="other">Több, titkosítatlan Wi-Fi hálózat is elérhető</item>
+    </plurals>
+
+    <!-- Name of the dialog that lets the user choose an accented character to insert -->
+    <string name="select_character">Karakterválasztó</string>
+
+    <!-- SMS per-application rate control Dialog --> <skip />
+    <!-- See SMS_DIALOG.  This is shown if the current application's name cannot be figuerd out. -->
+    <string name="sms_control_default_app_name">Ismeretlen alkalmazás</string>
+    <!-- SMS_DIALOG: An SMS dialog is shown if an application tries to send too many SMSes.  This is the title of that dialog. -->
+    <string name="sms_control_title">SMS üzenetek küldése</string>
+    <!-- See SMS_DIALOG.  This is the message shown in that dialog. -->
+    <string name="sms_control_message">Nagymennyiségű SMS üzenet vár elküldésre. Válassza az \"OK\" gombot a küldéshez, vagy a \"Mégse\" gombot a küldés megakadályozásához.</string>
+    <!-- See SMS_DIALOG.  This is a button choice to allow sending the SMSes. -->
+    <string name="sms_control_yes">OK</string>
+    <!-- See SMS_DIALOG.  This is a button choice to disallow sending the SMSes.. -->
+    <string name="sms_control_no">Mégse</string>
+
+    <!-- Name of the button in the date/time picker to accept the date/time change -->
+    <string name="date_time_set">Rendben</string>
+
+    <!-- Security Permissions strings-->
+    <!-- The default permission group for any permissions that have not explicitly set a group. -->
+    <string name="default_permission_group">Alapértelmezett</string>
+    <!-- Do not translate. -->
+    <string name="permissions_format"><xliff:g id="perm_line1">%1$s</xliff:g>, <xliff:g id="perm_line2">%2$s</xliff:g></string>
+    <!-- Shown for an application when it doesn't require any permission grants. -->
+    <string name="no_permissions">Semmilyen engedély nem szükséges</string>
+    <!-- When installing an application, the less-dangerous permissions are hidden.  If the user showed those, this is the text to hide them again.  -->
+    <string name="perms_hide"><b>Kevésbé veszélyesek eltüntetése</b></string>
+    <!-- When installing an application, the less-dangerous permissions are hidden.  This is the text to show those. -->
+    <string name="perms_show_all"><b>Az összes mutatása</b></string>
+
+    <!-- Shown when there is content loading from the internet into a dialog. -->
+    <string name="googlewebcontenthelper_loading">Betöltés\u2026</string>
+
+    <!-- USB storage dialog strings -->
+    <!-- This is the label for the activity, and should never be visible to the user. -->
+    <!-- See USB_STORAGE.  USB_STORAGE_DIALOG:  After the user selects the notification, a dialog is shown asking if he wants to mount.  This is the title. -->
+    <string name="usb_storage_title">USB csatlakoztatva</string>
+    <!-- See USB_STORAGE.    This is the message. -->
+    <string name="usb_storage_message">A telefon USB-n keresztül csatlakozik a számítógéphez. A \"Csatol\" gomb lehetővé teszi fájlok cseréjét a gép és a telefon SD kártyája között.</string>
+    <!-- See USB_STORAGE.    This is the button text to mount the phone on the computer. -->
+    <string name="usb_storage_button_mount">Csatol</string>
+    <!-- See USB_STORAGE.   This is the button text to ignore the plugging in of the phone.. -->
+    <string name="usb_storage_button_unmount">Ne csatoljon</string>
+    <!-- See USB_STORAGE_DIALOG.  If there was an error mounting, this is the text. --> 
+    <string name="usb_storage_error_message">Probléma történt az SD kártya USB tárolóként való használata közben.</string>
+    <!-- USB_STORAGE: When the user connects the phone to a computer via USB, we show a notification asking if he wants to share files across.  This is the title -->
+    <string name="usb_storage_notification_title">USB csatlakoztatva</string>
+    <!-- See USB_STORAGE. This is the message. -->
+    <string name="usb_storage_notification_message">A számítógéppel való fájlcseréhez válassza ezt.</string>
+    <!-- USB_STORAGE_STOP: While USB storage is enabled, we show a notification dialog asking if he wants to stop. This is the title -->
+    <string name="usb_storage_stop_notification_title">USB tároló kikapcsolása</string>
+    <!-- See USB_STORAGE. This is the message. -->
+    <string name="usb_storage_stop_notification_message">A fájlcsere befejezéséhez válassza ezt.</string>
+
+    <!-- USB storage stop dialog strings -->
+    <!-- This is the label for the activity, and should never be visible to the user. -->
+    <!-- See USB_STORAGE_STOP.  USB_STORAGE_STOP_DIALOG:  After the user selects the notification, a dialog is shown asking if he wants to stop usb storage.  This is the title. -->
+    <string name="usb_storage_stop_title">USB tároló kikapcsolása</string>
+    <!-- See USB_STORAGE_STOP.    This is the message. -->
+    <string name="usb_storage_stop_message">Mielőtt kikapcsolja az USB tároló funkciót, csatolja le azt a számítógép segítségével (\"Eszköz biztonságos eltávolítása\"). Ezután válassza a \"Kikapcsol\" gombot.</string>
+    <!-- See USB_STORAGE_STOP.    This is the button text to stop usb storage. -->
+    <string name="usb_storage_stop_button_mount">Kikapcsol</string>
+    <!-- See USB_STORAGE_STOP.   This is the button text to cancel stoping usb storage. -->
+    <string name="usb_storage_stop_button_unmount">Mégse</string>
+    <!-- See USB_STORAGE_STOP_DIALOG.  If there was an error stopping, this is the text. --> 
+    <string name="usb_storage_stop_error_message">Problémába ütközött az USB tároló kikapcsolása. Ellenőrizze, hogy a számítógépen lecsatolta-e az eszközt, aztán próbálja újra.</string>
+
+    <!-- External media format dialog strings -->
+    <!-- This is the label for the activity, and should never be visible to the user. -->
+    <!-- See EXTMEDIA_FORMAT.  EXTMEDIA_FORMAT_DIALOG:  After the user selects the notification, a dialog is shown asking if he wants to format the SD card.  This is the title. -->
+    <string name="extmedia_format_title">SD kártya formázása</string>
+    <!-- See EXTMEDIA_FORMAT.   This is the message. -->
+    <string name="extmedia_format_message">Biztosan formázni akarja az SD kártyát? Az összes adat a kártyán elveszik.</string>
+    <!-- See EXTMEDIA_FORMAT.    This is the button text to format the sd card. -->
+    <string name="extmedia_format_button_format">Formázás</string>
+
+    <!-- Title of notification shown when ADB is actively connected to the phone. -->
+    <string name="adb_active_notification_title">USB hibakereső csatlakoztatva</string>
+    <!-- Message of notification shown when ADB is actively connected to the phone. -->
+    <string name="adb_active_notification_message">Egy számítógép csatlakozik a telefonhoz.</string>
+    
+    <!-- Used to replace %s in urls retreived from the signin server with locales.  For Some        -->
+    <!-- devices we don't support all the locales we ship to and need to replace the '%s' with a    -->
+    <!-- locale string based on mcc values.  By default (0-length string) we don't replace the %s   -->
+    <!-- at all and later replace it with a locale string based on the users chosen locale          -->
+    <!-- DO NOT TRANSLATE -->
+    <string name="locale_replacement">""</string>
+
+    <!-- Title of the pop-up dialog in which the user switches input method components. -->
+    <string name="select_input_method">Beviteli Módszer Kiválasztása</string>
+    
+    <string name="fast_scroll_alphabet">\u0020ABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
+    <string name="fast_scroll_numeric_alphabet">\u00200123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
+    
+    <string name="candidates_style"><u>candidates</u></string>
+
+    <!-- External media notification strings -->
+    <!-- Shown when external media is being checked -->
+    <string name="ext_media_checking_notification_title">SD kártya előkészítése</string>
+    <string name="ext_media_checking_notification_message">Ellenőrzés</string>
+
+    <!-- Shown when external media is blank (or unsupported filesystem) -->
+    <string name="ext_media_nofs_notification_title">Üres SD kártya</string>
+    <string name="ext_media_nofs_notification_message">SD kártya üres vagy nem támogatott fájlrendszert tartalmaz.</string>
+
+    <!-- Shown when external media is unmountable (corrupt)) -->
+    <string name="ext_media_unmountable_notification_title">Megsérült SD kártya</string>
+    <string name="ext_media_unmountable_notification_message">Az SD kártya megsérült. Újra kell formázni.</string>
+
+    <!-- Shown when external media is unsafely removed -->
+    <string name="ext_media_badremoval_notification_title">SD kártya váratlanul eltávolítva</string>
+    <string name="ext_media_badremoval_notification_message">Csatolja le a kártyát eltávolítás előtt az adatvesztés elkerülése érdekében!</string>
+
+    <!-- Shown when external media has been safely removed -->
+    <string name="ext_media_safe_unmount_notification_title">SD kártyát biztonságos eltávolítani</string>
+    <string name="ext_media_safe_unmount_notification_message">Most már biztonságos eltávolítani az SD kártyát.</string>
+
+    <!-- Shown when external media is missing -->
+    <string name="ext_media_nomedia_notification_title">Eltávolított SD kártya</string>
+    <string name="ext_media_nomedia_notification_message">SD kártya eltávolítva. Illesszen be újat.</string>
+
+    <!-- Shown in LauncherActivity when the requested target Intent didn't return any matching Activities, leaving the list empty. -->
+    <string name="activity_list_empty">Nincs illeszkedő tevékenység</string>
+
+    <!-- permission attributes related to package usage statistics -->
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_pkgUsageStats">komponens használati statisztikájának frissítése</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_pkgUsageStats">Lehetővé teszi az összegyűjtött használati statisztika módosítását. Rendes alkalmazásoknak nincs szükségük erre.</string>
+
+    <!-- Shown in the tutorial for tap twice for zoom control. -->
+    <string name="tutorial_double_tap_to_zoom_message_short">Érintse meg kétszer a nagyításhoz</string>
+
+
+    <!-- Shown in gadget hosts (e.g. the home screen) when there was an error inflating
+    the gadget. -->
+    <string name="gadget_host_error_inflating">Hiba a widget nagyítása közben</string>
+
+    <!-- Long label for a button on a full-screen input method for the "Go" action. -->
+    <string name="ime_action_go">Menj</string>
+    
+    <!-- Long label for a button on a full-screen input method for the "Search" action. -->
+    <string name="ime_action_search">Keresés</string>
+    
+    <!-- Long label for a button on a full-screen input method for the "Send" action. -->
+    <string name="ime_action_send">Küldés</string>
+    
+    <!-- Long label for a button on a full-screen input method for the "Next" action. -->
+    <string name="ime_action_next">Következő</string>
+    
+    <!-- Long label for a button on a full-screen input method for the "Done" action. -->
+    <string name="ime_action_done">Kész</string>
+    
+    <!-- Long label for a button on a full-screen input method for an unknown action. -->
+    <string name="ime_action_default">Végrehajt</string>
+    
+    <!-- Strings for search suggestions. These are going here because they are referenced by both 
+         ContactsProvider and GoogleContactsProvider -->
+    <skip />
+
+
+    <!-- This string appears (on two lines) when you type a number into contacts search, to let you dial the phone number you typed.  The first line will be in bigger type than the second. -->
+    <string name="dial_number_using">Szám tárcsázása:\n <xliff:g id="number" example="555">%s</xliff:g></string>
+
+    <!-- This string appears (on two lines) when you type a number into contacts search, to let you create a contact whose phone number is the number you typed.  The first line will be in bigger type than the second. -->
+    <string name="create_contact_using">Kapcsolat létrehozása\na <xliff:g id="number" example="555">%s</xliff:g> számmal</string>
+
+    <!-- This string array should be overridden by the manufacture to present a list of carrier-id,locale pairs.  This is used at startup to set a default locale by checking the system property ro.carrier for the carrier-id and searching through this array -->
+    <string-array translatable="false" name="carrier_locales">
+    </string-array>
+
+     <!-- Title for the selected state of a CompoundButton. -->
+     <string name="accessibility_compound_button_selected">kipipálva</string>
+
+     <!-- Title for the unselected state of a CompoundButton. -->
+     <string name="accessibility_compound_button_unselected">nincs kipipálva</string>
+
+</resources>
