@@ -47,6 +47,8 @@ LOCAL_CFLAGS += -DSTATIC_ANDROIDFW_FOR_TOOLS
 LOCAL_SRC_FILES:= $(hostSources)
 LOCAL_C_INCLUDES := external/zlib
 
+LOCAL_CPPFLAGS += -fno-strict-aliasing
+
 include $(BUILD_HOST_STATIC_LIBRARY)
 
 
@@ -68,6 +70,9 @@ LOCAL_SHARED_LIBRARIES := \
 	libcutils \
 	libutils \
 	libz
+
+
+LOCAL_CPPFLAGS += -fno-strict-aliasing
 
 include $(BUILD_SHARED_LIBRARY)
 
