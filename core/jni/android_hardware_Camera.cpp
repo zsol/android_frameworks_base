@@ -609,10 +609,10 @@ static jint android_hardware_Camera_native_setup(JNIEnv *env, jobject thiz,
     jobject weak_this, jint cameraId, jint halVersion, jstring clientPackageName)
 {
     // Convert jstring to String16
-    const char16_t *rawClientName = env->GetStringChars(clientPackageName, NULL);
+    const char16_t *rawClientName = (char16_t*)env->GetStringChars(clientPackageName, NULL);
     jsize rawClientNameLen = env->GetStringLength(clientPackageName);
     String16 clientName(rawClientName, rawClientNameLen);
-    env->ReleaseStringChars(clientPackageName, rawClientName);
+    env->ReleaseStringChars(clientPackageName, (jchar*)rawClientName);
 
     sp<Camera> camera;
     if (halVersion == CAMERA_HAL_API_VERSION_NORMAL_CONNECT) {
