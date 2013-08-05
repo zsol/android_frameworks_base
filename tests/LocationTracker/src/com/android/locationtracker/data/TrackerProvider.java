@@ -112,10 +112,17 @@ public class TrackerProvider extends ContentProvider {
             String[] selectionArgs, String sortOrder) {
         SQLiteDatabase db = mOpenHelper.getReadableDatabase();
         // TODO: extract limit from URI ?
-        Cursor cursor = db.query(TABLE_NAME, projection, selection,
+        Cursor cursor = null;
+        try {
+			cursor = db.query(TABLE_NAME, projection, selection,
                 selectionArgs, null, null, sortOrder);
-        getContext().getContentResolver().notifyChange(uri, null);
-        return cursor;
+            getContext().getContentResolver().notifyChange(uri, null);
+            return cursor;
+		} finally {
+			if (cursor != null) {
+				cursor.close();
+			}
+		}
     }
 
     @Override

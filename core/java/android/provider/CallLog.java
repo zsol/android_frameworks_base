@@ -538,27 +538,26 @@ public class CallLog {
 
                 // We should prefer normalized one (probably coming from
                 // Phone.NORMALIZED_NUMBER column) first. If it isn't available try others.
-                if (ci.normalizedNumber != null) {
+		        if (ci.normalizedNumber != null) {
                     final String normalizedPhoneNumber = ci.normalizedNumber;
                     cursor = resolver.query(Phone.CONTENT_URI,
-                            new String[] { Phone._ID },
-                            Phone.CONTACT_ID + " =? AND " + Phone.NORMALIZED_NUMBER + " =?",
-                            new String[] { String.valueOf(ci.contactIdOrZero),
-                                    normalizedPhoneNumber},
-                            null);
+                        new String[] { Phone._ID },
+                        Phone.CONTACT_ID + " =? AND " + Phone.NORMALIZED_NUMBER + " =?",
+                        new String[] { String.valueOf(ci.contactIdOrZero), normalizedPhoneNumber},
+                        null);
                 } else {
                     final String phoneNumber = ci.phoneNumber != null ? ci.phoneNumber : number;
                     cursor = resolver.query(
-                            Uri.withAppendedPath(Callable.CONTENT_FILTER_URI,
-                                    Uri.encode(phoneNumber)),
-                            new String[] { Phone._ID },
-                            Phone.CONTACT_ID + " =?",
-                            new String[] { String.valueOf(ci.contactIdOrZero) },
-                            null);
+                        Uri.withAppendedPath(Callable.CONTENT_FILTER_URI,
+                                Uri.encode(phoneNumber)),
+                        new String[] { Phone._ID },
+                        Phone.CONTACT_ID + " =?",
+                        new String[] { String.valueOf(ci.contactIdOrZero) },
+                        null);
                 }
-
+                
                 if (cursor != null) {
-                    try {
+					try {
                         if (cursor.getCount() > 0 && cursor.moveToFirst()) {
                             final Uri feedbackUri = DataUsageFeedback.FEEDBACK_URI.buildUpon()
                                     .appendPath(cursor.getString(0))
@@ -569,6 +568,7 @@ public class CallLog {
                         }
                     } finally {
                         cursor.close();
+
                     }
                 }
             }

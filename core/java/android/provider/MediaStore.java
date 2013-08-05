@@ -2234,18 +2234,21 @@ public final class MediaStore {
      * @return A version string, or null if the version could not be determined.
      */
     public static String getVersion(Context context) {
-        Cursor c = context.getContentResolver().query(
+        Cursor c = null;
+            try {
+				c = context.getContentResolver().query(
                 Uri.parse(CONTENT_AUTHORITY_SLASH + "none/version"),
                 null, null, null, null);
-        if (c != null) {
-            try {
-                if (c.moveToFirst()) {
-                    return c.getString(0);
-                }
+                if (c != null) {
+                    if (c.moveToFirst()) {
+                        return c.getString(0);
+                    }
+				}
             } finally {
-                c.close();
+				if (c != null) {
+                    c.close();
+			    }
             }
-        }
         return null;
     }
 
