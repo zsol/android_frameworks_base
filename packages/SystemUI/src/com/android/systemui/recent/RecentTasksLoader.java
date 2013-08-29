@@ -300,11 +300,11 @@ public class RecentTasksLoader implements View.OnTouchListener {
         }
 
         if (mTaskLoader != null) {
-            mTaskLoader.cancel(false);
+            mTaskLoader.cancel(true);
             mTaskLoader = null;
         }
         if (mThumbnailLoader != null) {
-            mThumbnailLoader.cancel(false);
+            mThumbnailLoader.cancel(true);
             mThumbnailLoader = null;
         }
         mLoadedTasks = null;
@@ -492,6 +492,9 @@ public class RecentTasksLoader implements View.OnTouchListener {
                                 tasksWaitingForThumbnails.put(item);
                                 break;
                             } catch (InterruptedException e) {
+                                if (isCancelled()) {
+                                    return null;
+                                }
                             }
                         }
                         tasks.add(item);
@@ -518,6 +521,9 @@ public class RecentTasksLoader implements View.OnTouchListener {
                         tasksWaitingForThumbnails.put(new TaskDescription());
                         break;
                     } catch (InterruptedException e) {
+                        if (isCancelled()) {
+                            return null;
+                        }
                     }
                 }
 
@@ -562,6 +568,9 @@ public class RecentTasksLoader implements View.OnTouchListener {
                         try {
                             td = tasksWaitingForThumbnails.take();
                         } catch (InterruptedException e) {
+                            if (isCancelled()) {
+                                return null;
+                            }
                         }
                     }
                     if (td.isNull()) { // end sentinel
