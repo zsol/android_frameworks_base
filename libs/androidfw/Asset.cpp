@@ -49,7 +49,6 @@ static Mutex gAssetLock;
 static int32_t gCount = 0;
 static Asset* gHead = NULL;
 static Asset* gTail = NULL;
-static Mutex sLock;
 
 int32_t Asset::getGlobalCount()
 {
@@ -847,9 +846,7 @@ void _CompressedAsset::close(void)
  */
 const void* _CompressedAsset::getBuffer(bool)
 {
-    if (mBuf != NULL)
-        return mBuf;
-    AutoMutex _l(sLock);
+    AutoMutex _l(mCompressedAssetLock);
     unsigned char* buf = NULL;
 
     if (mBuf != NULL)
