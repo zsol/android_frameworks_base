@@ -23,6 +23,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.ContentObserver;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.UserHandle;
@@ -69,6 +70,12 @@ public class Clock implements DemoMode {
     public static final int CLOCK_DATE_STYLE_LOWERCASE = 1;
     public static final int CLOCK_DATE_STYLE_UPPERCASE = 2;
 
+    public static final int FONT_BOLD = 0;
+    public static final int FONT_CONDENSED = 1;
+    public static final int FONT_LIGHT = 2;
+    public static final int FONT_LIGHT_ITALIC = 3;
+    public static final int FONT_NORMAL = 4;
+
     private static final char MAGIC1 = '\uEF00';
     private static final char MAGIC2 = '\uEF01';
 
@@ -83,6 +90,7 @@ public class Clock implements DemoMode {
     private int mAmPmStyle = AM_PM_STYLE_GONE;
     private int mClockDateDisplay = CLOCK_DATE_DISPLAY_GONE;
     private int mClockDateStyle = CLOCK_DATE_STYLE_REGULAR;
+    private int mClockFontStyle = FONT_NORMAL;
     private boolean mDemoMode;
     private boolean mAttached;
 
@@ -106,6 +114,8 @@ public class Clock implements DemoMode {
                     Settings.System.STATUS_BAR_DATE_STYLE), false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.STATUSBAR_CLOCK_COLOR), false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.STATUSBAR_CLOCK_FONT_STYLE), false, this, UserHandle.USER_ALL);
             updateSettings();
         }
 
@@ -343,6 +353,9 @@ public class Clock implements DemoMode {
         mClockDateStyle = Settings.System.getIntForUser(resolver,
                 Settings.System.STATUS_BAR_DATE_STYLE, CLOCK_DATE_STYLE_REGULAR,
                 UserHandle.USER_CURRENT);
+        mClockFontStyle = Settings.System.getIntForUser(resolver,
+                Settings.System.STATUSBAR_CLOCK_FONT_STYLE, FONT_NORMAL,
+                UserHandle.USER_CURRENT);
 
         int defaultColor = mContext.getResources().getColor(R.color.status_bar_clock_color);
         int clockColor = Settings.System.getIntForUser(resolver,
@@ -353,8 +366,30 @@ public class Clock implements DemoMode {
             clockColor = defaultColor;
         }
 
+        getFontStyle(mClockFontStyle);
         mClockView.setTextColor(clockColor);
         updateClock();
+    }
+
+    public void getFontStyle(int font) {
+        switch (font) {
+            case FONT_BOLD:
+                mClockView.setTypeface(Typeface.create("sans-serif", Typeface.BOLD));
+                break;
+            case FONT_CONDENSED:
+                mClockView.setTypeface(Typeface.create("sans-serif-condensed", Typeface.NORMAL));
+                break;
+            case FONT_LIGHT:
+                mClockView.setTypeface(Typeface.create("sans-serif-light", Typeface.NORMAL));
+                break;
+            case FONT_LIGHT_ITALIC:
+                mClockView.setTypeface(Typeface.create("sans-serif-light", Typeface.ITALIC));
+                break;
+            case FONT_NORMAL:
+            default:
+                mClockView.setTypeface(Typeface.create("sans-serif", Typeface.NORMAL));
+                break;
+        }
     }
 
     @Override
