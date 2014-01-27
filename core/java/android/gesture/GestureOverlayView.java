@@ -87,6 +87,7 @@ public class GestureOverlayView extends FrameLayout {
     private final Rect mInvalidRect = new Rect();
     private final Path mPath = new Path();
     private boolean mGestureVisible = true;
+    protected boolean mInputEnabled = true;
 
     private float mX;
     private float mY;
@@ -206,6 +207,7 @@ public class GestureOverlayView extends FrameLayout {
 
     public void setGestureColor(int color) {
         mCertainGestureColor = color;
+        setCurrentColor(color);
     }
 
     public void setUncertainGestureColor(int color) {
@@ -497,7 +499,7 @@ public class GestureOverlayView extends FrameLayout {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
-        if (isEnabled()) {
+        if (isEnabled() && mInputEnabled) {
             final boolean cancelDispatch = (mIsGesturing || (mCurrentGesture != null &&
                     mCurrentGesture.getStrokesCount() > 0 && mPreviousWasGesturing)) &&
                     mInterceptEvents;
