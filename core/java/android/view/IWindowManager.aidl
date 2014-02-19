@@ -261,12 +261,6 @@ interface IWindowManager
     void enableScreenIfNeeded();
 
     /**
-     * Toggle global menu
-     * @hide
-     */
-    void toggleGlobalMenu();
-
-    /**
      * Clears the frame statistics for a given window.
      *
      * @param token The window token.
@@ -281,4 +275,18 @@ interface IWindowManager
      * @return The frame statistics or null if the window does not exist.
      */
     WindowContentFrameStats getWindowContentFrameStats(IBinder token);
+
+    /**
+     * Toggle global menu
+     *
+     * @hide
+     */
+    void toggleGlobalMenu();
+
+    /**
+     * Get current system ui visibility mode.
+     *
+     * @hide
+     */
+    int getSystemUIVisibility();
 }

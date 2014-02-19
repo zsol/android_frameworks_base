@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Slim recent app screen animation -->
+    <style name="Animation.RecentScreen">
+        <item name="windowEnterAnimation">@anim/recent_screen_enter</item>
+        <item name="windowExitAnimation">@anim/recent_screen_exit</item>
+    </style>
+
+    <style name="Animation.RecentScreen.Left">
+        <item name="windowEnterAnimation">@anim/recent_screen_enter_left</item>
+        <item name="windowExitAnimation">@anim/recent_screen_exit_left</item>
+    </style>
+
+</resources>

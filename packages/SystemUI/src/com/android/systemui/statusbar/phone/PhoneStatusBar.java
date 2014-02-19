@@ -532,6 +532,12 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.NAVIGATION_BAR_SHOW),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.RECENT_CARD_BG_COLOR), false, this,
+                    UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.RECENT_CARD_TEXT_COLOR), false, this,
+                    UserHandle.USER_ALL);
             update();
         }
 
@@ -549,6 +555,8 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
 
         @Override
         public void onChange(boolean selfChange, Uri uri) {
+            super.onChange(selfChange, uri);
+
             if (uri.equals(Settings.System.getUriFor(
                     Settings.System.BATTERY_SAVER_MODE_COLOR))) {
                     mBatterySaverWarningColor = Settings.System.getIntForUser(
@@ -580,6 +588,11 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                         mContext.getContentResolver(),
                         Settings.System.HEADS_UP_TEXT_COLOR, 0x00000000,
                         UserHandle.USER_CURRENT);
+            } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.RECENT_CARD_BG_COLOR))
+                    || uri.equals(Settings.System.getUriFor(
+                    Settings.System.RECENT_CARD_TEXT_COLOR))) {
+                rebuildRecentsScreen();
             } else if (uri.equals(Settings.System.getUriFor(
                     Settings.System.QS_COLOR_SWITCH))) {
                     mQSCSwitch = Settings.System.getIntForUser(
