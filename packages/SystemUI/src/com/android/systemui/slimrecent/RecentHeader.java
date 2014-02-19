@@ -19,6 +19,7 @@ package com.android.systemui.slimrecent;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
 import android.provider.Settings;
@@ -29,6 +30,8 @@ import android.widget.TextView;
 
 import com.android.cards.internal.CardHeader;
 import com.android.systemui.R;
+import com.android.systemui.recents.misc.Utilities;
+
 
 /**
  * This class handles the header view.
@@ -36,6 +39,8 @@ import com.android.systemui.R;
 public class RecentHeader extends CardHeader {
 
     private Context mContext;
+
+    private TaskDescription mTaskDescription;
 
     private String mLabel;
     private int mHeaderHeight;
@@ -45,10 +50,11 @@ public class RecentHeader extends CardHeader {
     private float mScaleFactor;
     private boolean mScaleFactorChanged;
 
-    public RecentHeader(Context context, String label, float scaleFactor) {
+    public RecentHeader(Context context, TaskDescription td, float scaleFactor) {
         super(context);
+        mTaskDescription = td;
         mContext = context;
-        mLabel = label;
+        mLabel = td.getLabel();
         mScaleFactor = scaleFactor;
         initDimensions();
 
@@ -57,8 +63,9 @@ public class RecentHeader extends CardHeader {
     }
 
     // Update header content.
-    public void updateHeader(String label, float scaleFactor) {
-        mLabel = label;
+    public void updateHeader(TaskDescription td, float scaleFactor) {
+        mTaskDescription = td;
+        mLabel = td.getLabel();
         if (scaleFactor != mScaleFactor) {
             mScaleFactorChanged = true;
             mScaleFactor = scaleFactor;
@@ -125,8 +132,23 @@ public class RecentHeader extends CardHeader {
         if (textColor != 0x00ffffff) {
             holder.textView.setTextColor(textColor);
         } else {
-            holder.textView.setTextColor(defaultCardText);
+            holder.textView.setTextColor(getDefaultTextColor());
         }
+    }
+
+    public int getDefaultTextColor() {
+        if (mTaskDescription.cardColor != 0) {
+            if (Utilities.computeContrastBetweenColors(mTaskDescription.cardColor,
+                    Color.WHITE) < 3f) {
+                return mContext.getResources().getColor(
+                        R.color.recents_task_bar_dark_text_color);
+            } else {
+                return mContext.getResources().getColor(
+                        R.color.recents_task_bar_light_text_color);
+            }
+        }
+        return mContext.getResources().getColor(
+                    R.color.card_text_color_header);
     }
 
     static class ViewHolder {

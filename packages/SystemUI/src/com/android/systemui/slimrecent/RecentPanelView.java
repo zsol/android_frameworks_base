@@ -554,7 +554,8 @@ public class RecentPanelView {
      */
     private TaskDescription createTaskDescription(int taskId, int persistentTaskId,
             Intent baseIntent, ComponentName origActivity,
-            CharSequence description, boolean isFavorite, int expandedState) {
+            CharSequence description, boolean isFavorite, int expandedState,
+            ActivityManager.TaskDescription td) {
 
         final Intent intent = new Intent(baseIntent);
         if (origActivity != null) {
@@ -566,7 +567,10 @@ public class RecentPanelView {
         final ResolveInfo resolveInfo = pm.resolveActivity(intent, 0);
         if (resolveInfo != null) {
             final ActivityInfo info = resolveInfo.activityInfo;
-            final String title = info.loadLabel(pm).toString();
+            String title = td.getLabel();
+            if (title == null) {
+                title = info.loadLabel(pm).toString();
+            }
 
             String identifier = TASK_PACKAGE_IDENTIFIER;
             final ComponentName component = intent.getComponent();
@@ -579,10 +583,11 @@ public class RecentPanelView {
             if (title != null && title.length() > 0) {
                 if (DEBUG) Log.v(TAG, "creating activity desc for id="
                         + persistentTaskId + ", label=" + title);
+                int color = td.getPrimaryColor();
 
                 final TaskDescription item = new TaskDescription(taskId,
                         persistentTaskId, resolveInfo, baseIntent, info.packageName,
-                        identifier, description, isFavorite, expandedState);
+                        identifier, description, isFavorite, expandedState, color);
                 item.setLabel(title);
                 return item;
             } else {
@@ -654,7 +659,7 @@ public class RecentPanelView {
             TaskDescription item = createTaskDescription(recentInfo.id,
                     recentInfo.persistentId, recentInfo.baseIntent,
                     recentInfo.origActivity, recentInfo.description,
-                    false, EXPANDED_STATE_UNKNOWN);
+                    false, EXPANDED_STATE_UNKNOWN, recentInfo.taskDescription);
 
             if (item != null) {
                 for (String fav : favList) {
