@@ -39,9 +39,9 @@
         <item name="android:fontFamily">sans-serif-condensed</item>
         <item name="android:textColor">@color/card_text_color_header</item>
         <item name="android:layout_width">@dimen/recent_header_width</item>
-        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_height">@dimen/recent_app_icon_size</item>
         <item name="android:gravity">start|center_vertical</item>
-        <item name="android:textAlignment">gravity</item>
+        <item name="android:textAlignment">viewStart</item>
         <item name="android:layout_marginStart">0dp</item>
         <item name="android:layout_marginTop">4dp</item>
         <item name="android:layout_marginEnd">0dp</item>

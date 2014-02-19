@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 SlimRoms Project
+ * Copyright (C) 2014-2015 SlimRoms Project
  * Author: Lars Greiss - email: kufikugel@googlemail.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
@@ -755,7 +755,8 @@ public class RecentPanelView {
     private boolean isCurrentHomeActivity(ActivityManager.RunningTaskInfo task) {
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_HOME);
-        ResolveInfo resolveInfo = mContext.getPackageManager().resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY);
+        ResolveInfo resolveInfo =
+            mContext.getPackageManager().resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY);
         String currentHomePackage = resolveInfo.activityInfo.packageName;
         return task.baseActivity.getPackageName().equals(currentHomePackage);
     }
