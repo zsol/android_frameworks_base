@@ -2187,6 +2187,18 @@ public final class ActivityThread {
         return mActivities.get(token).activity;
     }
 
+    protected void performFinishFloating() {
+        synchronized (mPackages) {
+            Activity a = null;
+            for (ActivityClientRecord ar : mActivities.values()) {
+                a = ar.activity;
+                if (a != null && !a.mFinished && a.getWindow() != null && a.getWindow().mIsFloatingWindow) {
+                    a.finish();
+                }
+            }
+        }
+    }
+
     public final void sendActivityResult(
             IBinder token, String id, int requestCode,
             int resultCode, Intent data) {
@@ -3016,12 +3028,12 @@ public final class ActivityThread {
                 r.state = null;
                 r.persistentState = null;
             } catch (Exception e) {
-                if (!mInstrumentation.onException(r.activity, e)) {
+                /*if (!mInstrumentation.onException(r.activity, e)) {
                     throw new RuntimeException(
                         "Unable to resume activity "
                         + r.intent.getComponent().toShortString()
                         + ": " + e.toString(), e);
-                }
+                }*/
             }
         }
         return r;
