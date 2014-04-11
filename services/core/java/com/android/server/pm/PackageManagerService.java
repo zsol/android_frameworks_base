@@ -4883,13 +4883,25 @@ public class PackageManagerService extends IPackageManager.Stub {
             if (lowThreshold == 0) {
                 throw new IllegalStateException("Invalid low memory threshold");
             }
+
+            PackageManager pm = null;;
+            if (mContext != null)
+                pm = mContext.getPackageManager();
+            String n = null;
+
             for (PackageParser.Package pkg : sortedPkgs) {
                 long usableSpace = dataDir.getUsableSpace();
                 if (usableSpace < lowThreshold) {
                     Log.w(TAG, "Not running dexopt on remaining apps due to low memory: " + usableSpace);
                     break;
                 }
-                performBootDexOpt(pkg, ++i, total);
+                if (pm != null)
+                    n = (String)pkg.applicationInfo.loadLabel(pm);
+                if (n == null || n.length() == 0)
+                    n = pkg.packageName;
+                final String name = "\n"+n;
+                n = null;
+                performBootDexOpt(pkg, ++i, total, name);
             }
         }
     }
@@ -4938,6 +4950,10 @@ public class PackageManagerService extends IPackageManager.Stub {
     }
 
     private void performBootDexOpt(PackageParser.Package pkg, int curr, int total) {
+        performBootDexOpt(pkg, curr, total, "");
+    }
+
+    private void performBootDexOpt(PackageParser.Package pkg, int curr, int total, String pkgname) {
         if (DEBUG_DEXOPT) {
             Log.i(TAG, "Optimizing app " + curr + " of " + total + ": " + pkg.packageName);
         }
@@ -4945,7 +4961,7 @@ public class PackageManagerService extends IPackageManager.Stub {
             try {
                 ActivityManagerNative.getDefault().showBootMessage(
                         mContext.getResources().getString(R.string.android_upgrading_apk,
-                                curr, total), true);
+                                curr, total, pkgname), true);
             } catch (RemoteException e) {
             }
         }
