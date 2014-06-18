@@ -38,6 +38,13 @@ static const bool kIsDebug = false;
 // Number of threads to use for preprocessing images.
 static const size_t MAX_THREADS = 4;
 
+#ifdef SHOW_EXTENDED_WARNINGS
+#define SHOW_MANIFEST_WARNING
+#define SHOW_UNCOMMENTED_SYMBOL_WARNING
+#define SHOW_LOCALIZATION_WARNINGS
+#define SHOW_DEFAULT_TRANSLATION_WARNINGS
+#endif
+
 // ==========================================================================
 // ==========================================================================
 // ==========================================================================
