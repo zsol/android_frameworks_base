@@ -4947,6 +4947,18 @@ public final class Settings {
         public static final String BATTERY_FULLY_CHARGED_NOTIFICATION = "battery_fully_charged_notification";
 
         /**
+         * Whether lid wakes the device
+         * @hide
+         */
+        public static final String LID_CONTROLS_WAKE = "lid_controls_wake";
+
+        /**
+         * Whether lid puts the device to sleep
+         * @hide
+         */
+        public static final String LID_CONTROLS_SLEEP = "lid_controls_sleep";
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *

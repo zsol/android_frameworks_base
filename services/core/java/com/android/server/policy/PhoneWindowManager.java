@@ -470,6 +470,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
     int mLidNavigationAccessibility;
     boolean mLidControlsScreenLock;
     boolean mLidControlsSleep;
+    boolean mLidControlsWake;
     int mShortPressOnPowerBehavior;
     int mLongPressOnPowerBehavior;
     int mDoublePressOnPowerBehavior;
@@ -984,6 +985,12 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                     UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.KEYGUARD_TOGGLE_TORCH), false, this,
+                    UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.LID_CONTROLS_WAKE), false, this,
+                    UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.LID_CONTROLS_SLEEP), false, this,
                     UserHandle.USER_ALL);
             updateSettings();
         }
@@ -1830,8 +1837,6 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                 com.android.internal.R.integer.config_lidNavigationAccessibility);
         mLidControlsScreenLock = mContext.getResources().getBoolean(
                 com.android.internal.R.bool.config_lidControlsScreenLock);
-        mLidControlsSleep = mContext.getResources().getBoolean(
-                com.android.internal.R.bool.config_lidControlsSleep);
         mTranslucentDecorEnabled = mContext.getResources().getBoolean(
                 com.android.internal.R.bool.config_enableTranslucentDecor);
 
@@ -2490,6 +2495,13 @@ public class PhoneWindowManager implements WindowManagerPolicy {
 
             mTorchEnabled = (Settings.System.getIntForUser(resolver,
                     Settings.System.KEYGUARD_TOGGLE_TORCH, 0, UserHandle.USER_CURRENT) == 1);
+
+            mLidControlsSleep = Settings.System.getIntForUser(resolver,
+                    Settings.System.LID_CONTROLS_SLEEP,
+                    1, UserHandle.USER_CURRENT) != 0;
+            mLidControlsWake = Settings.System.getIntForUser(resolver,
+                    Settings.System.LID_CONTROLS_WAKE,
+                    1, UserHandle.USER_CURRENT) != 0;
 
         }
         synchronized (mWindowManagerFuncs.getWindowManagerLock()) {
@@ -5732,8 +5744,10 @@ public class PhoneWindowManager implements WindowManagerPolicy {
         updateRotation(true);
 
         if (lidOpen) {
-            wakeUp(SystemClock.uptimeMillis(), mAllowTheaterModeWakeFromLidSwitch,
+            if (mLidControlsWake) {
+                wakeUp(SystemClock.uptimeMillis(), mAllowTheaterModeWakeFromLidSwitch,
                     "android.policy:LID");
+            }
         } else if (!mLidControlsSleep) {
             mPowerManager.userActivity(SystemClock.uptimeMillis(), false);
         }
