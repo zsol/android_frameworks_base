@@ -2343,6 +2343,13 @@ public final class Settings {
         public static final String HEADS_UP_NOTIFCATION_DECAY = "heads_up_notification_decay";
 
         /**
+         * Whether to enable ticker animation
+         *
+         * @hide
+         */
+        public static final String TICKER_ENABLED = "ticker_enabled";
+
+        /**
          * Quick Settings Smart Pulldown
          *
          * @hide
