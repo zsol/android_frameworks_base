@@ -255,6 +255,7 @@ bool parseCommaSeparatedList(const String8& str, std::set<ConfigDescription>* ou
 }
 
 void applyVersionForCompatibility(ConfigDescription* config) {
+    return;
     if (config == NULL) {
         return;
     }
@@ -468,6 +469,24 @@ bool parseUiModeType(const char* name, ResTable_config* out) {
               (out->uiMode&~ResTable_config::MASK_UI_MODE_TYPE)
               | ResTable_config::UI_MODE_TYPE_WATCH;
         return true;
+    } else if (strcmp(name, "smallui") == 0) {
+      if (out) out->uiMode =
+              (out->uiMode&~ResTable_config::MASK_UI_MODE_TYPE)
+              | 0xc;
+      return true;
+    } else if (strcmp(name, "mediumui") == 0) {
+      if (out) out->uiMode =
+              (out->uiMode&~ResTable_config::MASK_UI_MODE_TYPE)
+              | 0xd;
+      return true;
+    } else if (strcmp(name, "largeui") == 0) {
+      if (out) out->uiMode =
+              (out->uiMode&~ResTable_config::MASK_UI_MODE_TYPE)
+              | 0xe;
+      return true;
+    } else if (strcmp(name, "hugeui") == 0) {
+      if (out) out->uiMode = 0xf;
+      return true;
     }
 
     return false;

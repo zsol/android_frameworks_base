@@ -332,9 +332,10 @@ static status_t makeFileResources(Bundle* bundle, const sp<AaptAssets>& assets,
         const char16_t* const end = str + baseName.size();
         while (str < end) {
             if (!((*str >= 'a' && *str <= 'z')
+                    || (*str >= 'A' && *str <= 'Z')
                     || (*str >= '0' && *str <= '9')
                     || *str == '_' || *str == '.')) {
-                fprintf(stderr, "%s: Invalid file name: must contain only [a-z0-9_.]\n",
+                fprintf(stderr, "%s: Invalid file name: must contain only [a-zA-Z0-9_.]\n",
                         it.getPath().string());
                 hasErrors = true;
             }
@@ -1028,13 +1029,13 @@ static ssize_t extractPlatformBuildVersion(AssetManager& assets, Bundle* bundle)
     }
 
     ResXMLTree tree;
+    ssize_t result = NO_ERROR;
     Asset* asset = assets.openNonAsset(cookie, "AndroidManifest.xml", Asset::ACCESS_STREAMING);
+
     if (asset == NULL) {
-        fprintf(stderr, "ERROR: Platform AndroidManifest.xml not found\n");
-        return UNKNOWN_ERROR;
+        return NO_ERROR;
     }
 
-    ssize_t result = NO_ERROR;
     if (tree.setTo(asset->getBuffer(true), asset->getLength()) != NO_ERROR) {
         fprintf(stderr, "ERROR: Platform AndroidManifest.xml is corrupt\n");
         result = UNKNOWN_ERROR;
