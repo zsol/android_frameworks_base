@@ -491,8 +491,6 @@ public class TelecomManager {
      *
      * @param uriScheme The URI scheme.
      * @return A list of {@code PhoneAccountHandle} objects supporting the URI scheme.
-     */
-    /**
      * @hide
      */
     @SystemApi
@@ -646,6 +644,7 @@ public class TelecomManager {
      * {@link PhoneAccountHandle#getComponentName()} does not match the package name of the app.
      *
      * @param account The complete {@link PhoneAccount}.
+     *
      * @hide
      */
     @SystemApi
