@@ -68,4 +68,9 @@
     <dimen name="recent_text_size">20dp</dimen>
     <dimen name="recent_thumbnail_bottom_padding">3dp</dimen>
 
+    <!-- The width of the view containing the menu status bar icon -->
+    <dimen name="navigation_menu_key_width">40dip</dimen>
+    <!-- The width of the view containing the layout changer icon -->
+    <dimen name="navigation_layout_changer_width">25dip</dimen>
+
 </resources>

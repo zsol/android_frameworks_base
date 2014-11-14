@@ -211,7 +211,7 @@
     <integer name="def_send_action_app_error">0</integer>
 
     <!-- Default for Settings.Global.HEADS_UP_NOTIFICATIONS_ENABLED, 1==on -->
-    <integer name="def_heads_up_enabled">1</integer>
+    <integer name="def_heads_up_enabled">1</integer> 
 
     <!-- Default DnD values of Settings.System.HEADS_UP_NOTIFICATION -->
     <string name="def_heads_up_notification_dnd_values"></string>
@@ -260,4 +260,7 @@
 
     <!-- Defaults for Settings.Secure.SPELL_CHECKER_ENABLED. -->
     <bool name="def_spell_checker">true</bool>
+
+    <!-- Defaults for Settings.System.DEV_FORCE_SHOW_NAVBAR. -->
+    <integer name="def_force_disable_navkeys">0</integer>
 </resources>

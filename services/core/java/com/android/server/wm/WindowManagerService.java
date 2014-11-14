@@ -974,6 +974,11 @@ public class WindowManagerService extends IWindowManager.Stub
     }
 
     @Override
+    public void sendHomeAction() {
+        mPolicy.sendHomeAction();
+    }
+
+    @Override
     public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
             throws RemoteException {
         try {

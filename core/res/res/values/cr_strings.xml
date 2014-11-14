@@ -48,4 +48,35 @@
     <!-- Error message if user want to try to disable all navigation options -->
     <string name="disable_navigation_pie_error">You cannot disable the navigation bar. No other navigation is enabled. Enable first pie controls to turn off the navigation bar.</string>
 
+    <!-- Navbar Action Stuff-->
+    <string name="action_home">Default: Home</string>
+    <string name="action_back">Default: Back</string>
+    <string name="action_recents">Default: Recents</string>
+    <string name="action_search">Search: In-app search</string>
+    <string name="action_screenshot">Screenshot</string>
+    <string name="action_screenrecord">Screen record</string>
+    <string name="action_menu">Menu</string>
+    <string name="action_ime">Open IME Switcher</string>
+    <string name="action_kill">Kill task</string>
+    <string name="action_last_app">Last app</string>
+    <string name="action_power">Screen off</string>
+    <string name="action_blank">Empty spacer</string>
+    <string name="action_notifications">Notifications</string>
+    <string name="action_assist">Search: Google Now</string>
+    <string name="action_robocop">Reboot menu</string>
+    <string name="action_voiceassist">Search: Voice search</string>
+    <string name="action_torch">Torch</string> 
+    <string name="action_silent">Ring/Silent</string>
+    <string name="action_vib">Ring/Vibrate</string>
+    <string name="action_silent_vib">Ring/Vibrate/Silent</string>
+    <string name="action_ribbon">Ribbon</string>
+    <string name="action_app">Custom app/action</string>
+    <string name="action_arrow_left">Cursor left</string>
+    <string name="action_arrow_right">Cursor right</string>
+    <string name="action_arrow_up">Cursor up</string>
+    <string name="action_arrow_down">Cursor down</string>
+
+    <string name="def_ime_layout">**arrow_left**,,,|**arrow_up**,,,|**arrow_down**,,,|**arrow_right**,,,</string>
+    <string name="def_navbar_layout">**back**,,,|**home**,,,|**recents**,,,</string>
+
 </resources>

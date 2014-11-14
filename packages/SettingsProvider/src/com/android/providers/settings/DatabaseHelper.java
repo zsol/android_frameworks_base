@@ -1837,16 +1837,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             upgradeHeadsUpSettingFromNone(db);
             upgradeDeviceNameFromNone(db);
 
-            // Removal of back/recents is no longer supported
-            // due to pinned apps
-            db.beginTransaction();
-            try {
-                db.execSQL("DELETE FROM system WHERE name='"
-                        + Settings.System.NAV_BUTTONS + "'");
-                db.setTransactionSuccessful();
-            } finally {
-                db.endTransaction();
-            }
 
             upgradeVersion = 114;
         }
@@ -2609,6 +2599,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     R.bool.def_notification_pulse);
 
             loadUISoundEffectsSettings(stmt);
+
+            loadIntegerSetting(stmt, Settings.System.NAVBAR_FORCE_ENABLE,
+                    R.integer.def_force_disable_navkeys);
 
             loadIntegerSetting(stmt, Settings.System.POINTER_SPEED,
                     R.integer.def_pointer_speed);

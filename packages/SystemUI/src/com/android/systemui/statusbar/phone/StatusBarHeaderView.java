@@ -397,6 +397,14 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
         }
     }
 
+    public boolean getExpanded() {
+        return mExpanded;
+    }
+
+    public boolean getSettingsButtonVisibility() {
+        return mSettingsButton.getVisibility() == View.VISIBLE;
+    }
+
     public void updateEverything() {
         updateHeights();
         updateVisibilities();
