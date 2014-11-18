@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="DBNavigator.Module.ConnectionManager">
+    <connections />
+  </component>
+  <component name="FacetManager">
+    <facet type="android" name="Android">
+      <configuration>
+        <option name="UPDATE_PROPERTY_FILES" value="true" />
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/gen" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/accessibility/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/appwidget/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/backup/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/core/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/devicepolicy/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/print/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/restrictions/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/usage/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/usb/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/voiceinteraction/java" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
+
