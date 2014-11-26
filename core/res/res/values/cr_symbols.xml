@@ -105,4 +105,7 @@
   <java-symbol type="id" name="option4" />
   <java-symbol type="id" name="option5" />
 
+  <!-- Doze mode -->
+  <java-symbol type="bool" name="config_doze_enabled_by_default" />
+
 </resources>
