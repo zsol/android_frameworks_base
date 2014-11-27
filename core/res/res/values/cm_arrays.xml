@@ -188,6 +188,8 @@
         <item>@string/app_ops_toggle_mobile_data</item>
         <!-- OP_SU -->
         <item>@string/app_ops_su</item>
+        <!-- OP_ALARM_WAKEUP -->
+        <item>@string/app_ops_alarm_wakeup</item>
     </string-array>
 
     <!-- A list of pre-installed applications that will be treated as carrier apps,
