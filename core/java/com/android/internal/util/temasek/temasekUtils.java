@@ -17,6 +17,9 @@
 package com.android.internal.util.temasek;
 
 import android.content.Context;
+import android.content.res.Resources;
+
+import java.util.Locale;
 
 public class temasekUtils {
 
@@ -24,4 +27,10 @@ public class temasekUtils {
         return context.getResources().getBoolean(
                 com.android.internal.R.bool.config_showNavigationBar);
     }
+
+    public static boolean isChineseLanguage() {
+       return Resources.getSystem().getConfiguration().locale.getLanguage().startsWith(
+               Locale.CHINESE.getLanguage());
+    }
+
 }
