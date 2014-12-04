@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <!-- Hardware keys on/off option -->
+    <bool name="config_hwKeysPref">false</bool>
+
+</resources>
