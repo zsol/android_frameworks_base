@@ -70,4 +70,6 @@ interface IStatusBarService
     void toggleKillApp();
     void toggleScreenshot();
     void toggleSmartPulldown();
+    void hideHeadsUpCandidate(String packageName);
+    void scheduleHeadsUpClose();
 }
