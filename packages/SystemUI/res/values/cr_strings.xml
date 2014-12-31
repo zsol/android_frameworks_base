@@ -79,4 +79,8 @@
 
     <string name="gestures_message">Draw your gesture here</string>
 
+    <!-- Heads up toast -->
+    <string name="heads_up_enabled">Heads up notifications are enabled</string>
+    <string name="heads_up_disabled">Heads up notifications are disabled</string>
+
 </resources>
