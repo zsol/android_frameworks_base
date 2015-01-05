@@ -197,36 +197,23 @@ public class PhoneStatusBarPolicy {
         mService.setIconVisibility(SLOT_SU, false);
         mSuController.addCallback(mSuCallback);
 
-        mAlarmIconObserver.onChange(true);
+        mSettingsObserver.onChange(true);
         mContext.getContentResolver().registerContentObserver(
                 Settings.System.getUriFor(Settings.System.SHOW_ALARM_ICON),
-                false, mAlarmIconObserver);
-
-        mSuIndicatorObserver.onChange(true);
+                false, mSettingsObserver);
         mContext.getContentResolver().registerContentObserver(
                 Settings.System.getUriFor(Settings.System.SHOW_SU_INDICATOR),
-                false, mSuIndicatorObserver);
+                false, mSettingsObserver);
     }
 
-    private ContentObserver mAlarmIconObserver = new ContentObserver(null) {
+    private ContentObserver mSettingsObserver = new ContentObserver(null) {
         @Override
         public void onChange(boolean selfChange, Uri uri) {
             mAlarmIconVisible = Settings.System.getInt(mContext.getContentResolver(),
                     Settings.System.SHOW_ALARM_ICON, 1) == 1;
-            updateAlarm();
-        }
-
-        @Override
-        public void onChange(boolean selfChange) {
-            onChange(selfChange, null);
-        }
-    };
-
-    private ContentObserver mSuIndicatorObserver = new ContentObserver(null) {
-        @Override
-        public void onChange(boolean selfChange, Uri uri) {
             mSuIndicatorVisible = Settings.System.getInt(mContext.getContentResolver(),
                     Settings.System.SHOW_SU_INDICATOR, 1) == 1;
+            updateAlarm();
             updateSu();
         }
 
