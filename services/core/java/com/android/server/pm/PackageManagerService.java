@@ -16240,6 +16240,11 @@ public class PackageManagerService extends IPackageManager.Stub {
                         continue;
                     }
 
+                    // Verifying SdDir before Install to avoid NPE
+                    if (PackageHelper.getSdDir(cid) == null) {
+                        continue;
+                    }
+
                     final AsecInstallArgs args = new AsecInstallArgs(cid,
                             getAppDexInstructionSets(ps), ps.isForwardLocked());
                     // The package status is changed only if the code path
