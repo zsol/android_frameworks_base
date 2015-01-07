@@ -3646,6 +3646,12 @@ public final class Settings {
          */
         public static final String T9_SEARCH_INPUT_LOCALE = "t9_search_input_locale";
 
+         /**
+         * Whether to dismiss all recents tasks
+         * @hide
+         */
+        public static final String RECENTS_CLEAR_ALL_DISMISS_ALL = "recents_clear_all_dismiss_all";
+
         /**
          * Color temperature of the display during the day
          * @hide
