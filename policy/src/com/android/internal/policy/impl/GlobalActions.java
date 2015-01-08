@@ -301,28 +301,32 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
 
         // next: screen record, if enabled
         if (mShowScreenRecord) {
-            if (Settings.System.getInt(mContext.getContentResolver(),
-                    Settings.System.POWER_MENU_SCREENRECORD_ENABLED, 0) != 0) {
-                mItems.add(
-                    new SinglePressAction(com.android.internal.R.drawable.ic_lock_screen_record,
-                            R.string.global_action_screen_record) {
+            try {
+                if (Settings.System.getInt(mContext.getContentResolver(),
+                        Settings.System.POWER_MENU_SCREENRECORD_ENABLED, 0) != 0) {
+                    mItems.add(
+                        new SinglePressAction(com.android.internal.R.drawable.ic_lock_screen_record,
+                                R.string.global_action_screen_record) {
 
-                        public void onPress() {
-                            toggleScreenRecord();
-                        }
+                            public void onPress() {
+                                toggleScreenRecord();
+                            }
 
-                        public boolean onLongPress() {
-                            return false;
-                        }
+                            public boolean onLongPress() {
+                                return false;
+                            }
 
-                        public boolean showDuringKeyguard() {
-                            return true;
-                        }
+                            public boolean showDuringKeyguard() {
+                                return true;
+                            }
 
-                        public boolean showBeforeProvisioning() {
-                            return true;
-                        }
-                    });
+                            public boolean showBeforeProvisioning() {
+                                return true;
+                            }
+                        });
+                }
+            } catch (NullPointerException e) {
+              // Do nothing
             }
         }
 
