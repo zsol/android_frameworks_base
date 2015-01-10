@@ -159,6 +159,15 @@ public class Action {
                     }
                 }
                 return;
+            } else if (action.equals(ActionConstants.ACTION_RECENTS)) {
+                if (isKeyguardShowing) {
+                    return;
+                }
+               try {
+                    barService.toggleRecentApps();
+                } catch (RemoteException e) {
+                }
+                return;
             } else if (action.equals(ActionConstants.ACTION_SILENT)) {
                 AudioManager am = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
                 if (am != null && ActivityManagerNative.isSystemReady()) {

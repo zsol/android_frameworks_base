@@ -61,6 +61,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 
 public class NavigationBarView extends LinearLayout {
+	
     final static boolean DEBUG = false;
     final static String TAG = "PhoneStatusBar/NavigationBarView";
 
@@ -102,6 +103,9 @@ public class NavigationBarView extends LinearLayout {
     private Drawable mRecentIcon;
     private Drawable mRecentLandIcon;
     private Drawable mHomeIcon, mHomeLandIcon;
+
+    private FrameLayout mRot0;
+    private FrameLayout mRot90;
 
     private NavigationBarViewTaskSwitchHelper mTaskSwitchHelper;
     private DelegateViewHelper mDelegateHelper;
@@ -391,7 +395,6 @@ public class NavigationBarView extends LinearLayout {
         }
     }
 
-    @Override
     public void setLayoutDirection(int layoutDirection) {
         getIcons(mThemedResources != null ? mThemedResources : getContext().getResources());
 
@@ -562,10 +565,12 @@ public class NavigationBarView extends LinearLayout {
 
     @Override
     public void onFinishInflate() {
+        mRot0 = (FrameLayout) findViewById(R.id.rot0);
+        mRot90 = (FrameLayout) findViewById(R.id.rot90);
+		
         mRotatedViews[Configuration.ORIENTATION_PORTRAIT] = findViewById(R.id.rot0);
         mRotatedViews[Configuration.ORIENTATION_LANDSCAPE] = findViewById(R.id.rot90);
         mCurrentView = mRotatedViews[mContext.getResources().getConfiguration().orientation];
-
         getImeSwitchButton().setOnClickListener(mImeSwitcherClickListener);
 
         updateRTLOrder();
@@ -744,6 +749,16 @@ public class NavigationBarView extends LinearLayout {
                 return "VISIBLE";
         }
     }
+
+    public void setForgroundColor(Drawable drawable) {
+        if (mRot0 != null) {
+            mRot0.setForeground(drawable);
+        }
+        if (mRot90 != null) {
+            mRot90.setForeground(drawable);
+        }
+    }
+
 
     public void dump(FileDescriptor fd, PrintWriter pw, String[] args) {
         pw.println("NavigationBarView {");
