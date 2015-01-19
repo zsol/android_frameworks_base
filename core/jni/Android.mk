@@ -248,7 +248,7 @@ LOCAL_SHARED_LIBRARIES := \
 	libminikin \
 	libstlport \
 	libprocessgroup \
-	libnativebridge \
+	libnativebridge
 
 ifeq ($(USE_OPENGL_RENDERER),true)
 	LOCAL_SHARED_LIBRARIES += libhwui
