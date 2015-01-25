@@ -3494,6 +3494,12 @@ public final class Settings {
         public static final String STATUS_BAR_SHOW_BATTERY_PERCENT = "status_bar_show_battery_percent";
 
         /**
+         * Disable FC Notifications
+         * @hide
+         */
+        public static final String DISABLE_FC_NOTIFICATIONS = "disable_fc_notifications";
+
+        /**
          * Visibility of SIM icons of unpopulated SIM slots in MSIM mode
          * 0: Hide unpopulated SIM icons
          * 1: Show unpopulated SIM icons
