@@ -68,6 +68,7 @@ public class QSPanel extends ViewGroup {
     protected int mCellHeight;
     protected int mLargeCellWidth;
     protected int mLargeCellHeight;
+    protected int mNumberOfColumns;
     protected int mPanelPaddingBottom;
     protected int mDualTileUnderlap;
     protected int mBrightnessPaddingTop;
@@ -161,6 +162,22 @@ public class QSPanel extends ViewGroup {
         return brightnessSliderEnabled;
     }
 
+    /**
+     * Use three or four columns.
+     */
+    private int useFourColumns() {
+        final Resources res = mContext.getResources();
+        boolean shouldUseFourColumns = Settings.System.getInt(
+            mContext.getContentResolver(), Settings.System.QS_USE_FOUR_COLUMNS,
+                0) == 1;
+        if (shouldUseFourColumns) {
+            mNumberOfColumns = 4;
+        } else {
+            mNumberOfColumns = res.getInteger(R.integer.quick_settings_num_columns);
+        }
+        return mNumberOfColumns;
+    }
+
     protected void updateDetailText() {
         mDetailDoneButton.setText(R.string.quick_settings_done);
         mDetailSettingsButton.setText(R.string.quick_settings_more_settings);
@@ -189,7 +206,7 @@ public class QSPanel extends ViewGroup {
 
     public void updateResources() {
         final Resources res = mContext.getResources();
-        final int columns = Math.max(1, res.getInteger(R.integer.quick_settings_num_columns));
+        final int columns = Math.max(1, useFourColumns());
         mCellHeight = res.getDimensionPixelSize(R.dimen.qs_tile_height);
         mCellWidth = (int)(mCellHeight * TILE_ASPECT);
         mLargeCellHeight = res.getDimensionPixelSize(R.dimen.qs_dual_tile_height);
@@ -561,7 +578,7 @@ public class QSPanel extends ViewGroup {
         boolean isRtl = getLayoutDirection() == LAYOUT_DIRECTION_RTL;
         for (TileRecord record : mRecords) {
             if (record.tileView.getVisibility() == GONE) continue;
-            final int cols = getColumnCount(record.row);
+            final int cols = useFourColumns();
             final int cw = record.row == 0 ? mLargeCellWidth : mCellWidth;
             final int extra = (w - cw * cols) / (cols + 1);
             int left = record.col * cw + (record.col + 1) * extra;
