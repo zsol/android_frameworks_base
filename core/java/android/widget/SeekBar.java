@@ -49,7 +49,7 @@ public class SeekBar extends AbsSeekBar {
          * 
          * @param seekBar The SeekBar whose progress has changed
          * @param progress The current progress level. This will be in the range 0..max where max
-         *        was set by {@link ProgressBar#setMax(int)}. (The default value for max is 100.)
+         *        was set by ProgressBar. (The default value for max is 100.)
          * @param fromUser True if the progress change was initiated by the user.
          */
         void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser);
