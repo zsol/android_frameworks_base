@@ -541,7 +541,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             }
 
             mHeadsUpSwype = Settings.System.getInt(
-                    resolver, Settings.System.HEADS_UP_DISMISS_ON_REMOVE, 1) == 1;
+                    resolver, Settings.System.HEADS_UP_DISMISS_ON_REMOVE, 0) == 1;
 
             if (mNavigationBarView != null) {
                 boolean navLeftInLandscape = Settings.System.getIntForUser(resolver,
