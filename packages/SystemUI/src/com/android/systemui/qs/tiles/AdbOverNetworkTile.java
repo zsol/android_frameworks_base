@@ -48,6 +48,11 @@ public class AdbOverNetworkTile extends QSTile<QSTile.BooleanState> {
     }
 
     @Override
+    protected void handleSecondaryClick() {
+        mHost.startSettingsActivity(SETTINGS_DEVELOPMENT);
+    }
+
+    @Override
     protected void handleLongClick() {
         mHost.startSettingsActivity(SETTINGS_DEVELOPMENT);
     }
