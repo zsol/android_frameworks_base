@@ -109,6 +109,7 @@
     <string name="navbar_menu_conditional_button">Menu (autoHide) button</string>
     <string name="navbar_menu_always_button">Menu (alwaysShow) button</string>
     <string name="navbar_menu_big_button">Menu button</string>
+    <string name="navbar_power_button">Power button</string>
 
     <!-- Navigation ring shortcuts -->
     <string name="navigation_ring_title">Quick launch shortcuts</string>
@@ -127,5 +128,7 @@
     <string name="navring_choose_action_title">Choose action</string>
     <string name="select_application">Select application</string>
     <string name="lockscreen_target_empty">Empty</string>
+    <!-- Content description of the power button for accessibility (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_power">Power</string>
 
 </resources>
