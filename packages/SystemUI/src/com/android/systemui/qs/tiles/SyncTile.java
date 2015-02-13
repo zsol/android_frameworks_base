@@ -66,13 +66,6 @@ public class SyncTile extends QSTile<QSTile.BooleanState> {
     }
 
     @Override
-    protected void handleSecondaryClick() {
-        Intent intent = new Intent("android.settings.SYNC_SETTINGS");
-        intent.addCategory(Intent.CATEGORY_DEFAULT);
-        mHost.startSettingsActivity(intent);
-    }
-
-    @Override
     public void handleLongClick() {
         Intent intent = new Intent("android.settings.SYNC_SETTINGS");
         intent.addCategory(Intent.CATEGORY_DEFAULT);
