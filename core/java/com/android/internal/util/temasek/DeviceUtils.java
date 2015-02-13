@@ -28,9 +28,6 @@ import android.nfc.NfcAdapter;
 import android.provider.Settings;
 import android.os.Vibrator;
 import android.telephony.TelephonyManager;
-import android.util.DisplayMetrics;
-import android.view.DisplayInfo;
-import android.view.WindowManager;
 import android.util.Log;
 
 import com.android.internal.telephony.PhoneConstants;
@@ -41,11 +38,6 @@ import java.util.List;
 public class DeviceUtils {
 
     private static final String SETTINGS_METADATA_NAME = "com.android.settings";
-
-    // Device types
-    private static final int DEVICE_PHONE  = 0;
-    private static final int DEVICE_HYBRID = 1;
-    private static final int DEVICE_TABLET = 2;
 
     public static boolean deviceSupportsRemoteDisplay(Context ctx) {
         DisplayManager dm = (DisplayManager) ctx.getSystemService(Context.DISPLAY_SERVICE);
@@ -142,33 +134,4 @@ public class DeviceUtils {
         public String[] entries;
         public String[] values;
     }
-
-    private static int getScreenType(Context con) {
-        WindowManager wm = (WindowManager)con.getSystemService(Context.WINDOW_SERVICE);
-        DisplayInfo outDisplayInfo = new DisplayInfo();
-        wm.getDefaultDisplay().getDisplayInfo(outDisplayInfo);
-        int shortSize = Math.min(outDisplayInfo.logicalHeight, outDisplayInfo.logicalWidth);
-        int shortSizeDp =
-            shortSize * DisplayMetrics.DENSITY_DEFAULT / outDisplayInfo.logicalDensityDpi;
-        if (shortSizeDp < 600) {
-            return DEVICE_PHONE;
-        } else if (shortSizeDp < 720) {
-            return DEVICE_HYBRID;
-        } else {
-            return DEVICE_TABLET;
-        }
-    }
-
-    public static boolean isPhone(Context con) {
-        return getScreenType(con) == DEVICE_PHONE;
-    }
-
-    public static boolean isHybrid(Context con) {
-        return getScreenType(con) == DEVICE_HYBRID;
-    }
-
-    public static boolean isTablet(Context con) {
-        return getScreenType(con) == DEVICE_TABLET;
-    }
-
 }
