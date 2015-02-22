@@ -3523,6 +3523,15 @@ public final class Settings {
         public static final String STATUS_BAR_DATE = "status_bar_date";
 
         /**
+         * Sets the date string style
+         * 0 - Regular style
+         * 1 - Lowercase
+         * 2 - Uppercase
+         * @hide
+         */
+        public static final String STATUS_BAR_DATE_STYLE = "status_bar_date_style";
+
+        /**
          * Stores the java DateFormat string for the date
          * @hide
          */

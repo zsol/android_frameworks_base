@@ -64,6 +64,10 @@ public class Clock implements DemoMode {
     public static final int CLOCK_DATE_DISPLAY_SMALL = 1;
     public static final int CLOCK_DATE_DISPLAY_NORMAL = 2;
 
+    public static final int CLOCK_DATE_STYLE_REGULAR = 0;
+    public static final int CLOCK_DATE_STYLE_LOWERCASE = 1;
+    public static final int CLOCK_DATE_STYLE_UPPERCASE = 2;
+
     private static final char MAGIC1 = '\uEF00';
     private static final char MAGIC2 = '\uEF01';
 
@@ -77,6 +81,7 @@ public class Clock implements DemoMode {
 
     private int mAmPmStyle = AM_PM_STYLE_GONE;
     private int mClockDateDisplay = CLOCK_DATE_DISPLAY_GONE;
+    private int mClockDateStyle = CLOCK_DATE_STYLE_REGULAR;
     private boolean mDemoMode;
     private boolean mAttached;
 
@@ -96,6 +101,8 @@ public class Clock implements DemoMode {
                     Settings.System.STATUS_BAR_DATE), false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.STATUS_BAR_DATE_FORMAT), false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.STATUS_BAR_DATE_STYLE), false, this, UserHandle.USER_ALL);
             updateSettings();
         }
 
@@ -220,11 +227,19 @@ public class Clock implements DemoMode {
                     Settings.System.STATUS_BAR_DATE_FORMAT);
 
             if (clockDateFormat == null || clockDateFormat.isEmpty()) {
+                // Set dateString to short uppercase Weekday (Default for AOKP) if empty
                 dateString = DateFormat.format("EEE", now) + " ";
             } else {
                 dateString = DateFormat.format(clockDateFormat, now) + " ";
             }
-            result = dateString.toString().toLowerCase() + result;
+            if (mClockDateStyle == CLOCK_DATE_STYLE_LOWERCASE) {
+                // When Date style is small, convert date to uppercase
+                result = dateString.toString().toLowerCase() + result;
+            } else if (mClockDateStyle == CLOCK_DATE_STYLE_UPPERCASE) {
+                result = dateString.toString().toUpperCase() + result;
+            } else {
+                result = dateString.toString() + result;
+            }
         }
 
         SpannableStringBuilder formatted = new SpannableStringBuilder(result);
@@ -319,9 +334,12 @@ public class Clock implements DemoMode {
         mAmPmStyle = (Settings.System.getIntForUser(resolver,
                 Settings.System.STATUS_BAR_AM_PM, 2, UserHandle.USER_CURRENT));
         mClockFormatString = "";
-        mClockDateDisplay = Settings.System.getInt(resolver,
+        mClockDateDisplay = (Settings.System.getIntForUser(resolver,
                 Settings.System.STATUS_BAR_DATE,
-                CLOCK_DATE_DISPLAY_GONE);
+                CLOCK_DATE_DISPLAY_GONE, UserHandle.USER_CURRENT));
+        mClockDateStyle = Settings.System.getIntForUser(resolver,
+                Settings.System.STATUS_BAR_DATE_STYLE, CLOCK_DATE_STYLE_REGULAR,
+                UserHandle.USER_CURRENT);
         updateClock();
     }
 
