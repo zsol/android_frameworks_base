@@ -94,7 +94,7 @@ public class FingerprintService extends SystemService {
 
         IBinder getToken() { return token.get(); }
         public void binderDied() {
-            mClients.remove(token);
+            mClients.remove(token.get());
             this.token = null;
         }
 
@@ -102,7 +102,7 @@ public class FingerprintService extends SystemService {
             try {
                 if (token != null) {
                     if (DEBUG) Slog.w(TAG, "removing leaked reference: " + token);
-                    mClients.remove(token);
+                    mClients.remove(token.get());
                 }
             } finally {
                 super.finalize();
@@ -145,7 +145,7 @@ public class FingerprintService extends SystemService {
                         clientData.receiver.onError(error);
                     } catch (RemoteException e) {
                         Slog.e(TAG, "can't send message to client. Did it die?", e);
-                        mClients.remove(mClients.keyAt(i));
+                        mClients.removeAt(i);
                     }
                 }
                 break;
@@ -155,7 +155,7 @@ public class FingerprintService extends SystemService {
                         clientData.receiver.onAcquired(acquireInfo);
                     } catch (RemoteException e) {
                         Slog.e(TAG, "can't send message to client. Did it die?", e);
-                        mClients.remove(mClients.keyAt(i));
+                        mClients.removeAt(i);
                     }
                     break;
                 }
@@ -165,7 +165,7 @@ public class FingerprintService extends SystemService {
                         clientData.receiver.onProcessed(fingerId);
                     } catch (RemoteException e) {
                         Slog.e(TAG, "can't send message to client. Did it die?", e);
-                        mClients.remove(mClients.keyAt(i));
+                        mClients.removeAt(i);
                     }
                     break;
                 }
@@ -178,7 +178,7 @@ public class FingerprintService extends SystemService {
                             clientData.receiver.onEnrollResult(fingerId, remaining);
                         } catch (RemoteException e) {
                             Slog.e(TAG, "can't send message to client. Did it die?", e);
-                            mClients.remove(mClients.keyAt(i));
+                            mClients.removeAt(i);
                         }
                         // Update the database with new finger id.
                         // TODO: move to client code (Settings)
@@ -203,7 +203,7 @@ public class FingerprintService extends SystemService {
                             clientData.receiver.onRemoved(fingerId);
                         } catch (RemoteException e) {
                             Slog.e(TAG, "can't send message to client. Did it die?", e);
-                            mClients.remove(mClients.keyAt(i));
+                            mClients.removeAt(i);
                         }
                     }
                     clientData.state = STATE_LISTENING;
