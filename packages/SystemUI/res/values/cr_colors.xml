@@ -13,6 +13,6 @@
     <color name="gesture_color">@android:color/holo_blue_light</color>
 
     <!-- QS Customization -->
-    <color name="qs_background_drawable_color">#aa000000</color>
+    <color name="qs_background_drawable_color">#ff263238</color>
 
 </resources>
