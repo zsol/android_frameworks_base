@@ -375,8 +375,8 @@ public class RecentsView extends FrameLayout implements TaskStackView.TaskStackV
     }
 
     public void noUserInteraction() {
-        if (mClearRecents != null) {
-            mClearRecents.setVisibility(View.VISIBLE);
+        if (mFloatingButton != null) {
+            mFloatingButton.setVisibility(View.VISIBLE);
         }
     }
 
@@ -402,32 +402,40 @@ public class RecentsView extends FrameLayout implements TaskStackView.TaskStackV
                 .start();
     }
 
+    private boolean dismissAll() {
+        return Settings.System.getInt(mContext.getContentResolver(),
+            Settings.System.RECENTS_CLEAR_ALL_DISMISS_ALL, 1) == 1;
+    }
+
     @Override
     protected void onAttachedToWindow () {
         super.onAttachedToWindow();
         mFloatingButton = ((View)getParent()).findViewById(R.id.floating_action_button);
         mClearRecents = ((View)getParent()).findViewById(R.id.clear_recents);
         mClearRecents.setOnClickListener(new View.OnClickListener() {
+
             public void onClick(View v) {
-                if (mClearRecents.getAlpha() != 1f) {
+                if (mFloatingButton.getAlpha() != 1f) {
                     return;
                 }
 
-                // Hide clear recents before dismiss all tasks
-                mClearRecents.animate()
-                    .alpha(0f)
-                    .setStartDelay(0)
-                    .setUpdateListener(null)
-                    .setInterpolator(mConfig.fastOutSlowInInterpolator)
-                    .setDuration(mConfig.taskViewRemoveAnimDuration)
-                    .withEndAction(new Runnable() {
-                        @Override
-                        public void run() {
-                            mClearRecents.setVisibility(View.GONE);
-                            mClearRecents.setAlpha(1f);
-                        }
-                    })
-                    .start();
+                if (dismissAll()) {
+                    // Hide clear recents before dismiss all tasks
+                    mFloatingButton.animate()
+                        .alpha(0f)
+                        .setStartDelay(0)
+                        .setUpdateListener(null)
+                        .setInterpolator(mConfig.fastOutSlowInInterpolator)
+                        .setDuration(mConfig.taskViewRemoveAnimDuration)
+                        .withEndAction(new Runnable() {
+                            @Override
+                            public void run() {
+                                mFloatingButton.setVisibility(View.GONE);
+                                mFloatingButton.setAlpha(1f);
+                            }
+                        })
+                        .start();
+                }
 
                 dismissAllTasksAnimated();
             }
