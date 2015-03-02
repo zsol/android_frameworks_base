@@ -313,6 +313,15 @@ public class ActivityManager {
 
     Point mAppTaskThumbnailSize;
 
+    // Memoize these to reduce SystemProperty lookups
+    private static boolean _isHighEndGfx, _isLowRamDeviceStatic, _testHarness;
+    private static int _vmHeapClass, _vmHeapGrowth;
+    private static boolean _isLowRamDeviceStaticInit = false;
+    private static boolean _highEndGfxInit = false;
+    private static boolean _staticGetLargeMemoryClassInit = false;
+    private static boolean _staticGetMemoryClassInit = false;
+    private static boolean _isRunningInTestHarnessInit = false;
+
     /*package*/ ActivityManager(Context context, Handler handler) {
         mContext = context;
         mHandler = handler;
@@ -427,18 +436,23 @@ public class ActivityManager {
     public int getMemoryClass() {
         return staticGetMemoryClass();
     }
-    
+
     /** @hide */
     static public int staticGetMemoryClass() {
         // Really brain dead right now -- just take this from the configured
         // vm heap size, and assume it is in megabytes and thus ends with "m".
-        String vmHeapSize = SystemProperties.get("dalvik.vm.heapgrowthlimit", "");
-        if (vmHeapSize != null && !"".equals(vmHeapSize)) {
-            return Integer.parseInt(vmHeapSize.substring(0, vmHeapSize.length()-1));
+        if (!_staticGetMemoryClassInit) {
+            String vmHeapSize = SystemProperties.get("dalvik.vm.heapgrowthlimit", "");
+            if (vmHeapSize != null && !"".equals(vmHeapSize)) {
+                _vmHeapGrowth = Integer.parseInt(vmHeapSize.substring(0, vmHeapSize.length()-1));
+                _staticGetMemoryClassInit = true;
+            }
+        } else {
+            return _vmHeapGrowth;
         }
         return staticGetLargeMemoryClass();
     }
-    
+
     /**
      * Return the approximate per-application memory class of the current
      * device when an application is running with a large heap.  This is the
@@ -455,13 +469,17 @@ public class ActivityManager {
     public int getLargeMemoryClass() {
         return staticGetLargeMemoryClass();
     }
-    
+
     /** @hide */
     static public int staticGetLargeMemoryClass() {
         // Really brain dead right now -- just take this from the configured
         // vm heap size, and assume it is in megabytes and thus ends with "m".
-        String vmHeapSize = SystemProperties.get("dalvik.vm.heapsize", "16m");
-        return Integer.parseInt(vmHeapSize.substring(0, vmHeapSize.length() - 1));
+        if (!_staticGetLargeMemoryClassInit) {
+            String vmHeapSize = SystemProperties.get("dalvik.vm.heapsize", "16m");
+            _vmHeapClass = Integer.parseInt(vmHeapSize.substring(0, vmHeapSize.length()-1));
+            _staticGetLargeMemoryClassInit = true;
+        }
+        return _vmHeapClass;
     }
 
     /**
@@ -477,7 +495,11 @@ public class ActivityManager {
 
     /** @hide */
     public static boolean isLowRamDeviceStatic() {
-        return "true".equals(SystemProperties.get("ro.config.low_ram", "false"));
+        if (!_isLowRamDeviceStaticInit) {
+            _isLowRamDeviceStatic = "true".equals(SystemProperties.get("ro.config.low_ram", "false"));
+            _isLowRamDeviceStaticInit = true;
+        }
+        return _isLowRamDeviceStatic;
     }
 
     /**
@@ -487,9 +509,13 @@ public class ActivityManager {
      * @hide
      */
     static public boolean isHighEndGfx() {
-        return (!isLowRamDeviceStatic() &&
-                !Resources.getSystem().getBoolean(com.android.internal.R.bool.config_avoidGfxAccel))
-                || isForcedHighEndGfx();
+        if (!_highEndGfxInit) {
+            _isHighEndGfx = !isLowRamDeviceStatic() &&
+                            !Resources.getSystem().getBoolean(com.android.internal.R.bool.config_avoidGfxAccel) ||
+                            isForcedHighEndGfx();
+            _highEndGfxInit = true;
+        }
+        return _isHighEndGfx;
     }
 
     /**
@@ -782,7 +808,7 @@ public class ActivityManager {
          * The true identifier of this task, valid even if it is not running.
          */
         public int persistentId;
-        
+
         /**
          * The original Intent used to launch the task.  You can use this
          * Intent to re-launch the task (if it is no longer running) or bring
@@ -964,7 +990,7 @@ public class ActivityManager {
      * user has started and the maximum number the system can remember.
      * @param flags Information about what to return.  May be any combination
      * of {@link #RECENT_WITH_EXCLUDED} and {@link #RECENT_IGNORE_UNAVAILABLE}.
-     * 
+     *
      * @return Returns a list of RecentTaskInfo records describing each of
      * the recent tasks.
      */
@@ -1096,7 +1122,7 @@ public class ActivityManager {
             numActivities = source.readInt();
             numRunning = source.readInt();
         }
-        
+
         public static final Creator<RunningTaskInfo> CREATOR = new Creator<RunningTaskInfo>() {
             public RunningTaskInfo createFromParcel(Parcel source) {
                 return new RunningTaskInfo(source);
@@ -1419,100 +1445,100 @@ public class ActivityManager {
          * If non-zero, this is the process the service is running in.
          */
         public int pid;
-        
+
         /**
          * The UID that owns this service.
          */
         public int uid;
-        
+
         /**
          * The name of the process this service runs in.
          */
         public String process;
-        
+
         /**
          * Set to true if the service has asked to run as a foreground process.
          */
         public boolean foreground;
-        
+
         /**
          * The time when the service was first made active, either by someone
          * starting or binding to it.  This
          * is in units of {@link android.os.SystemClock#elapsedRealtime()}.
          */
         public long activeSince;
-        
+
         /**
          * Set to true if this service has been explicitly started.
          */
         public boolean started;
-        
+
         /**
          * Number of clients connected to the service.
          */
         public int clientCount;
-        
+
         /**
          * Number of times the service's process has crashed while the service
          * is running.
          */
         public int crashCount;
-        
+
         /**
          * The time when there was last activity in the service (either
          * explicit requests to start it or clients binding to it).  This
          * is in units of {@link android.os.SystemClock#uptimeMillis()}.
          */
         public long lastActivityTime;
-        
+
         /**
          * If non-zero, this service is not currently running, but scheduled to
          * restart at the given time.
          */
         public long restarting;
-        
+
         /**
          * Bit for {@link #flags}: set if this service has been
          * explicitly started.
          */
         public static final int FLAG_STARTED = 1<<0;
-        
+
         /**
          * Bit for {@link #flags}: set if the service has asked to
          * run as a foreground process.
          */
         public static final int FLAG_FOREGROUND = 1<<1;
-        
+
         /**
          * Bit for {@link #flags): set if the service is running in a
          * core system process.
          */
         public static final int FLAG_SYSTEM_PROCESS = 1<<2;
-        
+
         /**
          * Bit for {@link #flags): set if the service is running in a
          * persistent process.
          */
         public static final int FLAG_PERSISTENT_PROCESS = 1<<3;
-        
+
         /**
          * Running flags.
          */
         public int flags;
-        
+
         /**
          * For special services that are bound to by system code, this is
          * the package that holds the binding.
          */
         public String clientPackage;
-        
+
         /**
          * For special services that are bound to by system code, this is
          * a string resource providing a user-visible label for who the
          * client is.
          */
         public int clientLabel;
-        
+
         public RunningServiceInfo() {
         }
 
@@ -1553,7 +1579,7 @@ public class ActivityManager {
             clientPackage = source.readString();
             clientLabel = source.readInt();
         }
-        
+
         public static final Creator<RunningServiceInfo> CREATOR = new Creator<RunningServiceInfo>() {
             public RunningServiceInfo createFromParcel(Parcel source) {
                 return new RunningServiceInfo(source);
@@ -1577,7 +1603,7 @@ public class ActivityManager {
      * @param maxNum The maximum number of entries to return in the list.  The
      * actual number returned may be smaller, depending on how many services
      * are running.
-     * 
+     *
      * @return Returns a list of RunningServiceInfo records describing each of
      * the running tasks.
      */
@@ -1591,7 +1617,7 @@ public class ActivityManager {
             return null;
         }
     }
-    
+
     /**
      * Returns a PendingIntent you can start to show a control panel for the
      * given running service.  If the service does not have a control panel,
@@ -1607,7 +1633,7 @@ public class ActivityManager {
             return null;
         }
     }
-    
+
     /**
      * Information you can retrieve about the available memory through
      * {@link ActivityManager#getMemoryInfo}.
@@ -1634,7 +1660,7 @@ public class ActivityManager {
          * processes.
          */
         public long threshold;
-        
+
         /**
          * Set to true if the system considers itself to currently be in a low
          * memory situation.
@@ -1667,7 +1693,7 @@ public class ActivityManager {
             dest.writeLong(visibleAppThreshold);
             dest.writeLong(foregroundAppThreshold);
         }
-        
+
         public void readFromParcel(Parcel source) {
             availMem = source.readLong();
             totalMem = source.readLong();
@@ -1791,7 +1817,7 @@ public class ActivityManager {
      */
     public boolean clearApplicationUserData(String packageName, IPackageDataObserver observer) {
         try {
-            return ActivityManagerNative.getDefault().clearApplicationUserData(packageName, 
+            return ActivityManagerNative.getDefault().clearApplicationUserData(packageName,
                     observer, UserHandle.myUserId());
         } catch (RemoteException e) {
             return false;
@@ -1832,7 +1858,7 @@ public class ActivityManager {
          * The process name in which the crash or error occurred.
          */
         public String processName;
-        
+
         /**
          * The pid of this process; 0 if none
          */
@@ -1844,7 +1870,7 @@ public class ActivityManager {
          * the same uid).
          */
         public int uid;
-        
+
         /**
          * The activity name associated with the error, if known.  May be null.
          */
@@ -1900,8 +1926,8 @@ public class ActivityManager {
             longMsg = source.readString();
             stackTrace = source.readString();
         }
-        
-        public static final Creator<ProcessErrorStateInfo> CREATOR = 
+
+        public static final Creator<ProcessErrorStateInfo> CREATOR =
                 new Creator<ProcessErrorStateInfo>() {
             public ProcessErrorStateInfo createFromParcel(Parcel source) {
                 return new ProcessErrorStateInfo(source);
@@ -1915,11 +1941,11 @@ public class ActivityManager {
             readFromParcel(source);
         }
     }
-    
+
     /**
-     * Returns a list of any processes that are currently in an error condition.  The result 
+     * Returns a list of any processes that are currently in an error condition.  The result
      * will be null if all processes are running properly at this time.
-     * 
+     *
      * @return Returns a list of ProcessErrorStateInfo records, or null if there are no
      * current error conditions (it will not return an empty list).  This list ordering is not
      * specified.
@@ -1935,7 +1961,7 @@ public class ActivityManager {
     /**
      * Information you can retrieve about a running process.
      */
-    public static class RunningAppProcessInfo implements Parcelable {        
+    public static class RunningAppProcessInfo implements Parcelable {
         /**
          * The name of the process that this object is associated with
          */
@@ -1945,17 +1971,17 @@ public class ActivityManager {
          * The pid of this process; 0 if none
          */
         public int pid;
-        
+
         /**
          * The user id of this process.
          */
         public int uid;
-        
+
         /**
          * All packages that have been loaded into the process.
          */
         public String pkgList[];
-        
+
         /**
          * Constant for {@link #flags}: this is an app that is unable to
          * correctly save its state when going to the background,
@@ -1963,7 +1989,7 @@ public class ActivityManager {
          * @hide
          */
         public static final int FLAG_CANT_SAVE_STATE = 1<<0;
-        
+
         /**
          * Constant for {@link #flags}: this process is associated with a
          * persistent system app.
@@ -1997,21 +2023,21 @@ public class ActivityManager {
          * foreground UI.
          */
         public static final int IMPORTANCE_FOREGROUND = 100;
-        
+
         /**
          * Constant for {@link #importance}: this process is running something
          * that is actively visible to the user, though not in the immediate
          * foreground.
          */
         public static final int IMPORTANCE_VISIBLE = 200;
-        
+
         /**
          * Constant for {@link #importance}: this process is running something
          * that is considered to be actively perceptible to the user.  An
          * example would be an application performing background music playback.
          */
         public static final int IMPORTANCE_PERCEPTIBLE = 130;
-        
+
         /**
          * Constant for {@link #importance}: this process is running an
          * application that can not save its state, and thus can't be killed
@@ -2019,19 +2045,19 @@ public class ActivityManager {
          * @hide
          */
         public static final int IMPORTANCE_CANT_SAVE_STATE = 170;
-        
+
         /**
          * Constant for {@link #importance}: this process is contains services
          * that should remain running.
          */
         public static final int IMPORTANCE_SERVICE = 300;
-        
+
         /**
          * Constant for {@link #importance}: this process process contains
          * background code that is expendable.
          */
         public static final int IMPORTANCE_BACKGROUND = 400;
-        
+
         /**
          * Constant for {@link #importance}: this process is empty of any
          * actively running code.
@@ -2069,7 +2095,7 @@ public class ActivityManager {
          * smaller than "less important" values.
          */
         public int importance;
-        
+
         /**
          * An additional ordering within a particular {@link #importance}
          * category, providing finer-grained information about the relative
@@ -2086,7 +2112,7 @@ public class ActivityManager {
          * been specified for the reason for this level.
          */
         public static final int REASON_UNKNOWN = 0;
-        
+
         /**
          * Constant for {@link #importanceReasonCode}: one of the application's
          * content providers is being used by another process.  The pid of
@@ -2095,7 +2121,7 @@ public class ActivityManager {
          * {@link #importanceReasonComponent}.
          */
         public static final int REASON_PROVIDER_IN_USE = 1;
-        
+
         /**
          * Constant for {@link #importanceReasonCode}: one of the application's
          * content providers is being used by another process.  The pid of
@@ -2104,25 +2130,25 @@ public class ActivityManager {
          * {@link #importanceReasonComponent}.
          */
         public static final int REASON_SERVICE_IN_USE = 2;
-        
+
         /**
          * The reason for {@link #importance}, if any.
          */
         public int importanceReasonCode;
-        
+
         /**
          * For the specified values of {@link #importanceReasonCode}, this
          * is the process ID of the other process that is a client of this
          * process.  This will be 0 if no other process is using this one.
          */
         public int importanceReasonPid;
-        
+
         /**
          * For the specified values of {@link #importanceReasonCode}, this
          * is the name of the component that is being used in this process.
          */
         public ComponentName importanceReasonComponent;
-        
+
         /**
          * When {@link #importanceReasonPid} is non-0, this is the importance
          * of the other pid. @hide
@@ -2140,7 +2166,7 @@ public class ActivityManager {
             importanceReasonCode = REASON_UNKNOWN;
             processState = PROCESS_STATE_IMPORTANT_FOREGROUND;
         }
-        
+
         public RunningAppProcessInfo(String pProcessName, int pPid, String pArr[]) {
             processName = pProcessName;
             pid = pPid;
@@ -2183,7 +2209,7 @@ public class ActivityManager {
             processState = source.readInt();
         }
 
-        public static final Creator<RunningAppProcessInfo> CREATOR = 
+        public static final Creator<RunningAppProcessInfo> CREATOR =
             new Creator<RunningAppProcessInfo>() {
             public RunningAppProcessInfo createFromParcel(Parcel source) {
                 return new RunningAppProcessInfo(source);
@@ -2197,7 +2223,7 @@ public class ActivityManager {
             readFromParcel(source);
         }
     }
-    
+
     /**
      * Returns a list of application processes installed on external media
      * that are running on the device.
@@ -2281,7 +2307,7 @@ public class ActivityManager {
             return null;
         }
     }
-    
+
     /**
      * @deprecated This is now just a wrapper for
      * {@link #killBackgroundProcesses(String)}; the previous behavior here
@@ -2293,17 +2319,17 @@ public class ActivityManager {
     public void restartPackage(String packageName) {
         killBackgroundProcesses(packageName);
     }
-    
+
     /**
      * Have the system immediately kill all background processes associated
      * with the given package.  This is the same as the kernel killing those
      * processes to reclaim memory; the system will take care of restarting
      * these processes in the future as needed.
-     * 
+     *
      * <p>You must hold the permission
      * {@link android.Manifest.permission#KILL_BACKGROUND_PROCESSES} to be able to
      * call this method.
-     * 
+     *
      * @param packageName The name of the package whose processes are to
      * be killed.
      */
@@ -2314,7 +2340,7 @@ public class ActivityManager {
         } catch (RemoteException e) {
         }
     }
-    
+
     /**
      * Have the system perform a force stop of everything associated with
      * the given application package.  All processes that share its uid
@@ -2322,14 +2348,14 @@ public class ActivityManager {
      * removed, etc.  In addition, a {@link Intent#ACTION_PACKAGE_RESTARTED}
      * broadcast will be sent, so that any of its registered alarms can
      * be stopped, notifications removed, etc.
-     * 
+     *
      * <p>You must hold the permission
      * {@link android.Manifest.permission#FORCE_STOP_PACKAGES} to be able to
      * call this method.
-     * 
+     *
      * @param packageName The name of the package to be stopped.
      * @param userId The user for which the running package is to be stopped.
-     * 
+     *
      * @hide This is not available to third party applications due to
      * it allowing them to break other applications by stopping their
      * services, removing their alarms, etc.
@@ -2454,7 +2480,11 @@ public class ActivityManager {
      * Returns "true" if device is running in a test harness.
      */
     public static boolean isRunningInTestHarness() {
-        return SystemProperties.getBoolean("ro.test_harness", false);
+        if (!_isRunningInTestHarnessInit) {
+            _testHarness = SystemProperties.getBoolean("ro.test_harness", false);
+            _isRunningInTestHarnessInit = true;
+        }
+        return _testHarness;
     }
 
     /**
@@ -2592,7 +2622,7 @@ public class ActivityManager {
     }
 
     /**
-     * @param userid the user's id. Zero indicates the default user 
+     * @param userid the user's id. Zero indicates the default user
      * @hide
      */
     public boolean switchUser(int userid) {
