@@ -773,7 +773,7 @@ public class QSPanel extends ViewGroup {
             mVibrationEnabled = Settings.System.getIntForUser(
             mContext.getContentResolver(), Settings.System.QUICK_SETTINGS_TILES_VIBRATE,
                 0, UserHandle.USER_CURRENT) == 1;
-            mQSShadeTransparency = Settings.System.getInt(
+            mQSShadeTransparency = Settings.System.getIntForUser(
             mContext.getContentResolver(), Settings.System.QS_TRANSPARENT_SHADE,
                 0, UserHandle.USER_CURRENT) == 1;
         }
