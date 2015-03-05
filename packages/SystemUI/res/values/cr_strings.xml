@@ -29,4 +29,7 @@
     <!-- Screen record notification error title -->
     <string name="screenrecord_notif_error">Unable to record screen</string>
 
+    <!-- no interuptions except alarms -->
+    <string name="zen_no_interruptions_but_alarm">No interruptions. Except alarms.</string>
+
 </resources>
