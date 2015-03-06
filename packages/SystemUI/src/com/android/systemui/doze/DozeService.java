@@ -137,15 +137,14 @@ public class DozeService extends DreamService implements ProximitySensorManager.
         setWindowless(true);
 
         mSensors = (SensorManager) mContext.getSystemService(Context.SENSOR_SERVICE);
+        mSigMotionSensor = new TriggerSensor(Sensor.TYPE_SIGNIFICANT_MOTION,
+                mDozeParameters.getPulseOnSigMotion(), mDozeParameters.getVibrateOnSigMotion(),
+                DozeLog.PULSE_REASON_SENSOR_SIGMOTION);
+        mPickupSensor = new TriggerSensor(Sensor.TYPE_PICK_UP_GESTURE,
+                mDozeParameters.getPulseOnPickup(), mDozeParameters.getVibrateOnPickup(),
+                DozeLog.PULSE_REASON_SENSOR_PICKUP);
         mUseAccelerometer = mDozeParameters.setUsingAccelerometerAsSensorPickUp();
-        if (!mUseAccelerometer) {
-            mSigMotionSensor = new TriggerSensor(Sensor.TYPE_SIGNIFICANT_MOTION,
-                    mDozeParameters.getPulseOnSigMotion(), mDozeParameters.getVibrateOnSigMotion(),
-                    DozeLog.PULSE_REASON_SENSOR_SIGMOTION);
-            mPickupSensor = new TriggerSensor(Sensor.TYPE_PICK_UP_GESTURE,
-                    mDozeParameters.getPulseOnPickup(), mDozeParameters.getVibrateOnPickup(),
-                    DozeLog.PULSE_REASON_SENSOR_PICKUP);
-        } else {
+        if (mUseAccelerometer) {
             mProximitySensorManager = new ProximitySensorManager(mContext, this);
             mShakeSensorManager = new ShakeSensorManager(mContext, this);
         }
