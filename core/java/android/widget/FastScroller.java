@@ -375,6 +375,7 @@ class FastScroller {
                     break;
             }
         }
+        ta.recycle();
 
         updateAppearance();
     }
