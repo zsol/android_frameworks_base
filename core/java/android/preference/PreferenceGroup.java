@@ -127,6 +127,14 @@ public abstract class PreferenceGroup extends Preference implements GenericInfla
     }
 
     /**
+     * @hide
+     * @return The {@link Preference}s added to this group
+     */
+    public List<Preference> getPreferenceList() {
+        return mPreferenceList;
+    }
+
+    /**
      * Adds a {@link Preference} at the correct position based on the
      * preference's order.
      * 
