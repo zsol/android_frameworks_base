@@ -13,4 +13,20 @@
     <string name="ext_media_unmounting_notification_title">unmounting\u2026</string>
     <string name="ext_media_mounting_notification_title">mounting\u2026</string>
 
+    <!-- Screenrecord Notification Ticker -->
+    <string name="screenrecord_notif_ticker">Screen is being recorded</string>
+
+    <!-- Screenrecord notification title -->
+    <string name="screenrecord_notif_title">Recording screen</string>
+
+    <!-- Screenrecord notification action: Stop -->
+    <string name="screenrecord_notif_stop">Stop</string>
+
+    <!-- Screenrecord notification action: show/hide pointer -->
+    <string name="screenrecord_notif_pointer_on">Show pointer</string>
+    <string name="screenrecord_notif_pointer_off">Hide pointer</string>
+
+    <!-- Screen record notification error title -->
+    <string name="screenrecord_notif_error">Unable to record screen</string>
+
 </resources>
