@@ -3065,8 +3065,8 @@ public class PhoneWindowManager implements WindowManagerPolicy {
         // timeout.
         if (keyCode == KeyEvent.KEYCODE_HOME) {
 
-            if (scanCode != 0 && !hasHwKeysEnabled()) {
-                Log.i(TAG, "Ignoring Home Key: we have navbar on");
+            if (scanCode != 0 && mHomeWakeScreen != 0) {
+                Log.i(TAG, "Ignoring Home Key: honoring HOME WAKE option");
                 return 0;
             }
 
