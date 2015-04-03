@@ -57,4 +57,6 @@
     <dimen name="folder_height">480dp</dimen>
     <dimen name="setup_sidebar_width">90dp</dimen>
 
+    <dimen name="ribbon_drag_handle_height">25dp</dimen>
+
 </resources>
