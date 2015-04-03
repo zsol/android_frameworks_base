@@ -765,7 +765,7 @@ public class ViewConfiguration {
 
         // Report menu key presence based on hardware key rebinding
         try {
-            return wm.hasMenuKeyEnabled();
+            return wm.hasPermanentMenuKey();
         } catch (RemoteException ex) {
             return true;
         }
