@@ -65,7 +65,7 @@ import static com.android.internal.R.styleable.WindowAnimation_wallpaperIntraOpe
 import static com.android.internal.R.styleable.WindowAnimation_wallpaperIntraCloseEnterAnimation;
 import static com.android.internal.R.styleable.WindowAnimation_wallpaperIntraCloseExitAnimation;
 
-import com.android.internal.util.crdroid.AwesomeAnimationHelper;
+import com.android.internal.util.temasek.AwesomeAnimationHelper;
 import android.widget.Toast;
 
 // State management of app transitions.  When we are preparing for a
