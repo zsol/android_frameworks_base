@@ -118,7 +118,7 @@ public class CarrierLabel extends TextView {
                         intent.getStringExtra(TelephonyIntents.EXTRA_SPN),
                         intent.getBooleanExtra(TelephonyIntents.EXTRA_SHOW_PLMN, false),
                         intent.getStringExtra(TelephonyIntents.EXTRA_PLMN));
-                isCN = CrUtils.isChineseLanguage();
+                isCN = temasekUtils.isChineseLanguage();
             }
         }
     };
