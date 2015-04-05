@@ -43,6 +43,7 @@ import android.provider.Settings;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.GestureDetector;
+import android.view.inputmethod.InputMethodManager;
 import android.view.*;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
