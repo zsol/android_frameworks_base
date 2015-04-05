@@ -80,7 +80,7 @@ public class HotspotTile extends QSTile<QSTile.BooleanState> {
 
     @Override
     protected void handleSecondaryClick() {
-        mHost.startSettingsActivity(WIRELESS_SETTINGS);
+        mHost.startSettingsActivity(TETHER_SETTINGS);
     }
 
     @Override
