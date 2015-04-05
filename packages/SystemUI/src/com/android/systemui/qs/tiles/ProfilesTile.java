@@ -73,12 +73,6 @@ public class ProfilesTile extends QSTile<QSTile.State> {
     }
 
     @Override
-    protected void handleLongClick() {
-        super.handleLongClick();
-        mHost.startSettingsActivity(new Intent("com.android.settings.PROFILES_SETTINGS"));
-    }
-
-    @Override
     protected void handleSecondaryClick() {
         mHost.startSettingsActivity(new Intent("com.android.settings.PROFILES_SETTINGS"));
     }
