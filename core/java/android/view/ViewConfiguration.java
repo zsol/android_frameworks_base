@@ -306,31 +306,35 @@ public class ViewConfiguration {
         mOverflingDistance = (int) (sizeAndDensity * OVERFLING_DISTANCE + 0.5f);
 
         if (!sHasPermanentMenuKeySet) {
+            // The action overflow button within app UI can
+            // be controlled with a system setting
             final int configVal = res.getInteger(
-                    com.android.internal.R.integer.config_overrideHasPermanentMenuKey);
+                            com.android.internal.R.integer.config_overrideHasPermanentMenuKey);
+            final int overflowButtonOption = Settings.System.getInt(context.getContentResolver(),
+                            Settings.System.UI_OVERFLOW_BUTTON, configVal);
 
-            switch (configVal) {
-                default:
-                case HAS_PERMANENT_MENU_KEY_AUTODETECT: {
-                    IWindowManager wm = WindowManagerGlobal.getWindowManagerService();
-                    try {
-                        sHasPermanentMenuKey = wm.hasPermanentMenuKey();
-                        sHasPermanentMenuKeySet = true;
-                    } catch (RemoteException ex) {
-                        sHasPermanentMenuKey = false;
-                    }
-                }
-                break;
+            switch (overflowButtonOption) {
+		default:
+		case HAS_PERMANENT_MENU_KEY_AUTODETECT: {
+		    IWindowManager wm = WindowManagerGlobal.getWindowManagerService();
+		    try {
+		        sHasPermanentMenuKey = !wm.hasNavigationBar();
+		        sHasPermanentMenuKeySet = true;
+		    } catch (RemoteException ex) {
+		        sHasPermanentMenuKey = false;
+		    }
+		}
+		break;
 
                 case HAS_PERMANENT_MENU_KEY_TRUE:
                     sHasPermanentMenuKey = true;
-                    sHasPermanentMenuKeySet = true;
-                    break;
+		    sHasPermanentMenuKeySet = true;
+		    break;
 
-                case HAS_PERMANENT_MENU_KEY_FALSE:
-                    sHasPermanentMenuKey = false;
-                    sHasPermanentMenuKeySet = true;
-                    break;
+		case HAS_PERMANENT_MENU_KEY_FALSE:
+		    sHasPermanentMenuKey = false;
+		    sHasPermanentMenuKeySet = true;
+		    break;
             }
         }
 
