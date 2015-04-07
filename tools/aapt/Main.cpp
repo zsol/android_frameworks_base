@@ -213,7 +213,10 @@ void usage(void)
         "       specified folder.\n"
         "   --ignore-assets\n"
         "       Assets to be ignored. Default pattern is:\n"
-        "       %s\n",
+        "       %s\n"
+        "   --compress\n"
+        "       Specifies if aapt should prefer compression or not.\n"
+        "       Possible values are 0(Stored) and 1(Deflated).\n",
         gDefaultIgnoreAssets);
 }
 
@@ -716,6 +719,23 @@ int main(int argc, char* const argv[])
                     gUserIgnoreAssets = argv[0];
                 } else if (strcmp(cp, "-pseudo-localize") == 0) {
                     bundle.setPseudolocalize(PSEUDO_ACCENTED | PSEUDO_BIDI);
+                } else if (strcmp(cp, "-compress") == 0) {
+                    argc--;
+                    argv++;
+                    if (!argc) {
+                        fprintf(stderr, "ERROR: No argument supplied for '--compress' option\n");
+                        wantUsage = true;
+                        goto bail;
+                    }
+                    if (strcmp(argv[0], "0") == 0) {
+                        bundle.setCompressionMethod(ZipEntry::kCompressStored);
+                    } else if (strcmp(argv[0], "1") == 0) {
+                        bundle.setCompressionMethod(ZipEntry::kCompressDeflated);
+                    } else {
+                        fprintf(stderr, "ERROR: Invalid argument supplied for '--compress' option\n");
+                        wantUsage = true;
+                        goto bail;
+                    }
                 } else {
                     fprintf(stderr, "ERROR: Unknown option '-%s'\n", cp);
                     wantUsage = true;
