@@ -3757,6 +3757,12 @@ public final class Settings {
         public static final String VOLUME_KEYS_CONTROL_MEDIA_STREAM = "volume_keys_control_media_stream";
 
         /**
+         * Change the screenshot delay
+         * @hide
+         */
+        public static final String SCREENSHOT_DELAY = "screenshot_delay";
+
+        /**
          * Whether to show the weather info on the lock screen
          * @hide
          */
