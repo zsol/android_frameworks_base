@@ -74,7 +74,7 @@ public class ProfilesTile extends QSTile<QSTile.State> {
 
     @Override
     protected void handleSecondaryClick() {
-        mHost.startSettingsActivity(new Intent("com.android.settings.PROFILES_SETTINGS"));
+        mHost.startSettingsActivity(PROFILES_SETTINGS);
     }
 
     @Override
