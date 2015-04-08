@@ -94,9 +94,4 @@
   <java-symbol type="drawable" name="ic_shortcut_action_screenshot" />
   <java-symbol type="drawable" name="ic_shortcut_action_search" />
 
-  <!-- Config Power Menu -->
-  <java-symbol type="drawable" name="ic_lock_screen_record" />
-  <java-symbol type="string" name="global_action_screen_record" />
-  <java-symbol type="bool" name="config_enableScreenrecordChord" />
-
 </resources>
