@@ -175,6 +175,9 @@ public class CmHardwareService extends ICmHardwareService.Stub {
         }
 
         public int[] getDisplayColorCalibration() {
+            if (!DisplayColorCalibration.isSupported()) {
+              return null;
+            }
             int[] rgb = splitStringToInt(DisplayColorCalibration.getCurColors(), " ");
             if (rgb == null || rgb.length != 3) {
                 Log.e(TAG, "Invalid color calibration string");
