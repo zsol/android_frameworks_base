@@ -49,12 +49,13 @@ public class LocationTile extends QSTile<QSTile.BooleanState> {
             Settings.Secure.LOCATION_MODE_HIGH_ACCURACY
     };
 
+    private final List<Integer> mLocationList = new ArrayList<>();
+
     private final AnimationIcon mEnable =
             new AnimationIcon(R.drawable.ic_signal_location_enable_animation);
     private final AnimationIcon mDisable =
             new AnimationIcon(R.drawable.ic_signal_location_disable_animation);
 
-    private final List<Integer> mLocationList = new ArrayList<>();
     private final LocationController mController;
     private final LocationDetailAdapter mDetailAdapter;
     private final KeyguardMonitor mKeyguard;
@@ -94,20 +95,20 @@ public class LocationTile extends QSTile<QSTile.BooleanState> {
             showDetail(true);
         } else {
             mController.setLocationEnabled(!mController.isLocationEnabled());
+            mEnable.setAllowAnimation(true);
+            mDisable.setAllowAnimation(true);
             qsCollapsePanel();
         }
-        mEnable.setAllowAnimation(true);
-        mDisable.setAllowAnimation(true);
     }
 
     @Override
     protected void handleSecondaryClick() {
-        mHost.startSettingsActivity(LOCATION_SETTINGS_INTENT);
+        showDetail(true);
     }
 
     @Override
     protected void handleLongClick() {
-        mHost.startSettingsActivity(LOCATION_SETTINGS_INTENT);
+        showDetail(true);
     }
 
     @Override
