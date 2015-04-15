@@ -33,8 +33,7 @@ import com.android.systemui.qs.QSTile;
 public class UsbTetherTile extends QSTile<QSTile.BooleanState> {
     private static final Intent WIRELESS_SETTINGS = new Intent(Settings.ACTION_WIRELESS_SETTINGS);
 
-    private final ConnectivityManager cm =
-            (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+    private final ConnectivityManager mConnectivityManager;
 
     private boolean mListening;
 
@@ -43,6 +42,8 @@ public class UsbTetherTile extends QSTile<QSTile.BooleanState> {
 
     public UsbTetherTile(Host host) {
         super(host);
+        mConnectivityManager = (ConnectivityManager) mContext
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
     }
 
     protected BooleanState newTileState() {
@@ -65,7 +66,7 @@ public class UsbTetherTile extends QSTile<QSTile.BooleanState> {
 
     @Override
     protected void handleClick() {
-        cm.setUsbTethering(!mUsbTethered);
+        mConnectivityManager.setUsbTethering(!mUsbTethered);
     }
 
     @Override
@@ -74,15 +75,15 @@ public class UsbTetherTile extends QSTile<QSTile.BooleanState> {
     }
 
     private void updateState() {
-        String[] tethered = cm.getTetheredIfaces();
-        String[] mUsbRegexs = cm.getTetherableUsbRegexs();
+        String[] tetheredIfaces = mConnectivityManager.getTetheredIfaces();
+        String[] usbRegexs = mConnectivityManager.getTetherableUsbRegexs();
 
         mUsbTethered = false;
-        for (String s : tethered) {
-            for (String regex : mUsbRegexs) {
+        for (String s : tetheredIfaces) {
+            for (String regex : usbRegexs) {
                 if (s.matches(regex)) {
                     mUsbTethered = true;
-                    break;
+                    return;
                 }
             }
         }
@@ -92,16 +93,20 @@ public class UsbTetherTile extends QSTile<QSTile.BooleanState> {
         @Override
         public void onReceive(Context context, Intent intent) {
             mUsbConnected = intent.getBooleanExtra(UsbManager.USB_CONNECTED, false);
-            updateState();
+            if (mUsbConnected && mConnectivityManager.isTetheringSupported()) {
+                updateState();
+            } else {
+                mUsbTethered = false;
+            }
             refreshState();
         }
     };
 
     @Override
     protected void handleUpdateState(BooleanState state, Object arg) {
-        state.visible = mUsbConnected && cm.isTetheringSupported();
+        state.visible = mUsbConnected && mConnectivityManager.isTetheringSupported();
         state.value = mUsbTethered;
-        state.label = mContext.getString(R.string.quick_settings_usb_tether);
+        state.label = mContext.getString(R.string.quick_settings_usb_tether_label);
         state.iconId = mUsbTethered ? R.drawable.ic_qs_usb_tether_on
                 : R.drawable.ic_qs_usb_tether_off;
     }

@@ -96,7 +96,7 @@
     <string name="quick_settings_expanded_desktop_off">Normal</string>
     <string name="quick_settings_reboot_label">Reboot</string>
     <string name="quick_settings_reboot_recovery_label">Recovery</string>
-    <string name="quick_settings_usb_tether">USB tethering</string>
+    <string name="quick_settings_usb_tether_label">USB tethering</string>
     <string name="quick_settings_doze">Doze enabled</string>
     <string name="quick_settings_doze_off">Doze disabled</string>
     <string name="quick_settings_navbar_on">NavBar On</string>
