@@ -1784,7 +1784,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             // usual case: status bar visible & not immersive
 
             // show the ticker if there isn't already a heads up
-            if (mHeadsUpNotificationView.getEntry() == null) {
+            if (mHeadsUpNotificationView != null && mHeadsUpNotificationView.getEntry() == null) {
                 tick(notification, true);
             }
         }
