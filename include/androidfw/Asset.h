@@ -28,6 +28,7 @@
 #include <utils/Errors.h>
 #include <utils/FileMap.h>
 #include <utils/String8.h>
+#include <utils/threads.h>
 
 namespace android {
 
@@ -313,6 +314,7 @@ private:
     class StreamingZipInflater* mZipInflater;  // for streaming large compressed assets
 
     unsigned char*  mBuf;       // for getBuffer()
+    Mutex mCompressedAssetLock;
 };
 
 // need: shared mmap version?
