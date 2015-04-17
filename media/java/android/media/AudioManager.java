@@ -61,7 +61,8 @@ import java.util.Iterator;
  */
 public class AudioManager {
 
-    private final Context mApplicationContext;
+    private Context mOriginalContext;
+    private Context mApplicationContext;
     private long mVolumeKeyUpTime;
     private final boolean mUseMasterVolume;
     private final boolean mUseVolumeKeySounds;
@@ -690,15 +691,34 @@ public class AudioManager {
      * @hide
      */
     public AudioManager(Context context) {
-        mApplicationContext = context.getApplicationContext();
-        mUseMasterVolume = mApplicationContext.getResources().getBoolean(
+        setContext(context);
+        mUseMasterVolume = getContext().getResources().getBoolean(
                 com.android.internal.R.bool.config_useMasterVolume);
-        mUseVolumeKeySounds = mApplicationContext.getResources().getBoolean(
+        mUseVolumeKeySounds = getContext().getResources().getBoolean(
                 com.android.internal.R.bool.config_useVolumeKeySounds);
-        mUseFixedVolume = mApplicationContext.getResources().getBoolean(
+        mUseFixedVolume = getContext().getResources().getBoolean(
                 com.android.internal.R.bool.config_useFixedVolume);
         sAudioPortEventHandler.init();
         mProfileManager = (ProfileManager) context.getSystemService(Context.PROFILE_SERVICE);
+    }
+
+    private Context getContext() {
+        if (mApplicationContext == null) {
+            setContext(mOriginalContext);
+        }
+        if (mApplicationContext != null) {
+            return mApplicationContext;
+        }
+        return mOriginalContext;
+    }
+
+    private void setContext(Context context) {
+        mApplicationContext = context.getApplicationContext();
+        if (mApplicationContext != null) {
+            mOriginalContext = null;
+        } else {
+            mOriginalContext = context;
+        }
     }
 
     private static IAudioService getService()
@@ -735,7 +755,7 @@ public class AudioManager {
      *     or {@link KeyEvent#KEYCODE_MEDIA_AUDIO_TRACK}.
      */
     public void dispatchMediaKeyEvent(KeyEvent keyEvent) {
-        MediaSessionLegacyHelper helper = MediaSessionLegacyHelper.getHelper(mApplicationContext);
+        MediaSessionLegacyHelper helper = MediaSessionLegacyHelper.getHelper(getContext());
         helper.sendMediaButtonEvent(keyEvent, false);
     }
 
@@ -796,7 +816,7 @@ public class AudioManager {
                 break;
             case KeyEvent.KEYCODE_VOLUME_MUTE:
                 if (event.getRepeatCount() == 0) {
-                    MediaSessionLegacyHelper.getHelper(mApplicationContext)
+                    MediaSessionLegacyHelper.getHelper(getContext())
                             .sendVolumeKeyEvent(event, false);
                 }
                 break;
@@ -827,7 +847,7 @@ public class AudioManager {
                 mVolumeKeyUpTime = SystemClock.uptimeMillis();
                 break;
             case KeyEvent.KEYCODE_VOLUME_MUTE:
-                MediaSessionLegacyHelper.getHelper(mApplicationContext)
+                MediaSessionLegacyHelper.getHelper(getContext())
                         .sendVolumeKeyEvent(event, false);
                 break;
         }
@@ -874,10 +894,10 @@ public class AudioManager {
         try {
             if (mUseMasterVolume) {
                 service.adjustMasterVolume(direction, flags,
-                        mApplicationContext.getOpPackageName());
+                        getContext().getOpPackageName());
             } else {
                 service.adjustStreamVolume(streamType, direction, flags,
-                        mApplicationContext.getOpPackageName());
+                        getContext().getOpPackageName());
             }
         } catch (RemoteException e) {
             Log.e(TAG, "Dead object in adjustStreamVolume", e);
@@ -908,10 +928,10 @@ public class AudioManager {
         try {
             if (mUseMasterVolume) {
                 service.adjustMasterVolume(direction, flags,
-                        mApplicationContext.getOpPackageName());
+                        getContext().getOpPackageName());
             } else {
                 MediaSessionLegacyHelper helper =
-                        MediaSessionLegacyHelper.getHelper(mApplicationContext);
+                        MediaSessionLegacyHelper.getHelper(getContext());
                 helper.sendAdjustVolumeBy(USE_DEFAULT_STREAM_TYPE, direction, flags);
             }
         } catch (RemoteException e) {
@@ -944,10 +964,10 @@ public class AudioManager {
         try {
             if (mUseMasterVolume) {
                 service.adjustMasterVolume(direction, flags,
-                        mApplicationContext.getOpPackageName());
+                        getContext().getOpPackageName());
             } else {
                 MediaSessionLegacyHelper helper =
-                        MediaSessionLegacyHelper.getHelper(mApplicationContext);
+                        MediaSessionLegacyHelper.getHelper(getContext());
                 helper.sendAdjustVolumeBy(suggestedStreamType, direction, flags);
             }
         } catch (RemoteException e) {
@@ -967,7 +987,7 @@ public class AudioManager {
     public void adjustMasterVolume(int steps, int flags) {
         IAudioService service = getService();
         try {
-            service.adjustMasterVolume(steps, flags, mApplicationContext.getOpPackageName());
+            service.adjustMasterVolume(steps, flags, getContext().getOpPackageName());
         } catch (RemoteException e) {
             Log.e(TAG, "Dead object in adjustMasterVolume", e);
         }
@@ -1138,7 +1158,7 @@ public class AudioManager {
         }
         IAudioService service = getService();
         try {
-            service.setRingerModeExternal(ringerMode, mApplicationContext.getOpPackageName());
+            service.setRingerModeExternal(ringerMode, getContext().getOpPackageName());
         } catch (RemoteException e) {
             Log.e(TAG, "Dead object in setRingerMode", e);
         }
@@ -1160,10 +1180,10 @@ public class AudioManager {
         IAudioService service = getService();
         try {
             if (mUseMasterVolume) {
-                service.setMasterVolume(index, flags, mApplicationContext.getOpPackageName());
+                service.setMasterVolume(index, flags, getContext().getOpPackageName());
             } else {
                 service.setStreamVolume(streamType, index, flags,
-                        mApplicationContext.getOpPackageName());
+                        getContext().getOpPackageName());
             }
         } catch (RemoteException e) {
             Log.e(TAG, "Dead object in setStreamVolume", e);
@@ -1229,7 +1249,7 @@ public class AudioManager {
     public void setMasterVolume(int index, int flags) {
         IAudioService service = getService();
         try {
-            service.setMasterVolume(index, flags, mApplicationContext.getOpPackageName());
+            service.setMasterVolume(index, flags, getContext().getOpPackageName());
         } catch (RemoteException e) {
             Log.e(TAG, "Dead object in setMasterVolume", e);
         }
@@ -1330,7 +1350,7 @@ public class AudioManager {
     public void setMasterMute(boolean state, int flags) {
         IAudioService service = getService();
         try {
-            service.setMasterMute(state, flags, mApplicationContext.getOpPackageName(), mICallBack);
+            service.setMasterMute(state, flags, getContext().getOpPackageName(), mICallBack);
         } catch (RemoteException e) {
             Log.e(TAG, "Dead object in setMasterMute", e);
         }
@@ -1588,7 +1608,7 @@ public class AudioManager {
      * @see #startBluetoothSco()
     */
     public boolean isBluetoothScoAvailableOffCall() {
-        return mApplicationContext.getResources().getBoolean(
+        return getContext().getResources().getBoolean(
                com.android.internal.R.bool.config_bluetooth_sco_off_call);
     }
 
@@ -1641,7 +1661,7 @@ public class AudioManager {
         IAudioService service = getService();
         try {
             service.startBluetoothSco(mICallBack,
-                    mApplicationContext.getApplicationInfo().targetSdkVersion);
+                    getContext().getApplicationInfo().targetSdkVersion);
         } catch (RemoteException e) {
             Log.e(TAG, "Dead object in startBluetoothSco", e);
         }
@@ -1789,7 +1809,7 @@ public class AudioManager {
     public void setMicrophoneMute(boolean on){
         IAudioService service = getService();
         try {
-            service.setMicrophoneMute(on, mApplicationContext.getOpPackageName());
+            service.setMicrophoneMute(on, getContext().getOpPackageName());
         } catch (RemoteException e) {
             Log.e(TAG, "Dead object in setMicrophoneMute", e);
         }
@@ -2220,7 +2240,7 @@ public class AudioManager {
      * Settings has an in memory cache, so this is fast.
      */
     private boolean querySoundEffectsEnabled(int user) {
-        return Settings.System.getIntForUser(mApplicationContext.getContentResolver(),
+        return Settings.System.getIntForUser(getContext().getContentResolver(),
                 Settings.System.SOUND_EFFECTS_ENABLED, 0, user) != 0;
     }
 
@@ -2632,7 +2652,7 @@ public class AudioManager {
         try {
             status = service.requestAudioFocus(requestAttributes, durationHint, mICallBack,
                     mAudioFocusDispatcher, getIdForAudioFocusListener(l),
-                    mApplicationContext.getOpPackageName() /* package name */, flags,
+                    getContext().getOpPackageName() /* package name */, flags,
                     ap != null ? ap.cb() : null);
         } catch (RemoteException e) {
             Log.e(TAG, "Can't call requestAudioFocus() on AudioService:", e);
@@ -2657,7 +2677,7 @@ public class AudioManager {
                         .setInternalLegacyStreamType(streamType).build(),
                     durationHint, mICallBack, null,
                     MediaFocusControl.IN_VOICE_COMM_FOCUS_ID,
-                    mApplicationContext.getOpPackageName(),
+                    getContext().getOpPackageName(),
                     AUDIOFOCUS_FLAG_LOCK,
                     null /* policy token */);
         } catch (RemoteException e) {
@@ -2727,7 +2747,7 @@ public class AudioManager {
         if (eventReceiver == null) {
             return;
         }
-        if (!eventReceiver.getPackageName().equals(mApplicationContext.getPackageName())) {
+        if (!eventReceiver.getPackageName().equals(getContext().getPackageName())) {
             Log.e(TAG, "registerMediaButtonEventReceiver() error: " +
                     "receiver and context package names don't match");
             return;
@@ -2738,7 +2758,7 @@ public class AudioManager {
         mediaButtonIntent.addFlags(mediaButtonIntent.FLAG_RECEIVER_FOREGROUND);
         //     the associated intent will be handled by the component being registered
         mediaButtonIntent.setComponent(eventReceiver);
-        PendingIntent pi = PendingIntent.getBroadcast(mApplicationContext,
+        PendingIntent pi = PendingIntent.getBroadcast(getContext(),
                 0/*requestCode, ignored*/, mediaButtonIntent, 0/*flags*/);
         registerMediaButtonIntent(pi, eventReceiver);
     }
@@ -2773,8 +2793,8 @@ public class AudioManager {
             Log.e(TAG, "Cannot call registerMediaButtonIntent() with a null parameter");
             return;
         }
-        MediaSessionLegacyHelper helper = MediaSessionLegacyHelper.getHelper(mApplicationContext);
-        helper.addMediaButtonListener(pi, eventReceiver, mApplicationContext);
+        MediaSessionLegacyHelper helper = MediaSessionLegacyHelper.getHelper(getContext());
+        helper.addMediaButtonListener(pi, eventReceiver, getContext());
     }
 
     /**
@@ -2792,7 +2812,7 @@ public class AudioManager {
         Intent mediaButtonIntent = new Intent(Intent.ACTION_MEDIA_BUTTON);
         //     the associated intent will be handled by the component being registered
         mediaButtonIntent.setComponent(eventReceiver);
-        PendingIntent pi = PendingIntent.getBroadcast(mApplicationContext,
+        PendingIntent pi = PendingIntent.getBroadcast(getContext(),
                 0/*requestCode, ignored*/, mediaButtonIntent, 0/*flags*/);
         unregisterMediaButtonIntent(pi);
     }
@@ -2815,7 +2835,7 @@ public class AudioManager {
      * @hide
      */
     public void unregisterMediaButtonIntent(PendingIntent pi) {
-        MediaSessionLegacyHelper helper = MediaSessionLegacyHelper.getHelper(mApplicationContext);
+        MediaSessionLegacyHelper helper = MediaSessionLegacyHelper.getHelper(getContext());
         helper.removeMediaButtonListener(pi);
     }
 
@@ -2832,7 +2852,7 @@ public class AudioManager {
         if ((rcClient == null) || (rcClient.getRcMediaIntent() == null)) {
             return;
         }
-        rcClient.registerWithSession(MediaSessionLegacyHelper.getHelper(mApplicationContext));
+        rcClient.registerWithSession(MediaSessionLegacyHelper.getHelper(getContext()));
     }
 
     /**
@@ -2847,7 +2867,7 @@ public class AudioManager {
         if ((rcClient == null) || (rcClient.getRcMediaIntent() == null)) {
             return;
         }
-        rcClient.unregisterWithSession(MediaSessionLegacyHelper.getHelper(mApplicationContext));
+        rcClient.unregisterWithSession(MediaSessionLegacyHelper.getHelper(getContext()));
     }
 
     /**
@@ -3579,7 +3599,7 @@ public class AudioManager {
      */
     public void setRingerModeInternal(int ringerMode) {
         try {
-            getService().setRingerModeInternal(ringerMode, mApplicationContext.getOpPackageName());
+            getService().setRingerModeInternal(ringerMode, getContext().getOpPackageName());
         } catch (RemoteException e) {
             Log.w(TAG, "Error calling setRingerModeInternal", e);
         }
