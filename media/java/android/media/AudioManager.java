@@ -690,7 +690,12 @@ public class AudioManager {
      * @hide
      */
     public AudioManager(Context context) {
-        mApplicationContext = context.getApplicationContext();
+        Context appcontext = context.getApplicationContext();
+        if (appcontext == null) {
+            mApplicationContext = context;
+        } else {
+            mApplicationContext = appcontext;
+        }
         mUseMasterVolume = mApplicationContext.getResources().getBoolean(
                 com.android.internal.R.bool.config_useMasterVolume);
         mUseVolumeKeySounds = mApplicationContext.getResources().getBoolean(
