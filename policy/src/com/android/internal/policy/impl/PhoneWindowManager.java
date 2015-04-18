@@ -7554,6 +7554,12 @@ public class PhoneWindowManager implements WindowManagerPolicy {
         return !hasNavigationBar() && mHasPermanentMenuKey;
     }
 
+    //Keep for compatibility with some apps
+    @Override
+    public boolean needsNavigationBar() {
+        return mHasNavigationBar;
+    }
+
     @Override
     public void setLastInputMethodWindowLw(WindowState ime, WindowState target) {
         mLastInputMethodWindow = ime;

@@ -1195,6 +1195,7 @@ public interface WindowManagerPolicy {
      */
     public boolean hasNavigationBar();
     public boolean hasPermanentMenuKey();
+    public boolean needsNavigationBar();
 
     /**
      * Lock the device now.
