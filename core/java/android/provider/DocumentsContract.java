@@ -12,6 +12,20 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
+ * Per article 5 of the Apache 2.0 License, some modifications to this code
+ * were made by the Oneplus Project.
+ *
+ * Modifications Copyright (C) 2015 The Oneplus Project
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 3
+ * of the License, or (at your option) any later version.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
 package android.provider;
@@ -298,6 +312,22 @@ public final class DocumentsContract {
         public static final int FLAG_SUPPORTS_RENAME = 1 << 6;
 
         /**
+         * Flag indicating that a document can be copied.
+         *
+         * @see #COLUMN_FLAGS
+         * @hide
+         */
+        public static final int FLAG_SUPPORTS_COPY = 1 << 7;
+
+        /**
+         * Flag indicating that a document can be pasted.
+         *
+         * @see #COLUMN_FLAGS
+         * @hide
+         */
+        public static final int FLAG_SUPPORTS_PASTE = 1 << 8;
+
+        /**
          * Flag indicating that document titles should be hidden when viewing
          * this directory in a larger format grid. For example, a directory
          * containing only images may want the image thumbnails to speak for
@@ -509,9 +539,17 @@ public final class DocumentsContract {
     public static final String METHOD_RENAME_DOCUMENT = "android:renameDocument";
     /** {@hide} */
     public static final String METHOD_DELETE_DOCUMENT = "android:deleteDocument";
+    /** {@hide} */
+    public static final String METHOD_ISCHILD_DOCUMENT = "android:isChildDocument";
+    /** {@hide} */
+    public static final String METHOD_PATH_DOCUMENT = "android:getPathDocument";
 
     /** {@hide} */
     public static final String EXTRA_URI = "uri";
+    /** {@hide} */
+    public static final String EXTRA_CHILD = "child";
+    /** {@hide} */
+    public static final String EXTRA_PATH = "path";
 
     private static final String PATH_ROOT = "root";
     private static final String PATH_RECENT = "recent";
@@ -985,6 +1023,68 @@ public final class DocumentsContract {
         in.putParcelable(DocumentsContract.EXTRA_URI, documentUri);
 
         client.call(METHOD_DELETE_DOCUMENT, null, in);
+    }
+
+    /**
+     * Test if a document is child from the given parent.
+     *
+     * @param parentDocumentUri directory
+     * @param displayName name of new document
+     * @return if the document is child from the given parent.
+     */
+    public static boolean isChildDocument(ContentResolver resolver, Uri documentUri,
+            String displayName) {
+        final ContentProviderClient client = resolver.acquireUnstableContentProviderClient(
+                documentUri.getAuthority());
+        try {
+            return isChildDocument(client, documentUri, displayName);
+        } catch (Exception e) {
+            Log.w(TAG, "Failed to test if document is child", e);
+            return false;
+        } finally {
+            ContentProviderClient.releaseQuietly(client);
+        }
+    }
+
+    /** {@hide} */
+    public static boolean isChildDocument(ContentProviderClient client, Uri parentDocumentUri,
+            String displayName) throws RemoteException {
+        final Bundle in = new Bundle();
+        in.putParcelable(DocumentsContract.EXTRA_URI, parentDocumentUri);
+        in.putString(Document.COLUMN_DISPLAY_NAME, displayName);
+
+        final Bundle out = client.call(METHOD_ISCHILD_DOCUMENT, null, in);
+        return out.getBoolean(DocumentsContract.EXTRA_CHILD);
+    }
+
+    /**
+     * Return the document path.
+     *
+     * @param documentUri The document's uri
+     * @return the document path.
+     * @hide
+     */
+    public static String getPathDocument(ContentResolver resolver, Uri documentUri) {
+        final ContentProviderClient client = resolver.acquireUnstableContentProviderClient(
+                documentUri.getAuthority());
+        try {
+            return getPathDocument(client, documentUri);
+        } catch (Exception e) {
+            Log.w(TAG, "Failed to return the document path", e);
+            return null;
+        } finally {
+            ContentProviderClient.releaseQuietly(client);
+        }
+    }
+
+    /** {@hide} */
+    public static String getPathDocument(ContentProviderClient client, Uri documentUri)
+            throws RemoteException {
+        final Bundle in = new Bundle();
+        in.putParcelable(DocumentsContract.EXTRA_URI, documentUri);
+
+        final Bundle out = client.call(METHOD_PATH_DOCUMENT, null, in);
+        return out.getString(DocumentsContract.EXTRA_PATH);
     }
 
     /**

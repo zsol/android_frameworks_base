@@ -12,6 +12,20 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
+ * Per article 5 of the Apache 2.0 License, some modifications to this code
+ * were made by the Oneplus Project.
+ *
+ * Modifications Copyright (C) 2015 The Oneplus Project
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 3
+ * of the License, or (at your option) any later version.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
 package com.android.externalstorage;
@@ -24,6 +38,7 @@ import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.database.MatrixCursor.RowBuilder;
 import android.graphics.Point;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.CancellationSignal;
 import android.os.Environment;
@@ -252,12 +267,14 @@ public class ExternalStorageProvider extends DocumentsProvider {
         if (file.canWrite()) {
             if (file.isDirectory()) {
                 flags |= Document.FLAG_DIR_SUPPORTS_CREATE;
+                flags |= Document.FLAG_SUPPORTS_PASTE;
                 flags |= Document.FLAG_SUPPORTS_DELETE;
                 flags |= Document.FLAG_SUPPORTS_RENAME;
             } else {
                 flags |= Document.FLAG_SUPPORTS_WRITE;
                 flags |= Document.FLAG_SUPPORTS_DELETE;
                 flags |= Document.FLAG_SUPPORTS_RENAME;
+                flags |= Document.FLAG_SUPPORTS_COPY;
             }
         }
 
@@ -316,6 +333,29 @@ public class ExternalStorageProvider extends DocumentsProvider {
     }
 
     @Override
+    public String getPathDocument(String docId) {
+        try {
+            final File doc = getFileForDocId(docId).getCanonicalFile();
+            return doc.getCanonicalPath();
+        } catch (IOException e) {
+            throw new IllegalArgumentException(
+                    "Failed to determine " + docId + " path: " + e);
+        }
+    }
+
+    @Override
+    public boolean isDirectChildDocument(String parentDocId, String displayName) {
+        try {
+            final File parent = getFileForDocId(parentDocId).getCanonicalFile();
+            final File doc = new File(parent, displayName);
+            return doc.exists();
+        } catch (IOException e) {
+            throw new IllegalArgumentException(
+                    "Failed to determine if " + displayName + " is child of " + parentDocId + ": " + e);
+        }
+    }
+
+    @Override
     public String createDocument(String docId, String mimeType, String displayName)
             throws FileNotFoundException {
         displayName = FileUtils.buildValidFatFilename(displayName);
@@ -331,12 +371,18 @@ public class ExternalStorageProvider extends DocumentsProvider {
                 throw new IllegalStateException("Failed to mkdir " + file);
             }
         } else {
+            boolean rescan = shouldRescanFile(file);
             try {
                 if (!file.createNewFile()) {
                     throw new IllegalStateException("Failed to touch " + file);
                 }
             } catch (IOException e) {
                 throw new IllegalStateException("Failed to touch " + file + ": " + e);
+            }
+
+            if (rescan) {
+                MediaScannerConnection.scanFile(getContext(), new String[]{file.getAbsolutePath()},
+                        null, null);
             }
         }
 
@@ -407,19 +453,27 @@ public class ExternalStorageProvider extends DocumentsProvider {
 
     @Override
     public String renameDocument(String docId, String displayName) throws FileNotFoundException {
-        // Since this provider treats renames as generating a completely new
-        // docId, we're okay with letting the MIME type change.
-        displayName = FileUtils.buildValidFatFilename(displayName);
-
         final File before = getFileForDocId(docId);
+        boolean rescan = shouldRescanFile(before);
         final File after = new File(before.getParentFile(), displayName);
+        ArrayList<String> toRescan = null;
+        if (rescan) {
+            toRescan = getFilesPathRecursively(before);
+        }
         if (after.exists()) {
             throw new IllegalStateException("Already exists " + after);
         }
         if (!before.renameTo(after)) {
             throw new IllegalStateException("Failed to rename to " + after);
         }
+        if (rescan) {
+            toRescan.addAll(getFilesPathRecursively(after));
+        }
         final String afterDocId = getDocIdForFile(after);
+        if (rescan) {
+            MediaScannerConnection.scanFile(getContext(), toRescan.toArray(
+                    new String[toRescan.size()]), null, null);
+        }
         if (!TextUtils.equals(docId, afterDocId)) {
             return afterDocId;
         } else {
@@ -430,11 +484,16 @@ public class ExternalStorageProvider extends DocumentsProvider {
     @Override
     public void deleteDocument(String docId) throws FileNotFoundException {
         final File file = getFileForDocId(docId);
+        boolean rescan = shouldRescanFile(file);
         if (file.isDirectory()) {
             FileUtils.deleteContents(file);
         }
         if (!file.delete()) {
             throw new IllegalStateException("Failed to delete " + file);
+        }
+        if (rescan) {
+            MediaScannerConnection.scanFile(getContext(), new String[]{file.getAbsolutePath()},
+                    null, null);
         }
     }
 
@@ -523,6 +582,20 @@ public class ExternalStorageProvider extends DocumentsProvider {
             throws FileNotFoundException {
         final File file = getFileForDocId(documentId);
         return DocumentsContract.openImageThumbnail(file);
+    }
+
+    private boolean shouldRescanFile(File file) {
+        boolean rescan = false;
+        if (file.isDirectory()) {
+            rescan = true;
+        } else {
+            String mimeType = getTypeForFile(file);
+            rescan = rescan || mimeType.startsWith("image/") ||
+                    mimeType.startsWith("video/") || mimeType.startsWith("audio/") ||
+                    mimeType.startsWith("application/ogg") ||
+                    mimeType.startsWith("application/x-flac");
+        }
+        return rescan;
     }
 
     private static String getTypeForFile(File file) {

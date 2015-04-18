@@ -12,6 +12,20 @@
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
      limitations under the License.
+
+     Per article 5 of the Apache 2.0 License, some modifications to this code
+     were made by the OnePlus Project.
+
+     Modifications Copyright (C) 2015 The OnePlus Project
+
+     This program is free software; you can redistribute it and/or
+     modify it under the terms of the GNU General Public License
+     as published by the Free Software Foundation; either version 3
+     of the License, or (at your option) any later version.
+
+     You should have received a copy of the GNU General Public License
+     along with this program; if not, write to the Free Software
+     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 -->
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
@@ -108,4 +122,24 @@
     <!-- Title of dialog when prompting user to select an app to share documents with [CHAR LIMIT=32] -->
     <string name="share_via">Share via</string>
 
+    <plurals name="files_pasted_failed">
+        <item quantity="one">The file couldn\'t be pasted.</item>
+        <item quantity="other">Some files couldn\'t be pasted.</item>
+    </plurals>
+
+    <!-- Copy files -->
+    <string name="copy_message">Copying %1$d file(s)</string>
+    <string name="copy_percent_bytes" formatted="false">"%1dB/%2dB"</string>
+    <string name="copy_percent_megas" formatted="false">"%1dMB/%2dMB"</string>
+
+    <!-- Folder already exists -->
+    <string name="folder_exists">Folder \"%1$s\" already exists. Please use another name.</string>
+    <!-- Folder name empty -->
+    <string name="folder_name_empty">Folder name cannot be empty.</string>
+
+    <!-- Menu rename item -->
+    <string name="menu_rename">Rename</string>
+    <string name="menu_rename_doc">Rename document</string>
+    <string name="document_name_empty">Name cannot be empty.</string>
+    <string name="document_exists">Document \"%1$s\" already exists. Please use another name.</string>
 </resources>

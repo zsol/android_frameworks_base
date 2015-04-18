@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 The Android Open Source Project
+ * Copyright (C) 2015 The Oneplus Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,20 +12,6 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- * Per article 5 of the Apache 2.0 License, some modifications to this code
- * were made by the Oneplus Project.
- *
- * Modifications Copyright (C) 2015 The Oneplus Project
- *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 3
- * of the License, or (at your option) any later version.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
 package com.android.documentsui;
@@ -46,7 +32,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.provider.DocumentsContract;
-import android.provider.DocumentsContract.Document;
 import android.text.InputFilter;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -59,29 +44,39 @@ import com.android.documentsui.model.DocumentInfo;
 import java.io.FileNotFoundException;
 
 /**
- * Dialog to create a new directory.
+ * Dialog to rename a document.
  */
-public class CreateDirectoryFragment extends DialogFragment {
-    private static final String TAG_CREATE_DIRECTORY = "create_directory";
+public class RenameDocumentFragment extends DialogFragment {
+    private static final String TAG_RENAME_DOCUMENT = "rename_document";
 
-    public static void show(FragmentManager fm) {
-        final CreateDirectoryFragment dialog = new CreateDirectoryFragment();
-        dialog.show(fm, TAG_CREATE_DIRECTORY);
+    public static void show(FragmentManager fm, DocumentInfo documentInfo) {
+        final RenameDocumentFragment dialog = new RenameDocumentFragment();
+        dialog.mDisplayName = documentInfo.displayName;
+        dialog.mUri = documentInfo.derivedUri;
+        dialog.show(fm, TAG_RENAME_DOCUMENT);
     }
+
+    private String mDisplayName;
+    private Uri mUri;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+        if (savedInstanceState != null) {
+            mDisplayName = savedInstanceState.getString("displayName");
+            mUri = savedInstanceState.getParcelable("uri");
+        }
         final Context context = getActivity();
         final ContentResolver resolver = context.getContentResolver();
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(context);
         final LayoutInflater dialogInflater = LayoutInflater.from(builder.getContext());
 
-        final View view = dialogInflater.inflate(R.layout.dialog_create_dir, null, false);
+        final View view = dialogInflater.inflate(R.layout.dialog_rename_doc, null, false);
         final EditText text1 = (EditText) view.findViewById(android.R.id.text1);
+        text1.setText(mDisplayName);
         text1.setFilters(new InputFilter[] { new FolderInputFilter() });
 
-        builder.setTitle(R.string.menu_create_dir);
+        builder.setTitle(R.string.menu_rename_doc);
         builder.setView(view);
 
         builder.setPositiveButton(android.R.string.ok, new OnClickListener() {
@@ -93,7 +88,7 @@ public class CreateDirectoryFragment extends DialogFragment {
 
                 if (displayName == null || "".equals(displayName.trim())) {
                     Toast.makeText(activity, activity.getResources().getString(
-                            R.string.folder_name_empty, displayName), Toast.LENGTH_LONG).show();
+                            R.string.document_name_empty, displayName), Toast.LENGTH_LONG).show();
                     return;
                 }
 
@@ -103,9 +98,9 @@ public class CreateDirectoryFragment extends DialogFragment {
                         displayName);
                 if (exists) {
                     Toast.makeText(activity, activity.getResources().getString(
-                            R.string.folder_exists, displayName), Toast.LENGTH_LONG).show();
+                            R.string.document_exists, displayName), Toast.LENGTH_LONG).show();
                 } else {
-                    new CreateDirectoryTask(activity, cwd, displayName).executeOnExecutor(
+                    new RenameDocumentTask(activity, mUri, displayName).executeOnExecutor(
                             ProviderExecutor.forAuthority(cwd.authority));
                 }
                 ((DocumentsActivity) context).removeDialog((Dialog) dialog);
@@ -123,15 +118,22 @@ public class CreateDirectoryFragment extends DialogFragment {
         return dialog;
     }
 
-    private class CreateDirectoryTask extends AsyncTask<Void, Void, DocumentInfo> {
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putString("displayName", mDisplayName);
+        outState.putParcelable("uri", mUri);
+        super.onSaveInstanceState(outState);
+    }
+
+    private class RenameDocumentTask extends AsyncTask<Void, Void, DocumentInfo> {
         private final DocumentsActivity mActivity;
-        private final DocumentInfo mCwd;
+        private final Uri mUri;
         private final String mDisplayName;
 
-        public CreateDirectoryTask(
-                DocumentsActivity activity, DocumentInfo cwd, String displayName) {
+        public RenameDocumentTask(
+                DocumentsActivity activity, Uri uri, String displayName) {
             mActivity = activity;
-            mCwd = cwd;
+            mUri = uri;
             mDisplayName = displayName;
         }
 
@@ -146,15 +148,15 @@ public class CreateDirectoryFragment extends DialogFragment {
             ContentProviderClient client = null;
             try {
                 client = DocumentsApplication.acquireUnstableProviderOrThrow(
-                        resolver, mCwd.derivedUri.getAuthority());
-                final Uri childUri = DocumentsContract.createDocument(
-                        client, mCwd.derivedUri, Document.MIME_TYPE_DIR, mDisplayName);
+                        resolver, mUri.getAuthority());
+                final Uri childUri = DocumentsContract.renameDocument(
+                        client, mUri, mDisplayName);
                 return DocumentInfo.fromUri(resolver, childUri);
             } catch (RemoteException e) {
-                Log.w(TAG, "Failed to create directory", e);
+                Log.w(TAG, "Failed to rename file", e);
                 return null;
             } catch (FileNotFoundException e) {
-                Log.w(TAG, "Failed to create directory", e);
+                Log.w(TAG, "Failed to rename file", e);
                 return null;
             } finally {
                 ContentProviderClient.releaseQuietly(client);
@@ -163,13 +165,6 @@ public class CreateDirectoryFragment extends DialogFragment {
 
         @Override
         protected void onPostExecute(DocumentInfo result) {
-            if (result != null) {
-                // Navigate into newly created child
-                mActivity.onDocumentPicked(result);
-            } else {
-                Toast.makeText(mActivity, R.string.create_error, Toast.LENGTH_SHORT).show();
-            }
-
             mActivity.setPending(false);
         }
     }

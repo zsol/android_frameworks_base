@@ -12,6 +12,20 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
+ * Per article 5 of the Apache 2.0 License, some modifications to this code
+ * were made by the Oneplus Project.
+ *
+ * Modifications Copyright (C) 2015 The Oneplus Project
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 3
+ * of the License, or (at your option) any later version.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
 package android.app;
@@ -1059,6 +1073,45 @@ public class DownloadManager {
                                 cursor.getColumnIndexOrThrow(COLUMN_LOCAL_FILENAME));
                         return Uri.fromFile(new File(path));
                     }
+                }
+            }
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+        // downloaded file not found or its status is not 'successfully completed'
+        return null;
+    }
+
+    /**
+     * Returns the path of the given downloaded file id, if the file is
+     * downloaded successfully. Otherwise, null is returned.
+     *<p>
+     * If the specified downloaded file is in external storage (for example, /sdcard dir),
+     * then it is assumed to be safe for anyone to read and the returned path corresponds
+     * to the filepath on sdcard.
+     *
+     * @param id the id of the downloaded file.
+     * @return the path of the given downloaded file id, if download was successful. null
+     * otherwise.
+     */
+    public String getPathForDownloadedFile(long id) {
+        // to check if the file is in cache, get its destination from the database
+        Query query = new Query().setFilterById(id);
+        Cursor cursor = null;
+        try {
+            cursor = query(query);
+            if (cursor == null) {
+                return null;
+            }
+            if (cursor.moveToFirst()) {
+                int status = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_STATUS));
+                if (DownloadManager.STATUS_SUCCESSFUL == status) {
+                    // return public path
+                    String path = cursor.getString(
+                            cursor.getColumnIndexOrThrow(COLUMN_LOCAL_FILENAME));
+                    return path;
                 }
             }
         } finally {

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 The Android Open Source Project
+ * Copyright (C) 2015 The Oneplus Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,30 +30,23 @@
 
 package com.android.documentsui;
 
-import android.content.Context;
-import android.preference.PreferenceManager;
+import android.text.InputFilter;
+import android.text.Spanned;
 
-public class LocalPreferences {
-    private static final String KEY_ADVANCED_DEVICES = "advancedDevices";
-    private static final String KEY_FILE_SIZE = "fileSize";
+public class FolderInputFilter implements InputFilter {
 
-    public static boolean getDisplayAdvancedDevices(Context context) {
-        return PreferenceManager.getDefaultSharedPreferences(context)
-                .getBoolean(KEY_ADVANCED_DEVICES, true);
+    private static final String RESERVED_CHARS = "|\\?*<\":>+[]/'";
+
+    public FolderInputFilter() {
     }
 
-    public static boolean getDisplayFileSize(Context context) {
-        return PreferenceManager.getDefaultSharedPreferences(context)
-                .getBoolean(KEY_FILE_SIZE, true);
-    }
+    @Override
+    public CharSequence filter(CharSequence source, int start, int end,
+            Spanned dest, int dstart, int dend) {
 
-    public static void setDisplayAdvancedDevices(Context context, boolean display) {
-        PreferenceManager.getDefaultSharedPreferences(context).edit()
-                .putBoolean(KEY_ADVANCED_DEVICES, display).apply();
-    }
-
-    public static void setDisplayFileSize(Context context, boolean display) {
-        PreferenceManager.getDefaultSharedPreferences(context).edit()
-                .putBoolean(KEY_FILE_SIZE, display).apply();
+        if (source != null && RESERVED_CHARS.contains(("" + source))) {
+            return "";
+        }
+        return null;
     }
 }

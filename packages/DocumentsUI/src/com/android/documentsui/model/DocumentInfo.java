@@ -12,6 +12,20 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
+ * Per article 5 of the Apache 2.0 License, some modifications to this code
+ * were made by the Oneplus Project.
+ *
+ * Modifications Copyright (C) 2015 The Oneplus Project
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 3
+ * of the License, or (at your option) any later version.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
 package com.android.documentsui.model;
@@ -65,6 +79,8 @@ public class DocumentInfo implements Durable, Parcelable {
 
     /** Derived fields that aren't persisted */
     public Uri derivedUri;
+    public Uri copiedUri;
+    public DocumentInfo parent;
 
     public DocumentInfo() {
         reset();
@@ -219,6 +235,14 @@ public class DocumentInfo implements Durable, Parcelable {
         return (flags & Document.FLAG_DIR_SUPPORTS_CREATE) != 0;
     }
 
+    public boolean isPasteSupported() {
+        return (flags & Document.FLAG_SUPPORTS_PASTE) != 0;
+    }
+
+    public boolean isRenameSupported() {
+        return (flags & Document.FLAG_SUPPORTS_RENAME) != 0;
+    }
+
     public boolean isThumbnailSupported() {
         return (flags & Document.FLAG_SUPPORTS_THUMBNAIL) != 0;
     }
@@ -233,6 +257,10 @@ public class DocumentInfo implements Durable, Parcelable {
 
     public boolean isDeleteSupported() {
         return (flags & Document.FLAG_SUPPORTS_DELETE) != 0;
+    }
+
+    public boolean isCopySupported() {
+        return (flags & Document.FLAG_SUPPORTS_COPY) != 0;
     }
 
     public boolean isGridTitlesHidden() {

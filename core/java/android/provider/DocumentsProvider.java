@@ -12,6 +12,20 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
+ * Per article 5 of the Apache 2.0 License, some modifications to this code
+ * were made by the Oneplus Project.
+ *
+ * Modifications Copyright (C) 2015 The Oneplus Project
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 3
+ * of the License, or (at your option) any later version.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
 package android.provider;
@@ -19,6 +33,8 @@ package android.provider;
 import static android.provider.DocumentsContract.METHOD_CREATE_DOCUMENT;
 import static android.provider.DocumentsContract.METHOD_DELETE_DOCUMENT;
 import static android.provider.DocumentsContract.METHOD_RENAME_DOCUMENT;
+import static android.provider.DocumentsContract.METHOD_ISCHILD_DOCUMENT;
+import static android.provider.DocumentsContract.METHOD_PATH_DOCUMENT;
 import static android.provider.DocumentsContract.buildDocumentUri;
 import static android.provider.DocumentsContract.buildDocumentUriMaybeUsingTree;
 import static android.provider.DocumentsContract.buildTreeDocumentUri;
@@ -50,7 +66,9 @@ import android.util.Log;
 
 import libcore.io.IoUtils;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Objects;
 
 /**
@@ -184,6 +202,29 @@ public abstract class DocumentsProvider extends ContentProvider {
      */
     public boolean isChildDocument(String parentDocumentId, String documentId) {
         return false;
+    }
+
+    /**
+     * Test if a document is child from the given parent.
+     *
+     * @param parentDocumentId parent to verify against.
+     * @param displayName child to verify.
+     * @return if given document is a child of the given parent.
+     * @see DocumentsContract.Root#FLAG_SUPPORTS_IS_CHILD
+     */
+    public boolean isDirectChildDocument(String parentDocumentId, String displayName) {
+        return false;
+    }
+
+    /**
+     * Return the document path.
+     *
+     * @param documentId The document's uri
+     * @return the document path.
+     * @hide
+     */
+    public String getPathDocument(String documentId) {
+        return null;
     }
 
     /** {@hide} */
@@ -681,6 +722,21 @@ public abstract class DocumentsProvider extends ContentProvider {
                 // Document no longer exists, clean up any grants
                 revokeDocumentPermission(documentId);
 
+            } else if (METHOD_ISCHILD_DOCUMENT.equals(method)) {
+                enforceWritePermissionInner(documentUri, null);
+
+                final String displayName = extras.getString(Document.COLUMN_DISPLAY_NAME);
+                boolean isChild = isDirectChildDocument(documentId, displayName);
+
+                out.putBoolean(DocumentsContract.EXTRA_CHILD, isChild);
+
+            } else if (METHOD_PATH_DOCUMENT.equals(method)) {
+                enforceWritePermissionInner(documentUri, null);
+
+                String path = getPathDocument(documentId);
+
+                out.putString(DocumentsContract.EXTRA_PATH, path);
+
             } else {
                 throw new UnsupportedOperationException("Method not supported " + method);
             }
@@ -786,5 +842,20 @@ public abstract class DocumentsProvider extends ContentProvider {
         } else {
             return super.openTypedAssetFile(uri, mimeTypeFilter, opts, signal);
         }
+    }
+
+    /**
+     * @hide
+     */
+    protected ArrayList<String> getFilesPathRecursively(File file) {
+        ArrayList<String> files = new ArrayList<String>();
+        files.add(file.getAbsolutePath());
+        if (file.isDirectory()) {
+            File[] children = file.listFiles();
+            for (File f : children) {
+                files.addAll(getFilesPathRecursively(f));
+            }
+        }
+        return files;
     }
 }

@@ -26,6 +26,20 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ *
+ * Per article 5 of the Apache 2.0 License, some modifications to this code
+ * were made by the Oneplus Project.
+ *
+ * Modifications Copyright (C) 2015 The Oneplus Project
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 3
+ * of the License, or (at your option) any later version.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
 package com.android.documentsui;
@@ -44,6 +58,7 @@ import static com.android.documentsui.model.DocumentInfo.getCursorString;
 
 import android.app.ActivityManager;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -62,10 +77,12 @@ import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.InsetDrawable;
+import android.graphics.drawable.RippleDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CancellationSignal;
+import android.os.Handler;
 import android.os.OperationCanceledException;
 import android.os.Parcelable;
 import android.os.RemoteException;
@@ -77,6 +94,7 @@ import android.text.format.Time;
 import android.util.Log;
 import android.util.SparseArray;
 import android.util.SparseBooleanArray;
+import android.util.TypedValue;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -94,6 +112,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.android.documentsui.DocumentsActivity.State;
 import com.android.documentsui.ProviderExecutor.Preemptable;
@@ -144,6 +163,11 @@ public class DirectoryFragment extends Fragment {
     private DocumentsAdapter mAdapter;
     private LoaderCallbacks<DirectoryResult> mCallbacks;
 
+    private ActionMode mActionMode;
+    private View mBottomToolbar;
+
+    private Handler mHandler;
+
     private static final String EXTRA_TYPE = "type";
     private static final String EXTRA_ROOT = "root";
     private static final String EXTRA_DOC = "doc";
@@ -153,20 +177,22 @@ public class DirectoryFragment extends Fragment {
     private final int mLoaderId = 42;
     private DirectoryLoader mLoader;
 
-    public static void showNormal(FragmentManager fm, RootInfo root, DocumentInfo doc, int anim) {
-        show(fm, TYPE_NORMAL, root, doc, null, anim);
+    public static void showNormal(FragmentManager fm, RootInfo root, DocumentInfo doc, int anim,
+            View bottomToolbar) {
+        show(fm, TYPE_NORMAL, root, doc, null, anim, bottomToolbar);
     }
 
-    public static void showSearch(FragmentManager fm, RootInfo root, String query, int anim) {
-        show(fm, TYPE_SEARCH, root, null, query, anim);
+    public static void showSearch(FragmentManager fm, RootInfo root, String query, int anim,
+            View bottomToolbar) {
+        show(fm, TYPE_SEARCH, root, null, query, anim, bottomToolbar);
     }
 
-    public static void showRecentsOpen(FragmentManager fm, int anim) {
-        show(fm, TYPE_RECENT_OPEN, null, null, null, anim);
+    public static void showRecentsOpen(FragmentManager fm, int anim, View bottomToolbar) {
+        show(fm, TYPE_RECENT_OPEN, null, null, null, anim, bottomToolbar);
     }
 
     private static void show(FragmentManager fm, int type, RootInfo root, DocumentInfo doc,
-            String query, int anim) {
+            String query, int anim, View bottomToolbar) {
         final Bundle args = new Bundle();
         args.putInt(EXTRA_TYPE, type);
         args.putParcelable(EXTRA_ROOT, root);
@@ -189,6 +215,7 @@ public class DirectoryFragment extends Fragment {
 
         final DirectoryFragment fragment = new DirectoryFragment();
         fragment.setArguments(args);
+        fragment.setBottomToolbar(bottomToolbar);
 
         ft.replace(R.id.container_directory, fragment);
         ft.commitAllowingStateLoss();
@@ -210,6 +237,9 @@ public class DirectoryFragment extends Fragment {
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        mHandler = new Handler();
+
         final Context context = inflater.getContext();
         final Resources res = context.getResources();
         final View view = inflater.inflate(R.layout.fragment_directory, container, false);
@@ -417,6 +447,10 @@ public class DirectoryFragment extends Fragment {
         updateDisplayState();
     }
 
+    private void setBottomToolbar(View bottomToolbar) {
+        mBottomToolbar = bottomToolbar;
+    }
+
     private void updateDisplayState() {
         final State state = getDisplayState(this);
 
@@ -473,112 +507,190 @@ public class DirectoryFragment extends Fragment {
         }
     };
 
+    private ArrayList<DocumentInfo> getCheckedItems() {
+        final SparseBooleanArray checked = mCurrentView.getCheckedItemPositions();
+        final ArrayList<DocumentInfo> docs = Lists.newArrayList();
+        final int size = checked.size();
+        for (int i = 0; i < size; i++) {
+            if (checked.valueAt(i)) {
+                final Cursor cursor = mAdapter.getItem(checked.keyAt(i));
+                if (cursor != null) {
+                    final DocumentInfo doc = DocumentInfo.fromDirectoryCursor(cursor);
+                    docs.add(doc);
+                }
+            }
+        }
+        return docs;
+    }
+
+    private View.OnClickListener mBottomToolbarListener = new View.OnClickListener() {
+
+        @Override
+        public void onClick(View v) {
+            final ArrayList<DocumentInfo> docs = getCheckedItems();
+
+            final int id = v.getId();
+            mHandler.postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+                    switch (id) {
+                        case R.id.menu_open :
+                            DocumentsActivity.get(DirectoryFragment.this).onDocumentsPicked(docs);
+                            mActionMode.finish();
+                            break;
+                        case R.id.menu_share :
+                            onShareDocuments(docs);
+                            mActionMode.finish();
+                            break;
+                        case R.id.menu_delete :
+                            onDeleteDocuments(docs);
+                            mActionMode.finish();
+                            break;
+                        case R.id.menu_copy :
+                            onCopyDocuments(docs);
+                            mActionMode.finish();
+                            break;
+                        case R.id.menu_cut :
+                            onCutDocuments(docs);
+                            mActionMode.finish();
+                            break;
+                        case R.id.menu_rename :
+                            DocumentsActivity.get(DirectoryFragment.this).onDocumentRename(docs.get(0));
+                            mActionMode.finish();
+                            break;
+                    }
+                }
+
+            }, 250);
+        }
+    };
+    private void checkBottomToolbar() {
+        final State state = getDisplayState(DirectoryFragment.this);
+
+        final View open = mBottomToolbar.findViewById(R.id.menu_open_container);
+        final View share = mBottomToolbar.findViewById(R.id.menu_share_container);
+        final View delete = mBottomToolbar.findViewById(R.id.menu_delete_container);
+        final View copy = mBottomToolbar.findViewById(R.id.menu_copy_container);
+        final View cut = mBottomToolbar.findViewById(R.id.menu_cut_container);
+        final View rename = mBottomToolbar.findViewById(R.id.menu_rename_container);
+
+        final ArrayList<DocumentInfo> docs = getCheckedItems();
+        boolean isCopySupported = true;
+        boolean isDeleteSupported = true;
+        boolean isRenameSupported = true;
+        boolean hasFolder = false;
+        for (DocumentInfo doc : docs) {
+            isCopySupported = isCopySupported && doc.isCopySupported();
+            isDeleteSupported = isDeleteSupported && doc.isDeleteSupported();
+            isRenameSupported = isRenameSupported && doc.isRenameSupported();
+            if (Document.MIME_TYPE_DIR.equals(doc.mimeType)) {
+                hasFolder = true;
+            }
+        }
+
+        final boolean manageMode = state.action == ACTION_MANAGE;
+        final boolean stdMode = state.action == ACTION_STANDALONE;
+        open.setVisibility(!manageMode && !stdMode ? View.VISIBLE : View.GONE);
+        share.setVisibility((manageMode || stdMode) && !hasFolder ? View.VISIBLE : View.GONE);
+        delete.setVisibility((manageMode || stdMode) && isDeleteSupported ? View.VISIBLE : View.GONE);
+        copy.setVisibility(stdMode ? View.VISIBLE : View.GONE);
+        cut.setVisibility(stdMode && isDeleteSupported ? View.VISIBLE : View.GONE);
+        rename.setVisibility(stdMode && docs.size() == 1 && isRenameSupported
+                && mType != TYPE_RECENT_OPEN ? View.VISIBLE : View.GONE);
+
+        boolean visible = open.getVisibility() == View.VISIBLE
+                || share.getVisibility() == View.VISIBLE
+                || copy.getVisibility() == View.VISIBLE
+                || cut.getVisibility() == View.VISIBLE
+                || delete.getVisibility() == View.VISIBLE
+                || rename.getVisibility() == View.VISIBLE;
+        mBottomToolbar.setVisibility(visible ? View.VISIBLE : View.GONE);
+        mBottomToolbar.invalidate();
+    }
+
     private MultiChoiceModeListener mMultiListener = new MultiChoiceModeListener() {
         @Override
         public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-            mode.getMenuInflater().inflate(R.menu.mode_directory, menu);
+
+            mActionMode = mode;
+
             mode.setTitle(getResources()
                     .getString(R.string.mode_selected_count, mCurrentView.getCheckedItemCount()));
+
+            if (mBottomToolbar == null) {
+                mBottomToolbar = ((DocumentsActivity) getActivity()).getBottomToolbar();
+            }
+
+            mBottomToolbar.setVisibility(View.VISIBLE);
+
+            final View open = mBottomToolbar.findViewById(R.id.menu_open);
+            final View share = mBottomToolbar.findViewById(R.id.menu_share);
+            final View delete = mBottomToolbar.findViewById(R.id.menu_delete);
+            final View copy = mBottomToolbar.findViewById(R.id.menu_copy);
+            final View cut = mBottomToolbar.findViewById(R.id.menu_cut);
+            final View rename = mBottomToolbar.findViewById(R.id.menu_rename);
+            open.setOnClickListener(mBottomToolbarListener);
+            share.setOnClickListener(mBottomToolbarListener);
+            delete.setOnClickListener(mBottomToolbarListener);
+            copy.setOnClickListener(mBottomToolbarListener);
+            cut.setOnClickListener(mBottomToolbarListener);
+            rename.setOnClickListener(mBottomToolbarListener);
+
+            TypedValue out = new TypedValue();
+            getActivity().getTheme().resolveAttribute(android.R.attr.actionBarSize, out, true);
+            int dimension = (int) (out.getDimension(getResources().getDisplayMetrics()) * 0.75);
+
+            RippleDrawable drawable = (RippleDrawable) open.getBackground();
+            drawable.setMaxRadius(dimension);
+            drawable = (RippleDrawable) share.getBackground();
+            drawable.setMaxRadius(dimension);
+            drawable = (RippleDrawable) delete.getBackground();
+            drawable.setMaxRadius(dimension);
+            drawable = (RippleDrawable) copy.getBackground();
+            drawable.setMaxRadius(dimension);
+            drawable = (RippleDrawable) cut.getBackground();
+            drawable.setMaxRadius(dimension);
+            drawable = (RippleDrawable) rename.getBackground();
+            drawable.setMaxRadius(dimension);
+
             return true;
         }
 
         @Override
         public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-            final State state = getDisplayState(DirectoryFragment.this);
-
-            final MenuItem open = menu.findItem(R.id.menu_open);
-            final MenuItem share = menu.findItem(R.id.menu_share);
-            final MenuItem delete = menu.findItem(R.id.menu_delete);
-            final MenuItem copy = menu.findItem(R.id.menu_copy);
-            final MenuItem cut = menu.findItem(R.id.menu_cut);
-
-            final boolean manageMode = state.action == ACTION_MANAGE;
-            final boolean stdMode = state.action == ACTION_STANDALONE;
-            open.setVisible(!manageMode && !stdMode);
-            share.setVisible(manageMode || stdMode);
-            delete.setVisible(manageMode || stdMode);
-            copy.setVisible(stdMode);
-            cut.setVisible(stdMode);
+            checkBottomToolbar();
 
             return true;
         }
 
         @Override
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-            final SparseBooleanArray checked = mCurrentView.getCheckedItemPositions();
-            final ArrayList<DocumentInfo> docs = Lists.newArrayList();
-            final int size = checked.size();
-            for (int i = 0; i < size; i++) {
-                if (checked.valueAt(i)) {
-                    final Cursor cursor = mAdapter.getItem(checked.keyAt(i));
-                    final DocumentInfo doc = DocumentInfo.fromDirectoryCursor(cursor);
-                    docs.add(doc);
-                }
-            }
-
-            final int id = item.getItemId();
-            if (id == R.id.menu_open) {
-                DocumentsActivity.get(DirectoryFragment.this).onDocumentsPicked(docs);
-                mode.finish();
-                return true;
-
-            } else if (id == R.id.menu_share) {
-                onShareDocuments(docs);
-                mode.finish();
-                return true;
-
-            } else if (id == R.id.menu_delete) {
-                onDeleteDocuments(docs);
-                mode.finish();
-                return true;
-
-            } else if (id == R.id.menu_copy) {
-                onCopyDocuments(docs);
-                mode.finish();
-                return true;
-
-            } else if (id == R.id.menu_cut) {
-                onCutDocuments(docs);
-                mode.finish();
-                return true;
-
-            } else {
-                return false;
-            }
+            return false;
         }
 
         @Override
         public void onDestroyActionMode(ActionMode mode) {
-            // ignored
+             mActionMode = null;
+            mBottomToolbar.setVisibility(View.GONE);
         }
 
         @Override
         public void onItemCheckedStateChanged(
                 ActionMode mode, int position, long id, boolean checked) {
+            final State state = getDisplayState(DirectoryFragment.this);
+
             if (checked) {
                 // Directories and footer items cannot be checked
                 boolean valid = false;
-                boolean hasFolder = false;
 
                 final Cursor cursor = mAdapter.getItem(position);
                 if (cursor != null) {
                     final String docMimeType = getCursorString(cursor, Document.COLUMN_MIME_TYPE);
                     final int docFlags = getCursorInt(cursor, Document.COLUMN_FLAGS);
-                    final State state = getDisplayState(DirectoryFragment.this);
-                    if (Document.MIME_TYPE_DIR.equals(docMimeType)) {
-                        hasFolder = true;
-                    }
                     if (!Document.MIME_TYPE_DIR.equals(docMimeType) || state.action == ACTION_STANDALONE) {
                         valid = isDocumentEnabled(docMimeType, docFlags);
                     }
-                }
-
-                if (hasFolder) {
-                    final Menu menu = mode.getMenu();
-                    final MenuItem copy = menu.findItem(R.id.menu_copy);
-                    final MenuItem cut = menu.findItem(R.id.menu_cut);
-                    copy.setVisible(false);
-                    cut.setVisible(false);
                 }
 
                 if (!valid) {
@@ -586,8 +698,7 @@ public class DirectoryFragment extends Fragment {
                 }
             }
 
-            mode.setTitle(getResources()
-                    .getString(R.string.mode_selected_count, mCurrentView.getCheckedItemCount()));
+            checkBottomToolbar();
         }
     };
 
@@ -650,11 +761,13 @@ public class DirectoryFragment extends Fragment {
         builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 new DeleteFilesTask(docs.toArray(new DocumentInfo[0])).executeOnExecutor(getCurrentExecutor());
+                ((DocumentsActivity) context).removeDialog((Dialog) dialog);
             }
         });
         builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 // User cancelled the dialog, ignore actions
+                ((DocumentsActivity) context).removeDialog((Dialog) dialog);
             }
         });
 
@@ -663,6 +776,7 @@ public class DirectoryFragment extends Fragment {
 
         AlertDialog dialog = builder.create();
         dialog.show();
+        ((DocumentsActivity) context).addDialog(dialog);
     }
 
     private boolean onDeleteDocumentsImpl(final List<DocumentInfo> docs) {
@@ -706,6 +820,7 @@ public class DirectoryFragment extends Fragment {
                     onDeleteDocumentsImpl(docsToDelete);
                 }
 
+                ((DocumentsActivity) context).removeFromClipboard(doc);
 
                 DocumentsContract.deleteDocument(client, doc.derivedUri);
             } catch (RemoteException e) {
@@ -1137,6 +1252,8 @@ public class DirectoryFragment extends Fragment {
             // Reload files in the current folder
             getLoaderManager().restartLoader(mLoaderId, null, mCallbacks);
             updateDisplayState();
+
+            ((DocumentsActivity) getActivity()).invalidateOptionsMenu();
         }
     }
 
@@ -1177,7 +1294,19 @@ public class DirectoryFragment extends Fragment {
             try {
                 client = DocumentsApplication.acquireUnstableProviderOrThrow(
                         resolver, mUri.getAuthority());
-                result = DocumentsContract.getDocumentThumbnail(client, mUri, mThumbSize, mSignal);
+                try {
+                    result = DocumentsContract.getDocumentThumbnail(client, mUri, mThumbSize,
+                            mSignal);
+                } catch (OutOfMemoryError ex) {
+                    // thumbnail too big, try half its size
+                    try {
+                        Point halfSize = new Point(mThumbSize.x / 2, mThumbSize.y / 2);
+                        result = DocumentsContract.getDocumentThumbnail(client, mUri, halfSize,
+                                mSignal);
+                    } catch (OutOfMemoryError e) {
+                        // still too big, move on
+                    }
+                }
                 if (result != null) {
                     final ThumbnailCache thumbs = DocumentsApplication.getThumbnailsCache(
                             context, mThumbSize);
