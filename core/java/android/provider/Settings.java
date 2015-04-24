@@ -3789,6 +3789,13 @@ public final class Settings {
         public static final String HEADS_UP_TEXT_COLOR = "heads_up_text_color";
 
         /**
+         * Defines the global heads up notification snooze
+         *
+         * @hide
+         */
+        public static final String HEADS_UP_NOTIFICATION_SNOOZE = "heads_up_notification_snooze";
+
+        /**
          * An intent (a flattened Uri String) to launch when user voice launch
          * action is detected. An empty or null string will launch the default
          * voice search activity.

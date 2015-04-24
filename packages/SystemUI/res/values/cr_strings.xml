@@ -79,9 +79,10 @@
 
     <string name="gestures_message">Draw your gesture here</string>
 
-    <!-- Heads up toast -->
+    <!-- Heads up -->
     <string name="heads_up_enabled">Heads up notifications are enabled</string>
     <string name="heads_up_disabled">Heads up notifications are disabled</string>
+    <string name="heads_up_snooze_message">Heads up is disabled for <xliff:g id="number">%d</xliff:g> minutes.</string>
 
     <!-- Task Manager -->
     <string name="task_manager_title">Task Manager</string>
