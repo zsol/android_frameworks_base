@@ -3832,13 +3832,6 @@ public final class Settings {
         public static final String SAFE_HEADSET_VOLUME = "safe_headset_volume";
 
         /**
-         * Volume key controls ringtone or media sound stream
-         *
-         * @hide
-         */
-        public static final String VOLUME_KEYS_CONTROL_MEDIA_STREAM = "volume_keys_control_media_stream";
-
-        /**
          * Change the screenshot delay
          * @hide
          */
