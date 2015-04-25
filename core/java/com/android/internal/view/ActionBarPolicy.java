@@ -19,11 +19,9 @@ package com.android.internal.view;
 import com.android.internal.R;
 
 import android.content.Context;
-import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.os.Build;
-import android.view.ViewConfiguration;
 
 /**
  * Allows components to query for various configuration policy decisions
@@ -45,10 +43,7 @@ public class ActionBarPolicy {
     }
 
     public boolean showsOverflowMenuButton() {
-        return !ViewConfiguration.get(mContext).hasPermanentMenuKey() ||
-                ((mContext.getResources().getConfiguration().uiMode &
-                        Configuration.UI_MODE_TYPE_TELEVISION) ==
-                        Configuration.UI_MODE_TYPE_TELEVISION);
+        return true;
     }
 
     public int getEmbeddedMenuWidthLimit() {
