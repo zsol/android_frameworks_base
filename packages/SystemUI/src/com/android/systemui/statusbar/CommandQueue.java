@@ -305,21 +305,21 @@ public class CommandQueue extends IStatusBar.Stub {
     public void toggleLastApp() {
         synchronized (mList) {
             mHandler.removeMessages(MSG_TOGGLE_LAST_APP);
-            mHandler.obtainMessage(MSG_TOGGLE_LAST_APP, 0, 0, null).sendToTarget();
+            mHandler.sendEmptyMessage(MSG_TOGGLE_LAST_APP);
         }
     }
 
     public void toggleKillApp() {
         synchronized (mList) {
             mHandler.removeMessages(MSG_TOGGLE_KILL_APP);
-            mHandler.obtainMessage(MSG_TOGGLE_KILL_APP, 0, 0, null).sendToTarget();
+            mHandler.sendEmptyMessage(MSG_TOGGLE_KILL_APP);
         }
     }
 
     public void toggleScreenshot() {
         synchronized (mList) {
             mHandler.removeMessages(MSG_TOGGLE_SCREENSHOT);
-            mHandler.obtainMessage(MSG_TOGGLE_SCREENSHOT, 0, 0, null).sendToTarget();
+            mHandler.sendEmptyMessage(MSG_TOGGLE_SCREENSHOT);
         }
     }
 
