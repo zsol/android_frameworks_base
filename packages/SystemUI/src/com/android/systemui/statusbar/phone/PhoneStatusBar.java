@@ -631,6 +631,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         switch (mClockLocation) {
             default:
             case Clock.STYLE_HIDE_CLOCK:
+                mClockView.setTextColor(0xffffff);
                 mClockView = (TextView) mStatusBarView.findViewById(R.id.clock);
                 // Don't set visibility here...
                 break;
