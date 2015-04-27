@@ -97,4 +97,8 @@
   <!-- Ambient Display-->
   <java-symbol type="bool" name="config_dozeUseAccelerometer" />
 
+   <!-- global actions (zen mode buttons) -->
+  <java-symbol type="id" name="option4" />
+  <java-symbol type="id" name="option5" />
+
 </resources>
