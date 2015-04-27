@@ -463,7 +463,7 @@ public class RecentsPanelView extends FrameLayout implements OnItemClickListener
     }
 
     private void createCustomAnimations(LayoutTransition transitioner) {
-        transitioner.setDuration(100);
+        transitioner.setDuration(60);
         transitioner.setStartDelay(LayoutTransition.CHANGE_DISAPPEARING, 0);
         transitioner.setAnimator(LayoutTransition.DISAPPEARING, null);
     }
