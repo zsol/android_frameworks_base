@@ -209,10 +209,8 @@ static void report_exception(JNIEnv* env, jthrowable excep, const char* msg)
          * that can be made while an exception is pending, so we want to
          * get the VM ptr, throw the exception, and then detach the thread.
          */
-        JavaVM* vm = jnienv_to_javavm(env);
         env->Throw(excep);
-        vm->DetachCurrentThread();
-        sleep(60);
+        env->ExceptionDescribe();
         ALOGE("Forcefully exiting");
         exit(1);
         *((int *) 1) = 1;
