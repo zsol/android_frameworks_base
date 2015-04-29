@@ -1070,6 +1070,9 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             }
         });
 
+        // Setup pie container if enabled
+        attachPieContainer(isPieEnabled());
+
         // figure out which pixel-format to use for the status bar.
         mPixelFormat = PixelFormat.OPAQUE;
 
@@ -1838,7 +1841,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         // Recalculate the position of the sliding windows and the titles.
         setAreThereNotifications();
         updateExpandedViewPos(EXPANDED_LEAVE_ALONE);
-        restorePieTriggerMask();
     }
 
     public void displayNotificationFromHeadsUp(StatusBarNotification notification) {
@@ -4104,6 +4106,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         mStatusBarWindow.addContent(mStatusBarWindowContent);
 
         updateExpandedViewPos(EXPANDED_LEAVE_ALONE);
+        restorePieTriggerMask();
         checkBarModes();
 
         mStatusBarWindow.requestLayout();
