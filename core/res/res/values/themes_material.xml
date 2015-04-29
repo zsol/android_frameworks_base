@@ -1285,4 +1285,15 @@ please see themes_device_defaults.xml.
         <item name="colorPrimaryDark">@color/material_blue_grey_950</item>
         <item name="colorAccent">@color/material_deep_teal_500</item>
     </style>
+    
+    <style name="Theme.Material.Trds.Dialog" parent="Theme.Material.BaseDialog">
+        <item name="colorBackground">@drawable/dark_material_bg</item>
+        <item name="windowBackground">@drawable/dialog_background_material</item>
+        <item name="colorControlActivated">@color/white</item>
+    </style>
+
+    <style name="Theme.Material.Trds.Dialog.Alert" parent="Theme.Material.Dialog.BaseAlert">
+        <item name="colorBackground">@drawable/dark_material_bg</item>
+        <item name="colorAccent">@color/white</item>
+    </style>
 </resources>
