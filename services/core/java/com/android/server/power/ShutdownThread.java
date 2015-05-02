@@ -205,7 +205,7 @@ public final class ShutdownThread extends Thread {
                 sConfirmDialog.dismiss();
                 sConfirmDialog = null;
             }
-            AlertDialog.Builder confirmDialogBuilder = new AlertDialog.Builder(context, AlertDialog.THEME_MATERIAL)
+            AlertDialog.Builder confirmDialogBuilder = new AlertDialog.Builder(context)
                     .setTitle(mRebootSafeMode
                             ? com.android.internal.R.string.reboot_safemode_title
                             : showRebootOption
@@ -375,7 +375,7 @@ public final class ShutdownThread extends Thread {
         if (!checkAnimationFileExist()) {
             // throw up an indeterminate system dialog to indicate radio is
             // shutting down.
-            ProgressDialog pd = new ProgressDialog(context, com.android.internal.R.style.Theme_Material_Trds_Dialog_Alert);
+            ProgressDialog pd = new ProgressDialog(context);
             if (mReboot) {
                 pd.setTitle(context.getText(com.android.internal.R.string.reboot_title));
                 pd.setMessage(context.getText(com.android.internal.R.string.reboot_progress));
