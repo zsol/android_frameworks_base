@@ -512,7 +512,7 @@ public class ThemeUtils {
         try {
             Context uiContext = context.createPackageContext("com.android.systemui",
                     Context.CONTEXT_RESTRICTED);
-            return new ThemedUiContext(uiContext, context.getApplicationContext());
+            return new ThemedUiContext(uiContext, context.getPackageName());
         } catch (PackageManager.NameNotFoundException e) {
         }
 
@@ -574,21 +574,16 @@ public class ThemeUtils {
     }
 
     private static class ThemedUiContext extends ContextWrapper {
-        private Context mAppContext;
+        private String mPackageName;
 
-        public ThemedUiContext(Context context, Context appContext) {
+        public ThemedUiContext(Context context, String packageName) {
             super(context);
-            mAppContext = appContext;
-        }
-
-        @Override
-        public Context getApplicationContext() {
-            return mAppContext;
+            mPackageName = packageName;
         }
 
         @Override
         public String getPackageName() {
-            return mAppContext.getPackageName();
+            return mPackageName;
         }
     }
 
