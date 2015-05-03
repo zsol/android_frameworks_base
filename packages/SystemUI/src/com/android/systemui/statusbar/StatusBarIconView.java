@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.content.res.ThemeConfig;
+import android.database.ContentObserver;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
@@ -49,7 +50,7 @@ public class StatusBarIconView extends AnimatedImageView {
     private StatusBarIcon mIcon;
     @ViewDebug.ExportedProperty private String mSlot;
     private Drawable mNumberBackground;
-    private Paint mNumberPaint;
+    private Paint mNumberPain;
     private int mNumberX;
     private int mNumberY;
     private String mNumberText;
@@ -60,7 +61,15 @@ public class StatusBarIconView extends AnimatedImageView {
     public StatusBarIconView(Context context, String slot, Notification notification) {
         super(context);
         final Resources res = context.getResources();
+        final float densityMultiplier = res.getDisplayMetrics().density;
+        final float scaledPx = 8 * densityMultiplier;
         mSlot = slot;
+        mNumberPain = new Paint();
+        mNumberPain.setTextAlign(Paint.Align.CENTER);
+        mNumberPain.setColor(res.getColor(R.drawable.notification_number_text_color));
+        mNumberPain.setAntiAlias(true);
+        mNumberPain.setTypeface(Typeface.DEFAULT_BOLD);
+        mNumberPain.setTextSize(scaledPx);
         setNotification(notification);
 
         mObserver = GlobalSettingsObserver.getInstance(context);
@@ -137,15 +146,6 @@ public class StatusBarIconView extends AnimatedImageView {
         if (!numberEquals || force) {
             if (icon.number > 1 && mShowNotificationCount) {
                 if (mNumberBackground == null) {
-                    final Resources res = mContext.getResources();
-                    final float densityMultiplier = res.getDisplayMetrics().density;
-                    final float scaledPx = 8 * densityMultiplier;
-                    mNumberPaint = new Paint();
-                    mNumberPaint.setTextAlign(Paint.Align.CENTER);
-                    mNumberPaint.setColor(res.getColor(R.drawable.notification_number_text_color));
-                    mNumberPaint.setAntiAlias(true);
-                    mNumberPaint.setTypeface(Typeface.DEFAULT_BOLD);
-                    mNumberPaint.setTextSize(scaledPx);
                     mNumberBackground = getContext().getResources().getDrawable(
                             R.drawable.ic_notification_overlay);
                 }
@@ -153,7 +153,6 @@ public class StatusBarIconView extends AnimatedImageView {
             } else {
                 mNumberBackground = null;
                 mNumberText = null;
-                mNumberPaint = null;
             }
             invalidate();
         }
@@ -263,7 +262,7 @@ public class StatusBarIconView extends AnimatedImageView {
 
         if (mNumberBackground != null) {
             mNumberBackground.draw(canvas);
-            canvas.drawText(mNumberText, mNumberX, mNumberY, mNumberPaint);
+            canvas.drawText(mNumberText, mNumberX, mNumberY, mNumberPain);
         }
     }
 
@@ -308,7 +307,7 @@ public class StatusBarIconView extends AnimatedImageView {
         final int w = getWidth();
         final int h = getHeight();
         final Rect r = new Rect();
-        mNumberPaint.getTextBounds(str, 0, str.length(), r);
+        mNumberPain.getTextBounds(str, 0, str.length(), r);
         final int tw = r.right - r.left;
         final int th = r.bottom - r.top;
         mNumberBackground.getPadding(r);
