@@ -38,7 +38,6 @@ import android.os.Handler;
 import android.os.IRemoteCallback;
 import android.os.RemoteException;
 import android.os.UserHandle;
-import android.os.Vibrator;
 import android.provider.AlarmClock;
 import android.provider.CalendarContract;
 import android.provider.CalendarContract.Events;
@@ -150,15 +149,10 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
     private boolean mShowWeather;
     private boolean mShowBatteryTextExpanded;
 
-    protected Vibrator mVibrator;
-
     private boolean mQSCSwitch = false;
 
     public StatusBarHeaderView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        mContext = context;
-
-        mVibrator = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
     }
 
     @Override
@@ -553,17 +547,10 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
         });
     }
 
-    public void vibrate (int duration) {
-        if (mVibrator != null) {
-            if (mVibrator.hasVibrator()) { mVibrator.vibrate(duration); }
-        }
-    }
-
     @Override
     public void onClick(View v) {
         if (v == mSettingsButton) {
             startSettingsActivity();
-            vibrate(20);
         } else if (v == mSystemIconsSuperContainer) {
             startBatteryActivity();
         } else if (v == mAlarmStatus && mNextAlarm != null) {
@@ -585,7 +572,6 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
     public boolean onLongClick(View v) {
         if (v == mSettingsButton) {
             startSettingsLongClickActivity();
-            vibrate(20);
         } else if (v == mSystemIconsSuperContainer) {
             startBatteryLongClickActivity();
         } else if (v == mClock) {
