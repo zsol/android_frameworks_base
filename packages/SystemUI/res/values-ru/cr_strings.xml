@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <!-- Power menu on navring targets -->
+    <string name="navring_action_power_menu">Меню питания</string>
+
+    <!-- mount notifications -->
+    <string name="ext_media_mounted_notification_title">подключен</string>
+    <string name="ext_media_unmounted_notification_title">извлечен</string>
+    <string name="ext_media_unmounted_notification_message">Вы можете безопасно извлечь накопитель.</string>
+    <string name="ext_media_unmount_action">Извлечь</string>
+    <string name="ext_media_mount_action">Подключить</string>
+    <string name="ext_media_unmounting_notification_title">извлечение\u2026</string>
+    <string name="ext_media_mounting_notification_title">подключение\u2026</string>
+
+    <!-- Screenrecord Notification Ticker -->
+    <string name="screenrecord_notif_ticker">Экран записывается</string>
+
+    <!-- Screenrecord notification title -->
+    <string name="screenrecord_notif_title">Запись экрана</string>
+
+    <!-- Screenrecord notification action: Stop -->
+    <string name="screenrecord_notif_stop">Стоп</string>
+
+    <!-- Screenrecord notification action: show/hide pointer -->
+    <string name="screenrecord_notif_pointer_on">Показывать указатель</string>
+    <string name="screenrecord_notif_pointer_off">Скрыть указатель</string>
+
+    <!-- Screen record notification error title -->
+    <string name="screenrecord_notif_error">Невозможно записать экран</string>
+
+    <!-- no interuptions except alarms -->
+    <string name="zen_no_interruptions_but_alarm">Нет прерываний. Кроме аварийных сигналов.</string>
+
+    <!-- Pie controls -->
+    <string name="pie_battery_status_charging">Заряжается (<xliff:g id="percent">%d</xliff:g>%%)</string>
+    <string name="pie_battery_status_full">Заряжена</string>
+    <string name="pie_battery_status_discharging"><xliff:g id="percent">%d</xliff:g>%% осталось</string>
+    <string name="pie_phone_status_no_service">Нет сети</string>
+    <string name="pie_phone_status_airplane_mode">Режим полета вкл</string>
+    <string name="pie_phone_status_emergency_only">Только экстренные вызовы</string>
+
+    <!-- Off/On/Toggle -->
+    <string name="off">Выкл</string>
+    <string name="on">Вкл</string>
+    <string name="toggle">Переключатель</string>
+
+    <!-- Dialog Cancel/OK -->
+    <string name="cancel">Отмена</string>
+    <string name="dlg_ok">Ок</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+
+    <!-- Slim Shortcut Actions -->
+    <string name="shortcut_picker">Ярлыки Slim</string>
+    <string name="shortcut_rotation">Автоповорот</string>
+    <string name="shortcut_reboot">Перезагрузка</string>
+    <string name="shortcut_recovery">Режим восстановления</string>
+    <string name="shortcut_toggle_title">Действие для выполнения</string>
+
+    <!-- App sidebar -->
+    <string name="default_folder_text">Папка</string>
+    <string name="title_activity_sidebar_configuration">Настройка содержания бара</string>
+    <string name="action_save">Сохранить</string>
+    <string name="toast_items_saved">Элементы бара приложений были сохранены</string>
+    <string name="content_setup_instructions">Для добавления элемента в бар приложений нажмите и удерживайте любой значек справа и перетащите его на панель.\n\nДля объединения элементов в папки переместите значек справа на любой элемент в баре приложений.\n\nДля удаления элемента просто перетащите его за пределы бара приложений.</string>
+    <string name="content_setup_dismiss">Продолжить</string>
+    <string name="toast_not_installed">Приложение не установлено</string>
+
+    <!-- Kill app toast -->
+    <string name="app_killed_message">Приложение закрыто</string>
+
+    <!-- TRDS -->
+    <string name="quick_settings_trds_label">TRDS</string>
+
+    <string name="gestures_message">Нарисуйте ваш жест здесь</string>
+
+</resources>
