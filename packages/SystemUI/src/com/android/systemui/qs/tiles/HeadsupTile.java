@@ -18,33 +18,16 @@ package com.android.systemui.qs.tiles;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.ContentObserver;
-import android.os.Handler;
 import android.provider.Settings;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AbsListView;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.CheckedTextView;
-import android.widget.ListView;
-import android.widget.Toast;
 
-import com.android.systemui.R;
 import com.android.systemui.qs.QSTile;
+import com.android.systemui.R;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
+/** Quick settings tile: Heads up **/
 public class HeadsupTile extends QSTile<QSTile.BooleanState> {
-    private boolean mListening;
-    private HeadsupObserver mObserver;
 
     public HeadsupTile(Host host) {
         super(host);
-        mObserver = new HeadsupObserver(mHandler);
     }
 
     @Override
@@ -54,94 +37,57 @@ public class HeadsupTile extends QSTile<QSTile.BooleanState> {
 
     @Override
     protected void handleClick() {
-        toggleState();
+        setEnabled();
         refreshState();
-	toast();
-    }
-
-     @Override
-    protected void handleSecondaryClick() {
-        Intent intent = new Intent(Intent.ACTION_MAIN);
-        intent.setClassName("com.android.settings",
-            "com.android.settings.Settings$HeadsUpSettingsActivity");
-        mHost.startSettingsActivity(intent);
     }
 
     @Override
-    public void handleLongClick() {
+    protected void handleLongClick() {
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.setClassName("com.android.settings",
             "com.android.settings.Settings$HeadsUpSettingsActivity");
         mHost.startSettingsActivity(intent);
     }
 
- protected void toggleState() {
-         Settings.System.putInt(mContext.getContentResolver(),
-                        Settings.System.HEADS_UP_NOTIFICATION, !headsupEnabled() ? 1 : 0);
+    private boolean getUserHeadsUpState() {
+         return Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.HEADS_UP_USER_ENABLED,
+                Settings.System.HEADS_UP_USER_ON) != 0;
     }
 
+    private void setEnabled() {
+        Settings.System.putInt(mContext.getContentResolver(),
+                Settings.System.HEADS_UP_USER_ENABLED,
+                getUserHeadsUpState() ? 0 : 1);
+    }
 
     @Override
     protected void handleUpdateState(BooleanState state, Object arg) {
+        state.value = getUserHeadsUpState();
         state.visible = true;
-	if (headsupEnabled()) {
-        state.icon = ResourceIcon.get(R.drawable.ic_qs_heads_up_on);
-        state.label = mContext.getString(R.string.quick_settings_heads_up_on);
-	} else {
-        state.icon = ResourceIcon.get(R.drawable.ic_qs_heads_up_off);
-	state.label = mContext.getString(R.string.quick_settings_heads_up_off);
-	    }
-	}
+        state.label = mContext.getString(R.string.quick_settings_heads_up_label);
+        if (getUserHeadsUpState()) {
+            state.icon = ResourceIcon.get(R.drawable.ic_qs_heads_up_on);
+            state.contentDescription =  mContext.getString(
+                    R.string.accessibility_quick_settings_heads_up_on);
+        } else {
+            state.icon = ResourceIcon.get(R.drawable.ic_qs_heads_up_off);
+            state.contentDescription =  mContext.getString(
+                    R.string.accessibility_quick_settings_heads_up_off);
+        }
+    }
 
-    private boolean headsupEnabled() {
-        return Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.HEADS_UP_NOTIFICATION, 1) == 1;
+    @Override
+    protected String composeChangeAnnouncement() {
+        if (mState.value) {
+            return mContext.getString(R.string.accessibility_quick_settings_heads_up_changed_on);
+        } else {
+            return mContext.getString(R.string.accessibility_quick_settings_heads_up_changed_off);
+        }
     }
 
     @Override
     public void setListening(boolean listening) {
-        if (mListening == listening) return;
-        mListening = listening;
-        if (listening) {
-            mObserver.startObserving();
-        } else {
-            mObserver.endObserving();
-        }
-    }
-
-    protected void toast() {
-  	/* show a toast */
-        String enabled = mContext.getString(R.string.heads_up_enabled);
-        String disabled = mContext.getString(R.string.heads_up_disabled);
-        int duration = Toast.LENGTH_SHORT;
-        if (headsupEnabled()) {
-            Toast toast = Toast.makeText(mContext, enabled, duration);
-            toast.show();
-        } else {
-            Toast toast = Toast.makeText(mContext, disabled, duration);
-            toast.show();
-        	}
-	}
-
-    private class HeadsupObserver extends ContentObserver {
-        public HeadsupObserver(Handler handler) {
-            super(handler);
-        }
-
-        @Override
-        public void onChange(boolean selfChange) {
-            refreshState();
-        }
-
-        public void startObserving() {
-            mContext.getContentResolver().registerContentObserver(
-                    Settings.System.getUriFor(Settings.System.HEADS_UP_NOTIFICATION),
-                    false, this);
-        }
-
-        public void endObserving() {
-            mContext.getContentResolver().unregisterContentObserver(this);
-        }
+        // Do nothing
     }
 }
-
