@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <!-- In WiFi AP notification -->
+    <string name="notify_turn_wifi_ap_off_title">Выключить Wi-Fi AP</string>
+
+    <!-- AOKP custom system animations -->
+    <string name="animation_fade">Затухание</string>
+    <string name="animation_slide_right">Слайд справа</string>
+    <string name="animation_slide_left">Слайд слева</string>
+    <string name="animation_slide_right_no_fade">Слайд справа (Без затухания)</string>
+    <string name="animation_slide_left_no_fade">Слайд слева (Без затухания)</string>
+    <string name="animation_slide_up">Слайд снизу</string>
+    <string name="animation_slide_down">Слайд сверху</string>
+    <string name="animation_default">По умолчанию</string>
+    <string name="animation_translucent">Полупрозрачный переход</string>
+    <string name="animation_grow_shrink">Приближение (Верх)</string>
+    <string name="animation_grow_shrink_center">Приближение (Центр)</string>
+    <string name="animation_grow_shrink_bottom">Приближение (Низ)</string>
+    <string name="animation_grow_shrink_left">Приближение (Лево)</string>
+    <string name="animation_grow_shrink_right">Приближение (Право)</string>
+    <string name="action_null">Пусто</string>
+
+    <string name="default_string">По умолчанию</string>
+
+    <!-- Zen mode buttons -->
+    <string name="silent_mode_priority">Приоритет</string>
+    <string name="silent_mode_none">Нет</string>
+
+    <!-- Error description on theme switch with ligtsensor mode enabled -->
+    <string name="theme_auto_switch_mode_error">Автоматические переключение в зависимости от освещения включено. Ручное переключение невозможно.</string>
+
+</resources>
