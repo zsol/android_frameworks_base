@@ -34,6 +34,16 @@
     <!-- no interuptions except alarms -->
     <string name="zen_no_interruptions_but_alarm">No interruptions. Except alarms.</string>
 
+    <!-- Battery status in pie controls -->
+    <string name="pie_battery_status_charging">Charging (<xliff:g id="percent">%d</xliff:g>%%)</string>
+    <string name="pie_battery_status_full">Charged</string>
+    <string name="pie_battery_status_discharging"><xliff:g id="percent">%d</xliff:g>%% remaining</string>
+
+    <!-- Phone status in pie controls -->
+    <string name="pie_phone_status_no_service">No service</string>
+    <string name="pie_phone_status_airplane_mode">Airplane mode on</string>
+    <string name="pie_phone_status_emergency_only">Emergency calls only</string>
+
     <!-- Off/On/Toggle -->
     <string name="off">Off</string>
     <string name="on">On</string>
