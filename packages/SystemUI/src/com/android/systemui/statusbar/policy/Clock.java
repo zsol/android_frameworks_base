@@ -200,6 +200,14 @@ public class Clock implements DemoMode {
 
         SimpleDateFormat sdf;
         String format = is24 ? d.timeFormat24 : d.timeFormat12;
+
+        // replace seconds directly in format, not in result
+        if (Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.CLOCK_USE_SECOND, 0) == 1) {
+            String temp = format;
+            format = temp.replaceFirst("mm","mm:ss");
+        }
+
         if (!format.equals(mClockFormatString)) {
             /*
              * Search for an unquoted "a" in the format string, so we can
@@ -240,11 +248,6 @@ public class Clock implements DemoMode {
 
         CharSequence dateString = null;
 
-        if (Settings.System.getInt(mContext.getContentResolver(), Settings.System.CLOCK_USE_SECOND, 0) == 1) {
-            String temp = result;
-            result = String.format("%s:%02d", temp, new GregorianCalendar().get(Calendar.SECOND));
-        }
-
         if (mClockDateDisplay != CLOCK_DATE_DISPLAY_GONE) {
             Date now = new Date();
 
@@ -258,7 +261,7 @@ public class Clock implements DemoMode {
                 dateString = DateFormat.format(clockDateFormat, now) + " ";
             }
             if (mClockDateStyle == CLOCK_DATE_STYLE_LOWERCASE) {
-                // When Date style is small, convert date to uppercase
+                // When Date style is small, convert date to lowercase
                 result = dateString.toString().toLowerCase() + result;
             } else if (mClockDateStyle == CLOCK_DATE_STYLE_UPPERCASE) {
                 result = dateString.toString().toUpperCase() + result;
