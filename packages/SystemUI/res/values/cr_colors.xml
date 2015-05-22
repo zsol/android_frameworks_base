@@ -12,16 +12,6 @@
     <color name="gesture_overlay_background_fill_color">#80000000</color>
     <color name="gesture_color">@android:color/holo_blue_light</color>
 
-    <!-- Pie controls -->
-    <color name="pie_overlay_color">#ff000000</color>
-    <color name="pie_snap_color">#ff009688</color>
-    <color name="pie_text_color">#ff009688</color>
-    <color name="pie_foreground_color">#ff009688</color>
-    <color name="pie_background_color">#ff000000</color>
-    <color name="pie_selected_color">#ff5c5c5c</color>
-    <color name="pie_long_pressed_color">#ff8c8c8c</color>
-    <color name="pie_outline_color">#ff5c5c5c</color>
-
     <!-- app sidebar trigger region color -->
     <color name="trigger_region_color">#8015a0e5</color>
     <!-- app sidebar item text color -->

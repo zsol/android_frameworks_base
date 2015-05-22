@@ -61,10 +61,9 @@ public class CommandQueue extends IStatusBar.Stub {
     private static final int MSG_SET_AUTOROTATE_STATUS              = 19 << MSG_SHIFT;
     private static final int MSG_START_CUSTOM_INTENT_AFTER_KEYGUARD = 20 << MSG_SHIFT;
     private static final int MSG_HIDE_HEADS_UP                      = 21 << MSG_SHIFT;
-    private static final int MSG_SET_PIE_TRIGGER_MASK               = 22 << MSG_SHIFT;
-    private static final int MSG_TOGGLE_LAST_APP                    = 23 << MSG_SHIFT;
-    private static final int MSG_TOGGLE_KILL_APP                    = 24 << MSG_SHIFT;
-    private static final int MSG_TOGGLE_SCREENSHOT                  = 25 << MSG_SHIFT;
+    private static final int MSG_TOGGLE_LAST_APP                    = 22 << MSG_SHIFT;
+    private static final int MSG_TOGGLE_KILL_APP                    = 23 << MSG_SHIFT;
+    private static final int MSG_TOGGLE_SCREENSHOT                  = 24 << MSG_SHIFT;
 
     public static final int FLAG_EXCLUDE_NONE = 0;
     public static final int FLAG_EXCLUDE_SEARCH_PANEL = 1 << 0;
@@ -111,7 +110,6 @@ public class CommandQueue extends IStatusBar.Stub {
         public void scheduleHeadsUpClose();
         public void setAutoRotate(boolean enabled);
         public void showCustomIntentAfterKeyguard(Intent intent);
-        public void setPieTriggerMask(int newMask, boolean lock);
         public void toggleLastApp();
         public void toggleKillApp();
         public void toggleScreenshot();
@@ -211,21 +209,21 @@ public class CommandQueue extends IStatusBar.Stub {
     public void toggleRecentApps() {
         synchronized (mList) {
             mHandler.removeMessages(MSG_TOGGLE_RECENT_APPS);
-            mHandler.sendEmptyMessage(MSG_TOGGLE_RECENT_APPS);
+            mHandler.obtainMessage(MSG_TOGGLE_RECENT_APPS, 0, 0, null).sendToTarget();
         }
     }
 
     public void preloadRecentApps() {
         synchronized (mList) {
             mHandler.removeMessages(MSG_PRELOAD_RECENT_APPS);
-            mHandler.sendEmptyMessage(MSG_PRELOAD_RECENT_APPS);
+            mHandler.obtainMessage(MSG_PRELOAD_RECENT_APPS, 0, 0, null).sendToTarget();
         }
     }
 
     public void cancelPreloadRecentApps() {
         synchronized (mList) {
             mHandler.removeMessages(MSG_CANCEL_PRELOAD_RECENT_APPS);
-            mHandler.sendEmptyMessage(MSG_CANCEL_PRELOAD_RECENT_APPS);
+            mHandler.obtainMessage(MSG_CANCEL_PRELOAD_RECENT_APPS, 0, 0, null).sendToTarget();
         }
     }
 
@@ -253,14 +251,6 @@ public class CommandQueue extends IStatusBar.Stub {
         synchronized (mList) {
             mHandler.obtainMessage(MSG_NOTIFICATION_LIGHT_PULSE, onMillis, offMillis, argb)
                     .sendToTarget();
-        }
-    }
-
-    public void setPieTriggerMask(int newMask, boolean lock) {
-        synchronized (mList) {
-            mHandler.removeMessages(MSG_SET_PIE_TRIGGER_MASK);
-            mHandler.obtainMessage(MSG_SET_PIE_TRIGGER_MASK,
-                    newMask, lock ? 1 : 0, null).sendToTarget();
         }
     }
 
@@ -417,9 +407,6 @@ public class CommandQueue extends IStatusBar.Stub {
                     break;
                 case MSG_HIDE_HEADS_UP:
                     mCallbacks.scheduleHeadsUpClose();
-                    break;
-                case MSG_SET_PIE_TRIGGER_MASK:
-                    mCallbacks.setPieTriggerMask(msg.arg1, msg.arg2 != 0);
                     break;
                 case MSG_TOGGLE_LAST_APP:
                     mCallbacks.toggleLastApp();
