@@ -222,9 +222,6 @@ public class PieController implements BaseStatusBar.NavigationBarCallback, PieVi
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.PIE_MENU), false, this,
                     UserHandle.USER_ALL);
-            resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.PIE_IME_CONTROL), false, this,
-                    UserHandle.USER_ALL);
         }
 
         @Override
@@ -418,16 +415,9 @@ public class PieController implements BaseStatusBar.NavigationBarCallback, PieVi
             sensitivity = EdgeServiceConstants.SENSITIVITY_DEFAULT;
         }
 
-        int flags = mPieTriggerSlots & mPieTriggerMask;
-
-        if (Settings.System.getIntForUser(resolver,
-                Settings.System.PIE_IME_CONTROL, 1,
-                UserHandle.USER_CURRENT) == 1) {
-            flags |= EdgeServiceConstants.IME_CONTROL;
-        }
-
         mPieManager.updateEdgeGestureActivationListener(mPieActivationListener,
-                sensitivity<<EdgeServiceConstants.SENSITIVITY_SHIFT | flags);
+                sensitivity<<EdgeServiceConstants.SENSITIVITY_SHIFT
+                | mPieTriggerSlots & mPieTriggerMask);
     }
 
     private void setupNavigationItems() {
