@@ -4474,12 +4474,6 @@ public final class Settings {
         public static final String PIE_IME_CONTROL = "pie_ime_control";
 
         /**
-         * Pie trigger sensitivity
-         * @hide
-         */
-        public static final String PIE_TRIGGER_SENSITIVITY = "pie_trigger_sensitivity";
-
-        /**
          * Whether the notification light will be allowed when in zen mode during downtime
          * @hide
          */
