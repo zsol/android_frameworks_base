@@ -30,7 +30,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.database.ContentObserver;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
@@ -58,7 +57,6 @@ import com.android.systemui.statusbar.policy.KeyButtonView;
 
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 
 public class NavigationBarView extends LinearLayout implements BaseStatusBar.NavigationBarCallback {
     final static boolean DEBUG = false;
@@ -70,7 +68,7 @@ public class NavigationBarView extends LinearLayout implements BaseStatusBar.Nav
     final static String NAVBAR_EDIT_ACTION = "android.intent.action.NAVBAR_EDIT";
 
     private boolean mInEditMode;
-    private NavbarEditor mEditBar;
+    private NavbarEditor mLandscapeNavEditor, mPortraitNavEditor;
     private NavBarReceiver mNavBarReceiver;
     private OnClickListener mRecentsClickListener;
     private OnTouchListener mRecentsPreloadListener;
@@ -600,7 +598,19 @@ public class NavigationBarView extends LinearLayout implements BaseStatusBar.Nav
         } else {
             mVertical = getWidth() > 0 && getHeight() > getWidth();
         }
-        mEditBar = new NavbarEditor(mCurrentView, mVertical, mIsLayoutRtl);
+
+        if (mPortraitNavEditor == null) {
+            mPortraitNavEditor = new NavbarEditor(
+                    mRotatedViews[Configuration.ORIENTATION_PORTRAIT], false);
+        }
+        mPortraitNavEditor.setRtl(mIsLayoutRtl);
+
+        if (mLandscapeNavEditor == null) {
+            mLandscapeNavEditor = new NavbarEditor(
+                    mRotatedViews[Configuration.ORIENTATION_LANDSCAPE], true);
+        }
+        mLandscapeNavEditor.setRtl(mIsLayoutRtl);
+
         updateSettings();
         getImeSwitchButton().setOnClickListener(mImeSwitcherClickListener);
 
@@ -684,6 +694,12 @@ public class NavigationBarView extends LinearLayout implements BaseStatusBar.Nav
                 .getLayoutDirection() == LAYOUT_DIRECTION_RTL;
         if (mIsLayoutRtl != isLayoutRtl) {
             mIsLayoutRtl = isLayoutRtl;
+            if (mPortraitNavEditor != null) {
+                mPortraitNavEditor.setRtl(mIsLayoutRtl);
+            }
+            if (mLandscapeNavEditor != null) {
+                mLandscapeNavEditor.setRtl(mIsLayoutRtl);
+            }
             reorient();
         }
     }
@@ -896,12 +912,15 @@ public class NavigationBarView extends LinearLayout implements BaseStatusBar.Nav
                 mInEditMode = edit;
                 if (edit) {
                     removeButtonListeners();
-                    mEditBar.setEditMode(true);
+                    mPortraitNavEditor.setEditMode(true);
+                    mLandscapeNavEditor.setEditMode(true);
                 } else {
                     if (save) {
-                        mEditBar.saveKeys();
+                        mPortraitNavEditor.saveKeys();
+                        mLandscapeNavEditor.saveKeys();
                     }
-                    mEditBar.setEditMode(false);
+                    mPortraitNavEditor.setEditMode(false);
+                    mLandscapeNavEditor.setEditMode(false);
                     updateSettings();
                 }
             }
@@ -909,7 +928,8 @@ public class NavigationBarView extends LinearLayout implements BaseStatusBar.Nav
     }
 
     public void updateSettings() {
-        mEditBar.updateKeys();
+        mPortraitNavEditor.updateKeys();
+        mLandscapeNavEditor.updateKeys();
         removeButtonListeners();
         updateButtonListeners();
         setDisabledFlags(mDisabledFlags, true /* force */);
