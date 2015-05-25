@@ -1,7 +1,5 @@
 /*
- * Copyright (C) 2014 The Android Open Source Project
- * Copyright (C) 2012-2015 The CyanogenMod Project
- * Copyright 2014-2015 The Euphoria-OS Project
+ * Copyright (C) 2015 The CyanogenMod Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,11 +17,8 @@
 package com.android.systemui.qs.tiles;
 
 import android.content.ContentResolver;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SyncStatusObserver;
-import android.os.Handler;
-import android.view.View;
 
 import com.android.systemui.R;
 import com.android.systemui.qs.QSTile;
@@ -32,20 +27,10 @@ import com.android.systemui.qs.QSTile;
 public class SyncTile extends QSTile<QSTile.BooleanState> {
 
     private Object mSyncObserverHandle = null;
-    private Handler mHandler;
     private boolean mListening;
 
     public SyncTile(Host host) {
         super(host);
-    }
-
-    @Override
-    protected void handleDestroy() {
-        super.handleDestroy();
-        if (mSyncObserverHandle != null) {
-            ContentResolver.removeStatusChangeListener(mSyncObserverHandle);
-            mSyncObserverHandle = null;
-        }
     }
 
     @Override
@@ -55,12 +40,7 @@ public class SyncTile extends QSTile<QSTile.BooleanState> {
 
     @Override
     public void handleClick() {
-        // If ON turn OFF else turn ON
-        if (isSyncEnabled()) {
-            ContentResolver.setMasterSyncAutomatically(false);
-        } else {
-            ContentResolver.setMasterSyncAutomatically(true);
-        }
+        ContentResolver.setMasterSyncAutomatically(!mState.value);
         refreshState();
         qsCollapsePanel();
     }
@@ -74,29 +54,45 @@ public class SyncTile extends QSTile<QSTile.BooleanState> {
 
     @Override
     protected void handleUpdateState(BooleanState state, Object arg) {
+        state.value = ContentResolver.getMasterSyncAutomatically();
         state.visible = true;
-        if (isSyncEnabled()) {
+        state.label = mContext.getString(R.string.quick_settings_sync_label);
+        if (state.value) {
             state.icon = ResourceIcon.get(R.drawable.ic_qs_sync_on);
-            state.label = mContext.getString(R.string.quick_settings_sync);
+            state.contentDescription =  mContext.getString(
+                    R.string.accessibility_quick_settings_sync_on);
         } else {
             state.icon = ResourceIcon.get(R.drawable.ic_qs_sync_off);
-            state.label = mContext.getString(R.string.quick_settings_sync_off);
+            state.contentDescription =  mContext.getString(
+                    R.string.accessibility_quick_settings_sync_off);
         }
     }
 
-    private boolean isSyncEnabled() {
-        return ContentResolver.getMasterSyncAutomatically();
+    @Override
+    protected String composeChangeAnnouncement() {
+        if (mState.value) {
+            return mContext.getString(R.string.accessibility_quick_settings_sync_changed_on);
+        } else {
+            return mContext.getString(R.string.accessibility_quick_settings_sync_changed_off);
+        }
     }
 
     @Override
     public void setListening(boolean listening) {
         if (mListening == listening) return;
         mListening = listening;
+
+        if (listening) {
+            mSyncObserverHandle = ContentResolver.addStatusChangeListener(
+                    ContentResolver.SYNC_OBSERVER_TYPE_SETTINGS, mSyncObserver);
+        } else {
+            ContentResolver.removeStatusChangeListener(mSyncObserverHandle);
+            mSyncObserverHandle = null;
+        }
     }
 
     private SyncStatusObserver mSyncObserver = new SyncStatusObserver() {
         public void onStatusChanged(int which) {
-            // update state/view if something happened
             mHandler.post(new Runnable() {
                 @Override
                 public void run() {
