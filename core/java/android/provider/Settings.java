@@ -4525,12 +4525,6 @@ public final class Settings {
         public static final String NOTIFICATION_DRAWER_CLEAR_ALL_ICON_COLOR = "nd_clear_all_icon_color";
 
         /**
-         * Show four g instead of lte
-         * @hide
-         */
-        public static final String SHOW_FOURG = "show_fourg";
-
-        /**
          * Enable built in CAF task manager
          * @hide
          */
