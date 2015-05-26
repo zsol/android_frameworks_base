@@ -30,15 +30,7 @@ public abstract class NotificationViewWrapper {
     protected final View mView;
 
     public static NotificationViewWrapper wrap(Context ctx, View v) {
-
-        // TODO: Figure out a better way to find out which template the view is.
-        if (v.findViewById(com.android.internal.R.id.media_actions) != null) {
-            return new NotificationMediaViewWrapper(ctx, v);
-        } else if (v.getId() == com.android.internal.R.id.status_bar_latest_event_content) {
-            return new NotificationTemplateViewWrapper(ctx, v);
-        } else {
-            return new NotificationCustomViewWrapper(v);
-        }
+        return new NotificationCustomViewWrapper(v);
     }
 
     protected NotificationViewWrapper(View view) {
