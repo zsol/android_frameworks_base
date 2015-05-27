@@ -137,4 +137,7 @@
     <!-- Slim Pie tile -->
     <string name="quick_settings_slim_pie">Pie</string>
 
+    <!-- Smart PullDown Warning -->
+    <string name="smart_pulldown_disabled">Smart pulldown is disabled</string>
+
 </resources>

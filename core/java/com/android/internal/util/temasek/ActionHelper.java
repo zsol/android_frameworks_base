@@ -272,6 +272,9 @@ public class ActionHelper {
         } else if (clickAction.equals(ActionConstants.ACTION_IME)) {
             resId = systemUiResources.getIdentifier(
                         SYSTEMUI_METADATA_NAME + ":drawable/ic_sysbar_ime_switcher", null, null);
+        } else if (clickAction.equals(ActionConstants.ACTION_SMART_PULLDOWN)) {
+            resId = systemUiResources.getIdentifier(
+                        SYSTEMUI_METADATA_NAME + ":drawable/ic_sysbar_notifications", null, null);
         } else if (clickAction.equals(ActionConstants.ACTION_KILL)) {
             resId = systemUiResources.getIdentifier(
                         SYSTEMUI_METADATA_NAME + ":drawable/ic_sysbar_killtask", null, null);
