@@ -229,7 +229,7 @@ public class DisplayMetrics {
      * Allow custom density setting
      * @hide
      */
-    public void forcePersistedDensity() {
+    public void updateDensity() {
         density = DENSITY_CURRENT / (float) DENSITY_DEFAULT;
         densityDpi = DENSITY_CURRENT;
         scaledDensity = density;
