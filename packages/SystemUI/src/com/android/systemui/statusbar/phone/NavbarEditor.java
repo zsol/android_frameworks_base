@@ -66,7 +66,7 @@ public class NavbarEditor implements View.OnTouchListener {
 
     // holds the button views in the order they currently appear on screen
     private final ArrayList<KeyButtonView> mButtonViews;
-    private boolean mRtl;
+    private final boolean mRtl;
 
     private Context mContext;
     private static Boolean sIsDevicePhone = null;
@@ -153,16 +153,16 @@ public class NavbarEditor implements View.OnTouchListener {
 
     private static final String DEFAULT_SETTING_STRING = "empty|back|home|recent|empty|menu0";
 
-    public NavbarEditor (View parent, boolean vertical) {
+    public NavbarEditor (View parent, boolean orientation, boolean isRtl) {
         mContext = parent.getContext();
         mParent = parent;
-        mVertical = vertical;
-        mRtl = false;
+        mVertical = orientation;
+        mRtl = isRtl;
 
         mButtonViews = new ArrayList<KeyButtonView>();
 
         KeyButtonView dpadLeft = (KeyButtonView) mParent.findViewById(R.id.dpad_left);
-        dpadLeft.setInfo(NAVBAR_DPAD_LEFT, vertical, true);
+        dpadLeft.setInfo(NAVBAR_DPAD_LEFT, orientation, true);
         mButtonViews.add(dpadLeft);
 
         for (int id : BUTTON_IDS) {
@@ -170,12 +170,8 @@ public class NavbarEditor implements View.OnTouchListener {
         }
 
         KeyButtonView dpadRight = (KeyButtonView) mParent.findViewById(R.id.dpad_right);
-        dpadRight.setInfo(NAVBAR_DPAD_RIGHT, vertical, true);
+        dpadRight.setInfo(NAVBAR_DPAD_RIGHT, orientation, true);
         mButtonViews.add(dpadRight);
-    }
-
-    public void setRtl(boolean rtl) {
-        mRtl = rtl;
     }
 
     public void setEditMode(boolean editMode) {
