@@ -377,7 +377,7 @@ class JavaDeathRecipient : public IBinder::DeathRecipient
 public:
     JavaDeathRecipient(JNIEnv* env, jobject object, const sp<DeathRecipientList>& list)
         : mVM(jnienv_to_javavm(env)), mObject(env->NewGlobalRef(object)),
-          mObjectWeak(env->NewWeakGlobalRef(object)), mList(list)
+          mObjectWeak(NULL), mList(list)
     {
         // These objects manage their own lifetimes so are responsible for final bookkeeping.
         // The list holds a strong reference to this object.
@@ -402,8 +402,9 @@ public:
                         "*** Uncaught exception returned from death notification!");
             }
 
-            // Keep only weak ref after binderDied() has been delivered, to allow
-            // the DeathRecipient and BinderProxy to be GC'd if no longer needed.
+            // Demote from strong ref to weak after binderDied() has been delivered,
+            // to allow the DeathRecipient and BinderProxy to be GC'd if no longer needed.
+            mObjectWeak = env->NewWeakGlobalRef(mObject);
             env->DeleteGlobalRef(mObject);
             mObject = NULL;
         }
@@ -424,9 +425,13 @@ public:
         bool result;
         JNIEnv* env = javavm_to_jnienv(mVM);
 
-        jobject me = env->NewLocalRef(mObjectWeak);
-        result = env->IsSameObject(obj, me);
-        env->DeleteLocalRef(me);
+        if (mObject != NULL) {
+            result = env->IsSameObject(obj, mObject);
+        } else {
+            jobject me = env->NewLocalRef(mObjectWeak);
+            result = env->IsSameObject(obj, me);
+            env->DeleteLocalRef(me);
+        }
         return result;
     }
 
@@ -458,14 +463,15 @@ protected:
         JNIEnv* env = javavm_to_jnienv(mVM);
         if (mObject != NULL) {
             env->DeleteGlobalRef(mObject);
+        } else {
+            env->DeleteWeakGlobalRef(mObjectWeak);
         }
-        env->DeleteWeakGlobalRef(mObjectWeak);
     }
 
 private:
     JavaVM* const mVM;
     jobject mObject;
-    jweak mObjectWeak; // weak ref to the same VM-side DeathRecipient
+    jweak mObjectWeak; // will be a weak ref to the same VM-side DeathRecipient after binderDied()
     wp<DeathRecipientList> mList;
 };
 
