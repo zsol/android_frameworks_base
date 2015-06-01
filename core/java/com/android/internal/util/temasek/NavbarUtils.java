@@ -73,7 +73,7 @@ public class NavbarUtils {
         return NavbarConstants.getActionIcon(mContext, ACTION_NULL);
     }
 
-	public static Drawable getLandscapeIconImage(Context context, String uri) {      
+    public static Drawable getLandscapeIconImage(Context context, String uri) {
         Drawable actionIcon;
 
         if (TextUtils.isEmpty(uri)) {
@@ -81,52 +81,55 @@ public class NavbarUtils {
         }
 
         if (uri.startsWith("**")) {
-			switch (uri) {
-				case ACTION_HOME:
-				    return getSystemUIDrawable(context, "com.android.systemui:drawable/ic_sysbar_home_land");
-				case ACTION_RECENTS:
-				    return getSystemUIDrawable(context, "com.android.systemui:drawable/ic_sysbar_recent_land");
-				case ACTION_BACK:
-				    return getSystemUIDrawable(context, "com.android.systemui:drawable/ic_sysbar_back_land");
-				case ACTION_MENU:
-					return getSystemUIDrawable(context, "com.android.systemui:drawable/ic_sysbar_menu_big_land");
-				case ACTION_SEARCH:
-				    return getSystemUIDrawable(context, "com.android.systemui:drawable/ic_sysbar_search_land");
-				case ACTION_KILL:
+            switch (uri) {
+                case ACTION_HOME:
+                    return getSystemUIDrawable(context, "com.android.systemui:drawable/ic_sysbar_home_land");
+                case ACTION_RECENTS:
+                    return getSystemUIDrawable(context, "com.android.systemui:drawable/ic_sysbar_recent_land");
+                case ACTION_BACK:
+                    return getSystemUIDrawable(context, "com.android.systemui:drawable/ic_sysbar_back_land");
+                case ACTION_MENU:
+                    return getSystemUIDrawable(context, "com.android.systemui:drawable/ic_sysbar_menu_big_land");
+                case ACTION_SEARCH:
+                    return getSystemUIDrawable(context, "com.android.systemui:drawable/ic_sysbar_search_land");
+                case ACTION_KILL:
                     return getSystemUIDrawable(context, "com.android.systemui:drawable/ic_sysbar_killtask_land");
-				case ACTION_ASSIST:
-				    return getSystemUIDrawable(context, "com.android.systemui:drawable/ic_sysbar_assist_land");
-				case ACTION_VOICEASSIST:
-					return getSystemUIDrawable(context, "com.android.systemui:drawable/ic_sysbar_voiceassist_land");
-				case ACTION_POWER:
-				    return getSystemUIDrawable(context, "com.android.systemui:drawable/ic_sysbar_power_land");
-        		case ACTION_TORCH:
-				    return getSystemUIDrawable(context, "com.android.systemui:drawable/ic_sysbar_torch_land");
-				case ACTION_LAST_APP:
-				    return getSystemUIDrawable(context, "com.android.systemui:drawable/ic_sysbar_lastapp_land");
-				case ACTION_NOTIFICATIONS:
-				    return getSystemUIDrawable(context, "com.android.systemui:drawable/ic_sysbar_notifications_land");
-				case ACTION_IME:
-				    return getSystemUIDrawable(context, "com.android.systemui:drawable/ic_sysbar_ime_switcher_land");
-				case ACTION_SCREENSHOT:
-				    return getSystemUIDrawable(context, "com.android.systemui:drawable/ic_sysbar_screenshot_land");
-				case ACTION_RING_VIB:
-				case ACTION_RING_SILENT:
-				case ACTION_RING_VIB_SILENT:
-				case ACTION_IME_LAYOUT:
-				case ACTION_ARROW_LEFT:
-				case ACTION_ARROW_RIGHT:
-				case ACTION_ARROW_UP:
-				case ACTION_ARROW_DOWN:
-				case ACTION_LAYOUT_LEFT:
-				case ACTION_LAYOUT_RIGHT:
-				case ACTION_NULL:
-				case ACTION_BLANK:
+                case ACTION_ASSIST:
+                    return getSystemUIDrawable(context, "com.android.systemui:drawable/ic_sysbar_assist_land");
+                case ACTION_VOICEASSIST:
+                    return getSystemUIDrawable(context, "com.android.systemui:drawable/ic_sysbar_voiceassist_land");
+                case ACTION_POWER:
+                    return getSystemUIDrawable(context, "com.android.systemui:drawable/ic_sysbar_power_land");
+                case ACTION_TORCH:
+                    return getSystemUIDrawable(context, "com.android.systemui:drawable/ic_sysbar_torch_land");
+                case ACTION_LAST_APP:
+                    return getSystemUIDrawable(context, "com.android.systemui:drawable/ic_sysbar_lastapp_land");
+                case ACTION_NOTIFICATIONS:
+                    return getSystemUIDrawable(context, "com.android.systemui:drawable/ic_sysbar_notifications_land");
+                case ACTION_IME:
+                    return getSystemUIDrawable(context, "com.android.systemui:drawable/ic_sysbar_ime_switcher_land");
+                case ACTION_SCREENSHOT:
+                    return getSystemUIDrawable(context, "com.android.systemui:drawable/ic_sysbar_screenshot_land");
+                case ACTION_RING_VIB:
+                case ACTION_RING_SILENT:
+                case ACTION_RING_VIB_SILENT:
+                case ACTION_IME_LAYOUT:
+                case ACTION_ARROW_LEFT:
+                case ACTION_ARROW_RIGHT:
+                case ACTION_ARROW_UP:
+                case ACTION_ARROW_DOWN:
+                case ACTION_LAYOUT_LEFT:
+                case ACTION_LAYOUT_RIGHT:
+                case ACTION_NULL:
+                case ACTION_BLANK:
                     return getSystemUIDrawable(context, "com.android.systemui:drawable/ic_sysbar_null");
-			}
-        } else {  // This must be an app 
+            }
+        } else {  // This must be an app
             try {
                 actionIcon = context.getPackageManager().getActivityIcon(Intent.parseUri(uri, 0));
+                if (actionIcon != null) {
+                    return actionIcon;
+                }
             } catch (NameNotFoundException e) {
             } catch (URISyntaxException e) {
             }
@@ -155,7 +158,7 @@ public class NavbarUtils {
                 }
             }
         }
-		return d;
+        return d;
     }
 
     public static String[] getNavBarActions(Context context) {
@@ -163,12 +166,12 @@ public class NavbarUtils {
         // Perfection is achieved, not when there is nothing more to add,
         // but when there is nothing left to take away. --Antoine de Saint-Exupéry, Airman's Odyssey 
         for (String action : NavbarConstants.NavbarActions()) {
-	            if (Arrays.asList(EXCLUDED_FROM_NAVBAR).contains(action)) continue;
+            if (Arrays.asList(EXCLUDED_FROM_NAVBAR).contains(action)) continue;
             mActionsArray.add(action);
         }
         if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH)) {
             mActionsArray.remove(NavbarConstant.ACTION_TORCH);
-		}        
+        }
         String[] mActions = new String[mActionsArray.size()];
         mActions = mActionsArray.toArray(mActions);
         return mActions;

@@ -24,6 +24,7 @@ public class KeyButtonInfo {
     private static final String TAG = "keybuttoninfo";
 
     public String singleAction, doubleTapAction, longPressAction, iconUri;
+    private Boolean applyTint = true;
 
     // reserved for single purpose keys
     public KeyButtonInfo(String singleTap) {
@@ -57,5 +58,13 @@ public class KeyButtonInfo {
                 longPressAction = null;
             }
         }
+    }
+
+    public Boolean getApplyTint() {
+        return applyTint;
+    }
+
+    public void setApplyTint(Boolean applyTint) {
+        this.applyTint = applyTint;
     }
 }

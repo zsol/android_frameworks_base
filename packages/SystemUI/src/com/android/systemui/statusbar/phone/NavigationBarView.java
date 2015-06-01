@@ -892,7 +892,7 @@ public class NavigationBarView extends LinearLayout implements BaseStatusBar.Nav
 
             // single layout: AOSP key spacing on left side
             if (mLegacyMenu && mButtonLayouts == 1) {
-                    if (mImeLayout) {
+                if (mImeLayout) {
                     mInfo = new KeyButtonInfo(ACTION_IME_LAYOUT);
                     mChanger = new LayoutChangerButtonView(mContext, null);
                     mChanger.setButtonActions(mInfo);
@@ -920,6 +920,7 @@ public class NavigationBarView extends LinearLayout implements BaseStatusBar.Nav
                 mButton.setButtonActions(mInfo);
                 mButton.setLongPressTimeout(mLongPressTimeout);
                 mButton.setLayoutParams(getLayoutParams(landscape, mButtonWidth, mTablet ? 1f : 0.5f));
+                //mButton.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
 
                 if (!mButton.mHasBlankSingleAction) {
                     addButton(navButtons, mButton, landscape);
@@ -1270,6 +1271,10 @@ public class NavigationBarView extends LinearLayout implements BaseStatusBar.Nav
     }
 
     private void addButton(ViewGroup root, View v, boolean landscape) {
+        if (v == null) return;
+        if (v instanceof KeyButtonView) {
+            ((KeyButtonView) v).setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        }
         if (landscape && !mTablet)
             root.addView(v, 0);
         else
@@ -1290,7 +1295,7 @@ public class NavigationBarView extends LinearLayout implements BaseStatusBar.Nav
         addMe.setLayoutParams(v.getLayoutParams());
         addMe.setImageResource(empty ? R.drawable.ic_sysbar_lights_out_dot_large
                 : R.drawable.ic_sysbar_lights_out_dot_small);
-        addMe.setScaleType(ImageView.ScaleType.CENTER);
+        addMe.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
         addMe.setVisibility(empty ? View.INVISIBLE : View.VISIBLE);
         if (landscape && !mTablet)
             root.addView(addMe, 0);
