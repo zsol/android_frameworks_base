@@ -4632,6 +4632,13 @@ public final class Settings {
         public static final String RECENT_CARD_TEXT_COLOR = "recent_card_text_color";
 
         /**
+         * Custom Recents Toggle
+         *
+         * @hide
+         */
+        public static final String CUSTOM_RECENT = "custom_recent";
+
+        /**
          * Whether to disable the torch when the screen turns off
          * @hide
          */
