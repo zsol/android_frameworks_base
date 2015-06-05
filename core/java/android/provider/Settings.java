@@ -3782,18 +3782,6 @@ public final class Settings {
          */
         public static final String HEADS_UP_TOUCH_OUTSIDE = "heads_up_touch_outside";
 
-		/**
-         * Heads Up background color
-         * @hide
-         */
-        public static final String HEADS_UP_BG_COLOR = "heads_up_bg_color";
-
-        /**
-         * Heads Up text color
-         * @hide
-         */
-        public static final String HEADS_UP_TEXT_COLOR = "heads_up_text_color";
-
         /**
          * Defines the global heads up notification snooze
          *
