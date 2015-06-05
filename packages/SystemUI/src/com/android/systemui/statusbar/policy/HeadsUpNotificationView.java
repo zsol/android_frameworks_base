@@ -176,6 +176,7 @@ public class HeadsUpNotificationView extends FrameLayout implements SwipeHelper.
             mHeadsUp.row.setHideSensitive(
                     false, false /* animated */, 0 /* delay */, 0 /* duration */);
             mContentHolder.setX(0);
+            mContentHolder.setY(0);
             mContentHolder.setVisibility(View.VISIBLE);
             mContentHolder.setAlpha(mMaxAlpha);
             mContentHolder.addView(mHeadsUp.row);
@@ -510,7 +511,6 @@ public class HeadsUpNotificationView extends FrameLayout implements SwipeHelper.
 
     private class EdgeSwipeHelper implements Gefingerpoken {
         private static final boolean DEBUG_EDGE_SWIPE = false;
-        private static final boolean ENABLE_AOSP_BEHAVIOUR = false;
         private final float mTouchSlop;
         private boolean mConsuming;
         private float mFirstY;
@@ -538,15 +538,15 @@ public class HeadsUpNotificationView extends FrameLayout implements SwipeHelper.
                     if (!mConsuming && daX < daY && daY > mTouchSlop) {
                         snooze();
                         if (dY > 0) {
-                            if (ENABLE_AOSP_BEHAVIOUR) {
-                                if (DEBUG_EDGE_SWIPE) Log.d(TAG, "found an open");
+                            if (DEBUG_EDGE_SWIPE) {
                                 mBar.animateExpandNotificationsPanel();
+                                Log.d(TAG, "found an open");
                             } else {
                                 mConsuming = true;
                             }
                         } else if (dY < 0) {
-                            if (ENABLE_AOSP_BEHAVIOUR) {
-                                if (DEBUG_EDGE_SWIPE) Log.d(TAG, "found a close");
+                            if (DEBUG_EDGE_SWIPE) {
+                                Log.d(TAG, "found a close");
                                 mBar.onHeadsUpDismissed(true);
                             } else {
                                 releaseAndClose();
