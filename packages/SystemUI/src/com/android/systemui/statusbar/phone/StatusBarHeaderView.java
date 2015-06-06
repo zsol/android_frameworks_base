@@ -209,11 +209,11 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
         mDateExpanded = (TextView) findViewById(R.id.date_expanded);
         mSettingsButton = findViewById(R.id.settings_button);
         mSettingsButton.setOnClickListener(this);
-        mTaskManagerButton = findViewById(R.id.task_manager_button);
-        mTaskManagerButton.setOnLongClickListener(this);
         mHeadsUpButton = findViewById(R.id.heads_up_button);
         mHeadsUpButton.setOnClickListener(this);
-        mHeadsUpButton.setOnLongClickListener(mLongClickListener);
+        mHeadsUpButton.setOnLongClickListener(this);
+        mTaskManagerButton = findViewById(R.id.task_manager_button);
+        mTaskManagerButton.setOnLongClickListener(this);
         mQsDetailHeader = findViewById(R.id.qs_detail_header);
         mQsDetailHeader.setAlpha(0);
         mQsDetailHeaderTitle = (TextView) mQsDetailHeader.findViewById(android.R.id.title);
@@ -674,22 +674,13 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
             triggerPowerMenuDialog();
         } else if (mStatusBarPowerMenuStyle == STATUS_BAR_POWER_MENU_INVERTED) {
             goToSleep();
+        } else if (v == mHeadsUpButton) {
+            startHeadsUpLongClickActivity();
         } else if (v == mTaskManagerButton) {
             startTaskManagerLongClickActivity();
         }
         return false;
     }
-
-    private View.OnLongClickListener mLongClickListener =
-            new View.OnLongClickListener() {
-        @Override
-        public boolean onLongClick(View v) {
-            if (v == mHeadsUpButton) {
-                startHeadsUpLongClickActivity();
-            }
-            return true;
-        }
-    };
 
     private void startSettingsActivity() {
         mActivityStarter.startActivity(new Intent(android.provider.Settings.ACTION_SETTINGS),
