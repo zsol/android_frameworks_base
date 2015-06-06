@@ -34,10 +34,12 @@
     <!-- no interuptions except alarms -->
     <string name="zen_no_interruptions_but_alarm">Не беспокоить(кроме важных сигналов)</string>
 
-    <!-- Pie controls -->
+    <!-- Battery status in pie controls -->
     <string name="pie_battery_status_charging">Заряжается (<xliff:g id="percent">%d</xliff:g>%%)</string>
     <string name="pie_battery_status_full">Заряжена</string>
     <string name="pie_battery_status_discharging"><xliff:g id="percent">%d</xliff:g>%% осталось</string>
+    
+    <!-- Phone status in pie controls -->
     <string name="pie_phone_status_no_service">Нет сети</string>
     <string name="pie_phone_status_airplane_mode">Режим полета вкл</string>
     <string name="pie_phone_status_emergency_only">Только экстренные вызовы</string>
@@ -76,5 +78,17 @@
     <string name="quick_settings_trds_label">TRDS</string>
 
     <string name="gestures_message">Нарисуйте ваш жест здесь</string>
+
+    <!-- Heads up -->
+    <string name="heads_up_enabled">\"Всплывающие уведомления\" включены</string>
+    <string name="heads_up_disabled">\"Всплывающие уведомления\" отключены</string>
+    <string name="heads_up_snooze_message">\"Всплывающие уведомления\" отключены на <xliff:g id="number">%d</xliff:g> мин.</string>
+    
+    <!-- Task Manager -->
+    <string name="task_manager_title">Диспетчер задач</string>
+    <string name="message_switch_fail">Нельзя перейти к этой задаче, потому что она не имеет интерфейса.</string>
+    <string name="tasklist_killall">Закрыть все</string>
+    <string name="tasklist_memory_usage">"Свободно/Всего памяти: <xliff:g id="number">%s</xliff:g> / <xliff:g id="name">%s</xliff:g>"</string>
+    <string name="message_keep_one_launcher">Должна быть как минимум одна задача с домашним экраном</string>
 
 </resources>
