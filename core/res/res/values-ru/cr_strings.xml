@@ -30,4 +30,22 @@
     <!-- Error description on theme switch with ligtsensor mode enabled -->
     <string name="theme_auto_switch_mode_error">Автоматические переключение в зависимости от освещения включено. Ручное переключение невозможно.</string>
 
+    <!-- status message in phone options dialog for when pie is on -->
+    <string name="global_actions_pie_mode_on_status">SlimPie включен</string>
+
+    <!-- status message in phone options dialog for when pie is off -->
+    <string name="global_actions_pie_mode_off_status">SlimPie отключен</string>
+
+    <!-- Error message if user want to try to disable all navigation options -->
+    <string name="disable_pie_navigation_error">Нельзя отключить SlimPie, поскольку не включено иной навигации. Сначала включите панель навигации.</string>
+
+    <!-- status message in phone options dialog for when navigation bar is on -->
+    <string name="global_actions_nav_bar_mode_on_status">Панель навигации включена</string>
+
+    <!-- status message in phone options dialog for when navigation bar is off -->
+    <string name="global_actions_nav_bar_mode_off_status">Панель навигации отключена</string>
+
+    <!-- Error message if user want to try to disable all navigation options -->
+    <string name="disable_navigation_pie_error">Нельзя отключить панель навигации, поскольку не включено иной навигации. Сначала включите SlimPie.</string>
+
 </resources>
