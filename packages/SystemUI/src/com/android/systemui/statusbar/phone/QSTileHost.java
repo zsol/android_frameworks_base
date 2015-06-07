@@ -73,7 +73,7 @@ import com.android.systemui.qs.tiles.ScreenshotTile;
 import com.android.systemui.qs.tiles.ScreenrecordTile;
 import com.android.systemui.qs.tiles.ScreenTimeoutTile;
 import com.android.systemui.qs.tiles.NavBarTile;
-import com.android.systemui.qs.tiles.HeadsupTile;
+import com.android.systemui.qs.tiles.HeadsUpTile;
 import com.android.systemui.qs.tiles.SyncTile;
 import com.android.systemui.qs.tiles.UsbTetherTile;
 import com.android.systemui.qs.tiles.WifiTile;
@@ -390,7 +390,7 @@ public class QSTileHost implements QSTile.Host {
             case QSConstants.TILE_MUSIC:
                 return new MusicTile(this);
             case QSConstants.TILE_HEADS_UP:
-                return new HeadsupTile(this);
+                return new HeadsUpTile(this);
             case QSConstants.TILE_TRDS:
                 return new TrdsTile(this);	
             default:

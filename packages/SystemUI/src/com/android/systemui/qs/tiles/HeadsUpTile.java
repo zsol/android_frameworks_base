@@ -24,9 +24,9 @@ import com.android.systemui.qs.QSTile;
 import com.android.systemui.R;
 
 /** Quick settings tile: Heads up **/
-public class HeadsupTile extends QSTile<QSTile.BooleanState> {
+public class HeadsUpTile extends QSTile<QSTile.BooleanState> {
 
-    public HeadsupTile(Host host) {
+    public HeadsUpTile(Host host) {
         super(host);
     }
 
@@ -39,6 +39,7 @@ public class HeadsupTile extends QSTile<QSTile.BooleanState> {
     protected void handleClick() {
         setEnabled();
         refreshState();
+        qsCollapsePanel();
     }
 
     @Override
