@@ -1647,13 +1647,9 @@ public final class PowerManagerService extends SystemService
                         if (mButtonTimeout != 0 && now > mLastUserActivityTime + mButtonTimeout) {
                              mButtonsLight.setBrightness(0);
                         } else {
-                            // The proximity sensor during a call may indicate positive,
-                            // the screen & buttons should stay off until it indicates negative
-                            if (!mProximityPositive) {
-                                mButtonsLight.setBrightness(buttonBrightness);
-                                if (buttonBrightness != 0 && mButtonTimeout != 0) {
-                                    nextTimeout = now + mButtonTimeout;
-                                }
+                            mButtonsLight.setBrightness(buttonBrightness);
+                            if (buttonBrightness != 0 && mButtonTimeout != 0) {
+                                nextTimeout = now + mButtonTimeout;
                             }
                         }
                         mUserActivitySummary = USER_ACTIVITY_SCREEN_BRIGHT;
