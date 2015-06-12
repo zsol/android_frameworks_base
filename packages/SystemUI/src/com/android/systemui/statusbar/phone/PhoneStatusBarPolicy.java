@@ -207,7 +207,7 @@ public class PhoneStatusBarPolicy {
         mSettingsObserver.onChange(true);
         mContext.getContentResolver().registerContentObserver(
                 Settings.System.getUriFor(Settings.System.SHOW_ALARM_ICON),
-                false, mAlarmIconObserver);
+                false, mSettingsObserver);
 
         mContext.getContentResolver().registerContentObserver(
                 Settings.System.getUriFor(Settings.System.SHOW_SU_INDICATOR),
