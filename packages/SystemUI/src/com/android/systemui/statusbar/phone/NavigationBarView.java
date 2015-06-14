@@ -49,6 +49,7 @@ import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.view.GestureDetector;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -920,7 +921,6 @@ public class NavigationBarView extends LinearLayout implements BaseStatusBar.Nav
                 mButton.setButtonActions(mInfo);
                 mButton.setLongPressTimeout(mLongPressTimeout);
                 mButton.setLayoutParams(getLayoutParams(landscape, mButtonWidth, mTablet ? 1f : 0.5f));
-                //mButton.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
 
                 if (!mButton.mHasBlankSingleAction) {
                     addButton(navButtons, mButton, landscape);
@@ -949,8 +949,8 @@ public class NavigationBarView extends LinearLayout implements BaseStatusBar.Nav
                 mChanger.setVisibility(mShowMenu || (mImeLayout && showingIME) ? View.VISIBLE : View.INVISIBLE);
 
                 if (mTablet) {
-                    addSeparator(navButtons, landscape, 0,  stockThreeButtonLayout ? 1f : 0.5f);
-                    addSeparator(lightsOut, landscape, 0,  stockThreeButtonLayout ? 1f : 0.5f);
+                    addSeparator(navButtons, landscape, 0, stockThreeButtonLayout ? 1f : 0.5f);
+                    addSeparator(lightsOut, landscape, 0, stockThreeButtonLayout ? 1f : 0.5f);
                 }
                 addButton(navButtons, mChanger, landscape);
                 addLightsOutButton(lightsOut, mChanger, landscape, true);
