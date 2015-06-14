@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 The Fusion Project
+ * Copyright (C) 2014 VanirAOSP && The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,7 +43,11 @@ public class NavbarUtils {
 
     // These items are excluded from settings and cannot be set as targets
     private static final String[] EXCLUDED_FROM_NAVBAR = {
+            ACTION_RING_SILENT,
+            ACTION_RING_VIB,
+            ACTION_RING_VIB_SILENT,
             ACTION_NULL,
+            ACTION_POWER,
             ACTION_LAYOUT_LEFT,
             ACTION_LAYOUT_RIGHT,
             ACTION_ARROW_LEFT,
@@ -110,6 +114,8 @@ public class NavbarUtils {
                     return getSystemUIDrawable(context, "com.android.systemui:drawable/ic_sysbar_ime_switcher_land");
                 case ACTION_SCREENSHOT:
                     return getSystemUIDrawable(context, "com.android.systemui:drawable/ic_sysbar_screenshot_land");
+                case ACTION_SLEEP:
+                    return getSystemUIDrawable(context, "com.android.systemui:drawable/ic_sysbar_power_land");
                 case ACTION_RING_VIB:
                 case ACTION_RING_SILENT:
                 case ACTION_RING_VIB_SILENT:

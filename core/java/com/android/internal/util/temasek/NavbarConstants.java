@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 The Fusion Project
+ * Copyright (C) 2014 VanirAOSP && The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -60,6 +60,7 @@ public class NavbarConstants {
     public static final String ACTION_IME_LAYOUT = "**ime_layout**";
     public static final String ACTION_POWER = "**power**";
     public static final String ACTION_NULL = "**null**";
+    public static final String ACTION_SLEEP = "**sleep**";
 
     //not presently utilized, but gives the gist of NavbarConstants' methods without scrolling down (YAY)
     public interface AwesomeGuts {
@@ -89,6 +90,7 @@ public class NavbarConstants {
         ACTION_TORCH          ("**torch**",           com.android.internal.R.string.action_torch,         "com.android.systemui:drawable/ic_sysbar_torch"),
         ACTION_ASSIST         ("**assist**",          com.android.internal.R.string.action_assist,        "com.android.systemui:drawable/ic_sysbar_assist"),
         ACTION_SEARCH         ("**search**",          com.android.internal.R.string.action_search,        "com.android.systemui:drawable/ic_sysbar_search"),
+        ACTION_SLEEP          ("**sleep**",           com.android.internal.R.string.action_sleep,         "com.android.systemui:drawable/ic_sysbar_power"),
         ACTION_VOICEASSIST    ("**voiceassist**",     com.android.internal.R.string.action_voiceassist,   "com.android.systemui:drawable/ic_sysbar_voiceassist"),
         ACTION_RING_SILENT    ("**ring_silent**",     com.android.internal.R.string.action_silent,        "com.android.systemui:drawable/ic_sysbar_silent"),
         ACTION_RING_VIB_SILENT("**ring_vib_silent**", com.android.internal.R.string.action_silent_vib,    "com.android.systemui:drawable/ic_sysbar_silent_vib"),
