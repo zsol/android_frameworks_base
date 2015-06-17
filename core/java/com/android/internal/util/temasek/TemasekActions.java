@@ -32,10 +32,8 @@ import android.media.ToneGenerator;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
-import android.os.PowerManager;
 import android.os.RemoteException;
 import android.os.ServiceManager;
-import android.os.SystemClock;
 import android.os.Vibrator;
 import android.provider.AlarmClock;
 import android.provider.CalendarContract;
@@ -60,7 +58,7 @@ import java.util.List;
 
 public class TemasekActions {
 
-    private static final String TAG = "TemasekActions";
+    private static final String TAG = "AxxionActions";
     private static final boolean DEBUG = NavbarUtils.DEBUG;
 
     private static final int LAYOUT_LEFT = -1;
@@ -81,7 +79,7 @@ public class TemasekActions {
     }
 
     public static boolean launchAction(final Context mContext, final String action) {
-        if (DEBUG) Log.e(TAG, "ACTION: " + action);
+        if (DEBUG) Log.e(TAG, "ACTION: " + action);		
 
         switch (action) {
             case ACTION_HOME:
@@ -120,8 +118,7 @@ public class TemasekActions {
                     @Override
                     public void run() {
                         if (TaskUtils.killActiveTask(mContext,mCurrentUserId)) {
-                            Toast.makeText(mContext, R.string.app_killed_message,
-                            Toast.LENGTH_SHORT).show();
+                            Toast.makeText(mContext, R.string.app_killed_message, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -145,8 +142,8 @@ public class TemasekActions {
                 return true;
 
             case ACTION_TORCH:
-                TorchManager torchManager = (TorchManager)
-                        mContext.getSystemService(Context.TORCH_SERVICE);
+                TorchManager torchManager = (TorchManager) 
+			    mContext.getSystemService(Context.TORCH_SERVICE);
                 torchManager.toggleTorch();
                 return true;
 
@@ -157,8 +154,7 @@ public class TemasekActions {
             case ACTION_NOTIFICATIONS:
                 try {
                     IStatusBarService.Stub.asInterface(
-                        ServiceManager.getService(mContext.STATUS_BAR_SERVICE))
-                        .animateNotificationsOrSettingsPanel();
+                        ServiceManager.getService(mContext.STATUS_BAR_SERVICE)).animateNotificationsOrSettingsPanel();
                 } catch (RemoteException e) {
                     Log.e(TAG, "NOTIFICATION ACTION FAILED");
                 }
@@ -167,8 +163,7 @@ public class TemasekActions {
             case ACTION_IME_LAYOUT:
                 try {
                     IStatusBarService.Stub.asInterface(
-                        ServiceManager.getService(mContext.STATUS_BAR_SERVICE))
-                        .notifyLayoutChange(LAYOUT_IME);
+                            ServiceManager.getService(mContext.STATUS_BAR_SERVICE)).notifyLayoutChange(LAYOUT_IME);
                 } catch (RemoteException e) {
                 }
                 return true;
@@ -190,8 +185,7 @@ public class TemasekActions {
                 return true;
 
             case ACTION_RING_VIB:
-                final AudioManager rv = (AudioManager)
-                        mContext.getSystemService(Context.AUDIO_SERVICE);
+                final AudioManager rv = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
                 if (rv != null) {
                     if (rv.getRingerMode() != AudioManager.RINGER_MODE_VIBRATE) {
                         rv.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
@@ -215,8 +209,7 @@ public class TemasekActions {
             case ACTION_LAYOUT_LEFT:
                 try {
                     IStatusBarService.Stub.asInterface(
-                        ServiceManager.getService(mContext.STATUS_BAR_SERVICE))
-                            .notifyLayoutChange(LAYOUT_LEFT);
+                            ServiceManager.getService(mContext.STATUS_BAR_SERVICE)).notifyLayoutChange(LAYOUT_LEFT);
                 } catch (RemoteException e) {
                 }
                 return true;
@@ -224,8 +217,7 @@ public class TemasekActions {
             case ACTION_LAYOUT_RIGHT:
                 try {
                     IStatusBarService.Stub.asInterface(
-                        ServiceManager.getService(mContext.STATUS_BAR_SERVICE))
-                            .notifyLayoutChange(LAYOUT_RIGHT);
+                            ServiceManager.getService(mContext.STATUS_BAR_SERVICE)).notifyLayoutChange(LAYOUT_RIGHT);
                 } catch (RemoteException e) {
                 }
                 return true;
@@ -236,8 +228,7 @@ public class TemasekActions {
                 return true;
 
             case ACTION_RING_SILENT:
-                final AudioManager rs = (AudioManager)
-                        mContext.getSystemService(Context.AUDIO_SERVICE);
+                final AudioManager rs = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
                 if (rs != null) {
                     if (rs.getRingerMode() != AudioManager.RINGER_MODE_SILENT) {
                         rs.setRingerMode(AudioManager.RINGER_MODE_SILENT);
@@ -254,8 +245,7 @@ public class TemasekActions {
                 return true;
 
             case ACTION_RING_VIB_SILENT:
-                final AudioManager rvs = (AudioManager)
-                        mContext.getSystemService(Context.AUDIO_SERVICE);
+                final AudioManager rvs = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
                 if (rvs != null) {
                     if (rvs.getRingerMode() == AudioManager.RINGER_MODE_NORMAL) {
                         rvs.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
@@ -277,20 +267,15 @@ public class TemasekActions {
                     }
                 }
                 return true;
-
+ 
             case ACTION_SCREENSHOT:
                 mContext.sendBroadcast(new Intent(Intent.ACTION_SCREENSHOT));
-                return true;
+				return true;
 
             case ACTION_SCREENRECORD:
                 mContext.sendBroadcast(new Intent(Intent.ACTION_SCREENRECORD));
-                return true;
-
-            case ACTION_SLEEP:
-                final PowerManager pm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
-                pm.goToSleep(SystemClock.uptimeMillis());
-                return true;
-
+				return true;
+				
             case ACTION_NULL:
             case ACTION_BLANK:
                 return true;
