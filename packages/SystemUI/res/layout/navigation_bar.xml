@@ -80,7 +80,6 @@
                 android:scaleType="center"
                 android:contentDescription="@string/accessibility_back"
                 />
-
             <com.android.systemui.statusbar.policy.KeyButtonView android:id="@+id/home"
                 android:layout_width="@dimen/navigation_key_width"
                 android:layout_height="match_parent"
@@ -91,7 +90,6 @@
                 android:scaleType="center"
                 android:contentDescription="@string/accessibility_home"
                 />
-
             <com.android.systemui.statusbar.policy.KeyButtonView android:id="@+id/recent_apps"
                 android:layout_width="@dimen/navigation_key_width"
                 android:layout_height="match_parent"
@@ -100,7 +98,6 @@
                 android:scaleType="center"
                 android:contentDescription="@string/accessibility_recent"
                 />
-
             <FrameLayout
                 android:layout_width="@dimen/navigation_side_padding"
                 android:layout_height="match_parent"
@@ -109,10 +106,10 @@
                     android:id="@+id/menu"
                     android:layout_width="@dimen/navigation_extra_key_width"
                     android:layout_height="match_parent"
-                    android:scaleType="centerInside"
                     android:contentDescription="@string/accessibility_menu"
                     android:src="@drawable/ic_sysbar_menu"
                     android:visibility="invisible"
+                    android:scaleType="centerInside"
                     android:layout_gravity="end"
                     systemui:keyCode="82" />
 
@@ -120,12 +117,11 @@
                     android:id="@+id/ime_switcher"
                     android:layout_width="@dimen/navigation_extra_key_width"
                     android:layout_height="match_parent"
-                    android:scaleType="centerInside"
                     android:contentDescription="@string/accessibility_ime_switch_button"
+                    android:scaleType="centerInside"
                     android:src="@drawable/ic_ime_switcher_default"
                     android:visibility="invisible"
                     android:layout_gravity="end" />
-
             </FrameLayout>
 
         </LinearLayout>
