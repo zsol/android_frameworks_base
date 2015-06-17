@@ -31,7 +31,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.RemoteException;
 import android.os.ServiceManager;
-import android.os.SystemClock;
 import android.os.Vibrator;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
@@ -39,8 +38,6 @@ import android.util.Log;
 import android.util.SparseArray;
 import android.view.InputDevice;
 import android.view.InputEvent;
-import android.view.KeyCharacterMap;
-import android.view.KeyEvent;
 
 import java.util.ArrayList;
 
@@ -178,28 +175,6 @@ public final class InputManager {
 
     private InputManager(IInputManager im) {
         mIm = im;
-    }
-
-    /**
-     * @hide
-     */
-    public static void triggerVirtualKeypress(int keyCode) {
-        triggerVirtualKeypress(keyCode, 0);
-    }
-
-    /**
-     * @hide
-     */
-    public static void triggerVirtualKeypress(int keyCode, int flags) {
-
-        final long now = SystemClock.uptimeMillis();
-        final InputManager im = InputManager.getInstance();
-        final KeyEvent down = new KeyEvent(now, now, KeyEvent.ACTION_DOWN,
-                keyCode, 0, 0, KeyCharacterMap.VIRTUAL_KEYBOARD, 0,
-                flags, InputDevice.SOURCE_KEYBOARD);
-        final KeyEvent up = KeyEvent.changeAction(KeyEvent.changeTimeRepeat(down, now+1, 0), KeyEvent.ACTION_UP);
-        im.injectInputEvent(down, InputManager.INJECT_INPUT_EVENT_MODE_ASYNC);
-        im.injectInputEvent(up, InputManager.INJECT_INPUT_EVENT_MODE_ASYNC);
     }
 
     /**

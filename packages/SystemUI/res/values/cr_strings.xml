@@ -91,7 +91,4 @@
     <string name="tasklist_memory_usage">"Free/Total Memory: <xliff:g id="number">%s</xliff:g> / <xliff:g id="name">%s</xliff:g>"</string>
     <string name="message_keep_one_launcher">Should keep at least one home activity!</string>
 
-    <!-- Navigation bar -->
-    <string name="def_navbar_layout_warning">Empty layout: using default!</string>
-
 </resources>

@@ -68,7 +68,6 @@ import android.provider.Settings;
 import android.service.dreams.DreamManagerInternal;
 import android.telephony.TelephonyManager;
 import android.util.EventLog;
-import android.util.Log;
 import android.util.Slog;
 import android.util.TimeUtils;
 import android.view.Display;
@@ -743,9 +742,6 @@ public final class PowerManagerService extends SystemService
                 (mWakeUpWhenPluggedOrUnpluggedConfig ? 1 : 0));
         mProximityWakeEnabled = Settings.System.getInt(resolver,
                 Settings.System.PROXIMITY_ON_WAKE, 0) == 1;
-
-        final boolean hasForceNavbar = Settings.System.getIntForUser(resolver,
-                Settings.System.NAVBAR_FORCE_ENABLE, 0, UserHandle.USER_CURRENT) == 1;
 
         final int oldScreenBrightnessSetting = mScreenBrightnessSetting;
         mScreenBrightnessSetting = Settings.System.getIntForUser(resolver,

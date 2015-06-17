@@ -746,8 +746,9 @@ public class ViewConfiguration {
      * @return true if a permanent menu key is present, false otherwise.
      */
     public boolean hasPermanentMenuKey() {
+        // Check if navbar is on to set overflow menu button
         boolean mHasNavigationBar = Settings.System.getInt(mContext.getContentResolver(),
-                    Settings.System.NAVBAR_FORCE_ENABLE, 0) == 1;
+                    Settings.System.NAVIGATION_BAR_SHOW, 0) == 1;
         // Check if hw keys are on to set overflow menu button
         boolean mHasHwKeysEnabled = Settings.System.getInt(mContext.getContentResolver(),
                     Settings.System.ENABLE_HW_KEYS, 0) == 1;

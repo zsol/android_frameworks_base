@@ -1165,9 +1165,6 @@ public abstract class BaseStatusBar extends SystemUI implements
     public void onHeadsUpDismissed(boolean direction) {
     }
 
-    public void notifyLayoutChange(int direction) { }
-    public void setHomeActionListener() { }
-
     @Override
     public void showRecentApps(boolean triggeredFromAltTab) {
         int msg = MSG_SHOW_RECENT_APPS;
@@ -1307,26 +1304,6 @@ public abstract class BaseStatusBar extends SystemUI implements
     }
 
     protected abstract View getStatusBarView();
-
-    protected View.OnTouchListener mRecentsPreloadOnTouchListener = new View.OnTouchListener() {
-        // additional optimization when we have software system buttons - start loading the recent
-        // tasks on touch down
-        @Override
-        public boolean onTouch(View v, MotionEvent event) {
-            int action = event.getAction() & MotionEvent.ACTION_MASK;
-            if (action == MotionEvent.ACTION_DOWN) {
-                preloadRecents();
-            } else if (action == MotionEvent.ACTION_CANCEL) {
-                cancelPreloadingRecents();
-            } else if (action == MotionEvent.ACTION_UP) {
-                if (!v.isPressed()) {
-                    cancelPreloadingRecents();
-                }
-
-            }
-            return false;
-        }
-    };
 
     /** Proxy for RecentsComponent */
 
