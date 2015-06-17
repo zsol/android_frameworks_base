@@ -29,7 +29,6 @@ import android.database.ContentObserver;
 import android.graphics.Canvas;
 import android.graphics.CanvasProperty;
 import android.graphics.Paint;
-import android.graphics.PorterDuff;
 import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -409,9 +408,7 @@ public class KeyButtonView extends ImageView {
             int color = Settings.System.getInt(mContext.getContentResolver(),
                     Settings.System.NAVIGATION_BAR_TINT, -1);
             if (color != -1) {
-                setColorFilter(color, PorterDuff.Mode.MULTIPLY);
-            } else {
-                tint = false;
+                setColorFilter(color);
             }
         }
         mShouldTintIcons = tint;
