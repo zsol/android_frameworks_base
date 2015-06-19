@@ -4635,15 +4635,6 @@ public final class Settings {
         public static final String HEADS_UP_SHOW_STATUS_BUTTON = "heads_up_show_status_button";
 
         /**
-         * Status bar power menu
-         * 0 - disabled (default)
-         * 1 - screen off / power menu
-         * 2 - power menu - screen off
-         * @hide
-         */
-        public static final String STATUS_BAR_POWER_MENU = "status_bar_power_menu";
-
-        /**
          * Whether to disable the torch when the screen turns off
          * @hide
          */
