@@ -46,6 +46,7 @@ import android.view.KeyEvent;
 import android.view.WindowManagerGlobal;
 import android.widget.Toast;
 
+import com.android.internal.util.temasek.Helpers;
 import com.android.internal.statusbar.IStatusBarService;
 
 import java.net.URISyntaxException;
@@ -183,6 +184,11 @@ public class Action {
                 } catch (RemoteException e) {
                 }
                 return;
+            } else if (action.equals(ActionConstants.ACTION_RESTARTUI)) {
+                if (isKeyguardShowing && isKeyguardSecure) {
+                    return;
+                }
+                Helpers.restartSystemUI();
             } else if (action.equals(ActionConstants.ACTION_SETTINGS_PANEL)) {
                 if (isKeyguardShowing && isKeyguardSecure) {
                     return;
