@@ -57,6 +57,7 @@ import com.android.systemui.qs.tiles.LiveDisplayTile;
 import com.android.systemui.qs.tiles.LocationTile;
 import com.android.systemui.qs.tiles.AppCircleBarTile;
 import com.android.systemui.qs.tiles.NavBarTile;
+import com.android.systemui.qs.tiles.SystemUIRestartTile;
 import com.android.systemui.qs.tiles.PieTile;
 import com.android.systemui.qs.tiles.LockscreenToggleTile;
 import com.android.systemui.qs.tiles.MusicTile;
@@ -395,6 +396,7 @@ public class QSTileHost implements QSTile.Host, Tunable {
         else if (tileSpec.equals("navbar")) return new NavBarTile(this);
         else if (tileSpec.equals("appcirclebar")) return new AppCircleBarTile(this);
         else if (tileSpec.equals("pie")) return new PieTile(this);
+        else if (tileSpec.equals("restartui")) return new SystemUIRestartTile(this);
         else if (tileSpec.startsWith(IntentTile.PREFIX)) return IntentTile.create(this,tileSpec);
         else throw new IllegalArgumentException("Bad tile spec: " + tileSpec);
     }
@@ -491,6 +493,7 @@ public class QSTileHost implements QSTile.Host, Tunable {
         else if (spec.equals("navbar")) return R.string.quick_settings_navbar_title;
         else if (spec.equals("appcirclebar")) return R.string.quick_settings_appcirclebar_title;
         else if (spec.equals("pie")) return R.string.quick_settings_pie;
+        else if (spec.equals("restartui")) return R.string.quick_settings_systemui_restart_label;
         return 0;
     }
 
@@ -529,6 +532,7 @@ public class QSTileHost implements QSTile.Host, Tunable {
         else if (spec.equals("navbar")) return R.drawable.ic_qs_navbar_on;
         else if (spec.equals("appcirclebar")) return R.drawable.ic_qs_appcirclebar_on;
         else if (spec.equals("pie")) return R.drawable.ic_qs_pie_on;	
+        else if (spec.equals("restartui")) return R.drawable.ic_qs_systemui_restart;
         return 0;
     }
 
