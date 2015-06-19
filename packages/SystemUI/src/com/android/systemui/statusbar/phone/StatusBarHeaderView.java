@@ -464,27 +464,21 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
 
     private void updateSystemIconsLayoutParams() {
         RelativeLayout.LayoutParams lp = (LayoutParams) mSystemIconsSuperContainer.getLayoutParams();
-        int taskManager = mTaskManagerButton != null
+        int baseId = mTaskManagerButton != null
                 ? mTaskManagerButton.getId() : mSettingsButton.getId();
         int headsUp = mHeadsUpButton != null
                 ? mHeadsUpButton.getId()
                 : mMultiUserSwitch.getId();
-        int powerMenu = mStatusBarPowerMenu != null
-                ? mStatusBarPowerMenu.getId() : mTaskManagerButton.getId();
         int rule = mExpanded
-                ? taskManager
+                ? baseId
                 : mMultiUserSwitch.getId();
         int ruleh = mExpanded
                 ? headsUp
-                : mMultiUserSwitch.getId();
-        int rulep = mExpanded
-                ? powerMenu
                 : mMultiUserSwitch.getId();
         if (rule != lp.getRules()[RelativeLayout.START_OF] &&
                 rule != lp.getRules()[RelativeLayout.START_OF]) {
             lp.addRule(RelativeLayout.START_OF, rule);
             lp.addRule(RelativeLayout.START_OF, ruleh);
-            lp.addRule(RelativeLayout.START_OF, rulep);
             mSystemIconsSuperContainer.setLayoutParams(lp);
         }
     }
@@ -834,6 +828,7 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
         target.avatarX = mMultiUserSwitch.getLeft() + mMultiUserAvatar.getLeft();
         target.avatarY = mMultiUserSwitch.getTop() + mMultiUserAvatar.getTop();
         target.weatherY = mClock.getBottom() - mWeatherLine1.getHeight();
+        target.statusBarPowerMenuY = mClock.getTop();
         if (getLayoutDirection() == LAYOUT_DIRECTION_LTR) {
             target.batteryX = mSystemIconsSuperContainer.getLeft()
                     + mSystemIconsContainer.getRight();
