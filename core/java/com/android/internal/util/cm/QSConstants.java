@@ -61,6 +61,7 @@ public class QSConstants {
     public static final String TILE_MUSIC = "music";
     public static final String TILE_HEADS_UP = "heads_up";
     public static final String TILE_TRDS = "trds";
+    public static final String TILE_SYSTEMUI_RESTART = "reboot_systemui";
 
     protected static final ArrayList<String> TILES_AVAILABLE = new ArrayList<String>();
 
@@ -105,5 +106,6 @@ public class QSConstants {
         TILES_AVAILABLE.add(TILE_MUSIC);
         TILES_AVAILABLE.add(TILE_HEADS_UP);
         TILES_AVAILABLE.add(TILE_TRDS);
+        TILES_AVAILABLE.add(TILE_SYSTEMUI_RESTART);
     }
 }
