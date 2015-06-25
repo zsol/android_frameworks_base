@@ -1945,6 +1945,7 @@
          "lockdown" = lock the phone down
          "bugreport" = Take bug report, if available
          "silent" = silent mode
+         "torch" = Toggle torch
          -->
     <string-array translatable="false" name="config_globalActionsList">
         <item>power</item>
