@@ -25,7 +25,7 @@ import android.widget.FrameLayout;
 import com.android.systemui.EventLogTags;
 
 public class PanelHolder extends FrameLayout {
-    public static final boolean DEBUG_GESTURES = false;
+    public static final boolean DEBUG_GESTURES = true;
 
     private int mSelectedPanelIndex = -1;
     private PanelBar mBar;

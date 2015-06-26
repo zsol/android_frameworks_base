@@ -36,7 +36,7 @@ public class KeyguardServiceDelegate {
     private static final String EXTRA_ACTIVE = "active";
 
     private static final String TAG = "KeyguardServiceDelegate";
-    private static final boolean DEBUG = false;
+    private static final boolean DEBUG = true;
 
     protected KeyguardServiceWrapper mKeyguardService;
     private final Context mContext;
