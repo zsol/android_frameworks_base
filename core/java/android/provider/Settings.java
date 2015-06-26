@@ -4412,12 +4412,6 @@ public final class Settings {
         public static final String DOZE_AUTO_BRIGHTNESS = "doze_auto_brightness";
 
         /**
-         * Show when WiFi or data mobile is sending/receiving data
-         * @hide
-         */
-        public static final String STATUS_BAR_SHOW_NETWORK_ACTIVITY = "status_bar_show_network_activity";
-
-        /**
          * Should the storage removed notification be shown
          *
          * @hide
