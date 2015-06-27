@@ -48,6 +48,7 @@ import com.android.systemui.R;
 import com.android.systemui.SwipeHelper;
 import com.android.systemui.statusbar.ExpandableView;
 import com.android.systemui.statusbar.NotificationData;
+import com.android.systemui.statusbar.notification.NotificationHelper;
 import com.android.systemui.statusbar.phone.PhoneStatusBar;
 
 import java.util.ArrayList;
@@ -87,6 +88,9 @@ public class HeadsUpNotificationView extends LinearLayout implements SwipeHelper
     private String mMostRecentPackageName;
 
     private static int sRoundedRectCornerRadius = 0;
+
+    // Notification helper
+    protected NotificationHelper mNotificationHelper;
 
     public HeadsUpNotificationView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
@@ -133,17 +137,22 @@ public class HeadsUpNotificationView extends LinearLayout implements SwipeHelper
         }
     }
 
+    public void setNotificationHelper(NotificationHelper notificationHelper) {
+        mNotificationHelper = notificationHelper;
+    }
+
     public ViewGroup getHolder() {
         return mContentHolder;
     }
 
-    public boolean showNotification(NotificationData.Entry headsUp) {
-        if (mHeadsUp != null && headsUp != null && !mHeadsUp.key.equals(headsUp.key)) {
+    public boolean showNotification(NotificationData.Entry isHeadsUp) {
+        if (mHeadsUp != null && isHeadsUp != null && !mHeadsUp.key.equals(isHeadsUp.key)) {
             // bump any previous heads up back to the shade
             release();
         }
 
-        mHeadsUp = headsUp;
+        mHeadsUp = isHeadsUp; // set new entry
+
         if (mContentHolder != null) {
             mContentHolder.removeAllViews();
         }
@@ -155,6 +164,7 @@ public class HeadsUpNotificationView extends LinearLayout implements SwipeHelper
             mHeadsUp.row.setHeadsUp(true);
             mHeadsUp.row.setHideSensitive(
                     false, false /* animated */, 0 /* delay */, 0 /* duration */);
+            mHeadsUp.expanded.setOnClickListener(mNotificationHelper.getNotificationClickListener(isHeadsUp, true));
             if (mContentHolder == null) {
                 // too soon!
                 return false;
