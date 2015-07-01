@@ -1914,12 +1914,11 @@ public class Resources {
                 mConfiguration.setLayoutDirection(mConfiguration.locale);
             }
             if (mConfiguration.densityDpi != Configuration.DENSITY_DPI_UNDEFINED) {
-                if (DisplayMetrics.DENSITY_DEVICE_DEFAULT == mCompatibilityInfo.applicationDensity
-                        && (config != null
-                        && config.densityDpi == DisplayMetrics.DENSITY_DEVICE_DEFAULT)) {
+                if (DisplayMetrics.DENSITY_DEVICE_DEFAULT
+                        == mCompatibilityInfo.applicationDensity) {
                     mMetrics.setDensity(DisplayMetrics.DENSITY_PREFERRED);
                 } else {
-                    mMetrics.setDensity(mConfiguration.densityDpi);
+                    mMetrics.setDensity(mCompatibilityInfo.applicationDensity);
                 }
             }
             mMetrics.scaledDensity = mMetrics.density * mConfiguration.fontScale;
