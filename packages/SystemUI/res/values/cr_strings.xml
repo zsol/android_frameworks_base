@@ -91,9 +91,6 @@
     <string name="tasklist_memory_usage">"Free/Total Memory: <xliff:g id="number">%s</xliff:g> / <xliff:g id="name">%s</xliff:g>"</string>
     <string name="message_keep_one_launcher">Should keep at least one home activity!</string>
 
-    <!-- Title shown in recents popup for showing app in floating mode -->
-    <string name="status_bar_recent_floating_item_title">Floating mode</string>
-
     <!-- Slim Action floats tile -->
     <string name="quick_settings_slim_floats_on">Slim Floats Enabled</string>
     <string name="quick_settings_slim_floats_off">Slim Floats Disabled</string>
