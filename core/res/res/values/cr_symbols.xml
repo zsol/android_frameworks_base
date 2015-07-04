@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <!-- Custom styles for dialog themes -->
-  <java-symbol type="style" name="Theme.Material.Trds.Dialog" />
-  <java-symbol type="style" name="Theme.Material.Trds.Dialog.Alert" />
 
   <!-- Hardware keys on/off option -->
   <java-symbol type="bool" name="config_hwKeysPref" />
