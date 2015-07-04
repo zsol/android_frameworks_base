@@ -74,9 +74,6 @@
     <!-- Kill app toast -->
     <string name="app_killed_message">Destroyed</string>
 
-    <!-- TRDS -->
-    <string name="quick_settings_trds_label">TRDS</string>
-
     <string name="gestures_message">Draw your gesture here</string>
 
     <!-- Heads up -->
