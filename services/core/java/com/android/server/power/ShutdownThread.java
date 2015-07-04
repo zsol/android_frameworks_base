@@ -387,7 +387,7 @@ public final class ShutdownThread extends Thread {
         if (!checkAnimationFileExist()) {
             // throw up an indeterminate system dialog to indicate radio is
             // shutting down.
-            ProgressDialog pd = new ProgressDialog(context);
+            ProgressDialog pd = new ProgressDialog(context, com.android.internal.R.style.Theme_Material_Trds_Dialog_Alert);
             if (mReboot) {
                 pd.setTitle(context.getText(com.android.internal.R.string.reboot_title));
                 pd.setMessage(context.getText(com.android.internal.R.string.reboot_progress));
