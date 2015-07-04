@@ -3,7 +3,6 @@
   <!-- Custom styles for dialog themes -->
   <java-symbol type="style" name="Theme.Material.Trds.Dialog" />
   <java-symbol type="style" name="Theme.Material.Trds.Dialog.Alert" />
-  <java-symbol type="style" name="Theme.DeviceDefault.Resolver.Dark" />
 
   <!-- Hardware keys on/off option -->
   <java-symbol type="bool" name="config_hwKeysPref" />
