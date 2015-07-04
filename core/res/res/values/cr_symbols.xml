@@ -97,7 +97,10 @@
   <java-symbol type="drawable" name="ic_shortcut_action_ring_vib_silent" />
   <java-symbol type="drawable" name="ic_shortcut_action_screenshot" />
   <java-symbol type="drawable" name="ic_shortcut_action_search" />
- 
+
+  <!-- Ambient Display-->
+  <java-symbol type="bool" name="config_dozeUseAccelerometer" />
+  
   <!-- UI theme mode -->
   <java-symbol type="integer" name="config_uiThemeMode" />
   <java-symbol type="string" name="theme_auto_switch_mode_error" />
