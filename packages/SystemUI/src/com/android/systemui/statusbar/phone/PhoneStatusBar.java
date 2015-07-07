@@ -372,6 +372,8 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
     private long mKeyguardFadingAwayDelay;
     private long mKeyguardFadingAwayDuration;
 
+    private Bitmap mKeyguardWallpaper;
+
     int mKeyguardMaxNotificationCount;
 
     // carrier/wifi label
@@ -990,6 +992,11 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                     Settings.System.getUriFor(Settings.System.HEADS_UP_USER_ENABLED), true,
                     mHeadsUpObserver);
         }
+
+        WallpaperManager wm = (WallpaperManager) mContext.getSystemService(
+                Context.WALLPAPER_SERVICE);
+        mKeyguardWallpaper = wm.getKeyguardBitmap();
+
         mUnlockMethodCache = UnlockMethodCache.getInstance(mContext);
         mUnlockMethodCache.addListener(this);
         startKeyguard();
@@ -2478,13 +2485,10 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                 && (mMediaController != null);
 
         if (backdropBitmap == null && (mMediaMetadata == null || visualizerVisible)) {
-            backdropBitmap = wm.getKeyguardBitmap();
+            backdropBitmap = mKeyguardWallpaper;
         }
 
         if (visualizerVisible) {
-            if (backdropBitmap == null) {
-                backdropBitmap = wm.getBitmap();
-            }
             mBackdrop.setBitmap(backdropBitmap);
         }
 
@@ -3984,6 +3988,9 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                     updateMediaMetaData(true);
                 }
             } else if (Intent.ACTION_KEYGUARD_WALLPAPER_CHANGED.equals(action)) {
+                WallpaperManager wm = (WallpaperManager) mContext.getSystemService(
+                        Context.WALLPAPER_SERVICE);
+                mKeyguardWallpaper = wm.getKeyguardBitmap();
                 updateMediaMetaData(true);
             }
         }
@@ -4064,6 +4071,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         WallpaperManager wm = (WallpaperManager)
                 mContext.getSystemService(Context.WALLPAPER_SERVICE);
         wm.forgetLoadedKeyguardWallpaper();
+        mKeyguardWallpaper = wm.getKeyguardBitmap();
         updateMediaMetaData(true);
 
         if (mNavigationBarView != null) {
