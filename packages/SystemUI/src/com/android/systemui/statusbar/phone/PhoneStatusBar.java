@@ -1099,10 +1099,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             mNavigationBarView.updateResources(getNavbarThemedResources());
         }
 
-        if (mRecreating) {
-            removeSidebarView();
-        }
-
         addSidebarView();
 
         mNavigationBarView.setDisabledFlags(mDisabled);
@@ -4312,6 +4308,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             mContext.recreateTheme();
             recreateStatusBar();
             observer.update();
+            addSidebarView();
 
         } else {
             loadDimens();
