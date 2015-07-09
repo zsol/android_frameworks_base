@@ -60,6 +60,7 @@ import android.view.WindowManagerPolicy;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
+import com.cyanogenmod.keyguard.cmstats.KeyguardStats;
 import cyanogenmod.app.Profile;
 import cyanogenmod.app.ProfileManager;
 
