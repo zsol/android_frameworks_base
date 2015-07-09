@@ -220,6 +220,7 @@ class PackageSettingBase extends GrantedPermissions {
         }
         installStatus = base.installStatus;
         keySetData = base.keySetData;
+        installerPackageName = base.installerPackageName;
     }
 
     private PackageUserState modifyUserState(int userId) {
