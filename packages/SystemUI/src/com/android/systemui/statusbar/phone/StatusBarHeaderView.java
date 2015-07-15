@@ -209,7 +209,9 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
         loadDimens();
         updateVisibilities();
         updateClockScale();
-        updateBackgroundColor();
+        if (mQSCSwitch) {
+            updateBackgroundColor();
+        }
         updateAvatarScale();
         updateHeadsUpButton();
         addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
@@ -396,7 +398,9 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
         updateAvatarScale();
         updateClockLp();
         requestCaptureValues();
-        updateBackgroundColor();
+        if (mQSCSwitch) {
+            updateBackgroundColor();
+        }
     }
 
     private void updateHeights() {
