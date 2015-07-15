@@ -90,7 +90,7 @@ public class CellularTile extends QSTile<QSTile.SignalState> {
     @Override
     protected void handleClick() {
         if (mDataController.isMobileDataSupported()) {
-            showDetail(true);
+            mDataController.setMobileDataEnabled(!mDataController.isMobileDataEnabled());
         } else {
             mHost.startSettingsActivity(DATA_USAGE_SETTINGS);
         }
@@ -98,10 +98,14 @@ public class CellularTile extends QSTile<QSTile.SignalState> {
 
     @Override
     protected void handleSecondaryClick() {
-        if (mTelephonyManager.getDefault().getPhoneCount() > 1) {
-            mHost.startSettingsActivity(MOBILE_NETWORK_SETTINGS_MSIM);
+        if (mDataController.isMobileDataSupported()) {
+            showDetail(true);
         } else {
-            mHost.startSettingsActivity(MOBILE_NETWORK_SETTINGS);
+            if (mTelephonyManager.getDefault().getPhoneCount() > 1) {
+                mHost.startSettingsActivity(MOBILE_NETWORK_SETTINGS_MSIM);
+            } else {
+                mHost.startSettingsActivity(MOBILE_NETWORK_SETTINGS);
+            }
         }
     }
 
