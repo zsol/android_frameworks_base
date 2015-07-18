@@ -416,8 +416,6 @@ setup_failure:
     env->SetLongField(thiz, fields.fidNativeAudioEffect, 0);
 
     if (lpJniStorage) {
-        env->DeleteGlobalRef(lpJniStorage->mCallbackData.audioEffect_class);
-        env->DeleteGlobalRef(lpJniStorage->mCallbackData.audioEffect_ref);
         delete lpJniStorage;
     }
     env->SetLongField(thiz, fields.fidJniData, 0);
@@ -450,9 +448,6 @@ static void android_media_AudioEffect_native_finalize(JNIEnv *env,  jobject thiz
     AudioEffectJniStorage* lpJniStorage = (AudioEffectJniStorage *)env->GetLongField(
         thiz, fields.fidJniData);
     if (lpJniStorage) {
-        // delete global refs created in native_setup
-        env->DeleteGlobalRef(lpJniStorage->mCallbackData.audioEffect_class);
-        env->DeleteGlobalRef(lpJniStorage->mCallbackData.audioEffect_ref);
         ALOGV("deleting pJniStorage: %p\n", lpJniStorage);
         delete lpJniStorage;
     }
