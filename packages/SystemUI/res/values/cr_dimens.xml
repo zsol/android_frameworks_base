@@ -68,4 +68,7 @@
     <dimen name="recent_text_size">20dp</dimen>
     <dimen name="recent_thumbnail_bottom_padding">3dp</dimen>
 
+    <!-- The font size for the temperature text -->
+    <dimen name="status_bar_temp_text_size">13sp</dimen>
+
 </resources>

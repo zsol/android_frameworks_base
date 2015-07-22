@@ -55,4 +55,7 @@
     <color name="recents_empty_dark_color">#ff4d4d4d</color>
     <color name="recents_empty_light_color">#ffb3b3b3</color>
 
+    <!-- The color size for the temperature text -->
+    <color name="status_bar_temp_text_color">#FFFFFFFF</color>
+
 </resources>
