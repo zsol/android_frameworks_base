@@ -215,6 +215,9 @@ public class NavigationBarView extends LinearLayout implements BaseStatusBar.Nav
     private final OnTouchListener mNavButtonsTouchListener = new OnTouchListener() {
         @Override
         public boolean onTouch(View v, MotionEvent event) {
+                if (mDoubleTapToSleep) {
+                     mDoubleTapGesture.onTouchEvent(event);
+                }
                 onNavButtonTouched();
             return true;
         }
