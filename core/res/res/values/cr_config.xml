@@ -19,4 +19,7 @@
     <!-- The duration (in milliseconds) of recent app screen exit animation. -->
     <integer name="config_recentExitDur">450</integer>
 
+    <!-- Whether doze should invert colors for notifications -->
+    <bool name="config_invert_colors_on_doze">false</bool>
+
 </resources>
