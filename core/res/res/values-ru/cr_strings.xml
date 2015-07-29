@@ -23,10 +23,6 @@
 
     <string name="default_string">По умолчанию</string>
 
-    <!-- Zen mode buttons -->
-    <string name="silent_mode_priority">Приоритет</string>
-    <string name="silent_mode_none">Нет</string>
-
     <!-- Error description on theme switch with ligtsensor mode enabled -->
     <string name="theme_auto_switch_mode_error">Автоматические переключение в зависимости от освещения включено. Ручное переключение невозможно.</string>
 
