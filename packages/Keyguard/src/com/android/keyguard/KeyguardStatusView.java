@@ -338,8 +338,10 @@ public class KeyguardStatusView extends GridLayout implements
             }
         }
 
-        mWeatherView.setVisibility(
+        if (mWeatherView != null) {
+            mWeatherView.setVisibility(
                 (mShowWeather && !forceHideByNumberOfNotifications) ? View.VISIBLE : View.GONE);
+        }
         if (forceHide) {
             mWeatherView.setVisibility(View.GONE);
         } else {
