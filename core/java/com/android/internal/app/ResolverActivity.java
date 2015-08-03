@@ -208,7 +208,7 @@ public class ResolverActivity extends Activity implements AdapterView.OnItemClic
             List<ResolveInfo> rList, boolean alwaysUseOption) {
         if (getResources().getConfiguration().uiThemeMode
                     == Configuration.UI_THEME_MODE_HOLO_DARK) {
-              setTheme(R.style.Theme_DeviceDefault_Dialog_Alert);
+              setTheme(R.style.Theme_DeviceDefault_Resolver_Dark);
         } else {
               setTheme(R.style.Theme_DeviceDefault_Resolver);
         }
