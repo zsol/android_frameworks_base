@@ -2738,6 +2738,13 @@ class MountService extends IMountService.Stub
                     if (vol.isPrimary()) {
                         res.add(0, userVol);
                         foundPrimary = true;
+                    } else if (userVol.isEmulated()) {
+                        // In case of emulated non primary storages (valid case for adopted storage)
+                        // we need them to be high on the list, but behind the primary storage
+                        int l = 0;
+                        while ((l < res.size()) && (res.get(l).isPrimary() || res.get(l).isEmulated()))
+                            l++;
+                        res.add(l, userVol);
                     } else {
                         res.add(userVol);
                     }
