@@ -76,6 +76,7 @@ import com.android.systemui.qs.tiles.SyncTile;
 import com.android.systemui.qs.tiles.UsbTetherTile;
 import com.android.systemui.qs.tiles.SlimFloatsTile;
 import com.android.systemui.qs.tiles.WifiTile;
+import com.android.systemui.qs.tiles.TrdsTile;
 import com.android.systemui.settings.CurrentUserTracker;
 import com.android.systemui.statusbar.CustomTileData;
 import com.android.systemui.statusbar.policy.BluetoothController;
@@ -410,6 +411,8 @@ public class QSTileHost implements QSTile.Host {
                 return new MusicTile(this);
             case QSConstants.TILE_HEADS_UP:
                 return new HeadsUpTile(this);
+            case QSConstants.TILE_TRDS:
+                return new TrdsTile(this);	
             case QSConstants.TILE_SYSTEMUI_RESTART:
                 return new SystemUIRestartTile(this);
             case QSConstants.TILE_SLIM_FLOATS:
