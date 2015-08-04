@@ -16,9 +16,11 @@
 -->
 
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
-    android:color="@android:color/white">
+    android:color="@color/fab_color">
+    <item android:id="@android:id/mask">
     <shape
             android:shape="oval">
-        <solid android:color="@color/fab_color"/>
+        <solid android:color="@android:color/white"/>
     </shape>
+    </item>
 </ripple>
