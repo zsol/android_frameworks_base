@@ -90,5 +90,15 @@
     <string name="tasklist_killall">Закрыть все</string>
     <string name="tasklist_memory_usage">"Свободно/Всего памяти: <xliff:g id="number">%s</xliff:g> / <xliff:g id="name">%s</xliff:g>"</string>
     <string name="message_keep_one_launcher">Должна быть как минимум одна задача с домашним экраном</string>
+    
+    <!-- Slim Action floats tile -->
+    <string name="quick_settings_slim_floats_on">Плавающий режим Slim включен</string>
+    <string name="quick_settings_slim_floats_off">Плавающий режим Slim отключен</string>
+    
+    <!-- Battery Saver Dimss -->
+    <string name="battery_saver_dismiss_title">Скрыть</string>
+    
+    <!-- Title shown in recents popup for showing app launch in floating mode -->
+    <string name="recent_float_mode_title">Плавающий режим</string>
 
 </resources>
