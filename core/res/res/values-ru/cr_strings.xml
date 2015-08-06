@@ -43,5 +43,17 @@
 
     <!-- Error message if user want to try to disable all navigation options -->
     <string name="disable_navigation_pie_error">Нельзя отключить панель навигации, поскольку не включено иной навигации. Сначала включите SlimPie.</string>
+    
+    <!-- Floating Window -->
+    <string name="floating_window_snap_top">Привязка сверху</string>
+    <string name="floating_window_snap_bottom">Привязка снизу</string>
+    <string name="floating_window_snap_left">Привязка слева</string>
+    <string name="floating_window_snap_right">Привязка справа</string>
+    <string name="floating_window_minimize">Свернуть</string>
+
+    <!-- Setting confirmation dialog strings. Shown when any UI interaction can be modified by user input -->
+    <string name="setting_confirmation_ask_me_later">Спросить позже</string>
+    <string name="setting_confirmation_yes">Да</string>
+    <string name="setting_confirmation_no">Нет</string>
 
 </resources>
