@@ -388,8 +388,10 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
     private TaskManager mTaskManager;
     private LinearLayout mTaskManagerPanel;
     private ImageButton mTaskManagerButton;
+    // task manager enabled
     private boolean mShowTaskManager;
-    private boolean showTaskList = false;
+    // task manager click state
+    private boolean mShowTaskList = false;
 
     // top bar
     StatusBarHeaderView mHeader;
@@ -615,9 +617,22 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             mBrightnessControl = CMSettings.System.getIntForUser(
                     resolver, CMSettings.System.STATUS_BAR_BRIGHTNESS_CONTROL, 0,
                     UserHandle.USER_CURRENT) == 1;
-            mShowTaskManager = Settings.System.getIntForUser(resolver,
-                    Settings.System.ENABLE_TASK_MANAGER, 0, UserHandle.USER_CURRENT) == 1;
 
+	boolean showTaskManager = Settings.System.getIntForUser(resolver,
+                    Settings.System.ENABLE_TASK_MANAGER, 0, UserHandle.USER_CURRENT) == 1;
+	    if (mShowTaskManager != showTaskManager) {
+                if (!mShowTaskManager) {
+                    // explicitly reset click state when disabled
+                    mShowTaskList = false;
+                }
+                mShowTaskManager = showTaskManager;
+                if (mHeader != null) {
+                    mHeader.setTaskManagerEnabled(showTaskManager);
+                }
+                if (mNotificationPanel != null) {
+                    mNotificationPanel.setTaskManagerEnabled(showTaskManager);
+                }
+            }
             if (mNavigationBarView != null) {
                 boolean navLeftInLandscape = CMSettings.System.getIntForUser(resolver,
                         CMSettings.System.NAVBAR_LEFT_IN_LANDSCAPE, 0, UserHandle.USER_CURRENT) == 1;
@@ -1409,10 +1424,15 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         mTaskManagerButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                showTaskList = !showTaskList;
-                mNotificationPanel.setTaskManagerVisibility(showTaskList);
+                mShowTaskList = !mShowTaskList;
+                mNotificationPanel.setTaskManagerVisibility(mShowTaskList);
             }
         });
+        if (mRecreating) {
+            mHeader.setTaskManagerEnabled(mShowTaskManager);
+            mNotificationPanel.setTaskManagerEnabled(mShowTaskManager);
+            mShowTaskList = false;
+        }
 
         // User info. Trigger first load.
         mHeader.setUserInfoController(mUserInfoController);
