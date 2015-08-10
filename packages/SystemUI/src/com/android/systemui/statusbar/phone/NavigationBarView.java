@@ -185,9 +185,7 @@ public class NavigationBarView extends LinearLayout implements BaseStatusBar.Nav
             } else if (NavbarEditor.NAVBAR_HOME.equals(view.getTag()) && transitionType == LayoutTransition.APPEARING) {
                 mHomeAppearing = false;
             }
-
-            if (NavbarEditor.NAVBAR_HOME.equals(view.getTag()))
-                onNavButtonTouched();
+            onNavButtonTouched();
         }
 
         public void onBackAltCleared() {
@@ -230,17 +228,17 @@ public class NavigationBarView extends LinearLayout implements BaseStatusBar.Nav
             mHandler.removeCallbacks(mNavButtonDimmer);
             mIsHandlerCallbackActive = false;
         }
-
-        final ViewGroup navButtons = getNavButtons();
-        if (navButtons != null) {
+        final boolean keyguardProbablyEnabled =
+                (mDisabledFlags & View.STATUS_BAR_DISABLE_HOME) != 0;
+        if (getNavButtons() != null) {
             // restore alpha to previous state first
             if (mIsDim || mIsAnimating) {
                 mIsAnimating = false;
-                navButtons.clearAnimation();
+                getNavButtons().clearAnimation();
                 mIsDim = false;
-                navButtons.setAlpha(mOriginalAlpha);
+                getNavButtons().setAlpha(mOriginalAlpha);
             }
-            if (mDimNavButtons) {
+            if (mDimNavButtons && !keyguardProbablyEnabled) {
                 mHandler.postDelayed(mNavButtonDimmer, mDimNavButtonsTimeout);
                 mIsHandlerCallbackActive = true;
             }
@@ -392,7 +390,7 @@ public class NavigationBarView extends LinearLayout implements BaseStatusBar.Nav
         return intercept;
     }
 
-    private final H mHandler = new H();
+    private H mHandler = new H();
 
     public View getCurrentView() {
         return mCurrentView;
@@ -568,9 +566,8 @@ public class NavigationBarView extends LinearLayout implements BaseStatusBar.Nav
             setSlippery(disableHome && disableRecent && disableBack && disableSearch);
         }
 
-        final ViewGroup navButtons = getNavButtons();
-        if (navButtons != null) {
-            LayoutTransition lt = navButtons.getLayoutTransition();
+        if (getNavButtons() != null) {
+            LayoutTransition lt = getNavButtons().getLayoutTransition();
             if (lt != null) {
                 if (!lt.getTransitionListeners().contains(mTransitionListener)) {
                     lt.addTransitionListener(mTransitionListener);
@@ -658,9 +655,8 @@ public class NavigationBarView extends LinearLayout implements BaseStatusBar.Nav
         getImeSwitchButton().setOnClickListener(mImeSwitcherClickListener);
 
         if (mDimNavButtons) {
-            final ViewGroup navButtons = getNavButtons();
-            if (navButtons != null)
-                navButtons.setOnTouchListener(mNavButtonsTouchListener);
+            if (getNavButtons() != null)
+                getNavButtons().setOnTouchListener(mNavButtonsTouchListener);
         }
 
         updateRTLOrder();
@@ -692,9 +688,8 @@ public class NavigationBarView extends LinearLayout implements BaseStatusBar.Nav
         getImeSwitchButton().setOnClickListener(mImeSwitcherClickListener);
 
         if (mDimNavButtons) {
-            final ViewGroup navButtons = getNavButtons();
-            if (navButtons != null)
-                navButtons.setOnTouchListener(mNavButtonsTouchListener);
+            if (getNavButtons() != null)
+                getNavButtons().setOnTouchListener(mNavButtonsTouchListener);
         }
 
         mDeadZone = (DeadZone) mCurrentView.findViewById(R.id.deadzone);
@@ -1094,8 +1089,7 @@ public class NavigationBarView extends LinearLayout implements BaseStatusBar.Nav
         @Override
         public void run() {
             mIsHandlerCallbackActive = false;
-            final ViewGroup navButtons = getNavButtons();
-            if (navButtons != null && !mIsDim) {
+            if (getNavButtons() != null && mIsDim == false) {
                 mIsDim = true;
                 if (mDimNavButtonsAnimate) {
                     AlphaAnimation fadeOut =
@@ -1120,9 +1114,9 @@ public class NavigationBarView extends LinearLayout implements BaseStatusBar.Nav
                         }
                     });
                     fadeOut.setFillAfter(true);
-                    navButtons.startAnimation(fadeOut);
+                    getNavButtons().startAnimation(fadeOut);
                 } else {
-                    navButtons.setAlpha(mDimNavButtonsAlpha);
+                    getNavButtons().setAlpha(mDimNavButtonsAlpha);
                 }
             }
         }
