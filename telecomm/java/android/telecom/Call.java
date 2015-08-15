@@ -184,6 +184,7 @@ public final class Call {
          */
         public static final int CAPABILITY_ADD_PARTICIPANT      = 0x00080000;
 
+
         /**
          * Whether the call is a generic conference, where we do not know the precise state of
          * participants in the conference (eg. on CDMA).
@@ -207,7 +208,8 @@ public final class Call {
          * Speed up audio setup for MT call.
          * @hide
          */
-        public static final int CAPABILITY_SPEED_UP_MT_AUDIO = 0x00040000;
+
+        public static final int CAPABILITY_SPEED_UP_MT_AUDIO = 0x00008000;
 
         private final Uri mHandle;
         private final int mHandlePresentation;
@@ -299,6 +301,7 @@ public final class Call {
             if (can(capabilities, ADD_PARTICIPANT)) {
                 builder.append(" ADD_PARTICIPANT");
             }
+
             if (can(capabilities, CAPABILITY_SPEED_UP_MT_AUDIO)) {
                 builder.append(" CAPABILITY_SPEED_UP_IMS_MT_AUDIO");
             }

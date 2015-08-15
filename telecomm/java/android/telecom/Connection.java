@@ -214,7 +214,7 @@ public abstract class Connection implements IConferenceable {
      * Speed up audio setup for MT call.
      * @hide
     */
-    public static final int CAPABILITY_SPEED_UP_MT_AUDIO = 0x00040000;
+    public static final int CAPABILITY_SPEED_UP_MT_AUDIO = 0x00008000;
 
     // Flag controlling whether PII is emitted into the logs
     private static final boolean PII_DEBUG = Log.isLoggable(android.util.Log.DEBUG);
