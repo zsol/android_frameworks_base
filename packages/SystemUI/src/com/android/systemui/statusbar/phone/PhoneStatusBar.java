@@ -586,6 +586,12 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.Secure.UI_THEME_AUTO_MODE), false, this,
                     UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.LOCKSCREEN_ROTATION),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.ACCELEROMETER_ROTATION),
+                    false, this, UserHandle.USER_ALL);
             update();
         }
 
@@ -787,6 +793,8 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             if (mQSPanel != null) {
                 mQSPanel.updateNumColumns();
             }
+
+            mStatusBarWindowManager.updateKeyguardScreenRotation();
 
             boolean showTaskManager = Settings.System.getIntForUser(resolver,
                     Settings.System.ENABLE_TASK_MANAGER, 0, UserHandle.USER_CURRENT) == 1;
@@ -4329,6 +4337,9 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         updateNotifications(true);
         resetUserSetupObserver();
         setControllerUsers();
+
+        SettingsObserver observer = new SettingsObserver(mHandler);
+        observer.update();
 
         WallpaperManager wm = (WallpaperManager)
                 mContext.getSystemService(Context.WALLPAPER_SERVICE);
