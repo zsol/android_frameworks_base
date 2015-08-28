@@ -7356,9 +7356,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
         ActivityInfo ai = null;
         ResolveInfo info = mContext.getPackageManager().resolveActivityAsUser(
                 intent,
-                PackageManager.MATCH_DEFAULT_ONLY
-                        | PackageManager.GET_META_DATA
-                        | PackageManager.GET_RESOLVED_FILTER,
+                PackageManager.MATCH_DEFAULT_ONLY | PackageManager.GET_META_DATA,
                 mCurrentUserId);
         if (info != null) {
             ai = info.activityInfo;
