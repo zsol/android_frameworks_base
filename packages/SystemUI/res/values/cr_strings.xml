@@ -64,6 +64,7 @@
     <string name="shortcut_recovery">Recovery</string>
     <string name="shortcut_screensleep">Sleep Screen</string>
     <string name="shortcut_volume">Volume panel</string>
+    <string name="shortcut_restart_ui">Restart SystemUI</string>
     <string name="chamber_disabled">Chamber of secrets is closed</string>
     <string name="chamber_title">Input Settings string</string>
     <string name="chamber_message">Input a Settings string that is either an on and off (checkbox) function or possibly a list-preference. For example, doze_enabled or similar. Settings can be found in the Settings.java file. WARNING: This process is dangerous!</string>
