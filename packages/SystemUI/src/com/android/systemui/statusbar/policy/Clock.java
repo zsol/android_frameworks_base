@@ -74,10 +74,11 @@ public class Clock implements DemoMode {
     public static final int CLOCK_DATE_STYLE_UPPERCASE = 2;
 
     public static final int FONT_BOLD = 0;
-    public static final int FONT_CONDENSED = 1;
-    public static final int FONT_LIGHT = 2;
-    public static final int FONT_LIGHT_ITALIC = 3;
-    public static final int FONT_NORMAL = 4;
+    public static final int FONT_BOLD_ITALIC = 1;
+    public static final int FONT_CONDENSED = 2;
+    public static final int FONT_LIGHT = 3;
+    public static final int FONT_LIGHT_ITALIC = 4;
+    public static final int FONT_NORMAL = 5;
 
     private static final char MAGIC1 = '\uEF00';
     private static final char MAGIC2 = '\uEF01';
@@ -408,6 +409,9 @@ public class Clock implements DemoMode {
         switch (font) {
             case FONT_BOLD:
                 mClockView.setTypeface(Typeface.create("sans-serif", Typeface.BOLD));
+                break;
+            case FONT_BOLD_ITALIC:
+                mClockView.setTypeface(Typeface.create("sans-serif", Typeface.BOLD_ITALIC));
                 break;
             case FONT_CONDENSED:
                 mClockView.setTypeface(Typeface.create("sans-serif-condensed", Typeface.NORMAL));
