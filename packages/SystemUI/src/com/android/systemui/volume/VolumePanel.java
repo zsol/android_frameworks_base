@@ -810,8 +810,15 @@ public class VolumePanel extends Handler implements DemoMode {
             active.group.setVisibility(View.VISIBLE);
             updateSlider(active, true /*forceReloadIcon*/);
         }
-        updateZenPanelVisible();
-        hideVolumePanel();
+        if (Settings.System.getInt(mContext.getContentResolver(),
+                 Settings.System.VOLUME_PANEL_EXPANDED, 0) == 1) {
+            expandVolumePanel();
+            resetTimeout();
+        } else {
+            updateTimeoutDelay();
+            updateZenPanelVisible();
+            hideVolumePanel();
+        }
     }
 
     private void showVolumePanel() {
