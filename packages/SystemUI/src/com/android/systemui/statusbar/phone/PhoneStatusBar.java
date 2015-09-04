@@ -5368,6 +5368,10 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         return out;
     }
 
+    public VisualizerView getVisualizer() {
+        return mVisualizerView;
+    }
+
     private final class ShadeUpdates {
         private final ArraySet<String> mVisibleNotifications = new ArraySet<String>();
         private final ArraySet<String> mNewVisibleNotifications = new ArraySet<String>();
