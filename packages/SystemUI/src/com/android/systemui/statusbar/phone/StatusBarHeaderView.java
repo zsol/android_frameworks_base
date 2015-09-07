@@ -659,6 +659,7 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
             startForecastActivity();
         } else if (v == mHeadsUpButton) {
             startHeadsUpActivity();
+            updateHeadsUpButton();
         }
         mQSPanel.vibrateTile(20);
     }
