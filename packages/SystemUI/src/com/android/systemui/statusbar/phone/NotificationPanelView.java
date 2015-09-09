@@ -1455,7 +1455,6 @@ public class NotificationPanelView extends PanelView implements
         Resources res = mContext.getResources();
         ImageView image = (ImageView)
                 mHeader.findViewById(R.id.task_manager_button);
-        boolean expandVisually = mQsExpanded || mStackScrollerOverscrolling;
         if (!mTaskManagerShowing) {
             image.setImageDrawable(res.getDrawable(
                 R.drawable.ic_tasklist_switch_normal));
