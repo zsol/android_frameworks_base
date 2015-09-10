@@ -416,14 +416,12 @@ public class Typeface {
             }
             for (FontListParser.Alias alias : fontConfig.aliases) {
                 Typeface base = systemFonts.get(alias.toName);
-                if (base != null) {
-                    Typeface newFace = base;
-                    int weight = alias.weight;
-                    if (weight != 400) {
-                        newFace = new Typeface(nativeCreateWeightAlias(base.native_instance, weight));
-                    }
-                    systemFonts.put(alias.name, newFace);
+                Typeface newFace = base;
+                int weight = alias.weight;
+                if (weight != 400) {
+                    newFace = new Typeface(nativeCreateWeightAlias(base.native_instance, weight));
                 }
+                systemFonts.put(alias.name, newFace);
             }
             sSystemFontMap = systemFonts;
 
@@ -446,7 +444,7 @@ public class Typeface {
      */
     public static void recreateDefaults() {
         sTypefaceCache.clear();
-        if (sSystemFontMap != null) sSystemFontMap.clear();
+        sSystemFontMap.clear();
         init();
 
         DEFAULT_INTERNAL = create((String) null, 0);
