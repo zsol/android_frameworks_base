@@ -140,4 +140,13 @@
     <!-- Smart PullDown Warning -->
     <string name="smart_pulldown_disabled">Smart pulldown is disabled</string>
 
+    <!-- Expanded desktop detail tile -->
+    <string name="quick_settings_expanded_desktop">Expanded</string>
+    <string name="quick_settings_expanded_desktop_off">Normal</string>
+    <string name="quick_settings_expanded_desktop_detail_title">Expanded desktop mode</string>
+    <string name="quick_settings_expanded_hide_status">Hide status bar</string>
+    <string name="quick_settings_expanded_hide_navigation">Hide navigation bar</string>
+    <string name="quick_settings_expanded_hide_both">Hide both</string>
+    <string name="accessibility_quick_settings_expanded_desktop_off">Expanded desktop disabled</string>
+
 </resources>
