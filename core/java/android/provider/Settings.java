@@ -2275,6 +2275,12 @@ public final class Settings {
         public static final String LOCK_SCREEN_MAX_NOTIFICATIONS = "lock_screen_max_notifications";
 
         /**
+         * Whether to show media art on lockscreen
+         * @hide
+         */
+        public static final String LOCKSCREEN_MEDIA_METADATA = "lockscreen_media_metadata";
+
+        /**
          * Whether to allow one finger quick settings expansion on the right side of the statusbar.
          * @deprecated Use {@link android.provider.Settings.System#QS_QUICK_PULLDOWN} instead
          * @hide
