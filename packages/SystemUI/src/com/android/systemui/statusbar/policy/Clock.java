@@ -265,7 +265,7 @@ public class Clock implements DemoMode {
         String timeResult = sdf.format(mCalendar.getTime());
         String dateResult = "";
 
-        int clockDatePosition = Settings.System.getInt(getContext().getContentResolver(),
+        int clockDatePosition = Settings.System.getInt(mContext.getContentResolver(),
             Settings.System.STATUSBAR_CLOCK_DATE_POSITION, 0);
 
         CharSequence dateString = null;
