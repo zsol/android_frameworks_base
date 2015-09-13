@@ -58,9 +58,26 @@
     <!-- Slim Shortcut Actions -->
     <string name="shortcut_picker">Ярлыки Slim</string>
     <string name="shortcut_rotation">Автоповорот</string>
+    <string name="shortcut_torch">Фонарик</string>
+    <string name="shortcut_chamber">Тайная комната</string>
     <string name="shortcut_reboot">Перезагрузка</string>
     <string name="shortcut_recovery">Режим восстановления</string>
-    <string name="shortcut_toggle_title">Действие для выполнения</string>
+    <string name="shortcut_screensleep">Выключить экран</string>
+    <string name="shortcut_volume">Панель громкости</string>
+    <string name="shortcut_restart_ui">Рестарт SystemUI</string>
+    <string name="shortcut_powermenu">Меню кнопки питания</string>
+    <string name="chamber_disabled">Тайная комната закрыта</string>
+    <string name="chamber_title">Введите строку настроек</string>
+    <string name="chamber_message">Введите строку настроек, которая является либо функцией флажка (вкл/выкл), либо настройкой списка. Например, quiet_hours_ringer и тому подобное. Настройки можно найти в файле исходного кода Settings.java. ВНИМАНИЕ: Эта функция опасна!</string>
+    <string name="chamber_invalid">Введено неверное значение. Будьте внимательны.</string>
+    <string name="chamber_invalid_setting">Попробуйте переключить настройку для этого действия вручную, чтобы убедиться, что она существует в списке настроек.</string>
+    <string name="chamber_checkbox">Флажок</string>
+    <string name="chamber_chk_message">Это настройка флажка?</string>
+    <string name="chamber_int">Вводимые значения</string>
+    <string name="chamber_int_message">Введите значения, между которыми вы бы хотели переключаться, через запятую. Цветовые настройки задаются шестнадцатеричными значениями, например, #FF00aacc или базовыми значениями, как red, green, или yellow.</string>
+    <string name="chamber_name_title">Имя ярлыка</string>
+    <string name="chamber_name_message">Установить имя для отображения на ярлыке рядом со значком.</string>
+    <string name="chamber_name_toast">Используется стандартное имя</string>
 
     <!-- App sidebar -->
     <string name="default_folder_text">Папка</string>
