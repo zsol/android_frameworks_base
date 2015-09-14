@@ -661,10 +661,11 @@ public class WallpaperManagerService extends IWallpaperManager.Stub {
                 mKeyguardWallpaperMap.put(userId, keygaurdWallpaper);
                 loadKeyguardSettingsLocked(userId);
             }
-            if (mWallpaperObserver == null) {
-                mWallpaperObserver = new WallpaperObserver(wallpaper, keygaurdWallpaper);
-                mWallpaperObserver.startWatching();
+            if (mWallpaperObserver != null) {
+                mWallpaperObserver.stopWatching();
             }
+            mWallpaperObserver = new WallpaperObserver(wallpaper, keygaurdWallpaper);
+            mWallpaperObserver.startWatching();
             switchWallpaper(wallpaper, reply);
         }
     }
