@@ -59,4 +59,7 @@
     <!-- The color size for the temperature text -->
     <color name="status_bar_temp_text_color">#ffffffff</color>
 
+    <!-- Carrier Label -->
+    <color name="kg_carrier_text">#ffffffff</color>
+
 </resources>

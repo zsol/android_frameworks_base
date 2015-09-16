@@ -4283,11 +4283,20 @@ public final class Settings {
          */
         public static final String STATUS_BAR_CARRIER_COLOR = "status_bar_carrier_color";
 
-         /**
+        /**
          * Settings for carrier label font size
          * @hide
          */
-        public static final String STATUS_BAR_CARRIER_FONT_SIZE = "status_bar_carrier_font_size";        
+        public static final String STATUS_BAR_CARRIER_FONT_SIZE = "status_bar_carrier_font_size";
+
+        /**
+         * show carrier in statusbar while on lockscreen. The value is
+         * 0 = Hide
+         * 1 = Show only on keyguard
+         * 2 = Show only on statusbar
+         * 3 = Show on keyguard and statusbar
+         */
+        public static final String STATUS_BAR_CUSTOM_CARRIER = "status_bar_custom_carrier"; 
 
         /**
          * Width of the gesture anywhere trigger.

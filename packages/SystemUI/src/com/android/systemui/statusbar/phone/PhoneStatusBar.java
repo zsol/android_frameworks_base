@@ -426,9 +426,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
 
     private boolean mShowCarrierInPanel = false;
 
-    // Status bar carrier
-    private boolean mShowStatusBarCarrier;
-
     private boolean mQSCSwitch;
 
     // position
@@ -750,10 +747,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             if (mSearchPanelView != null) {
                 mSearchPanelView.setLeftNavbar(navLeftInLandscape);
             }
-
-            mShowStatusBarCarrier = Settings.System.getIntForUser(resolver,
-                    Settings.System.STATUS_BAR_CARRIER, 0, mCurrentUserId) == 1;
-            showStatusBarCarrierLabel(mShowStatusBarCarrier);
 
             // This method reads Settings.Secure.RECENTS_LONG_PRESS_ACTIVITY
             updateCustomRecentsLongPressHandler(false);
@@ -4307,15 +4300,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             }
         }
     };
-
-    public void showStatusBarCarrierLabel(boolean show) {
-        if (mStatusBarView == null) return;
-        ContentResolver resolver = mContext.getContentResolver();
-        View statusBarCarrierLabel = mStatusBarView.findViewById(R.id.status_bar_carrier_label);
-        if (statusBarCarrierLabel != null) {
-            statusBarCarrierLabel.setVisibility(show ? (mShowStatusBarCarrier ? View.VISIBLE : View.GONE) : View.GONE);
-        }
-    }
 
     private void resetUserExpandedStates() {
         ArrayList<Entry> activeNotifications = mNotificationData.getActiveNotifications();
