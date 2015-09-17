@@ -58,6 +58,7 @@ import com.android.systemui.qs.tiles.LockscreenToggleTile;
 import com.android.systemui.qs.tiles.LteTile;
 import com.android.systemui.qs.tiles.MusicTile;
 import com.android.systemui.qs.tiles.NotificationsTile;
+import com.android.systemui.qs.tiles.PieControlTile;
 import com.android.systemui.qs.tiles.ProfilesTile;
 import com.android.systemui.qs.tiles.PerfProfileTile;
 import com.android.systemui.qs.tiles.PowerMenuTile;
@@ -420,6 +421,8 @@ public class QSTileHost implements QSTile.Host {
                 return new SystemUIRestartTile(this);
             case QSConstants.TILE_SLIM_FLOATS:
                 return new SlimFloatsTile(this);
+            case QSConstants.TILE_SLIM_PIE:
+                return new PieControlTile(this);
             default:
                 throw new IllegalArgumentException("Bad tile spec: " + tileSpec);
         }
