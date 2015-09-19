@@ -509,7 +509,11 @@ public class KeyguardBottomAreaView extends FrameLayout implements View.OnClickL
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
+        mAccessibilityController.removeStateChangedCallback(this);
+        getContext().unregisterReceiver(mDevicePolicyReceiver);
+        KeyguardUpdateMonitor.getInstance(mContext).removeCallback(mUpdateMonitorCallback);
         mTrustDrawable.stop();
+        mShortcutHelper.cleanup();
     }
 
     private void updateLockIcon() {
@@ -716,6 +720,10 @@ public class KeyguardBottomAreaView extends FrameLayout implements View.OnClickL
 
     public boolean isTargetCustom(LockscreenShortcutsHelper.Shortcuts shortcut) {
         return mShortcutHelper.isTargetCustom(shortcut);
+    }
+
+    public void cleanup() {
+        mUnlockMethodCache.removeListener(this);
     }
 
     @Override
