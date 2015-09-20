@@ -80,8 +80,6 @@
                     android:layout_height="fill_parent"
                     android:ellipsize="end"
                     android:textAppearance="@style/TextAppearance.StatusBar.CarrierLabel"
-                    android:textSize="@dimen/status_bar_clock_size"
-                    android:textColor="@color/kg_carrier_text"
                     android:visibility="gone"
                     android:gravity="center"
                     android:singleLine="true"
