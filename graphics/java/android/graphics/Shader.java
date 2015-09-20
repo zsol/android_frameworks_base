@@ -90,7 +90,6 @@ public class Shader {
             super.finalize();
         } finally {
             nativeDestructor(native_instance);
-            native_instance = 0;  // Other finalizers can still call us.
         }
     }
 

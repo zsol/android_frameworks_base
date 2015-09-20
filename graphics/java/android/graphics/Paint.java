@@ -2219,7 +2219,6 @@ public class Paint {
     protected void finalize() throws Throwable {
         try {
             finalizer(mNativePaint);
-            mNativePaint = 0;
         } finally {
             super.finalize();
         }
