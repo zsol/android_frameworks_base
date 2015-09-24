@@ -310,9 +310,6 @@ public class QSPanel extends ViewGroup {
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-        if (mHost != null) {
-            mHost.getKeyguardMonitor().removeCallback(mKeyguardListener);
-        }
         mBrightnessController.unregisterCallbacks();
     }
 
