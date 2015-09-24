@@ -84,11 +84,6 @@ public class ApnTile extends QSTile<QSTile.State> {
     }
 
     @Override
-    public boolean hasSensitiveData() {
-        return true;
-    }
-
-    @Override
     protected State newTileState() {
         return new State();
     }
