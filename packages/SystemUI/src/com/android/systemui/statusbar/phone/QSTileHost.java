@@ -40,6 +40,7 @@ import com.android.systemui.qs.QSTile;
 import com.android.systemui.qs.tiles.AdbOverNetworkTile;
 import com.android.systemui.qs.tiles.AirplaneModeTile;
 import com.android.systemui.qs.tiles.AmbientDisplayTile;
+import com.android.systemui.qs.tiles.BatterySaverTile;
 import com.android.systemui.qs.tiles.BluetoothTile;
 import com.android.systemui.qs.tiles.BrightnessTile;
 import com.android.systemui.qs.tiles.CastTile;
@@ -401,6 +402,7 @@ public class QSTileHost implements QSTile.Host, Tunable {
         else if (tileSpec.equals("pie")) return new PieTile(this);
         else if (tileSpec.equals("restartui")) return new SystemUIRestartTile(this);
         else if (tileSpec.equals("heads_up")) return new HeadsUpTile(this);
+        else if (tileSpec.equals("battery_saver")) return new BatterySaverTile(this);
         else if (tileSpec.startsWith(IntentTile.PREFIX)) return IntentTile.create(this,tileSpec);
         else throw new IllegalArgumentException("Bad tile spec: " + tileSpec);
     }
@@ -500,6 +502,7 @@ public class QSTileHost implements QSTile.Host, Tunable {
         else if (spec.equals("pie")) return R.string.quick_settings_pie;
         else if (spec.equals("restartui")) return R.string.quick_settings_systemui_restart_label;
         else if (spec.equals("heads_up")) return R.string.quick_settings_heads_up_label;
+        else if (spec.equals("battery_saver")) return R.string.quick_settings_battery_saver_label;
         return 0;
     }
 
@@ -541,6 +544,7 @@ public class QSTileHost implements QSTile.Host, Tunable {
         else if (spec.equals("pie")) return R.drawable.ic_qs_pie_on;	
         else if (spec.equals("restartui")) return R.drawable.ic_qs_systemui_restart;
         else if (spec.equals("heads_up")) return R.drawable.ic_qs_heads_up_on;
+        else if (spec.equals("heads_up")) return R.drawable.ic_qs_battery_saver_on;
         return 0;
     }
 
