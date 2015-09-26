@@ -47,8 +47,16 @@
 
     <!-- Error message if user want to try to disable all navigation options -->
     <string name="disable_navigation_pie_error">Нельзя отключить панель навигации, поскольку не включено иной навигации. Сначала включите SlimPie.</string>
+
+    <!-- Some stuff from cm_strings.xml not from cm-part -->
+    <!-- label for item that screenrecord in phone options dialog -->
+    <string name="global_action_screenrecord">Запись экрана</string>
+    <!-- label for item that torch in power menu options dialog -->
+    <string name="global_action_torch">Фонарик</string>
+    <!-- Button to soft reboot the device, within the Reboot Options dialog -->
+    <string name="reboot_systemui">Рестарт SystemUI</string>
+
     
-    <!-- Floating Window -->
     <string name="floating_window_snap_top">Привязка сверху</string>
     <string name="floating_window_snap_bottom">Привязка снизу</string>
     <string name="floating_window_snap_left">Привязка слева</string>
@@ -59,5 +67,8 @@
     <string name="setting_confirmation_ask_me_later">Спросить позже</string>
     <string name="setting_confirmation_yes">Да</string>
     <string name="setting_confirmation_no">Нет</string>
+    
+    <!-- label for item that takes On-The-Go in the phone options dialog -->
+    <string name="global_action_onthego">Режим \"На ходу\"</string>
 
 </resources>
