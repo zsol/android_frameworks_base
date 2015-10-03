@@ -60,7 +60,7 @@ public class QSConstants {
     public static final String TILE_AMBIENT_DISPLAY = "ambient_display";
     public static final String TILE_NAVBAR = "toggleNavBar";
     public static final String TILE_MUSIC = "music";
-    public static final String TILE_HEADS_UP = "heads_up";
+    public static final String TILE_HEADS_UP = "toggleHeadsUp";
     public static final String TILE_TRDS = "trds";
     public static final String TILE_SYSTEMUI_RESTART = "reboot_systemui";
     public static final String TILE_SLIM_FLOATS = "slim_floats";
