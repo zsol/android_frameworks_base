@@ -93,7 +93,6 @@ import android.view.WindowManager;
 import android.view.WindowManagerGlobal;
 import android.view.accessibility.AccessibilityManager;
 import android.view.animation.AnimationUtils;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Chronometer;
 import android.widget.DateTimeView;
 import android.widget.ImageView;
@@ -2803,7 +2802,6 @@ public abstract class BaseStatusBar extends SystemUI implements
                         || mStatusBarKeyguardViewManager.isOccluded())
                 && !mStatusBarKeyguardViewManager.isInputRestricted()
                 && !isExpanded
-                && !isImeShowing();
         try {
             interrupt = interrupt && !mDreamManager.isDreaming();
         } catch (RemoteException e) {
@@ -2852,16 +2850,6 @@ public abstract class BaseStatusBar extends SystemUI implements
                 }
             }
         }
-    }
-
-    /**
-     * @return Whether IME input is showing.
-     */
-    public boolean isImeShowing() {
-        final InputMethodManager inputMethodManager = (InputMethodManager)
-                mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
-
-        return inputMethodManager != null ? inputMethodManager.isImeShowing() : false;
     }
 
     public void setInteracting(int barWindow, boolean interacting) {
