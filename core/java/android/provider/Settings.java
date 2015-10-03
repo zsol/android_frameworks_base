@@ -5019,13 +5019,6 @@ public final class Settings {
         public static final String SLIM_ACTION_FLOATS = "slim_action_floats";
 
         /**
-         * Launch headsup in floating window or not
-         *
-         * @hide
-         */
-        public static final String HEADS_UP_FLOATING = "heads_up_floating";
-
-        /**
          * Launch gesture anywhere in floating window or not
          * @hide
          */
