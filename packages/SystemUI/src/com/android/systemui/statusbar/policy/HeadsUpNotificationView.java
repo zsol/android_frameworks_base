@@ -547,9 +547,7 @@ public class HeadsUpNotificationView extends FrameLayout implements SwipeHelper.
                     final float daX = Math.abs(ev.getX() - mFirstX);
                     final float daY = Math.abs(dY);
                     if (!mConsuming && daX < daY && daY > mTouchSlop) {
-                        if (dY < 0) {
-                            snooze();
-                        }
+                        snooze();
                         if (dY > 0) {
                             if (DEBUG_EDGE_SWIPE) Log.d(TAG, "found an open");
                             mBar.animateExpandNotificationsPanel();
