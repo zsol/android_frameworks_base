@@ -478,10 +478,8 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
         int ruleTaskManager = mExpanded
                 ? taskManager
                 : mMultiUserSwitch.getId();
-        if (ruleHeadsup != lp.getRules()[RelativeLayout.START_OF] &&
-                ruleTaskManager != lp.getRules()[RelativeLayout.START_OF]) {
+        if (ruleTaskManager != lp.getRules()[RelativeLayout.START_OF]) {
             lp.addRule(RelativeLayout.START_OF, ruleTaskManager);
-            lp.addRule(RelativeLayout.START_OF, ruleHeadsup);
         }
         mSystemIconsSuperContainer.setLayoutParams(lp);
     }
@@ -674,8 +672,6 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
             startDateLongClickActivity();
         } else if (v == mWeatherContainer) {
             startForecastLongClickActivity();
-        } else if (v == mHeadsUpButton) {
-            startHeadsUpLongClickActivity();
         } else if (v == mTaskManagerButton) {
             startTaskManagerLongClickActivity();
         }

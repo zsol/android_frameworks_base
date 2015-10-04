@@ -296,13 +296,23 @@ public class HeadsUpNotificationView extends LinearLayout implements SwipeHelper
         mContentHolder = (ViewGroup) findViewById(R.id.content_holder);
         mContentHolder.setOutlineProvider(CONTENT_HOLDER_OUTLINE_PROVIDER);
 
-            mContentHolder = (ViewGroup) findViewById(R.id.content_holder);
-            mContentHolder.setOutlineProvider(CONTENT_HOLDER_OUTLINE_PROVIDER);
-
-            if (mSettingsObserver == null) {
-                mSettingsObserver = new SettingsObserver(new Handler());
+        mSnoozeLengthMs = Settings.Global.getInt(mContext.getContentResolver(),
+                SETTING_HEADS_UP_SNOOZE_LENGTH_MS, mDefaultSnoozeLengthMs);
+        mSettingsObserver = new ContentObserver(getHandler()) {
+            @Override
+            public void onChange(boolean selfChange) {
+                final int packageSnoozeLengthMs = Settings.Global.getInt(
+                        mContext.getContentResolver(), SETTING_HEADS_UP_SNOOZE_LENGTH_MS, -1);
+                if (packageSnoozeLengthMs > -1 && packageSnoozeLengthMs != mSnoozeLengthMs) {
+                    mSnoozeLengthMs = packageSnoozeLengthMs;
+                    if (DEBUG) Log.v(TAG, "mSnoozeLengthMs = " + mSnoozeLengthMs);
+                }
             }
-            if (DEBUG) Log.v(TAG, "mSnoozeLengthMs = " + mSnoozeLengthMs);
+        };
+        mContext.getContentResolver().registerContentObserver(
+                Settings.Global.getUriFor(SETTING_HEADS_UP_SNOOZE_LENGTH_MS), false,
+                mSettingsObserver);
+        if (DEBUG) Log.v(TAG, "mSnoozeLengthMs = " + mSnoozeLengthMs);
 
         mSnoozeButton = (ImageButton) findViewById(R.id.heads_up_snooze_button);
         if (mSnoozeButton != null) {

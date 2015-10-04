@@ -73,7 +73,6 @@ import com.android.systemui.qs.tiles.VolumeTile;
 import com.android.systemui.qs.tiles.ScreenTimeoutTile;
 import com.android.systemui.qs.tiles.SystemUIRestartTile;
 import com.android.systemui.qs.tiles.NavBarTile;
-import com.android.systemui.qs.tiles.HeadsupTile;
 import com.android.systemui.qs.tiles.SyncTile;
 import com.android.systemui.qs.tiles.UsbTetherTile;
 import com.android.systemui.qs.tiles.SlimFloatsTile;
@@ -413,8 +412,6 @@ public class QSTileHost implements QSTile.Host {
                 return new NavBarTile(this);
             case QSConstants.TILE_MUSIC:
                 return new MusicTile(this);
-            case QSConstants.TILE_HEADS_UP:
-                return new HeadsupTile(this);
             case QSConstants.TILE_TRDS:
                 return new TrdsTile(this);	
             case QSConstants.TILE_SYSTEMUI_RESTART:

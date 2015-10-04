@@ -385,6 +385,7 @@ public abstract class BaseStatusBar extends SystemUI implements
         }
 
         private void update() {
+            ContentResolver resolver = mContext.getContentResolver();
             mSearchPanelViewEnabled = Settings.Secure.getInt(
                     resolver, Settings.Secure.SEARCH_PANEL_ENABLED, 1) == 1;
         }
