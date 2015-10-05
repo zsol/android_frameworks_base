@@ -100,7 +100,6 @@ public class BatteryMeterView extends View implements DemoMode,
         boolean plugged;
         int health;
         int status;
-        int chargeRate;
         String technology;
         int voltage;
         int temperature;
@@ -123,8 +122,6 @@ public class BatteryMeterView extends View implements DemoMode,
                         BatteryManager.BATTERY_HEALTH_UNKNOWN);
                 status = intent.getIntExtra(BatteryManager.EXTRA_STATUS,
                         BatteryManager.BATTERY_STATUS_UNKNOWN);
-                chargeRate = intent.getIntExtra(BatteryManager.EXTRA_CHARGE_RATE,
-                        BatteryManager.BATTERY_CHARGE_RATE_UNKNOWN);
                 technology = intent.getStringExtra(BatteryManager.EXTRA_TECHNOLOGY);
                 voltage = intent.getIntExtra(BatteryManager.EXTRA_VOLTAGE, 0);
                 temperature = intent.getIntExtra(BatteryManager.EXTRA_TEMPERATURE, 0);
@@ -463,7 +460,6 @@ public class BatteryMeterView extends View implements DemoMode,
         private final RectF mFrame = new RectF();
         private final RectF mButtonFrame = new RectF();
         private final RectF mBoltFrame = new RectF();
-        private boolean mFastCharging;
 
         public NormalBatteryMeterDrawable(Resources res, boolean horizontal) {
             super();
@@ -514,7 +510,6 @@ public class BatteryMeterView extends View implements DemoMode,
             final int pb = getPaddingBottom() + (mHorizontal ? (int)(mHeight * 0.08f) : 0);
             final int height = mHeight - pt - pb;
             final int width = mWidth - pl - pr;
-            final boolean fastCharging = tracker.chargeRate == BatteryManager.BATTERY_CHARGE_RATE_FAST_CHARGING;
 
             final int buttonHeight = (int) ((mHorizontal ? width : height) * mButtonHeightFraction);
 
@@ -612,33 +607,20 @@ public class BatteryMeterView extends View implements DemoMode,
                 final float br = mFrame.right - mFrame.width() / (mHorizontal ? 6f : 7f);
                 final float bb = mFrame.bottom - mFrame.height() / (mHorizontal ? 7f : 10f);
                 if (mBoltFrame.left != bl || mBoltFrame.top != bt
-                        || mBoltFrame.right != br || mBoltFrame.bottom != bb
-                        || mFastCharging != fastCharging) {
+                        || mBoltFrame.right != br || mBoltFrame.bottom != bb) {
                     mBoltFrame.set(bl, bt, br, bb);
-                    mFastCharging = fastCharging;
                     mBoltPath.reset();
-                    if (fastCharging) {
-                        final float size = Math.min(mFrame.width(), mFrame.height()) * .66f;
-                        final float thick = size * .33f;
-                        final float bx = (mFrame.width() - size) / 2;
-                        final float by = (mFrame.height() - size) / 3;
-                        final float x = bx + size/2 - thick/2;
-                        final float y = by*2 + size/2 - thick/2;
-                        mBoltPath.addRect(bx, y, bx + size, y + thick, Path.Direction.CW);
-                        mBoltPath.addRect(x, by*2, x + thick, by*2 + size, Path.Direction.CW);
-                    } else {
-                        mBoltPath.moveTo(
-                                mBoltFrame.left + mBoltPoints[0] * mBoltFrame.width(),
-                                mBoltFrame.top + mBoltPoints[1] * mBoltFrame.height());
-                        for (int i = 2; i < mBoltPoints.length; i += 2) {
-                            mBoltPath.lineTo(
-                                    mBoltFrame.left + mBoltPoints[i] * mBoltFrame.width(),
-                                    mBoltFrame.top + mBoltPoints[i + 1] * mBoltFrame.height());
-                        }
+                    mBoltPath.moveTo(
+                            mBoltFrame.left + mBoltPoints[0] * mBoltFrame.width(),
+                            mBoltFrame.top + mBoltPoints[1] * mBoltFrame.height());
+                    for (int i = 2; i < mBoltPoints.length; i += 2) {
                         mBoltPath.lineTo(
-                                mBoltFrame.left + mBoltPoints[0] * mBoltFrame.width(),
-                                mBoltFrame.top + mBoltPoints[1] * mBoltFrame.height());
+                                mBoltFrame.left + mBoltPoints[i] * mBoltFrame.width(),
+                                mBoltFrame.top + mBoltPoints[i + 1] * mBoltFrame.height());
                     }
+                    mBoltPath.lineTo(
+                            mBoltFrame.left + mBoltPoints[0] * mBoltFrame.width(),
+                            mBoltFrame.top + mBoltPoints[1] * mBoltFrame.height());
                 }
 
                 float boltPct = mHorizontal ?
@@ -768,7 +750,6 @@ public class BatteryMeterView extends View implements DemoMode,
         private float   mTextX, mTextY; // precalculated position for drawText() to appear centered
 
         private Paint   mTextPaint;
-        private Paint   mFastChargingPaint;
         private Paint   mFrontPaint;
         private Paint   mBackPaint;
         private Paint   mBoltPaint;
@@ -788,11 +769,6 @@ public class BatteryMeterView extends View implements DemoMode,
             Typeface font = Typeface.create("sans-serif-condensed", Typeface.BOLD);
             mTextPaint.setTypeface(font);
             mTextPaint.setTextAlign(Paint.Align.CENTER);
-
-            mFastChargingPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-            font = Typeface.create("sans-serif", Typeface.BOLD);
-            mFastChargingPaint.setTypeface(font);
-            mFastChargingPaint.setTextAlign(Paint.Align.CENTER);
 
             mFrontPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
             mFrontPaint.setStrokeCap(Paint.Cap.BUTT);
@@ -868,7 +844,6 @@ public class BatteryMeterView extends View implements DemoMode,
         private void drawCircle(Canvas canvas, BatteryTracker tracker,
                 float textX, RectF drawRect) {
             boolean unknownStatus = tracker.status == BatteryManager.BATTERY_STATUS_UNKNOWN;
-            boolean fastCharging = tracker.chargeRate == BatteryManager.BATTERY_CHARGE_RATE_FAST_CHARGING;
             int level = tracker.level;
             Paint paint;
 
@@ -900,9 +875,7 @@ public class BatteryMeterView extends View implements DemoMode,
             if (unknownStatus) {
                 mTextPaint.setColor(paint.getColor());
                 canvas.drawText("?", textX, mTextY, mTextPaint);
-            } else if (fastCharging) {
-                mFastChargingPaint.setColor(getColorForLevel(level));
-                canvas.drawText("+", textX, mTextY, mFastChargingPaint);
+
             } else if (tracker.plugged) {
                 canvas.drawPath(mBoltPath, mBoltPaint);
             } else {
@@ -956,7 +929,6 @@ public class BatteryMeterView extends View implements DemoMode,
         private void initSizeBasedStuff() {
             mCircleSize = Math.min(getMeasuredWidth(), getMeasuredHeight());
             mTextPaint.setTextSize(mCircleSize / 2f);
-            mFastChargingPaint.setTextSize(mCircleSize / 1.5f);
             mWarningTextPaint.setTextSize(mCircleSize / 2f);
 
             float strokeWidth = mCircleSize / STROKE_WITH;
