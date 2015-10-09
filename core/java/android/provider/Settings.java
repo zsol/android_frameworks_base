@@ -6112,6 +6112,15 @@ public final class Settings {
         public static final String INSTALL_NON_MARKET_APPS = "install_non_market_apps";
 
         /**
+         * Whether applications can fake a signature.
+         *
+         * <p>1 = permit apps to fake signature
+         * <p>0 = disable this feature
+         * @hide
+         */
+        public static final String ALLOW_SIGNATURE_FAKE = "allow_signature_fake";
+
+        /**
          * Launch actions for left/right lockscreen targets
          * @hide
          */
