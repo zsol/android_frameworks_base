@@ -1282,7 +1282,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                 UserHandle.USER_CURRENT);
         setHeadsUpSnoozeTime(snoozeTime);
         mHeadsUpNotificationView.setSnoozeVisibility(snoozeTime != 0);
-        mHeadsUpNotificationView.setNotificationHelper(mNotificationHelper);
 
         if (MULTIUSER_DEBUG) {
             mNotificationPanelDebugText = (TextView) mNotificationPanel.findViewById(
