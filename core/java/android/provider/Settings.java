@@ -7623,8 +7623,6 @@ public final class Settings {
                 "navigation_ring_targets_0",
                 "navigation_ring_targets_1",
                 "navigation_ring_targets_2",
-                "navigation_ring_targets_3",
-                "navigation_ring_targets_4",
         };
 
         /**
