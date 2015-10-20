@@ -2351,6 +2351,12 @@ public final class Settings {
         public static final String HEADS_UP_TOUCH_OUTSIDE = "heads_up_touch_outside";
 
         /**
+         * Hide notification instead of remove when swiping headsup
+         * @hide
+         */
+        public static final String HEADS_UP_DISMISS_ON_REMOVE = "heads_up_dismiss_on_remove";
+
+        /**
          * Whether to enable ticker animation
          *
          * @hide
@@ -3959,12 +3965,6 @@ public final class Settings {
          * @hide
          */
         public static final String VOICE_WAKEUP = "voice_wakeup";
-
-        /**
-         * Hide notification instead of remove when swiping headsup
-         * @hide
-         */
-        public static final String HEADS_UP_DISMISS_ON_REMOVE = "heads_up_dismiss_on_remove";
 
         /**
          * An intent (a flattened Uri String) to launch when user voice launch
