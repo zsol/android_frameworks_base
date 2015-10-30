@@ -4296,13 +4296,6 @@ public final class Settings {
         public static final String SYSTEMUI_RECENTS_MEM_DISPLAY = "systemui_recents_mem_display";
 
         /**
-         * LockedAppList
-         *
-         * @hide
-         */
-        public static final String Locked_APP_LIST = "locked_app_list";
-
-        /**
          * Whether to use gesture anywhere feature.
          * @hide
          */
