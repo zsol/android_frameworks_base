@@ -572,11 +572,25 @@ final class DefaultPermissionGrantPolicy {
                 grantRuntimePermissionsLPw(musicPackage, STORAGE_PERMISSIONS, userId);
             }
 
-            // DU ALLOWED PERMISSIONS
-            PackageParser.Package chromiumPackage = getDefaultProviderAuthorityPackageLPr(
+            // Chromium Regular
+            PackageParser.Package chromiumRPackage = getDefaultProviderAuthorityPackageLPr(
                     "org.chromium.chrome", userId);
-            if (chromiumPackage != null) {
-                grantRuntimePermissionsLPw(chromiumPackage, CONTACTS_PERMISSIONS, userId);
+            if (chromiumRPackage != null) {
+                grantRuntimePermissionsLPw(chromiumRPackage, CONTACTS_PERMISSIONS, userId);
+            }
+
+            // Chromium Other
+            PackageParser.Package chromiumOPackage = getDefaultProviderAuthorityPackageLPr(
+                    "org.swe.atego.browser", userId);
+            if (chromiumOPackage != null) {
+                grantRuntimePermissionsLPw(chromiumOPackage, CONTACTS_PERMISSIONS, userId);
+            }
+
+            // SaberChrome
+            PackageParser.Package saberChrome = getDefaultProviderAuthorityPackageLPr(
+                    "org.frap129.saberchrome.browser", userId);
+            if (saberChrome != null) {
+                grantRuntimePermissionsLPw(saberChrome, CONTACTS_PERMISSIONS, userId);
             }
 
             mService.mSettings.onDefaultRuntimePermissionsGrantedLPr(userId);
