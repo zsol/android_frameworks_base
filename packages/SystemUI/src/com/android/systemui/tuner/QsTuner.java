@@ -30,6 +30,7 @@ import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.preference.PreferenceFragment;
 import android.provider.Settings.Secure;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
@@ -64,7 +65,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class QsTuner extends Fragment implements Callback {
+public class QsTuner extends PreferenceFragment implements Callback {
 
     private static final String TAG = "QsTuner";
 
