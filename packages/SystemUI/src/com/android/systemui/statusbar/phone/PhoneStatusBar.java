@@ -381,6 +381,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
     TextView mWeatherTempView;
     private int mWeatherTempState;
     private int mWeatherTempStyle;
+    private int mWeatherTempColor;
 
     private int mNavigationBarWindowState = WINDOW_STATE_SHOWING;
 
@@ -484,6 +485,9 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.STATUS_BAR_WEATHER_TEMP_STYLE),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.STATUS_BAR_WEATHER_COLOR),
+                    false, this, UserHandle.USER_ALL);
             update();
         }
 
@@ -521,7 +525,9 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         @Override
         public void onChange(boolean selfChange, Uri uri) {
             if (uri.equals(Settings.System.getUriFor(
-                    Settings.System.STATUS_BAR_WEATHER_TEMP_STYLE))) {
+                    Settings.System.STATUS_BAR_WEATHER_TEMP_STYLE))
+                    || uri.equals(Settings.System.getUriFor(
+                    Settings.System.STATUS_BAR_WEATHER_COLOR))) {
                     recreateStatusBar();
                     updateRowStates();
                     updateSpeedbump();
@@ -557,16 +563,19 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                     resolver, Settings.System.STATUS_BAR_SHOW_WEATHER_TEMP, 0,
                     UserHandle.USER_CURRENT);
             if (oldWeatherState != mWeatherTempState) {
-                updateWeatherTextState(mWeatherController.getWeatherInfo().temp);
+                updateWeatherTextState(mWeatherController.getWeatherInfo().temp, mWeatherTempColor);
             }
 
             mWeatherTempStyle = Settings.System.getIntForUser(
                     resolver, Settings.System.STATUS_BAR_WEATHER_TEMP_STYLE, 0,
                     UserHandle.USER_CURRENT);
+
+            mWeatherTempColor = Settings.System.getIntForUser(resolver,
+                    Settings.System.STATUS_BAR_WEATHER_COLOR, 0xFFFFFFFF, mCurrentUserId);
         }
     }
 
-    private void updateWeatherTextState(String temp) {
+    private void updateWeatherTextState(String temp, int color) {
         if (mWeatherTempState == 0 || TextUtils.isEmpty(temp)) {
             mWeatherTempView.setVisibility(View.GONE);
             return;
@@ -578,6 +587,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         } else if (mWeatherTempState == 2) {
             mWeatherTempView.setText(temp.substring(0, temp.length() - 1));
         }
+        mWeatherTempView.setTextColor(color);
         mWeatherTempView.setVisibility(View.VISIBLE);
     }
 
@@ -1164,6 +1174,8 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             mWeatherTempView = (TextView) mStatusBarView.findViewById(R.id.left_weather_temp);
         }
 
+        mWeatherTempColor = Settings.System.getIntForUser(mContext.getContentResolver(),
+                    Settings.System.STATUS_BAR_WEATHER_COLOR, 0xFFFFFFFF, mCurrentUserId);
         mWeatherTempState = Settings.System.getIntForUser(
                 mContext.getContentResolver(), Settings.System.STATUS_BAR_SHOW_WEATHER_TEMP, 0,
                 UserHandle.USER_CURRENT);
@@ -1172,11 +1184,11 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             mWeatherController.addCallback(new WeatherController.Callback() {
                 @Override
                 public void onWeatherChanged(WeatherInfo temp) {
-                    updateWeatherTextState(temp.temp);
+                    updateWeatherTextState(temp.temp, mWeatherTempColor);
                 }
             });
         }
-        updateWeatherTextState(mWeatherController.getWeatherInfo().temp);
+        updateWeatherTextState(mWeatherController.getWeatherInfo().temp, mWeatherTempColor);
 
         mKeyguardUserSwitcher = new KeyguardUserSwitcher(mContext,
                 (ViewStub) mStatusBarWindowContent.findViewById(R.id.keyguard_user_switcher),
