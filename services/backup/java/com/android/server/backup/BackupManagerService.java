@@ -348,6 +348,11 @@ public class BackupManagerService {
                 } catch (RemoteException e) {
                     // can't happen; it's a local object
                 }
+
+                BackupManagerService service = sInstance.mService;
+                if (service != null) {
+                    service.bindTransport(service.mTransportServiceIntent);
+                }
             }
         }
     }
@@ -1090,22 +1095,6 @@ public class BackupManagerService {
             mCurrentTransport = null;
         }
         if (DEBUG) Slog.v(TAG, "Starting with transport " + mCurrentTransport);
-
-        // Find all transport hosts and bind to their services
-        List<ResolveInfo> hosts = mPackageManager.queryIntentServicesAsUser(
-                mTransportServiceIntent, 0, UserHandle.USER_OWNER);
-        if (DEBUG) {
-            Slog.v(TAG, "Found transports: " + ((hosts == null) ? "null" : hosts.size()));
-        }
-        if (hosts != null) {
-            for (int i = 0; i < hosts.size(); i++) {
-                final ServiceInfo transport = hosts.get(i).serviceInfo;
-                if (MORE_DEBUG) {
-                    Slog.v(TAG, "   " + transport.packageName + "/" + transport.name);
-                }
-                tryBindTransport(transport);
-            }
-        }
 
         // Now that we know about valid backup participants, parse any
         // leftover journal files into the pending backup set
@@ -1953,12 +1942,23 @@ public class BackupManagerService {
     void checkForTransportAndBind(PackageInfo pkgInfo) {
         Intent intent = new Intent(mTransportServiceIntent)
                 .setPackage(pkgInfo.packageName);
+        bindTransport(intent);
+    }
+
+    // Find transport hosts by specified intent and bind to their services
+    void bindTransport(Intent intent) {
         List<ResolveInfo> hosts = mPackageManager.queryIntentServicesAsUser(
                 intent, 0, UserHandle.USER_OWNER);
+        if (DEBUG) {
+            Slog.v(TAG, "Found transports: " + ((hosts == null) ? "null" : hosts.size()));
+        }
         if (hosts != null) {
             final int N = hosts.size();
             for (int i = 0; i < N; i++) {
                 final ServiceInfo info = hosts.get(i).serviceInfo;
+                if (MORE_DEBUG) {
+                    Slog.v(TAG, "   " + info.packageName + "/" + info.name);
+                }
                 tryBindTransport(info);
             }
         }
