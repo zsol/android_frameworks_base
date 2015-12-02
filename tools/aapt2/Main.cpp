@@ -473,7 +473,7 @@ bool linkXml(const AaptOptions& options, const std::shared_ptr<ResourceTable>& t
         }
     }
 
-    if (outApk->add(outBuffer, buildFileReference(item).data(), ZipEntry::kCompressDeflated,
+    if (outApk->add(outBuffer, buildFileReference(item).data(), ZipEntry::kCompressStored,
                 nullptr) != android::NO_ERROR) {
         Logger::error(options.output) << "failed to write linked file '"
                                       << buildFileReference(item) << "' to apk." << std::endl;
