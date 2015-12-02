@@ -1353,6 +1353,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                         @Override
                         public void run() {
                             mQSPanel.setEditing(editing);
+                            mHeader.setEditing(editing);
                         }
                     });
                 }
@@ -1360,6 +1361,17 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                 @Override
                 public boolean isEditing() {
                     return mQSPanel.isEditing();
+                }
+
+                @Override
+                public void goToSettingsPage() {
+                    setEditing(true);
+                    mHandler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            mQSPanel.goToSettingsPage();
+                        }
+                    }, 500);
                 }
             });
         }
