@@ -16,6 +16,18 @@
         <item name="android:shadowRadius">1.0</item>
         <item name="android:shadowDx">2.0</item>
         <item name="android:shadowDy">2.0</item>
-    </style>  
+    </style>
+
+    <!-- App circle side bar -->
+    <style name="ListTheme" parent="@*android:style/Theme.Holo">
+        <item name="android:windowBackground">@*android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:listSelector">@*android:color/transparent</item>
+        <item name="android:scrollbars">none</item>
+        <item name="android:clipChildren">false</item>
+        <item name="android:overScrollMode">never</item>
+        <item name="android:divider">@null</item>
+    </style>
 
 </resources>
