@@ -1561,6 +1561,14 @@ public class NotificationPanelView extends PanelView implements
         }
     }
 
+
+
+  private void cancelAnimation() {
+        if (mQsExpansionAnimator != null) {
+            mQsExpansionAnimator.cancel();
+        }
+    }
+
     @Override
     protected boolean isScrolledToBottom() {
         if (!isInSettings()) {
