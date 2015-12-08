@@ -22,6 +22,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.content.res.ThemeConfig;
+import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.database.ContentObserver;
 import android.graphics.Canvas;
@@ -35,6 +36,7 @@ import android.os.Handler;
 import android.os.SystemClock;
 import android.provider.Settings;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.HapticFeedbackConstants;
 import android.view.InputDevice;
 import android.view.KeyCharacterMap;
@@ -62,6 +64,7 @@ public class KeyButtonView extends ImageView {
     public static final int CURSOR_REPEAT_FLAGS = KeyEvent.FLAG_SOFT_KEYBOARD
             | KeyEvent.FLAG_KEEP_TOUCH_MODE;
 
+    private int mContentDescriptionRes;
     private long mDownTime;
     private int mCode;
     private boolean mIsSmall;
@@ -111,7 +114,13 @@ public class KeyButtonView extends ImageView {
 
         mSupportsLongpress = a.getBoolean(R.styleable.KeyButtonView_keyRepeat, true);
 
+        TypedValue value = new TypedValue();
+        if (a.getValue(R.styleable.KeyButtonView_android_contentDescription, value)) {
+            mContentDescriptionRes = value.resourceId;
+        }
+
         a.recycle();
+
 
         setClickable(true);
         mTouchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
@@ -121,6 +130,15 @@ public class KeyButtonView extends ImageView {
 
         SettingsObserver settingsObserver = new SettingsObserver(new Handler());
         settingsObserver.observe();
+    }
+
+    @Override
+    protected void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        if (mContentDescriptionRes != 0) {
+            setContentDescription(mContext.getString(mContentDescriptionRes));
+        }
     }
 
     @Override
