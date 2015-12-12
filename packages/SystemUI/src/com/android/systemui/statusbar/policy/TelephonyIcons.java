@@ -274,7 +274,7 @@ class TelephonyIcons {
     static final int SIGNAL_STRENGTH_TYPE_CDMA = 7;
     static final int SIGNAL_STRENGTH_TYPE_UMTS = 8;
 
-    static final boolean DEBUG = false;
+    static final boolean DEBUG = true;
     static final int DEFAULT_SUB = 0;
     static final int INET_TYPE_NUM = 2;
     static final int SIGNAL_LEVEL_NUM = SignalStrength.NUM_SIGNAL_STRENGTH_BINS;
