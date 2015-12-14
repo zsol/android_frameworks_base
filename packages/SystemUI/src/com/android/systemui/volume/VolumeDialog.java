@@ -276,7 +276,8 @@ public class VolumeDialog {
             @Override
             public void onLayoutChange(View v, int left, int top, int right, int bottom,
                                        int oldLeft, int oldTop, int oldRight, int oldBottom) {
-                final boolean moved = oldLeft != left || oldTop != top;
+                final boolean moved = mLastActiveStream != mActiveStream ||
+                        oldLeft != left || oldTop != top;
                 if (D.BUG) Log.d(TAG, "onLayoutChange moved=" + moved
                         + " old=" + new Rect(oldLeft, oldTop, oldRight, oldBottom).toShortString()
                         + "," + mLastActiveStream
