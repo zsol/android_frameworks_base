@@ -43,7 +43,7 @@ import com.android.internal.backup.IObbBackupService;
  */
 public class ObbBackupService extends Service {
     static final String TAG = "ObbBackupService";
-    static final boolean DEBUG = false;
+    static final boolean DEBUG = true;
 
     /**
      * IObbBackupService interface implementation
