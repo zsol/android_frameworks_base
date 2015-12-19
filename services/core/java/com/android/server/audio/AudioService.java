@@ -606,8 +606,6 @@ public class AudioService extends IAudioService.Stub {
         return "card=" + card + ";device=" + device + ";";
     }
 
-    private boolean mLinkNotificationWithVolume;
-
     ///////////////////////////////////////////////////////////////////////////
     // Construction
     ///////////////////////////////////////////////////////////////////////////
@@ -670,9 +668,6 @@ public class AudioService extends IAudioService.Stub {
 
         mUseFixedVolume = mContext.getResources().getBoolean(
                 com.android.internal.R.bool.config_useFixedVolume);
-
-        mLinkNotificationWithVolume = Settings.System.getIntForUser(mContentResolver,
-                Settings.System.VOLUME_LINK_NOTIFICATION, 1, UserHandle.USER_CURRENT) == 1;
 
         mForceAnalogDeskDock = mContext.getResources().getBoolean(
                 com.android.internal.R.bool.config_forceAnalogDeskDock);
@@ -1142,12 +1137,6 @@ public class AudioService extends IAudioService.Stub {
             } else {
                 mRingerModeAffectedStreams |= (1 << AudioSystem.STREAM_DTMF);
             }
-        }
-
-        if (mLinkNotificationWithVolume) {
-            mStreamVolumeAlias[AudioSystem.STREAM_NOTIFICATION] = AudioSystem.STREAM_RING;
-        } else {
-            mStreamVolumeAlias[AudioSystem.STREAM_NOTIFICATION] = AudioSystem.STREAM_NOTIFICATION;
         }
 
         mStreamVolumeAlias[AudioSystem.STREAM_DTMF] = dtmfStreamAlias;
@@ -4814,8 +4803,6 @@ public class AudioService extends IAudioService.Stub {
                 Settings.System.MODE_RINGER_STREAMS_AFFECTED), false, this);
             mContentResolver.registerContentObserver(Settings.Global.getUriFor(
                 Settings.Global.DOCK_AUDIO_MEDIA_ENABLED), false, this);
-            mContentResolver.registerContentObserver(Settings.System.getUriFor(
-                Settings.System.VOLUME_LINK_NOTIFICATION), false, this);
             mContentResolver.registerContentObserver(CMSettings.System.getUriFor(
                 CMSettings.System.VOLUME_KEYS_CONTROL_RING_STREAM), false, this);
         }
@@ -4837,13 +4824,6 @@ public class AudioService extends IAudioService.Stub {
                 }
                 readDockAudioSettings(mContentResolver);
 
-                mLinkNotificationWithVolume = Settings.System.getIntForUser(mContentResolver,
-                        Settings.System.VOLUME_LINK_NOTIFICATION, 1, UserHandle.USER_CURRENT) == 1;
-                if (mLinkNotificationWithVolume) {
-                    mStreamVolumeAlias[AudioSystem.STREAM_NOTIFICATION] = AudioSystem.STREAM_RING;
-                } else {
-                    mStreamVolumeAlias[AudioSystem.STREAM_NOTIFICATION] = AudioSystem.STREAM_NOTIFICATION;
-                }
                 mVolumeKeysControlRingStream = CMSettings.System.getIntForUser(mContentResolver,
                         CMSettings.System.VOLUME_KEYS_CONTROL_RING_STREAM, 1,
                         UserHandle.USER_CURRENT) == 1;
