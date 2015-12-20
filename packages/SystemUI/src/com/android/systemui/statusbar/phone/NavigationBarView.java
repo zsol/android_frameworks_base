@@ -463,7 +463,7 @@ public class NavigationBarView extends LinearLayout {
 
         final boolean showImeButton = ((hints & StatusBarManager.NAVIGATION_HINT_IME_SHOWN) != 0)
                                 && !mShowDpadArrowKeys;
-        getImeSwitchButton().setVisibility(showImeButton ? View.VISIBLE : View.INVISIBLE);
+        getImeSwitchButton().setVisibility(showImeButton ? View.INVISIBLE : View.INVISIBLE);
 
         setDisabledFlags(mDisabledFlags, true);
 
