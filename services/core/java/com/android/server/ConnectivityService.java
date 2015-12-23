@@ -2316,6 +2316,14 @@ public class ConnectivityService extends IConnectivityManager.Stub
         }
     }
 
+    private void handleTimeoutNetworkRequest(NetworkRequestInfo nri) {
+        if (nri != null) {
+            if (DBG) log("Timeout with " + nri.request);
+            callCallbackForRequest(nri, null, ConnectivityManager.CALLBACK_UNAVAIL);
+            handleReleaseNetworkRequest(nri.request, getCallingUid());
+        }
+    }
+
     private void handleReleaseNetworkRequestWithIntent(PendingIntent pendingIntent,
             int callingUid) {
         NetworkRequestInfo nri = findExistingNetworkRequestInfo(pendingIntent);
@@ -2566,6 +2574,10 @@ public class ConnectivityService extends IConnectivityManager.Stub
                 case EVENT_REGISTER_NETWORK_REQUEST:
                 case EVENT_REGISTER_NETWORK_LISTENER: {
                     handleRegisterNetworkRequest((NetworkRequestInfo) msg.obj);
+                    break;
+                }
+                case EVENT_TIMEOUT_NETWORK_REQUEST: {
+                    handleTimeoutNetworkRequest((NetworkRequestInfo) msg.obj);
                     break;
                 }
                 case EVENT_REGISTER_NETWORK_REQUEST_WITH_INTENT:
@@ -3731,6 +3743,7 @@ public class ConnectivityService extends IConnectivityManager.Stub
 
         mHandler.sendMessage(mHandler.obtainMessage(EVENT_REGISTER_NETWORK_REQUEST, nri));
         if (timeoutMs > 0) {
+            if (DBG) log("requestNetwork for " + nri + " with timeoutMs: " + timeoutMs);
             mHandler.sendMessageDelayed(mHandler.obtainMessage(EVENT_TIMEOUT_NETWORK_REQUEST,
                     nri), timeoutMs);
         }
