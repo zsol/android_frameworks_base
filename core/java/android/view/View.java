@@ -4759,7 +4759,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback,
     protected int getHorizontalScrollbarHeight() {
         ScrollabilityCache cache = mScrollCache;
         if (cache != null) {
-            ScrollBarDrawable scrollBar = cache.scrollBar;
+            ScrollBarDrawable scrollBar = cache.scrollBarHorizontal;
             if (scrollBar != null) {
                 int size = scrollBar.getSize(false);
                 if (size <= 0) {
@@ -4821,6 +4821,12 @@ public class View implements Drawable.Callback, KeyEvent.Callback,
             scrollabilityCache.scrollBar.setState(getDrawableState());
         }
 
+        if (scrollabilityCache.scrollBarHorizontal == null) {
+            scrollabilityCache.scrollBarHorizontal = new ScrollBarDrawable();
+            scrollabilityCache.scrollBarHorizontal.setCallback(this);
+            scrollabilityCache.scrollBarHorizontal.setState(getDrawableState());
+        }
+
         final boolean fadeScrollbars = a.getBoolean(R.styleable.View_fadeScrollbars, true);
 
         if (!fadeScrollbars) {
@@ -4843,30 +4849,36 @@ public class View implements Drawable.Callback, KeyEvent.Callback,
 
         Drawable track = a.getDrawable(R.styleable.View_scrollbarTrackHorizontal);
         scrollabilityCache.scrollBar.setHorizontalTrackDrawable(track);
+        scrollabilityCache.scrollBarHorizontal.setHorizontalTrackDrawable(track);
 
         Drawable thumb = a.getDrawable(R.styleable.View_scrollbarThumbHorizontal);
         if (thumb != null) {
             scrollabilityCache.scrollBar.setHorizontalThumbDrawable(thumb);
+            scrollabilityCache.scrollBarHorizontal.setHorizontalThumbDrawable(thumb);
         }
 
         boolean alwaysDraw = a.getBoolean(R.styleable.View_scrollbarAlwaysDrawHorizontalTrack,
                 false);
         if (alwaysDraw) {
             scrollabilityCache.scrollBar.setAlwaysDrawHorizontalTrack(true);
+            scrollabilityCache.scrollBarHorizontal.setAlwaysDrawHorizontalTrack(true);
         }
 
         track = a.getDrawable(R.styleable.View_scrollbarTrackVertical);
         scrollabilityCache.scrollBar.setVerticalTrackDrawable(track);
+        scrollabilityCache.scrollBarHorizontal.setVerticalTrackDrawable(track);
 
         thumb = a.getDrawable(R.styleable.View_scrollbarThumbVertical);
         if (thumb != null) {
             scrollabilityCache.scrollBar.setVerticalThumbDrawable(thumb);
+            scrollabilityCache.scrollBarHorizontal.setVerticalThumbDrawable(thumb);
         }
 
         alwaysDraw = a.getBoolean(R.styleable.View_scrollbarAlwaysDrawVerticalTrack,
                 false);
         if (alwaysDraw) {
             scrollabilityCache.scrollBar.setAlwaysDrawVerticalTrack(true);
+            scrollabilityCache.scrollBarHorizontal.setAlwaysDrawVerticalTrack(true);
         }
 
         // Apply layout direction to the new Drawables if needed
@@ -12576,6 +12588,12 @@ public class View implements Drawable.Callback, KeyEvent.Callback,
             scrollCache.scrollBar.setState(getDrawableState());
         }
 
+        if (scrollCache.scrollBarHorizontal == null) {
+            scrollCache.scrollBarHorizontal = new ScrollBarDrawable();
+            scrollCache.scrollBarHorizontal.setCallback(this);
+            scrollCache.scrollBarHorizontal.setState(getDrawableState());
+        }
+
         if (isHorizontalScrollBarEnabled() ||
                 (isVerticalScrollBarEnabled() && !isVerticalScrollBarHidden())) {
 
@@ -13869,6 +13887,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback,
                     cache.state = ScrollabilityCache.OFF;
                 } else {
                     cache.scrollBar.mutate().setAlpha(Math.round(values[0]));
+                    cache.scrollBarHorizontal.mutate().setAlpha(Math.round(values[0]));
                 }
 
                 // This will make the scroll bars inval themselves after
@@ -13879,6 +13898,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback,
                 // We're just on -- but we may have been fading before so
                 // reset alpha
                 cache.scrollBar.mutate().setAlpha(255);
+                cache.scrollBarHorizontal.mutate().setAlpha(255);
             }
 
 
@@ -13895,6 +13915,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback,
                 final int height = mBottom - mTop;
 
                 final ScrollBarDrawable scrollBar = cache.scrollBar;
+                final ScrollBarDrawable scrollBarHorizontal = cache.scrollBarHorizontal;
 
                 final int scrollX = mScrollX;
                 final int scrollY = mScrollY;
@@ -13906,12 +13927,12 @@ public class View implements Drawable.Callback, KeyEvent.Callback,
                 int bottom;
 
                 if (drawHorizontalScrollBar) {
-                    int size = scrollBar.getSize(false);
+                    int size = scrollBarHorizontal.getSize(false);
                     if (size <= 0) {
                         size = cache.scrollBarSize;
                     }
 
-                    scrollBar.setParameters(computeHorizontalScrollRange(),
+                    scrollBarHorizontal.setParameters(computeHorizontalScrollRange(),
                                             computeHorizontalScrollOffset(),
                                             computeHorizontalScrollExtent(), false);
                     final int verticalScrollBarGap = drawVerticalScrollBar ?
@@ -13920,7 +13941,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback,
                     left = scrollX + (mPaddingLeft & inside);
                     right = scrollX + width - (mUserPaddingRight & inside) - verticalScrollBarGap;
                     bottom = top + size;
-                    onDrawHorizontalScrollBar(canvas, scrollBar, left, top, right, bottom);
+                    onDrawHorizontalScrollBar(canvas, scrollBarHorizontal, left, top, right, bottom);
                     if (invalidate) {
                         invalidate(left, top, right, bottom);
                     }
@@ -16974,6 +16995,10 @@ public class View implements Drawable.Callback, KeyEvent.Callback,
             final Drawable scrollBar = mScrollCache.scrollBar;
             if (scrollBar != null && scrollBar.isStateful()) {
                 scrollBar.setState(state);
+            }
+            final Drawable scrollBarHorizontal = mScrollCache.scrollBarHorizontal;
+            if (scrollBarHorizontal != null && scrollBarHorizontal.isStateful()) {
+               scrollBarHorizontal.setState(state);
             }
         }
 
@@ -21919,6 +21944,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback,
 
         public int scrollBarSize;
         public ScrollBarDrawable scrollBar;
+        public ScrollBarDrawable scrollBarHorizontal;
         public float[] interpolatorValues;
         public View host;
 
