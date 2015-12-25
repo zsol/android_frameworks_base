@@ -47,6 +47,9 @@ import java.util.Locale;
 public final class Configuration implements Parcelable, Comparable<Configuration> {
     /** @hide */
     public static final Configuration EMPTY = new Configuration();
+    static {
+        EMPTY.fontScale = 0;
+    }
 
     /**
      * Current user preference for the scaling factor for fonts, relative
