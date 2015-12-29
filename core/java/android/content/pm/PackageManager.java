@@ -4533,6 +4533,8 @@ public abstract class PackageManager {
     public abstract @Nullable VolumeInfo getPackageCurrentVolume(ApplicationInfo app);
     /** {@hide} */
     public abstract @NonNull List<VolumeInfo> getPackageCandidateVolumes(ApplicationInfo app);
+    /** {@hide} */
+    public abstract @NonNull List<VolumeInfo> getPackageCandidateVolumesForceable(ApplicationInfo app);
 
     /** {@hide} */
     public abstract int movePrimaryStorage(VolumeInfo vol);
