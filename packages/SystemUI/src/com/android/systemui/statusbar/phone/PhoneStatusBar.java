@@ -426,6 +426,10 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
     private int mWeatherTempFontStyle = FONT_NORMAL;
     private WeatherControllerImpl mWeatherController;
 
+    // Max Lockscreen Notification count
+    private int mMaxKeyguardNotifConfig;
+    private boolean mCustomMaxKeyguard;
+
     private int mNavigationBarWindowState = WINDOW_STATE_SHOWING;
 
     private int mStatusBarHeaderHeight;
@@ -550,6 +554,9 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.ENABLE_TASK_MANAGER),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.LOCKSCREEN_MAX_NOTIF_CONFIG),
+                    false, this, UserHandle.USER_ALL);
             update();
         }
 
@@ -620,7 +627,10 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                     resolver, CMSettings.System.STATUS_BAR_BRIGHTNESS_CONTROL, 0,
                     UserHandle.USER_CURRENT) == 1;
 
-	boolean showTaskManager = Settings.System.getIntForUser(resolver,
+            mMaxKeyguardNotifConfig = Settings.System.getIntForUser(resolver,
+                    Settings.System.LOCKSCREEN_MAX_NOTIF_CONFIG, 5, mCurrentUserId);
+
+            boolean showTaskManager = Settings.System.getIntForUser(resolver,
                     Settings.System.ENABLE_TASK_MANAGER, 0, UserHandle.USER_CURRENT) == 1;
 	    if (mShowTaskManager != showTaskManager) {
                 if (!mShowTaskManager) {
@@ -4890,7 +4900,14 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
 
     @Override
     protected int getMaxKeyguardNotifications() {
-        return mKeyguardMaxNotificationCount;
+        mCustomMaxKeyguard = Settings.System.getIntForUser(mContext.getContentResolver(),
+            Settings.System.LOCK_SCREEN_CUSTOM_NOTIF, 0, UserHandle.USER_CURRENT) == 1;
+
+        if (mCustomMaxKeyguard) {
+            return mMaxKeyguardNotifConfig;
+        } else {
+            return mKeyguardMaxNotificationCount;
+        }        
     }
 
     public NavigationBarView getNavigationBarView() {
