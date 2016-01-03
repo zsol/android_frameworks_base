@@ -4615,6 +4615,12 @@ public final class Settings {
         public static final String RECENT_APP_SIDEBAR_SCALE_FACTOR = "recent_app_sidebar_scale_factor";
 
         /**
+         * Enable/Disable screenshot sound
+         * @hide
+         */
+        public static final String SCREENSHOT_SOUND = "screenshot_sound";
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
