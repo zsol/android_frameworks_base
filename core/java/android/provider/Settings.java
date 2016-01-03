@@ -3895,6 +3895,13 @@ public final class Settings {
         public static final String LOCKSCREEN_BLUR_RADIUS = "lockscreen_blur_radius";
 
         /**
+         * Change fonts for the system lockscreen clock widget
+         *
+         * @hide
+         */
+        public static final String LOCK_CLOCK_FONTS = "lock_clock_fonts";
+
+        /**
          * Boolean value on whether to show weather in the statusbar
          */
         public static final String STATUS_BAR_SHOW_WEATHER = "status_bar_show_weather";
