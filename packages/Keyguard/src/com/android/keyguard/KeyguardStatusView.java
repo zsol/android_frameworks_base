@@ -319,27 +319,6 @@ public class KeyguardStatusView extends GridLayout implements
                 res.getColor(R.color.keyguard_default_icon_color);
         int iconColor = Settings.System.getInt(resolver,
                 Settings.System.LOCK_SCREEN_WEATHER_ICON_COLOR, defaultIconColor);
-        int maxAllowedNotifications = 6;
-        int currentVisibleNotifications = Settings.System.getInt(resolver,
-                Settings.System.LOCK_SCREEN_VISIBLE_NOTIFICATIONS, 0);
-        int hideMode = Settings.System.getInt(resolver,
-                    Settings.System.LOCK_SCREEN_WEATHER_HIDE_PANEL, 0);
-        int numberOfNotificationsToHide = Settings.System.getInt(resolver,
-                       Settings.System.LOCK_SCREEN_WEATHER_NUMBER_OF_NOTIFICATIONS, 4);
-        boolean forceHideByNumberOfNotifications = false;
-
-        if (hideMode == 0) {
-            if (currentVisibleNotifications > maxAllowedNotifications) {
-                forceHideByNumberOfNotifications = true;
-            }
-        } else if (hideMode == 1) {
-            if (currentVisibleNotifications >= numberOfNotificationsToHide) {
-                forceHideByNumberOfNotifications = true;
-            }
-        }
-
-        mWeatherView.setVisibility(
-                (mShowWeather && !forceHideByNumberOfNotifications) ? View.VISIBLE : View.GONE);
         if (forceHide) {
             mWeatherView.setVisibility(View.GONE);
         } else {
