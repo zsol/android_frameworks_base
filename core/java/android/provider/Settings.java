@@ -3361,6 +3361,12 @@ public final class Settings {
         public static final String IN_CALL_PROXIMITY_SENSOR = "in_call_proximity_sensor";
 
         /**
+         * Whether to show Brightness Icon On Brightness Slider
+         * @hide
+         */
+        public static final String BRIGHTNESS_ICON = "brightness_icon";
+
+        /**
          * @deprecated Use {@link android.provider.Settings.Global#LOW_BATTERY_SOUND}
          * instead
          * @hide
