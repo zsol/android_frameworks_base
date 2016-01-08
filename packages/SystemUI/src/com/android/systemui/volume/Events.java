@@ -170,7 +170,7 @@ public class Events {
                     break;
             }
         }
-        Log.v(TAG, sb.toString());
+        Log.i(TAG, sb.toString());
         if (sCallback != null) {
             sCallback.writeEvent(time, tag, list);
         }
