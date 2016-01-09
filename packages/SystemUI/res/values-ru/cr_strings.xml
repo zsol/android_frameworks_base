@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <!-- Battery Saver Dimss -->
+    <string name="battery_saver_dismiss_title">Скрыть</string>
+    <string name="battery_saver_notification_action_text_short">Выключить</string>
+
+    <!-- The text for the button in the notification window-shade that clears
+         all of the currently visible notifications. [CHAR LIMIT=10]-->
+    <string name="clear_recents">Закрыть все недавние</string>
+
+    <!-- App sidebar -->
+    <string name="default_folder_text">Папка</string>
+    <string name="title_activity_sidebar_configuration">Настройки содержания</string>
+    <string name="action_save">Сохранить</string>
+    <string name="toast_items_saved">Элементы панели были сохранены</string>
+    <string name="content_setup_instructions">Для добавления элемента в бар приложений нажмите и удерживайте любой значок справа и перетащите его на панель.\n\nДля объединения элементов в папки переместите значок справа на любой элемент в баре приложений.\n\nДля удаления элемента просто перетащите его за пределы бара приложений.</string>
+    <string name="content_setup_dismiss">Продолжить</string>
+    <string name="toast_not_installed">Приложение не установлено</string>
+
+    <!-- App circle sidebar -->
+    <string name="app_float_maximize_item_title">Максимизировать</string>
+    <string name="app_float_item_title">Плавающий вид</string>
+    <string name="app_stop_item_title">Закрыть приложение</string>
+
+    <!-- On The Go -->
+    <string name="onthego_notif_ticker">Режим \"На ходу\" активирован</string>
+    <string name="onthego_notif_title">Режим \"На ходу\" активен</string>
+    <string name="onthego_notif_stop">Остановить</string>
+    <string name="onthego_notif_options">Параметры</string>
+    <string name="onthego_notif_error">Не удалось запустить режим \"На ходу\"</string>
+    <string name="onthego_notif_restart">Перезагрузить режим \"На ходу\"</string>
+    <string name="onthego_notif_camera_changed">Режим камеры изменен</string>
+    <string name="onthego_transparency">Прозрачность</string>
+    <string name="onthego_front_camera">Использовать фронтальную камеру</string>
+    <string name="onthego_service_toggle">Автоматический перезапуск службы</string>
+    <!-- To do: Add QS OnTheGo
+    <string name="quick_settings_onthego_back">Rear Camera</string>
+    <string name="quick_settings_onthego_front">Front Camera</string>-->
+
+    <!-- PA Pie controls -->
+    <string name="pie_date_format">ccc, dd MMM yyyy</string>
+    <string name="pie_hour_format_12">hh:mm</string>
+    <string name="pie_hour_format_24">HH:mm</string>
+    <string name="pie_am_pm">a</string>
+
+    <!-- Quick settings -->
+    <string name="quick_settings_brightness_label">Яркость</string>
+    <string name="quick_settings_screen_off_label">Выключить экран</string>
+    <string name="quick_settings_screenshot_label">Скриншот</string>
+
+    <!-- Expanded desktop tile -->
+    <string name="quick_settings_expanded_desktop_label">Расширенный рабочий стол</string>
+    <string name="quick_settings_expanded_desktop">Расширенный</string>
+    <string name="quick_settings_expanded_desktop_off">Обычный</string>
+    <string name="quick_settings_expanded_desktop_detail_title">Расширенный режим</string>
+    <string name="quick_settings_expanded_hide_status">Скрыть строку статуса</string>
+    <string name="quick_settings_expanded_hide_navigation">Скрыть панель навигации</string>
+    <string name="quick_settings_expanded_hide_both">Скрыть обе</string>
+    <string name="accessibility_quick_settings_expanded_desktop_off">Расширенный рабочий стол отключен</string>
+
+    <!-- Content description of the brightness tile in quick settings (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_brightness">Volume panel.</string>
+
+    <!-- Content description of the screen off tile in quick settings (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_screen_off">Screen off.</string>
+
+    <!-- Content description of the screenshot tile in quick settings (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_screenshot">Screenshot.</string>
+
+    <!-- Music QS Tile -->
+    <string name="quick_settings_music_label">Музыка</string>
+    <string name="quick_settings_music_play">Играть</string>
+    <string name="quick_settings_music_pause">Пауза</string>
+
+    <!-- Reboot/Recovery QS Tile -->
+    <string name="quick_settings_reboot_label">Перезагрузка</string>
+    <string name="quick_settings_reboot_recovery_label">Режим восстановления</string>
+
+    <!-- LTE Tile -->
+    <string name="qs_lte_label">LTE</string>
+    <string name="lte_on">LTE вкл </string>
+    <string name="lte_off">LTE выкл</string>
+
+    <!-- NavBar tile -->
+    <string name="quick_settings_navbar_title">Панель навигации</string>	
+    <string name="quick_settings_navbar_on">Панель навигации вкл</string>
+    <string name="quick_settings_navbar_off">Панель навигации выкл</string>
+    
+    <!-- App Circle Bar tile -->
+    <string name="quick_settings_appcirclebar_title">AppCircleBar</string>
+    <string name="quick_settings_appcirclebar_on">AppCircleBar вкл</string>
+    <string name="quick_settings_appcirclebar_off">AppCircleBar выкл</string>
+
+    <!-- Pie tile -->
+    <string name="quick_settings_pie">Pie</string>	
+
+</resources>
