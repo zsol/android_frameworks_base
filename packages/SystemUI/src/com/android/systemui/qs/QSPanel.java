@@ -114,6 +114,10 @@ public class QSPanel extends ViewGroup {
         mClipper = new QSDetailClipper(mDetail);
         updateResources();
 
+	boolean brightnessIconEnabled = Settings.System.getIntForUser(
+            mContext.getContentResolver(), Settings.System.BRIGHTNESS_ICON,
+                1, UserHandle.USER_CURRENT) == 1;
+
         mBrightnessController = new BrightnessController(getContext(),
                 (ImageView) findViewById(R.id.brightness_icon),
                 (ToggleSlider) findViewById(R.id.brightness_slider));
@@ -150,7 +154,8 @@ public class QSPanel extends ViewGroup {
             brightnessSlider.setVisibility(VISIBLE);         
         } else {
             mBrightnessView.setVisibility(GONE);
-            brightnessSlider.setVisibility(GONE);
+            brightnessSlider.setVisibility(INVISIBLE);
+            brightnessIcon.setVisibility(GONE);
         }
         updateResources();
         return brightnessSliderEnabled;
