@@ -295,7 +295,8 @@ public class WifiInfo implements Parcelable {
             if (!TextUtils.isEmpty(unicode)) {
                 return "\"" + unicode + "\"";
             } else {
-                return mWifiSsid.getHexString();
+                String hex = mWifiSsid.getHexString();
+                return (hex != null) ? hex : WifiSsid.NONE;
             }
         }
         return WifiSsid.NONE;
