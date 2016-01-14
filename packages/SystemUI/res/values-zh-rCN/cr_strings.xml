@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Battery Saver Dimss -->
+    <string name="battery_saver_dismiss_title">清除</string>
+    <string name="battery_saver_notification_action_text_short">关闭</string>
+    <!-- The text for the button in the notification window-shade that clears
+         all of the currently visible notifications. [CHAR LIMIT=10]-->
+    <string name="clear_recents">关闭所有任务</string>
+    <!-- App sidebar -->
+    <string name="default_folder_text">文件夹</string>
+    <string name="title_activity_sidebar_configuration">应用栏内容设置</string>
+    <string name="action_save">保存</string>
+    <string name="toast_items_saved">应用栏应用已经保存.</string>
+    <string name="content_setup_instructions">在右侧长按任意一个应用并拖拽到左侧应用栏将添加应用.\n\n拖拽应用到应用栏已存在应用上将创建到文件夹中.\n\n拖拽应用到应用栏外侧将移除该应用.</string>
+    <string name="content_setup_dismiss">继续</string>
+    <string name="toast_not_installed">应用未安装</string>
+    <!-- App circle sidebar -->
+    <string name="app_float_maximize_item_title">最大化</string>
+    <string name="app_float_item_title">浮动窗口</string>
+    <string name="app_stop_item_title">结束应用</string>
+    <!-- On The Go -->
+    <string name="onthego_notif_ticker">走路模式已激活</string>
+    <string name="onthego_notif_title">走路模式为活动状态</string>
+    <string name="onthego_notif_stop">停止</string>
+    <string name="onthego_notif_options">选项</string>
+    <string name="onthego_notif_error">不能开启走路模式</string>
+    <string name="onthego_notif_restart">重新启动走路模式</string>
+    <string name="onthego_notif_camera_changed">相机模式更改</string>
+    <string name="onthego_transparency">透明度</string>
+    <string name="onthego_front_camera">使用前置摄像头</string>
+    <string name="onthego_service_toggle">自动重启服务</string>
+    <!-- To do: Add QS OnTheGo
+    <string name="quick_settings_onthego_back">Rear Camera</string>
+    <string name="quick_settings_onthego_front">Front Camera</string>-->
+    <!-- PA Pie controls -->
+    <string name="pie_date_format">ccc, dd MMM yyyy</string>
+    <string name="pie_hour_format_12">hh:mm</string>
+    <string name="pie_hour_format_24">HH:mm</string>
+    <string name="pie_am_pm">a</string>
+    <!-- Quick settings -->
+    <string name="quick_settings_brightness_label">亮度</string>
+    <string name="quick_settings_screen_off_label">锁屏</string>
+    <string name="quick_settings_screenshot_label">截图</string>
+    <!-- Expanded desktop tile -->
+    <string name="quick_settings_expanded_desktop_label">扩展桌面</string>
+    <string name="quick_settings_expanded_desktop">扩展模式</string>
+    <string name="quick_settings_expanded_desktop_off">正常模式</string>
+    <string name="quick_settings_expanded_desktop_detail_title">扩展桌面模式</string>
+    <string name="quick_settings_expanded_hide_status">隐藏状态栏</string>
+    <string name="quick_settings_expanded_hide_navigation">隐藏导航栏</string>
+    <string name="quick_settings_expanded_hide_both">同时隐藏</string>
+    <string name="accessibility_quick_settings_expanded_desktop_off">扩展桌面已禁用</string>
+    <!-- Content description of the brightness tile in quick settings (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_brightness">音量面板.</string>
+    <!-- Content description of the screen off tile in quick settings (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_screen_off">锁屏.</string>
+    <!-- Content description of the screenshot tile in quick settings (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_screenshot">截图.</string>
+    <!-- Music QS Tile -->
+    <string name="quick_settings_music_label">音乐</string>
+    <string name="quick_settings_music_play">播放</string>
+    <string name="quick_settings_music_pause">暂停</string>
+    <!-- Reboot/Recovery QS Tile -->
+    <string name="quick_settings_reboot_label">重启</string>
+    <string name="quick_settings_reboot_recovery_label">恢复模式</string>
+    <!-- LTE Tile -->
+    <string name="qs_lte_label">LTE</string>
+    <string name="lte_on">LTE打开 </string>
+    <string name="lte_off">LTE关闭</string>
+    <!-- NavBar tile -->
+    <string name="quick_settings_navbar_title">导航栏</string>	
+    <string name="quick_settings_navbar_on">导航栏打开</string>
+    <string name="quick_settings_navbar_off">导航栏关闭</string>
+        <!-- App Circle Bar tile -->
+    <string name="quick_settings_appcirclebar_title">应用环状侧边栏</string>
+    <string name="quick_settings_appcirclebar_on">应用环状侧边栏打开</string>
+    <string name="quick_settings_appcirclebar_off">应用环状侧边栏关闭</string>
+    <!-- App Side Bar tile -->
+    <string name="quick_settings_app_sidebar">应用程序栏</string>
+    <string name="quick_settings_appsidebar_on">应用程序栏打开</string>
+    <string name="quick_settings_appsidebar_off">应用程序栏关闭</string>
+    <!-- Pie tile -->
+    <string name="quick_settings_pie">Pie</string>	
+    <!-- Restart UI -->
+    <string name="quick_settings_systemui_restart_label">重启系统UI</string>
+
+</resources>
