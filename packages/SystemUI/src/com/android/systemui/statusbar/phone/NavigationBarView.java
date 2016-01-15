@@ -274,7 +274,7 @@ public class NavigationBarView extends LinearLayout {
         mDisplay = ((WindowManager)context.getSystemService(
                 Context.WINDOW_SERVICE)).getDefaultDisplay();
 
-        final Resources res = getContext().getResources();
+        final Resources res = getResources();
         mBarSize = res.getDimensionPixelSize(R.dimen.navigation_bar_size);
         mVertical = false;
         mShowMenu = false;
@@ -406,6 +406,9 @@ public class NavigationBarView extends LinearLayout {
                 updateLightsOutResources(container);
             }
         }
+        if (mEditBar != null) {
+            mEditBar.updateResources(res);
+        }
     }
 
     private void updateLightsOutResources(ViewGroup container) {
@@ -429,7 +432,7 @@ public class NavigationBarView extends LinearLayout {
 
     @Override
     public void setLayoutDirection(int layoutDirection) {
-        getIcons(mThemedResources != null ? mThemedResources : getContext().getResources());
+        getIcons(getResources());
 
         super.setLayoutDirection(layoutDirection);
     }
@@ -693,7 +696,7 @@ public class NavigationBarView extends LinearLayout {
         } else {
             mVertical = getWidth() > 0 && getHeight() > getWidth();
         }
-        mEditBar = new NavbarEditor(mCurrentView, mVertical, mIsLayoutRtl);
+        mEditBar = new NavbarEditor(mCurrentView, mVertical, mIsLayoutRtl, getResources());
         updateSettings();
 
         getImeSwitchButton().setOnClickListener(mImeSwitcherClickListener);
@@ -792,7 +795,7 @@ public class NavigationBarView extends LinearLayout {
 
     private String getResourceName(int resId) {
         if (resId != 0) {
-            final android.content.res.Resources res = getContext().getResources();
+            final android.content.res.Resources res = getResources();
             try {
                 return res.getResourceName(resId);
             } catch (android.content.res.Resources.NotFoundException ex) {
@@ -952,9 +955,9 @@ public class NavigationBarView extends LinearLayout {
         }
     }
 
-    // TODO LINK TO THIS ONCE THEMES GOES IN
-    protected void updateResources() {
-        getIcons(mContext.getResources());
+    @Override
+    public Resources getResources() {
+        return mThemedResources != null ? mThemedResources : getContext().getResources();
     }
 
     public class NavBarReceiver extends BroadcastReceiver {
