@@ -309,6 +309,10 @@ public abstract class BaseStatusBar extends SystemUI implements
         }
     };
 
+    // last theme that was applied in order to detect theme change (as opposed
+    // to some other configuration change).
+    protected ThemeConfig mCurrentTheme;
+
     @Override  // NotificationData.Environment
     public boolean isDeviceProvisioned() {
         return mDeviceProvisioned;
@@ -1570,9 +1574,8 @@ public abstract class BaseStatusBar extends SystemUI implements
         View contentViewLocal = null;
         View bigContentViewLocal = null;
         View headsUpContentViewLocal = null;
-        final ThemeConfig themeConfig = mContext.getResources().getConfiguration().themeConfig;
-        String themePackageName = themeConfig != null ?
-                themeConfig.getOverlayPkgNameForApp(mContext.getPackageName()) : null;
+        String themePackageName = mCurrentTheme != null ?
+                mCurrentTheme.getOverlayForStatusBar() : null;
         try {
             contentViewLocal = contentView.apply(
                     sbn.getPackageContext(mContext),
