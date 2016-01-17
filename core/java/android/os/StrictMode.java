@@ -1754,14 +1754,9 @@ public final class StrictMode {
                 // so we'll report it and bail on all of the current strict mode violations
                 // we currently are maintaining for this thread.
                 // First, drain the remaining violations from the parcel.
-                try {
-                    while (i < numViolations) {
-                        info = new ViolationInfo(p, !currentlyGathering);
-                        i++;
-                    }
-                } catch (IllegalStateException iex) {
-                    // Parcel is the wrong one or is corrupted. Stop reading draining
-                    // the parcel here.
+                while (i < numViolations) {
+                    info = new ViolationInfo(p, !currentlyGathering);
+                    i++;
                 }
                 // Next clear out all gathered violations.
                 clearGatheredViolations();
@@ -2222,26 +2217,7 @@ public final class StrictMode {
             violationUptimeMillis = in.readLong();
             numInstances = in.readLong();
             broadcastIntentAction = in.readString();
-
-            // TODO if parcel is corrupted or it's not what we expect, readStringArray() can
-            // end reading a integer that causes an overflow because of the new string array
-            // created. So instead of use readStringArray(), just read the length of the
-            // array, and in case that the length is bigger than MAX_SPAN_TAGS then
-            // we should stop reading here.
-            // FIXME this is only a patch to prevent UI to crash because an OOM exception.
-            // In deep, this is cause by a bad received parcel. We must found the orginal cause
-            // and fix it.
-            int length = in.readInt();
-            if (length > MAX_SPAN_TAGS) {
-                throw new IllegalStateException();
-            } else if (length >= 0) {
-                tags = new String[length];
-                for (int i = 0 ; i < length ; i++) {
-                    tags[i] = in.readString();
-                }
-            } else {
-                tags = null;
-            }
+            tags = in.readStringArray();
         }
 
         /**
