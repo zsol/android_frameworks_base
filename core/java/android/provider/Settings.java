@@ -4098,10 +4098,10 @@ public final class Settings {
         public static final String SHOW_HEADSET_ICON = "show_headset_icon";
 
         /**
-         * This preference enables showing the power menu on LockScreen.
+         * Whether to display powermenu on secure lockscreen
          * @hide
          */
-        public static final String LOCKSCREEN_ENABLE_POWER_MENU = "lockscreen_enable_power_menu";
+        public static final String POWER_MENU_LOCKSCREEN = "power_menu_lockscreen";
 
         /**
          * MediaScanner behavior on boot.
