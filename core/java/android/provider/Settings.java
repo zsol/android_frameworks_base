@@ -4762,6 +4762,12 @@ public final class Settings {
         public static final String QS_TRANSPARENT_HEADER = "qs_transparent_header";
 
         /**
+         * Whether to display dashboard tiles in a double line layout
+         * @hide
+         */
+        public static final String DASHBOARD_TILEVIEW_DOUBLE_LINES = "dashboard_tileview_double_lines";
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
