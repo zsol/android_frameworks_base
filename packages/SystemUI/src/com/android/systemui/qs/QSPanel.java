@@ -154,7 +154,7 @@ public class QSPanel extends ViewGroup {
             brightnessSlider.setVisibility(VISIBLE);         
         } else {
             mBrightnessView.setVisibility(GONE);
-            brightnessSlider.setVisibility(INVISIBLE);
+            brightnessSlider.setVisibility(GONE);
             brightnessIcon.setVisibility(GONE);
         }
         updateResources();
