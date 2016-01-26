@@ -47,9 +47,12 @@ public class WeatherControllerImpl implements WeatherController {
             = Uri.parse("content://com.cyanogenmod.lockclock.weather.provider/weather/current");
     public static final String[] WEATHER_PROJECTION = new String[]{
             "city",
-            "condition",
+            "wind",
             "condition_code",
-            "temperature"
+            "temperature",
+            "humidity",
+            "condition"
+
     };
     public static final String LOCK_CLOCK_PACKAGE_NAME = "com.cyanogenmod.lockclock";
 
@@ -122,10 +125,12 @@ public class WeatherControllerImpl implements WeatherController {
             try {
                 c.moveToFirst();
                 mCachedInfo.city = c.getString(0);
-                mCachedInfo.condition = c.getString(1);
+                mCachedInfo.wind = c.getString(1);
                 mCachedInfo.conditionCode = c.getInt(2);
                 mCachedInfo.conditionDrawable = getIcon(mCachedInfo.conditionCode);
                 mCachedInfo.temp = c.getString(3);
+                mCachedInfo.humidity = c.getString(4);
+                mCachedInfo.condition = c.getString(5);
             } finally {
                 c.close();
             }
