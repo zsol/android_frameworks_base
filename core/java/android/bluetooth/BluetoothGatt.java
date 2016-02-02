@@ -52,6 +52,7 @@ public final class BluetoothGatt implements BluetoothProfile {
     private final Object mStateLock = new Object();
     private Boolean mDeviceBusy = false;
     private int mTransport;
+    private boolean mDiscoveryStarted = false;
 
     private static final int CONN_STATE_IDLE = 0;
     private static final int CONN_STATE_CONNECTING = 1;
@@ -208,6 +209,11 @@ public final class BluetoothGatt implements BluetoothProfile {
                 if (!address.equals(mDevice.getAddress())) {
                     return;
                 }
+                if(!mDiscoveryStarted){
+                    if(VDBG) Log.d(TAG, "Service discovery initiated by stack");
+                    mServices.clear();
+                    mDiscoveryStarted = true;
+                }
                 mServices.add(new BluetoothGattService(mDevice, srvcUuid.getUuid(),
                                                        srvcInstId, srvcType));
             }
@@ -301,6 +307,7 @@ public final class BluetoothGatt implements BluetoothProfile {
                     return;
                 }
                 try {
+                    mDiscoveryStarted = false;
                     mCallback.onServicesDiscovered(BluetoothGatt.this, status);
                 } catch (Exception ex) {
                     Log.w(TAG, "Unhandled exception in callback", ex);
@@ -807,6 +814,7 @@ public final class BluetoothGatt implements BluetoothProfile {
 
         try {
             mService.discoverServices(mClientIf, mDevice.getAddress());
+            mDiscoveryStarted = true;
         } catch (RemoteException e) {
             Log.e(TAG,"",e);
             return false;
