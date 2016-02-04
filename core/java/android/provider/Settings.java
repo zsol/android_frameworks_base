@@ -3958,6 +3958,12 @@ public final class Settings {
         public static final String STATUS_BAR_CARRIER_FONT_SIZE = "status_bar_carrier_font_size";
 
         /**
+         * Custom carrier label placement
+         * @hide
+         */
+        public static final String STATUS_BAR_CARRIER_SPOT = "status_bar_carrier_spot";
+
+        /**
          * Allows to show the background activity back the lockscreen
          * 0 = off
          * 1 = on
