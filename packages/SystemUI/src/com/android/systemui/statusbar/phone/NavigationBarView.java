@@ -144,6 +144,10 @@ public class NavigationBarView extends LinearLayout {
     private OnLongClickListener mLongPressHomeListener;
     private OnClickListener mNotificationsClickListener;
     private OnLongClickListener mNotificationsLongListener;
+    private OnClickListener mTorchClickListener;
+    private OnClickListener mCameraClickListener;
+    private OnClickListener mScreenShotClickListener;
+    private OnClickListener mImmersiveClickListener;	
 
     private SettingsObserver mSettingsObserver;
     private boolean mShowDpadArrowKeys;
@@ -564,6 +568,9 @@ public class NavigationBarView extends LinearLayout {
         setButtonWithTagVisibility(NavbarEditor.NAVBAR_RECENT, !disableRecent);
         setButtonWithTagVisibility(NavbarEditor.NAVBAR_POWER, !disableRecent);
         setButtonWithTagVisibility(NavbarEditor.NAVBAR_NOTIFICATIONS, !disableRecent);
+        setButtonWithTagVisibility(NavbarEditor.NAVBAR_TORCH, !disableRecent);
+        setButtonWithTagVisibility(NavbarEditor.NAVBAR_CAMERA, !disableRecent);
+        setButtonWithTagVisibility(NavbarEditor.NAVBAR_SCREENSHOT, !disableRecent);
         setButtonWithTagVisibility(NavbarEditor.NAVBAR_SEARCH, !disableSearch);
     }
 
@@ -885,7 +892,7 @@ public class NavigationBarView extends LinearLayout {
     void setListeners(OnClickListener recentsClickListener, OnTouchListener recentsPreloadListener,
                       OnLongClickListener recentsBackListener, OnTouchListener homeSearchActionListener,
                       OnLongClickListener longPressHomeListener, OnClickListener notificationsClickListener,
-                      OnLongClickListener notificationsLongListener) {
+                      OnLongClickListener notificationsLongListener,OnClickListener torchClickListener ,  OnClickListener cameraClickListener ,OnClickListener screenshotClickListener ,OnClickListener immersiveClickListener) {
         mRecentsClickListener = recentsClickListener;
         mRecentsPreloadListener = recentsPreloadListener;
         mHomeSearchActionListener = homeSearchActionListener;
@@ -893,6 +900,10 @@ public class NavigationBarView extends LinearLayout {
         mLongPressHomeListener = longPressHomeListener;
         mNotificationsClickListener = notificationsClickListener;
         mNotificationsLongListener = notificationsLongListener;
+        mTorchClickListener = torchClickListener;
+        mCameraClickListener = cameraClickListener;
+        mScreenShotClickListener = screenshotClickListener;
+        mImmersiveClickListener = immersiveClickListener;
         updateButtonListeners();
     }
 
@@ -939,6 +950,22 @@ public class NavigationBarView extends LinearLayout {
             notificationsView.setOnClickListener(mNotificationsClickListener);
             notificationsView.setLongClickable(true);
             notificationsView.setOnLongClickListener(mNotificationsLongListener);
+        }
+        View torchView = mCurrentView.findViewWithTag(NavbarEditor.NAVBAR_TORCH);
+        if (torchView != null) {
+            torchView.setOnClickListener(mTorchClickListener);
+        }
+        View cameraView = mCurrentView.findViewWithTag(NavbarEditor.NAVBAR_CAMERA);
+        if (cameraView != null) {
+            cameraView.setOnClickListener(mCameraClickListener);
+        }
+        View screenshotView = mCurrentView.findViewWithTag(NavbarEditor.NAVBAR_SCREENSHOT);
+        if (screenshotView != null) {
+            screenshotView.setOnClickListener(mScreenShotClickListener);
+        }
+        View immersivetView = mCurrentView.findViewWithTag(NavbarEditor.NAVBAR_EXPAND);
+        if (immersivetView != null) {
+            immersivetView.setOnClickListener(mImmersiveClickListener);
         }
     }
 
