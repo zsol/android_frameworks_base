@@ -103,4 +103,31 @@
     <!-- Restart UI -->
     <string name="quick_settings_systemui_restart_label">Рестарт SystemUI</string>
 
+    <!-- Power Menu -->
+    <string name="quick_settings_power_menu_label">Меню питания</string>
+
+    <!-- Dialog title for navigation bar button selection -->
+    <string name="navbar_torch">Фонарик</string>
+
+    <!-- Content description of the power button for accessibility (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_torch">Фонарик</string>
+
+    <!-- Dialog title for navigation bar button selection -->
+    <string name="navbar_camera">Камера</string>
+
+    <!-- Content description of the power button for accessibility (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_camera">Камера</string>
+
+    <!-- Dialog title for navigation bar button selection -->
+    <string name="navbar_screenshot">Скриншот</string>
+
+    <!-- Content description of the power button for accessibility (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_screenshot">Скриншот</string>
+
+    <!-- Dialog title for navigation bar button selection -->
+    <string name="navbar_expand">Расширенный экран</string>
+
+    <!-- Content description of the power button for accessibility (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_expand">Расширенный экран</string>
+
 </resources>
