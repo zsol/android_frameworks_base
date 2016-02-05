@@ -57,6 +57,4 @@
             android:key="airplane"
             android:title="@string/status_bar_airplane"/>
 
-    </PreferenceCategory>
-
 </PreferenceScreen>
