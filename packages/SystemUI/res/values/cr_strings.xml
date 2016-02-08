@@ -155,4 +155,11 @@
     <string name="quick_settings_slim_floats_on">Slim Float Mode Enabled</string>
     <string name="quick_settings_slim_floats_off">Slim Float Mode Disabled</string>
 
+    <!-- Dialog title for navigation bar button selection -->
+    <string name="navbar_app_picker">Application picker</string>
+
+    <!-- Content description of the Application picker button for accessibility
+    (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_app_picker">Application picker</string>
+
 </resources>
