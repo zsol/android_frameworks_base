@@ -198,8 +198,6 @@ public class AppTransition implements Dump {
     private int[] mActivityAnimations = new int[11];
     private int mAnimationDuration;
     private boolean mIsResId = false;
-    private boolean mExitOnly;
-    private boolean mReverseExit;
     
     private int mCurrentUserId = 0;
 
@@ -1060,7 +1058,7 @@ public class AppTransition implements Dump {
                 case TRANSIT_ACTIVITY_OPEN:
                     if (mActivityAnimations[0] != 0) {
                         mIsResId = true;
-                        int[] animArray = AwesomeAnimationHelper.getSystemAnimations(mActivityAnimations[0], mExitOnly, mReverseExit);
+                        int[] animArray = AwesomeAnimationHelper.getAnimations(mActivityAnimations[0]);
                         animAttr = enter
                                 ? animArray[1]
                                 : animArray[0];
@@ -1073,7 +1071,7 @@ public class AppTransition implements Dump {
                 case TRANSIT_ACTIVITY_CLOSE:
                     if (mActivityAnimations[1] != 0) {
                         mIsResId = true;
-                        int[] animArray = AwesomeAnimationHelper.getSystemAnimations(mActivityAnimations[1], mExitOnly, mReverseExit);
+                        int[] animArray = AwesomeAnimationHelper.getAnimations(mActivityAnimations[1]);
                         animAttr = enter
                                 ? animArray[1]
                                 : animArray[0];
@@ -1086,7 +1084,7 @@ public class AppTransition implements Dump {
                 case TRANSIT_TASK_OPEN:
                     if (mActivityAnimations[2] != 0) {
                         mIsResId = true;
-                        int[] animArray = AwesomeAnimationHelper.getSystemAnimations(mActivityAnimations[2], mExitOnly, mReverseExit);
+                        int[] animArray = AwesomeAnimationHelper.getAnimations(mActivityAnimations[2]);
                         animAttr = enter
                                 ? animArray[1]
                                 : animArray[0];
@@ -1099,7 +1097,7 @@ public class AppTransition implements Dump {
                 case TRANSIT_TASK_CLOSE:
                     if (mActivityAnimations[3] != 0) {
                         mIsResId = true;
-                        int[] animArray = AwesomeAnimationHelper.getSystemAnimations(mActivityAnimations[3], mExitOnly, mReverseExit);
+                        int[] animArray = AwesomeAnimationHelper.getAnimations(mActivityAnimations[3]);
                         animAttr = enter
                                 ? animArray[1]
                                 : animArray[0];
@@ -1112,7 +1110,7 @@ public class AppTransition implements Dump {
                 case TRANSIT_TASK_TO_FRONT:
                     if (mActivityAnimations[4] != 0) {
                         mIsResId = true;
-                        int[] animArray = AwesomeAnimationHelper.getSystemAnimations(mActivityAnimations[4], mExitOnly, mReverseExit);
+                        int[] animArray = AwesomeAnimationHelper.getAnimations(mActivityAnimations[4]);
                         animAttr = enter
                                 ? animArray[1]
                                 : animArray[0];
@@ -1125,7 +1123,7 @@ public class AppTransition implements Dump {
                 case TRANSIT_TASK_TO_BACK:
                     if (mActivityAnimations[5] != 0) {
                         mIsResId = true;
-                        int[] animArray = AwesomeAnimationHelper.getSystemAnimations(mActivityAnimations[5], mExitOnly, mReverseExit);
+                        int[] animArray = AwesomeAnimationHelper.getAnimations(mActivityAnimations[5]);
                         animAttr = enter
                                 ? animArray[1]
                                 : animArray[0];
@@ -1138,7 +1136,7 @@ public class AppTransition implements Dump {
                 case TRANSIT_WALLPAPER_OPEN:
                     if (mActivityAnimations[6] != 0) {
                         mIsResId = true;
-                        int[] animArray = AwesomeAnimationHelper.getSystemAnimations(mActivityAnimations[6], mExitOnly, mReverseExit);
+                        int[] animArray = AwesomeAnimationHelper.getAnimations(mActivityAnimations[6]);
                         animAttr = enter
                                 ? animArray[1]
                                 : animArray[0];
@@ -1151,7 +1149,7 @@ public class AppTransition implements Dump {
                 case TRANSIT_WALLPAPER_CLOSE:
                     if (mActivityAnimations[7] != 0) {
                         mIsResId = true;
-                        int[] animArray = AwesomeAnimationHelper.getSystemAnimations(mActivityAnimations[7], mExitOnly, mReverseExit);
+                        int[] animArray = AwesomeAnimationHelper.getAnimations(mActivityAnimations[7]);
                         animAttr = enter
                                 ? animArray[1]
                                 : animArray[0];
@@ -1164,7 +1162,7 @@ public class AppTransition implements Dump {
                 case TRANSIT_WALLPAPER_INTRA_OPEN:
                     if (mActivityAnimations[8] != 0) {
                         mIsResId = true;
-                        int[] animArray = AwesomeAnimationHelper.getSystemAnimations(mActivityAnimations[8], mExitOnly, mReverseExit);
+                        int[] animArray = AwesomeAnimationHelper.getAnimations(mActivityAnimations[8]);
                         animAttr = enter
                                 ? animArray[1]
                                 : animArray[0];
@@ -1177,7 +1175,7 @@ public class AppTransition implements Dump {
                 case TRANSIT_WALLPAPER_INTRA_CLOSE:
                     if (mActivityAnimations[9] != 0) {
                         mIsResId = true;
-                        int[] animArray = AwesomeAnimationHelper.getSystemAnimations(mActivityAnimations[9], mExitOnly, mReverseExit);
+                        int[] animArray = AwesomeAnimationHelper.getAnimations(mActivityAnimations[9]);
                         animAttr = enter
                                 ? animArray[1]
                                 : animArray[0];
@@ -1190,7 +1188,7 @@ public class AppTransition implements Dump {
                 case TRANSIT_TASK_OPEN_BEHIND:
                     if (mActivityAnimations[10] != 0) {
                         mIsResId = true;
-                        int[] animArray = AwesomeAnimationHelper.getSystemAnimations(mActivityAnimations[10], mExitOnly, mReverseExit);
+                        int[] animArray = AwesomeAnimationHelper.getAnimations(mActivityAnimations[10]);
                         animAttr = enter
                                 ? animArray[1]
                                 : animArray[0];
@@ -1478,10 +1476,6 @@ public class AppTransition implements Dump {
             ContentResolver resolver = mContext.getContentResolver();
             resolver.registerContentObserver(
                     Settings.System.getUriFor(Settings.System.ANIMATION_CONTROLS_DURATION), false, this);
-            resolver.registerContentObserver(
-                    Settings.System.getUriFor(Settings.System.ANIMATION_CONTROLS_EXIT_ONLY), false, this);
-            resolver.registerContentObserver(
-                    Settings.System.getUriFor(Settings.System.ANIMATION_CONTROLS_REVERSE_EXIT), false, this);
             for (int i = 0; i < 11; i++) {
 	            resolver.registerContentObserver(
                     Settings.System.getUriFor(Settings.System.ACTIVITY_ANIMATION_CONTROLS[i]), false, this);
@@ -1498,9 +1492,6 @@ public class AppTransition implements Dump {
         for (int i = 0; i < 11; i++) {  
             mActivityAnimations[i] = Settings.System.getInt(resolver, Settings.System.ACTIVITY_ANIMATION_CONTROLS[i], 0);
         }
-
-        mExitOnly = Settings.System.getBoolean(resolver, Settings.System.ANIMATION_CONTROLS_EXIT_ONLY, true);
-        mReverseExit = Settings.System.getBoolean(resolver, Settings.System.ANIMATION_CONTROLS_REVERSE_EXIT, false);
 
         int temp = Settings.System.getInt(resolver, Settings.System.ANIMATION_CONTROLS_DURATION, 0);
         mAnimationDuration = temp * 15;
