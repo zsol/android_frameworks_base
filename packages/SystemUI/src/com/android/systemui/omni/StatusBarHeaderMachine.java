@@ -106,6 +106,7 @@ public class StatusBarHeaderMachine {
 
         @Override
         public void onChange(boolean selfChange) {
+            doUpdateStatusHeaderObservers(true);
             updateEnablement();
         }
     }
