@@ -626,17 +626,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             } else if (uri.equals(Settings.System.getUriFor(
                     Settings.System.NOTIFICATION_DRAWER_CLEAR_ALL_ICON_COLOR))) {
                     UpdateNotifDrawerClearAllIconColor();
-            } else if (uri.equals(Settings.System.getUriFor(
-                    Settings.System.SHOW_FOURG))) {
-                    mShow4G = Settings.System.getIntForUser(
-                            mContext.getContentResolver(),
-                            Settings.System.SHOW_FOURG,
-                            0, UserHandle.USER_CURRENT) == 1;
-                    recreateStatusBar();
-                    updateRowStates();
-                    updateSpeedbump();
-                    updateClearAll();
-                    updateEmptyShadeView();
             }
             update();
         }
