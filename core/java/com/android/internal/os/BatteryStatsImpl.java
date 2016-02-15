@@ -1968,8 +1968,8 @@ public final class BatteryStatsImpl extends BatteryStats {
 
     private int buildBatteryLevelInt(HistoryItem h) {
         return ((((int)h.batteryLevel)<<25)&0xfe000000)
-                | ((((int)h.batteryTemperature)<<14)&0x01ff8000)
-                | ((((int)h.batteryVoltage)<<1)&0x00007fff);
+                | ((((int)h.batteryTemperature)<<15)&0x01ff8000)
+                | ((((int)h.batteryVoltage)<<1)&0x00007ffe);
     }
 
     private int buildStateInt(HistoryItem h) {
@@ -2111,8 +2111,8 @@ public final class BatteryStatsImpl extends BatteryStats {
         if ((firstToken&DELTA_BATTERY_LEVEL_FLAG) != 0) {
             batteryLevelInt = src.readInt();
             cur.batteryLevel = (byte)((batteryLevelInt>>25)&0x7f);
-            cur.batteryTemperature = (short)((batteryLevelInt<<7)>>21);
-            cur.batteryVoltage = (char)(batteryLevelInt&0x3fff);
+            cur.batteryTemperature = (short)((batteryLevelInt<<7)>>22);
+            cur.batteryVoltage = (char)((batteryLevelInt>>1)&0x3fff);
             cur.numReadInts += 1;
             if (DEBUG) Slog.i(TAG, "READ DELTA: batteryToken=0x"
                     + Integer.toHexString(batteryLevelInt)
