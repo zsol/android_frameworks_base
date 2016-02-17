@@ -4689,6 +4689,12 @@ public final class Settings {
         public static final String QS_TRANSPARENT_HEADER = "qs_transparent_header";
 
         /**
+         * Whether to display dashboard dividers
+         * @hide
+         */
+        public static final String DASHBOARD_TILEVIEW_DIVIDERS = "dashboard_tileview_dividers";
+
+        /**
          * Whether to display dashboard tiles in a double line layout
          * @hide
          */
