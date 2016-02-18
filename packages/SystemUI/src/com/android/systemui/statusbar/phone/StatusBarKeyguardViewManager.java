@@ -549,7 +549,10 @@ public class StatusBarKeyguardViewManager {
     public void animateCollapsePanels(float speedUpFactor) {
         mPhoneStatusBar.animateCollapsePanels(CommandQueue.FLAG_EXCLUDE_NONE, true /* force */,
                 false /* delayed */, speedUpFactor);
-        dismiss(false);
+        if (mStatusBarWindowManager.keyguardExternalViewHasFocus()) {
+            mStatusBarWindowManager.setKeyguardExternalViewFocus(false);
+            dismiss(false);
+        }
     }
 
     /**
