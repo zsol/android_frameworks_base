@@ -4703,6 +4703,13 @@ public final class Settings {
                 "proximity_auto_speaker_incall_only";
 
         /**
+         * Whether to wake up screen when call is disconnected
+         *
+         * @hide
+         */
+        public static final String WAKEUP_SCREEN_WHEN_CALL_DISCONNECTED = "wakeup_screen_when_call_disconnected";
+
+        /**
          * Color of the clear all icon in the notification drawer
          * @hide
          */
