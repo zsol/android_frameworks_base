@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Battery Saver Dimss -->
+    <string name="battery_saver_dismiss_title">清除</string>
+    <string name="battery_saver_notification_action_text_short">關閉</string>
+    <!-- The text for the button in the notification window-shade that clears
+         all of the currently visible notifications. [CHAR LIMIT=10]-->
+    <string name="clear_recents">關閉所有任務</string>
+    <!-- App sidebar -->
+    <string name="default_folder_text">文件夾</string>
+    <string name="title_activity_sidebar_configuration">應用欄內容設置</string>
+    <string name="action_save">保存</string>
+    <string name="toast_items_saved">應用欄應用已經保存.</string>
+    <string name="content_setup_instructions">在右側長按任意一個應用並拖拽到左側應用欄將添加應用.\n\n拖拽應用到應用欄已存在應用上將創建到文件夾中.\n\n拖拽應用到應用欄外側將移除該應用.</string>
+    <string name="content_setup_dismiss">繼續</string>
+    <string name="toast_not_installed">應用未安裝</string>
+    <!-- App circle sidebar -->
+    <string name="app_float_maximize_item_title">最大化</string>
+    <string name="app_float_item_title">浮動窗口</string>
+    <string name="app_stop_item_title">結束應用</string>
+    <!-- On The Go -->
+    <string name="onthego_notif_ticker">走路模式已激活</string>
+    <string name="onthego_notif_title">走路模式為活動狀態</string>
+    <string name="onthego_notif_stop">停止</string>
+    <string name="onthego_notif_options">選項</string>
+    <string name="onthego_notif_error">不能開啟走路模式</string>
+    <string name="onthego_notif_restart">重新啟動走路模式</string>
+    <string name="onthego_notif_camera_changed">相機模式更改</string>
+    <string name="onthego_transparency">透明度</string>
+    <string name="onthego_front_camera">使用前置攝像頭</string>
+    <string name="onthego_service_toggle">自動重啟服務</string>
+    <!-- To do: Add QS OnTheGo
+    <string name="quick_settings_onthego_back">Rear Camera</string>
+    <string name="quick_settings_onthego_front">Front Camera</string>-->
+    <!-- PA Pie controls -->
+    <string name="pie_date_format">ccc, dd MMM yyyy</string>
+    <string name="pie_hour_format_12">hh:mm</string>
+    <string name="pie_hour_format_24">HH:mm</string>
+    <string name="pie_am_pm">a</string>
+    <!-- Quick settings -->
+    <string name="quick_settings_brightness_label">亮度</string>
+    <string name="quick_settings_screen_off_label">鎖定螢幕</string>
+    <string name="quick_settings_screenshot_label">截圖</string>
+    <!-- Expanded desktop tile -->
+    <string name="quick_settings_expanded_desktop_label">擴展桌面</string>
+    <string name="quick_settings_expanded_desktop">擴展模式</string>
+    <string name="quick_settings_expanded_desktop_off">正常模式</string>
+    <string name="quick_settings_expanded_desktop_detail_title">擴展桌面模式</string>
+    <string name="quick_settings_expanded_hide_status">隱藏狀態欄</string>
+    <string name="quick_settings_expanded_hide_navigation">隱藏導航欄</string>
+    <string name="quick_settings_expanded_hide_both">同時隱藏</string>
+    <string name="accessibility_quick_settings_expanded_desktop_off">擴展桌面已禁用</string>
+    <!-- Content description of the brightness tile in quick settings (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_brightness">音量面板.</string>
+    <!-- Content description of the screen off tile in quick settings (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_screen_off">鎖定螢幕.</string>
+    <!-- Content description of the screenshot tile in quick settings (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_screenshot">截圖.</string>
+    <!-- Music QS Tile -->
+    <string name="quick_settings_music_label">音樂</string>
+    <string name="quick_settings_music_play">播放</string>
+    <string name="quick_settings_music_pause">暫停</string>
+    <!-- Reboot/Recovery QS Tile -->
+    <string name="quick_settings_reboot_label">重啟</string>
+    <string name="quick_settings_reboot_recovery_label">Recovery</string>
+    <!-- LTE Tile -->
+    <string name="qs_lte_label">LTE</string>
+    <string name="lte_on">LTE打開 </string>
+    <string name="lte_off">LTE關閉</string>
+    <!-- NavBar tile -->
+    <string name="quick_settings_navbar_title">導航欄</string>	
+    <string name="quick_settings_navbar_on">導航欄打開</string>
+    <string name="quick_settings_navbar_off">導航欄關閉</string>
+        <!-- App Circle Bar tile -->
+    <string name="quick_settings_appcirclebar_title">應用環狀側邊欄</string>
+    <string name="quick_settings_appcirclebar_on">應用環狀側邊欄打開</string>
+    <string name="quick_settings_appcirclebar_off">應用環狀側邊欄關閉</string>
+    <!-- App Side Bar tile -->
+    <string name="quick_settings_app_sidebar">應用程序欄</string>
+    <string name="quick_settings_appsidebar_on">應用程序欄打開</string>
+    <string name="quick_settings_appsidebar_off">應用程序欄關閉</string>
+    <!-- Pie tile -->
+    <string name="quick_settings_pie">Pie</string>	
+    <!-- Restart UI -->
+    <string name="quick_settings_systemui_restart_label">重啟SystemUI</string>
+
+    <!-- Power Menu -->
+    <string name="quick_settings_power_menu_label">電源菜單</string>
+
+    <!-- Dialog title for navigation bar button selection -->
+    <string name="navbar_torch">手電筒</string>
+
+    <!-- Content description of the power button for accessibility (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_torch">手電筒</string>
+
+    <!-- Dialog title for navigation bar button selection -->
+    <string name="navbar_camera">相機</string>
+
+    <!-- Content description of the power button for accessibility (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_camera">相機</string>
+
+    <!-- Dialog title for navigation bar button selection -->
+    <string name="navbar_screenshot">截圖</string>
+
+    <!-- Content description of the power button for accessibility (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_screenshot">截圖</string>
+
+    <!-- Dialog title for navigation bar button selection -->
+    <string name="navbar_expand">沉浸模式</string>
+
+    <!-- Content description of the power button for accessibility (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_expand">沉浸模式</string>
+
+    <!-- Sound QS Tile -->
+    <string name="quick_settings_sound_label">聲音</string>
+    <string name="quick_settings_sound_ring">鈴聲</string>
+    <string name="quick_settings_sound_vibrate">震動</string>
+    <string name="quick_settings_sound_silent">靜音</string>
+
+</resources>
