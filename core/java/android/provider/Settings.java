@@ -3777,6 +3777,14 @@ public final class Settings {
         public static final String STATUSBAR_CLOCK_FONT_SIZE = "statusbar_clock_font_size";
 
         /**
+         * show or hide seconds options
+         * 0 - hide seconds (default)
+         * 1 - show seconds
+         * @hide
+         */
+        public static final String STATUSBAR_CLOCK_SECONDS = "statusbar_clock_seconds";
+
+        /**
          * Navigation bar height when it is on protrait
          * @hide
          */
