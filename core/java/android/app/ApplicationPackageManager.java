@@ -1643,28 +1643,19 @@ final class ApplicationPackageManager extends PackageManager {
 
     @Override
     public @NonNull List<VolumeInfo> getPackageCandidateVolumes(ApplicationInfo app) {
-        return getPackageCandidateVolumesInternal(app, false);
-    }
-
-    @Override
-    public @NonNull List<VolumeInfo> getPackageCandidateVolumesForceable(ApplicationInfo app) {
-        return getPackageCandidateVolumesInternal(app, true);
-    }
-
-    private @NonNull List<VolumeInfo> getPackageCandidateVolumesInternal(ApplicationInfo app, boolean forceable) {
         final StorageManager storage = mContext.getSystemService(StorageManager.class);
         final VolumeInfo currentVol = getPackageCurrentVolume(app);
         final List<VolumeInfo> vols = storage.getVolumes();
         final List<VolumeInfo> candidates = new ArrayList<>();
         for (VolumeInfo vol : vols) {
-            if (Objects.equals(vol, currentVol) || isPackageCandidateVolume(app, vol, forceable)) {
+            if (Objects.equals(vol, currentVol) || isPackageCandidateVolume(app, vol)) {
                 candidates.add(vol);
             }
         }
         return candidates;
     }
 
-    private static boolean isPackageCandidateVolume(ApplicationInfo app, VolumeInfo vol, boolean forceable) {
+    private static boolean isPackageCandidateVolume(ApplicationInfo app, VolumeInfo vol) {
         // Private internal is always an option
         if (VolumeInfo.ID_PRIVATE_INTERNAL.equals(vol.getId())) {
             return true;
@@ -1674,7 +1665,7 @@ final class ApplicationPackageManager extends PackageManager {
         // anywhere else
         if (app.isSystemApp()
                 || app.installLocation == PackageInfo.INSTALL_LOCATION_INTERNAL_ONLY
-                || (!forceable && app.installLocation == PackageInfo.INSTALL_LOCATION_UNSPECIFIED)) {
+                || app.installLocation == PackageInfo.INSTALL_LOCATION_UNSPECIFIED) {
             return false;
         }
 
