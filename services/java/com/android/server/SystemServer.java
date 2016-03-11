@@ -28,6 +28,7 @@ import android.content.Intent;
 import android.content.pm.IPackageManager;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.content.res.Resources.Theme;
 import android.database.ContentObserver;
 import android.os.Build;
 import android.os.Environment;
@@ -1109,6 +1110,12 @@ public final class SystemServer {
         WindowManager w = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
         w.getDefaultDisplay().getMetrics(metrics);
         context.getResources().updateConfiguration(config, metrics);
+
+        // The system context's theme may be configuration-dependent.
+        final Theme systemTheme = context.getTheme();
+        if (systemTheme.getChangingConfigurations() != 0) {
+            systemTheme.rebase();
+        }
 
         try {
             // TODO: use boot phase
