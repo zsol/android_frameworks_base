@@ -446,6 +446,8 @@ public final class DisplayInfo implements Parcelable {
             compatInfo.applyToDisplayMetrics(outMetrics);
         } else if (type == Display.TYPE_BUILT_IN) {
             outMetrics.setDensity(DisplayMetrics.DENSITY_PREFERRED);
+        } else {
+            outMetrics.setDensity(logicalDensityDpi);
         }
     }
 
