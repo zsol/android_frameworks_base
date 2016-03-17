@@ -30,9 +30,9 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import com.android.internal.logging.MetricsConstants;
 import com.android.systemui.R;
 import com.android.systemui.qs.QSTile;
+import org.cyanogenmod.internal.logging.CMMetricsLogger;
 
 /** Quick settings: Power Menu*/
 public class PowerMenuTile extends QSTile<QSTile.BooleanState> {
@@ -77,7 +77,7 @@ private static final Intent POWER_SETTINGS = new Intent().setComponent(new Compo
 
     @Override
     public int getMetricsCategory() {
-        return MetricsConstants.DONT_TRACK_ME_BRO;
+        return CMMetricsLogger.DONT_LOG;
     }
 
     @Override

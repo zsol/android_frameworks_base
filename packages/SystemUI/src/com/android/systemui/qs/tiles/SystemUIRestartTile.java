@@ -26,7 +26,7 @@ import com.android.systemui.R;
 import com.android.systemui.qs.QSTile;
 
 import com.android.internal.util.temasek.Helpers;
-import com.android.internal.logging.MetricsLogger;
+import org.cyanogenmod.internal.logging.CMMetricsLogger;
 
 /** Quick settings tile: Heads Up **/
 public class SystemUIRestartTile extends QSTile<QSTile.BooleanState> {
@@ -51,7 +51,7 @@ public class SystemUIRestartTile extends QSTile<QSTile.BooleanState> {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsLogger.DONT_TRACK_ME_BRO;
+        return CMMetricsLogger.DONT_LOG;
     }
 
     @Override

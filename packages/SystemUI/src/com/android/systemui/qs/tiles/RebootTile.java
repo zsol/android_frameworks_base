@@ -21,7 +21,7 @@ import android.os.Handler;
 import android.os.PowerManager;
 import com.android.systemui.R;
 import com.android.systemui.qs.QSTile;
-import com.android.internal.logging.MetricsLogger;
+import org.cyanogenmod.internal.logging.CMMetricsLogger;
 
 public class RebootTile extends QSTile<QSTile.BooleanState> {
 
@@ -33,7 +33,7 @@ public class RebootTile extends QSTile<QSTile.BooleanState> {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsLogger.DISPLAY;
+        return CMMetricsLogger.DONT_LOG;
     }
 
     @Override

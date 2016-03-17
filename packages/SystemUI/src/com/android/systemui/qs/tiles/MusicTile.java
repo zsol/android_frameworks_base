@@ -35,7 +35,7 @@ import android.view.ViewConfiguration;
 import com.android.systemui.R;
 import com.android.systemui.qs.QSTile;
 import com.android.systemui.qs.QSTileView;
-import com.android.internal.logging.MetricsLogger;
+import org.cyanogenmod.internal.logging.CMMetricsLogger;
 
 /** Quick settings tile: Music **/
 public class MusicTile extends QSTile<QSTile.BooleanState> {
@@ -64,7 +64,7 @@ public class MusicTile extends QSTile<QSTile.BooleanState> {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsLogger.DISPLAY;
+        return CMMetricsLogger.DONT_LOG;
     }
 
     @Override

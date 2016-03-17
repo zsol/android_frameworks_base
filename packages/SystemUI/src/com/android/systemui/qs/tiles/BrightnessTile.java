@@ -27,10 +27,10 @@ import android.os.UserHandle;
 import android.provider.Settings;
 import android.view.View;
 
-import com.android.internal.logging.MetricsConstants;
 import com.android.systemui.R;
 import com.android.systemui.settings.BrightnessController.BrightnessStateChangeCallback;
 import com.android.systemui.qs.QSTile;
+import org.cyanogenmod.internal.logging.CMMetricsLogger;
 
 /** Quick settings tile: Brightness **/
 public class BrightnessTile extends QSTile<QSTile.BooleanState> {
@@ -90,7 +90,7 @@ public class BrightnessTile extends QSTile<QSTile.BooleanState> {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsConstants.DONT_TRACK_ME_BRO;
+        return CMMetricsLogger.DONT_LOG;
     }
 
     @Override
