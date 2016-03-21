@@ -19,10 +19,6 @@
     <string name="action_null">空白</string>
     <!-- label for item that takes On-The-Go in the phone options dialog -->
     <string name="global_action_onthego">走路模式</string>
-    <!-- [CHAR LIMIT=NONE] Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
-    <string name="permlab_resetBatteryStats">重置电池统计信息</string>
-    <!-- [CHAR LIMIT=NONE] Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
-    <string name="permdesc_resetBatteryStats">允许应用程序重置当前低级别电量使用数据.</string>
     <!-- Button to soft reboot the device, within the Reboot Options dialog -->
     <string name="reboot_systemui">重启系统UI</string>
 </resources>
