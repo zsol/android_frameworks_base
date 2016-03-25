@@ -507,25 +507,25 @@ public class Clock implements DemoMode {
                 mClockView.setTypeface(Typeface.create("sans-serif-black", Typeface.ITALIC));
                 break;
             case FONT_DANCINGSCRIPT:
-                setTypeface(Typeface.create("cursive", Typeface.NORMAL));
+                mClockView.setTypeface(Typeface.create("cursive", Typeface.NORMAL));
                 break;
             case FONT_DANCINGSCRIPT_BOLD:
-                setTypeface(Typeface.create("cursive", Typeface.BOLD));
+                mClockView.setTypeface(Typeface.create("cursive", Typeface.BOLD));
                 break;
             case FONT_COMINGSOON:
-                setTypeface(Typeface.create("casual", Typeface.NORMAL));
+                mClockView.setTypeface(Typeface.create("casual", Typeface.NORMAL));
                 break;
             case FONT_NOTOSERIF:
-                setTypeface(Typeface.create("serif", Typeface.NORMAL));
+                mClockView.setTypeface(Typeface.create("serif", Typeface.NORMAL));
                 break;
             case FONT_NOTOSERIF_ITALIC:
-                setTypeface(Typeface.create("serif", Typeface.ITALIC));
+                mClockView.setTypeface(Typeface.create("serif", Typeface.ITALIC));
                 break;
             case FONT_NOTOSERIF_BOLD:
-                setTypeface(Typeface.create("serif", Typeface.BOLD));
+                mClockView.setTypeface(Typeface.create("serif", Typeface.BOLD));
                 break;
             case FONT_NOTOSERIF_BOLD_ITALIC:
-                setTypeface(Typeface.create("serif", Typeface.BOLD_ITALIC));
+                mClockView.setTypeface(Typeface.create("serif", Typeface.BOLD_ITALIC));
                 break;
         }
     }
