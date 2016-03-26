@@ -632,11 +632,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                 updateRecents();
             } else if (uri.equals(Settings.System.getUriFor(
                     Settings.System.STATUS_BAR_WEATHER_TEMP_STYLE))) {
-                    recreateStatusBar();
-                    updateRowStates();
-                    updateSpeedbump();
-                    updateClearAll();
-                    updateEmptyShadeView();
+                    DontStressOnRecreate();
             } else if (uri.equals(Settings.System.getUriFor(
                     Settings.System.NOTIFICATION_DRAWER_CLEAR_ALL_ICON_COLOR))) {
                     UpdateNotifDrawerClearAllIconColor();
@@ -4501,6 +4497,31 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         }
     }
 
+    private void DontStressOnRecreate() {
+        recreateStatusBar();
+        RemoveViews();
+    }   
+
+    private void RemoveViews() {
+        updateRowStates();
+        updateSpeedbump();
+        checkBarModes();
+        updateClearAll();
+        updateEmptyShadeView();
+        clearNotificationEffects();
+        updateDozingState();
+        updatePublicMode();
+        updateNotifications();
+        updateMediaMetaData(true);
+        resetQsPanelVisibility();
+        updateQsExpansionEnabled();
+        mShadeUpdates.check();
+        mQSPanel.refreshAllTiles();
+        mNotificationPanel.resetViews();
+        updateNotificationShadeForChildren();
+        mTmpChildOrderMap.clear();
+    }
+
     /**
      * Determines if we need to recreate the status bar due to a theme change.  We currently
      * check if the overlay for the status bar, fonts, or icons, or last theme change time is
@@ -5481,6 +5502,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         mWakeUpComingFromTouch = false;
         mWakeUpTouchLocation = null;
         mStackScroller.setAnimationsEnabled(false);
+        RemoveViews();
         updateVisibleToUser();
         if (mQSTileHost.isEditing()) {
             mQSTileHost.setEditing(false);
@@ -5503,6 +5525,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         mDeviceInteractive = true;
         mStackScroller.setAnimationsEnabled(true);
         mNotificationPanel.setTouchDisabled(false);
+        RemoveViews();
         updateVisibleToUser();
     }
 
