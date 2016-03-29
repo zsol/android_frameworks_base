@@ -86,23 +86,23 @@ public class Helpers {
     }
 
     /**
-     * Checks to see if Busybox is installed in "/system/"
+     * Checks to see if Toybox is installed in "/system/"
      *
-     * @return If busybox exists
+     * @return If toybox exists
      */
-    public static boolean checkBusybox() {
-        if (!new File("/system/bin/busybox").exists()
-                && !new File("/system/xbin/busybox").exists()) {
-            Log.e(TAG, "Busybox not in xbin or bin!");
+    public static boolean checkToybox() {
+        if (!new File("/system/bin/toybox").exists()
+                && !new File("/system/xbin/toybox").exists()) {
+            Log.e(TAG, "Toybox not in xbin or bin!");
             return false;
         }
         try {
-            if (!CMDProcessor.runSuCommand("busybox mount").success()) {
-                Log.e(TAG, "Busybox is there but it is borked! ");
+            if (!CMDProcessor.runSuCommand("toybox mount").success()) {
+                Log.e(TAG, "Toybox is there but it is borked! ");
                 return false;
             }
         } catch (NullPointerException e) {
-            Log.e(TAG, "NullpointerException thrown while testing busybox", e);
+            Log.e(TAG, "NullpointerException thrown while testing toybox", e);
             return false;
         }
         return true;
@@ -145,7 +145,7 @@ public class Helpers {
                 return true;
             }
         }
-        String fallbackMountCmd = new String("busybox mount -o remount," + mount + " /system");
+        String fallbackMountCmd = new String("toybox mount -o remount," + mount + " /system");
         return CMDProcessor.runSuCommand(fallbackMountCmd).success();
     }
 
