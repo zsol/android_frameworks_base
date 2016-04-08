@@ -9,6 +9,15 @@
          all of the currently visible notifications. [CHAR LIMIT=10]-->
     <string name="clear_recents">Закрыть все недавние</string>
 
+    <!-- App sidebar -->
+    <string name="default_folder_text">Папка</string>
+    <string name="title_activity_sidebar_configuration">Настройки содержания</string>
+    <string name="action_save">Сохранить</string>
+    <string name="toast_items_saved">Элементы панели были сохранены</string>
+    <string name="content_setup_instructions">Для добавления элемента в бар приложений нажмите и удерживайте любой значок справа и перетащите его на панель.\n\nДля объединения элементов в папки переместите значок справа на любой элемент в баре приложений.\n\nДля удаления элемента просто перетащите его за пределы бара приложений.</string>
+    <string name="content_setup_dismiss">Продолжить</string>
+    <string name="toast_not_installed">Приложение не установлено</string>
+
     <!-- App circle sidebar -->
     <string name="app_float_maximize_item_title">Максимизировать</string>
     <string name="app_float_item_title">Плавающий вид</string>
@@ -82,6 +91,11 @@
     <string name="quick_settings_appcirclebar_title">Круг приложений</string>
     <string name="quick_settings_appcirclebar_on">Круг приложений вкл</string>
     <string name="quick_settings_appcirclebar_off">Круг приложений выкл</string>
+
+    <!-- App Side Bar tile -->
+    <string name="quick_settings_app_sidebar">Панель приложений</string>
+    <string name="quick_settings_appsidebar_on">Панель приложений вкл</string>
+    <string name="quick_settings_appsidebar_off">Панель приложений выкл</string>
 
     <!-- Pie tile -->
     <string name="quick_settings_pie">Pie</string>	
