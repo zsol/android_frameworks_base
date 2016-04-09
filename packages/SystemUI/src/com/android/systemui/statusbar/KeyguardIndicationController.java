@@ -70,7 +70,6 @@ public class KeyguardIndicationController {
     private boolean mVisible;
 
     private boolean mPowerPluggedIn;
-    private boolean mUSBPluggedIn;
     private boolean mPowerCharged;
     private int mChargingSpeed;
     private int mChargingCurrent;
@@ -180,7 +179,7 @@ public class KeyguardIndicationController {
         if (mPowerPluggedIn) {
             String indication = computePowerIndication();
             if (DEBUG_CHARGING_CURRENT) {
-                indication += ",  " + (mUSBPluggedIn ? mChargingCurrent/1000 : mChargingCurrent) + " mA";
+                indication += ",  " + mChargingCurrent + " mA";
             }
             return indication;
         }
@@ -236,7 +235,6 @@ public class KeyguardIndicationController {
             boolean isChargingOrFull = status.status == BatteryManager.BATTERY_STATUS_CHARGING
                     || status.status == BatteryManager.BATTERY_STATUS_FULL;
             mPowerPluggedIn = status.isPluggedIn() && isChargingOrFull;
-            mUSBPluggedIn = (status.plugged == BatteryManager.BATTERY_PLUGGED_USB);
             mPowerCharged = status.isCharged();
             mChargingCurrent = status.maxChargingCurrent;
             mChargingSpeed = status.getChargingSpeed((mSlowThreshold / 1000), (mFastThreshold / 1000));
