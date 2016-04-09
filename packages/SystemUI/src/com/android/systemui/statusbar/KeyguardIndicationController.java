@@ -49,7 +49,7 @@ import com.android.systemui.statusbar.phone.StatusBarKeyguardViewManager;
 public class KeyguardIndicationController {
 
     private static final String TAG = "KeyguardIndicationController";
-    private static final boolean DEBUG_CHARGING_CURRENT = true;
+    private static final boolean DEBUG_CHARGING_CURRENT = false;
 
     private static final int MSG_HIDE_TRANSIENT = 1;
     private static final int MSG_CLEAR_FP_MSG = 2;
@@ -179,7 +179,7 @@ public class KeyguardIndicationController {
         if (mPowerPluggedIn) {
             String indication = computePowerIndication();
             if (DEBUG_CHARGING_CURRENT) {
-                indication += ",  " + mChargingCurrent + " mA";
+                indication += ",  " + (mChargingCurrent / 1000) + " mA";
             }
             return indication;
         }
@@ -237,7 +237,7 @@ public class KeyguardIndicationController {
             mPowerPluggedIn = status.isPluggedIn() && isChargingOrFull;
             mPowerCharged = status.isCharged();
             mChargingCurrent = status.maxChargingCurrent;
-            mChargingSpeed = status.getChargingSpeed((mSlowThreshold / 1000), (mFastThreshold / 1000));
+            mChargingSpeed = status.getChargingSpeed(mSlowThreshold, mFastThreshold);
             updateIndication();
         }
 
