@@ -9,6 +9,15 @@
          all of the currently visible notifications. [CHAR LIMIT=10]-->
     <string name="clear_recents">Chiudere tutti i recenti</string>
 
+    <!-- App sidebar -->
+    <string name="default_folder_text">Cartella</string>
+    <string name="title_activity_sidebar_configuration">Imposta contenuti Appbar</string>
+    <string name="action_save">Salva</string>
+    <string name="toast_items_saved">Le voci in Appbar sono state salvate.</string>
+    <string name="content_setup_instructions">Aggiungi gli elementi all\'Appbar tenendo premendo a lungo su qualsiasi elemento sulla destra e trascinardolo verso l\'Appbar.\n\nCombina gli elementi nelle cartelle lasciando un oggetto sopra un elemento esistente nell\'Appbar.\n\nPer rimuovere un elemento basta semplicemente trascinarlo fuori dall\'Appbar.</string>
+    <string name="content_setup_dismiss">Proseguire</string>
+    <string name="toast_not_installed">App non installata</string>
+
     <!-- App circle sidebar -->
     <string name="app_float_maximize_item_title">Massimizzare</string>
     <string name="app_float_item_title">Vista Float</string>
