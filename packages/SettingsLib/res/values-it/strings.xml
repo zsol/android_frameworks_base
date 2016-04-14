@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
 /*
 **
 ** Copyright 2015 The Android Open Source Project
@@ -16,187 +16,71 @@
 ** See the License for the specific language governing permissions and
 ** limitations under the License.
 */
--->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <!-- Toast message when Wi-Fi cannot scan for networks -->
-    <string name="wifi_fail_to_scan">Impossibile eseguire la scansione delle reti</string>
-    
-    <!-- Used in Wi-Fi settings dialogs when Wi-Fi does not have any security. -->
-    <string name="wifi_security_none">Nessuna</string>
+ -->
 
-    <!-- Summary for the remembered network. -->
-    <string name="wifi_remembered">Salvato</string>
-    <!-- Status for networks disabled for unknown reason -->
-    <string name="wifi_disabled_generic">Disabilitato</string>
-    <!-- Status for networked disabled from a DNS or DHCP failure -->
-    <string name="wifi_disabled_network_failure">Configurazione IP fallita</string>
-    <!-- Status for networked disabled from a wifi association failure -->
-    <string name="wifi_disabled_wifi_failure">Connessione WiFi fallita</string>
-    <!-- Status for networks disabled from authentication failure (wrong password
-         or certificate). -->
-    <string name="wifi_disabled_password_failure">Problema di autenticazione</string>
-    <!-- Summary for the remembered network but currently not in range. -->
-    <string name="wifi_not_in_range">Fuori portata</string>
-    <!-- Summary for the remembered network but no internet connection was detected. -->
-    <string name="wifi_no_internet">Nessun accesso a Internet rilevato, non si riconnette automaticamente.</string>
-    <!-- Summary for saved networks -->
-    <string name="saved_network">Salvato da <xliff:g id="name">%1$s</xliff:g></string>
-
-    <!-- Status message of Wi-Fi when it is connected by a Wi-Fi assistant application. [CHAR LIMIT=NONE] -->
-    <string name="connected_via_wfa">Collegato tramite assistente Wi\u2011Fi </string>
-    <!-- Status message of Wi-Fi when it is connected by Passpoint configuration. [CHAR LIMIT=NONE] -->
-    <string name="connected_via_passpoint">Collegato tramite %1$s</string>
-    <!-- Status message of Wi-Fi when network has matching passpoint credentials. [CHAR LIMIT=NONE] -->
-    <string name="available_via_passpoint">Disponibile con %1$s</string>
-    
-
-    <!-- Summary for Connected wifi network without internet -->
-    <string name="wifi_connected_no_internet">Nessuna connessione internet</string>
-
-    <!-- Bluetooth settings.  Message when a device is disconnected -->
-    <string name="bluetooth_disconnected">Scollegato</string>
-    <!-- Bluetooth settings.  Message when disconnecting from a device -->
-    <string name="bluetooth_disconnecting">Disconnessione\u2026</string>
-     <!-- Bluetooth settings.  Message when connecting to a device -->
-    <string name="bluetooth_connecting">Collegamento\u2026</string>
-    <!-- Bluetooth settings.  Message when connected to a device. [CHAR LIMIT=40] -->
-    <string name="bluetooth_connected">Collegato</string>
-    <!--Bluetooth settings screen, summary text under individual Bluetooth devices when pairing -->
-    <string name="bluetooth_pairing">Accoppiamento\u2026</string>
-
-    <!-- Bluetooth settings.  Message when connected to a device, except for phone audio. [CHAR LIMIT=40] -->
-    <string name="bluetooth_connected_no_headset">Collegato (senza telefono)</string>
-    <!-- Bluetooth settings.  Message when connected to a device, except for media audio. [CHAR LIMIT=40] -->
-    <string name="bluetooth_connected_no_a2dp">Collegato (senza media)</string>
-    <!-- Bluetooth settings.  Message when connected to a device, except for map. [CHAR LIMIT=40] -->
-    <string name="bluetooth_connected_no_map">Collegato (nessun accesso hai messaggi)</string>
-    <!-- Bluetooth settings.  Message when connected to a device, except for phone/media audio. [CHAR LIMIT=40] -->
-    <string name="bluetooth_connected_no_headset_no_a2dp">Collegato (senza telefono o audio multimediale)</string>
-
-    <!-- Bluetooth settings.  The user-visible string that is used whenever referring to the A2DP profile. -->
-    <string name="bluetooth_profile_a2dp">Audio multimediale</string>
-    <!-- Bluetooth settings.  The user-visible string that is used whenever referring to the headset or handsfree profile. -->
-    <string name="bluetooth_profile_headset">Audio del telefono</string>
-    <!-- Bluetooth settings.  The user-visible string that is used whenever referring to the OPP profile. -->
-    <string name="bluetooth_profile_opp">Trasferimento di file</string>
-    <!-- Bluetooth settings. The user-visible string that is used whenever referring to the HID profile. -->
-    <string name="bluetooth_profile_hid">Ingresso del dispositivo</string>
-    <!-- Bluetooth settings. The user-visible string that is used whenever referring to the PAN profile (accessing Internet through remote device). [CHAR LIMIT=40] -->
-    <string name="bluetooth_profile_pan">Accesso internet</string>
-    <!-- Bluetooth settings. The user-visible string that is used whenever referring to the PBAP profile. [CHAR LIMIT=40] -->
-    <string name="bluetooth_profile_pbap">Condivisione dei contatti</string>
-    <!-- Bluetooth settings. The user-visible summary string that is used whenever referring to the PBAP profile (sharing contacts). [CHAR LIMIT=60] -->
-    <string name="bluetooth_profile_pbap_summary">Utilizza per la condivisione dei contatti</string>
-    <!-- Bluetooth settings. The user-visible string that is used whenever referring to the PAN profile (sharing this device's Internet connection). [CHAR LIMIT=40] -->
-    <string name="bluetooth_profile_pan_nap">Condivisione della connessione Internet</string>
-    <!-- Bluetooth settings. The user-visible string that is used whenever referring to the map profile. -->
-    <string name="bluetooth_profile_map">Accesso al messaggio</string>
-    <!-- Bluetooth settings. The user-visible string that is used whenever referring to the SAP profile (sharing SIM card). -->
-    <string name="bluetooth_profile_sap">Accesso alla SIM</string>
-    <!-- Bluetooth settings. The user-visible string that is used whenever referring to the dun profile. -->
-    <string name="bluetooth_profile_dun">Dial-up accesso alla rete</string>
-
-    <!-- Bluetooth settings.  Connection options screen.  The summary for the A2DP checkbox preference when A2DP is connected. -->
-    <string name="bluetooth_a2dp_profile_summary_connected">Collegato ad audio multimediale</string>
-    <!-- Bluetooth settings.  Connection options screen.  The summary for the headset checkbox preference when headset is connected. -->
-    <string name="bluetooth_headset_profile_summary_connected">Collegato all\'audio del telefono</string>
-    <!-- Bluetooth settings.  Connection options screen.  The summary for the OPP checkbox preference when OPP is connected. -->
-    <string name="bluetooth_opp_profile_summary_connected">Collegato al file server di trasferimento</string>
-    <!-- Bluetooth settings.  Connection options screen.  The summary for the map checkbox preference when map is connected. -->
-    <string name="bluetooth_map_profile_summary_connected">Connesso a mappare</string>
-    <!-- Bluetooth settings.  Connection options screen.  The summary for the sap checkbox preference when SAP is connected. -->
-    <string name="bluetooth_sap_profile_summary_connected">Connesso a SAP</string>
-    <!-- Bluetooth settings.  Connection options screen.  The summary for the OPP checkbox preference when OPP is not connected. -->
-    <string name="bluetooth_opp_profile_summary_not_connected">Non collegato al server di trasferimento file</string>
-    <!-- Bluetooth settings. Connection options screen. The summary for the HID checkbox preference when HID is connected. -->
-    <string name="bluetooth_hid_profile_summary_connected">Collegato al dispositivo d\'ingresso</string>
-    <!-- Bluetooth settings. Connection options screen. The summary for the checkbox preference when PAN is connected (user role). [CHAR LIMIT=25]-->
-    <string name="bluetooth_pan_user_profile_summary_connected">Collegato al dispositivo per l\'accesso a Internet</string>
-    <!-- Bluetooth settings. Connection options screen. The summary for the checkbox preference when PAN is connected (NAP role). [CHAR LIMIT=25]-->
-    <string name="bluetooth_pan_nap_profile_summary_connected">Condivisione della connessione Internet locale con il dispositivo</string>
-    <!-- Bluetooth settings.  Connection options screen.  The summary for the DUN checkbox preference when DUN is connected. -->
-    <string name="bluetooth_dun_profile_summary_connected">Collegato a Dun Server</string>
-
-    <!-- Bluetooth settings. Connection options screen. The summary
-         for the PAN checkbox preference that describes how checking it
-         will set the PAN profile as preferred. -->
-    <string name="bluetooth_pan_profile_summary_use_for">Utilizza per l\'accesso a Internet</string>
-    <!-- Bluetooth settings. Connection options screen.  The summary for the map checkbox preference that describes how checking it will set the map profile as preferred. -->
-    <string name="bluetooth_map_profile_summary_use_for">Utilizza per la mappa</string>
-    <!-- Bluetooth settings.  Connection options screen.  The summary for the sap checkbox preference that describes how checking it will set the sap profile as preferred. -->
-    <string name="bluetooth_sap_profile_summary_use_for">Utilizza per l\'accesso alla SIM</string>
-    <!-- Bluetooth settings.  Connection options screen.  The summary for the A2DP checkbox preference that describes how checking it will set the A2DP profile as preferred. -->
-    <string name="bluetooth_a2dp_profile_summary_use_for">Utilizza per l\'audio multimediale</string>
-    <!-- Bluetooth settings.  Connection options screen.  The summary for the headset checkbox preference that describes how checking it will set the headset profile as preferred. -->
-    <string name="bluetooth_headset_profile_summary_use_for">Utilizza per l\'audio del telefono</string>
-    <!-- Bluetooth settings.  Connection options screen.  The summary for the OPP checkbox preference that describes how checking it will set the OPP profile as preferred. -->
-    <string name="bluetooth_opp_profile_summary_use_for">Utilizza per il trasferimento file</string>
-    <!-- Bluetooth settings. Connection options screen. The summary
-         for the HID checkbox preference that describes how checking it
-         will set the HID profile as preferred. -->
-    <string name="bluetooth_hid_profile_summary_use_for">Utilizza per l\'ingresso</string>
-    <!-- Bluetooth settings. Connection options screen.  The summary for the dun checkbox preference that describes how checking it will set the dun profile as preferred. -->
-    <string name="bluetooth_dun_profile_summary_use_for">Utilizza per l\'accesso di rete Dial-up</string>
-
-    <!-- Button text for accepting an incoming pairing request. [CHAR LIMIT=20] -->
-    <string name="bluetooth_pairing_accept">Accoppia</string>
-    <!-- Button text for accepting an incoming pairing request in all caps. [CHAR LIMIT=20] -->
-    <string name="bluetooth_pairing_accept_all_caps">ACCOPPIA</string>
-    <!-- Button text for declining an incoming pairing request. [CHAR LIMIT=20] -->
-    <string name="bluetooth_pairing_decline">Cancella</string>
-
-    <!-- Message in pairing dialogs.  [CHAR LIMIT=NONE] -->
-    <string name="bluetooth_pairing_will_share_phonebook">Concedi l\'accesso ai tuoi contatti e alla cronologia delle chiamate quando si è connessi.</string>
-    <!-- Message for the error dialog when BT pairing fails generically. -->
-    <string name="bluetooth_pairing_error_message">Impossibile accoppiare <xliff:g id="device_name">%1$s</xliff:g>.</string>
-
-    <!-- Message for the error dialog when BT pairing fails because the PIN /
-    Passkey entered is incorrect. -->
-    <string name="bluetooth_pairing_pin_error_message">Impossibile accoppiare <xliff:g id="device_name">%1$s</xliff:g> a causa di un PIN o chiave di accesso non corretta.</string>
-    <!-- Message for the error dialog when BT pairing fails because the other device is down. -->
-    <string name="bluetooth_pairing_device_down_error_message">Impossibile comunicare con <xliff:g id="device_name">%1$s</xliff:g>.</string>
-    <!-- Message for the error dialog when BT pairing fails because the other device rejected the pairing. -->
-    <string name="bluetooth_pairing_rejected_error_message">Accoppiamento rifiutato da <xliff:g id="device_name">%1$s</xliff:g>.</string>
-
-    <!-- Content description of the WIFI signal when WIFI is disabled for accessibility (not shown on the screen). [CHAR LIMIT=NONE] -->
-    <string name="accessibility_wifi_off">Wifi off.</string>
-    <!-- Content description of the WIFI signal when no signal for accessibility (not shown on the screen). [CHAR LIMIT=NONE] -->
-    <string name="accessibility_no_wifi">Wifi scollegato.</string>
-    <!-- Content description of the WIFI signal when it is one bar for accessibility (not shown on the screen). [CHAR LIMIT=NONE] -->
-    <string name="accessibility_wifi_one_bar">Wifi 1 barra.</string>
-    <!-- Content description of the WIFI signal when it is two bars for accessibility (not shown on the screen). [CHAR LIMIT=NONE] -->
-    <string name="accessibility_wifi_two_bars">Wifi 2 barre.</string>
-    <!-- Content description of the WIFI signal when it is three bars for accessibility (not shown on the screen). [CHAR LIMIT=NONE] -->
-    <string name="accessibility_wifi_three_bars">Wifi 3 barre.</string>
-    <!-- Content description of the WIFI signal when it is full for accessibility (not shown on the screen). [CHAR LIMIT=NONE] -->
-    <string name="accessibility_wifi_signal_full">Wifi segnale pieno.</string>
-
-    <!-- Label for kernel threads in battery usage -->
-    <string name="process_kernel_label">Android OS</string>
-    <!-- Title of data usage item that represents all uninstalled applications. [CHAR LIMIT=48] -->
-    <string name="data_usage_uninstalled_apps">Applicazioni rimosse</string>
-    <!-- Title of data usage item that represents all uninstalled applications or removed users. [CHAR LIMIT=48] -->
-    <string name="data_usage_uninstalled_apps_users">Epplicazioni e utenti rimossi</string>
-
-    <!-- Tethering controls, item title to go into the tethering settings -->
-    <!-- Tethering controls, item title to go into the tethering settings when only USB tethering is available [CHAR LIMIT=25]-->
-    <string name="tether_settings_title_usb">USB tethering</string>
-    <!-- Tethering controls, item title to go into the tethering settings when only Wifi tethering is available [CHAR LIMIT=25]-->
-    <string name="tether_settings_title_wifi">Hotspot portatile</string>
-    <!-- Tethering controls, item title to go into the tethering settings when only Bluetooth tethering is available [CHAR LIMIT=25]-->
-    <string name="tether_settings_title_bluetooth">Bluetooth tethering</string>
-    <!-- Tethering controls, item title to go into the tethering settings when USB and Bluetooth tethering are available [CHAR LIMIT=25]-->
-    <string name="tether_settings_title_usb_bluetooth">Tethering</string>
-    <!-- Tethering controls, item title to go into the tethering settings when USB, Bluetooth and Wifi tethering are available [CHAR LIMIT=25]-->
-    <string name="tether_settings_title_all">Tethering &amp; hotspot portatile</string>
-
-    <!-- Title for a work profile. [CHAR LIMIT=25] -->
-    <string name="managed_user_title">Profilo di lavoro</string>
-
-    <!-- Title for Guest user [CHAR LIMIT=35] -->
-    <string name="user_guest">Ospite</string>
-
-    <!-- Manage apps, individual app screen, substituted for the application's label when the app's label CAN NOT be determined.-->
-    <string name="unknown">Sconosciuto</string>
-
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="wifi_fail_to_scan" msgid="1265540342578081461">"Impossibile cercare reti"</string>
+    <string name="wifi_security_none" msgid="7985461072596594400">"Nessuna"</string>
+    <string name="wifi_remembered" msgid="4955746899347821096">"Salvata"</string>
+    <string name="wifi_disabled_generic" msgid="4259794910584943386">"Disattivata"</string>
+    <string name="wifi_disabled_network_failure" msgid="2364951338436007124">"Errore configurazione IP"</string>
+    <string name="wifi_disabled_wifi_failure" msgid="3081668066612876581">"Errore connessione Wi-Fi"</string>
+    <string name="wifi_disabled_password_failure" msgid="8659805351763133575">"Problema di autenticazione"</string>
+    <string name="wifi_not_in_range" msgid="1136191511238508967">"Fuori portata"</string>
+    <string name="wifi_no_internet" msgid="9151470775868728896">"Nessun accesso a Internet rilevato, non verrà eseguita la riconnessione automatica."</string>
+    <string name="saved_network" msgid="4352716707126620811">"Salvata da <xliff:g id="NAME">%1$s</xliff:g>"</string>
+    <string name="connected_via_wfa" msgid="3805736726317410714">"Connesso tramite assistente Wi‑Fi"</string>
+    <string name="connected_via_passpoint" msgid="2826205693803088747">"Collegato tramite %1$s"</string>
+    <string name="available_via_passpoint" msgid="1617440946846329613">"Disponibile tramite %1$s"</string>
+    <string name="wifi_connected_no_internet" msgid="3149853966840874992">"Connesso senza Internet"</string>
+    <string name="bluetooth_disconnected" msgid="6557104142667339895">"Disconnesso"</string>
+    <string name="bluetooth_disconnecting" msgid="8913264760027764974">"Disconnessione..."</string>
+    <string name="bluetooth_connecting" msgid="8555009514614320497">"Connessione..."</string>
+    <string name="bluetooth_connected" msgid="6038755206916626419">"Connesso"</string>
+    <string name="bluetooth_pairing" msgid="1426882272690346242">"Accoppiamento..."</string>
+    <string name="bluetooth_connected_no_headset" msgid="2866994875046035609">"Collegato (telefono escluso)"</string>
+    <string name="bluetooth_connected_no_a2dp" msgid="4576188601581440337">"Collegato (contenuti multimed. esclusi)"</string>
+    <string name="bluetooth_connected_no_map" msgid="6504436917057479986">"Connesso (nessun accesso ai messaggi)"</string>
+    <string name="bluetooth_connected_no_headset_no_a2dp" msgid="9195757766755553810">"Collegato (telef. o conten. mult. esclusi)"</string>
+    <string name="bluetooth_profile_a2dp" msgid="2031475486179830674">"Audio multimediale"</string>
+    <string name="bluetooth_profile_headset" msgid="8658779596261212609">"Audio telefono"</string>
+    <string name="bluetooth_profile_opp" msgid="9168139293654233697">"Trasferimento file"</string>
+    <string name="bluetooth_profile_hid" msgid="3680729023366986480">"Dispositivo di input"</string>
+    <string name="bluetooth_profile_pan" msgid="3391606497945147673">"Accesso Internet"</string>
+    <string name="bluetooth_profile_pbap" msgid="5372051906968576809">"Condivisione contatti"</string>
+    <string name="bluetooth_profile_pbap_summary" msgid="6605229608108852198">"Usa per condivisione contatti"</string>
+    <string name="bluetooth_profile_pan_nap" msgid="8429049285027482959">"Condivisione connessione Internet"</string>
+    <string name="bluetooth_profile_map" msgid="5465271250454324383">"Accesso ai messaggi"</string>
+    <string name="bluetooth_profile_sap" msgid="5764222021851283125">"Accesso alla SIM"</string>
+    <string name="bluetooth_a2dp_profile_summary_connected" msgid="963376081347721598">"Collegato ad audio media"</string>
+    <string name="bluetooth_headset_profile_summary_connected" msgid="7661070206715520671">"Collegato ad audio telefono"</string>
+    <string name="bluetooth_opp_profile_summary_connected" msgid="2611913495968309066">"Collegato al server di trasferimento file"</string>
+    <string name="bluetooth_map_profile_summary_connected" msgid="8191407438851351713">"Connesso alla mappa"</string>
+    <string name="bluetooth_sap_profile_summary_connected" msgid="8561765057453083838">"Collegato al SAP"</string>
+    <string name="bluetooth_opp_profile_summary_not_connected" msgid="1267091356089086285">"Non collegato al server di trasferimento file"</string>
+    <string name="bluetooth_hid_profile_summary_connected" msgid="3381760054215168689">"Connesso a dispositivo di input"</string>
+    <string name="bluetooth_pan_user_profile_summary_connected" msgid="4602294638909590612">"Connesso a dispositivo per accesso Internet"</string>
+    <string name="bluetooth_pan_nap_profile_summary_connected" msgid="1561383706411975199">"Connessione Internet locale condivisa con dispositivo"</string>
+    <string name="bluetooth_pan_profile_summary_use_for" msgid="5664884523822068653">"Usa per accesso Internet"</string>
+    <string name="bluetooth_map_profile_summary_use_for" msgid="5154200119919927434">"Utilizza per la mappa"</string>
+    <string name="bluetooth_sap_profile_summary_use_for" msgid="7085362712786907993">"Utilizza per accesso SIM"</string>
+    <string name="bluetooth_a2dp_profile_summary_use_for" msgid="4630849022250168427">"Usa per audio media"</string>
+    <string name="bluetooth_headset_profile_summary_use_for" msgid="8705753622443862627">"Usa per audio telefono"</string>
+    <string name="bluetooth_opp_profile_summary_use_for" msgid="1255674547144769756">"Usa per trasferimento file"</string>
+    <string name="bluetooth_hid_profile_summary_use_for" msgid="232727040453645139">"Utilizza per l\'input"</string>
+    <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"Accoppia"</string>
+    <string name="bluetooth_pairing_accept_all_caps" msgid="6061699265220789149">"ACCOPPIA"</string>
+    <string name="bluetooth_pairing_decline" msgid="4185420413578948140">"Annulla"</string>
+    <string name="bluetooth_pairing_will_share_phonebook" msgid="4982239145676394429">"L\'accoppiamento consente l\'accesso ai tuoi contatti e alla cronologia chiamate quando i dispositivi sono connessi."</string>
+    <string name="bluetooth_pairing_error_message" msgid="3748157733635947087">"Impossibile eseguire l\'accoppiamento con <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
+    <string name="bluetooth_pairing_pin_error_message" msgid="8337234855188925274">"Impossibile eseguire l\'accoppiamento con <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. La passkey o il PIN è errato."</string>
+    <string name="bluetooth_pairing_device_down_error_message" msgid="7870998403045801381">"Impossibile comunicare con <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
+    <string name="bluetooth_pairing_rejected_error_message" msgid="1648157108520832454">"Accoppiamento rifiutato da <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
+    <string name="accessibility_wifi_off" msgid="1166761729660614716">"Wi-Fi non attivo."</string>
+    <string name="accessibility_no_wifi" msgid="8834610636137374508">"Rete Wi-Fi scollegata."</string>
+    <string name="accessibility_wifi_one_bar" msgid="4869376278894301820">"Wi-Fi: una barra."</string>
+    <string name="accessibility_wifi_two_bars" msgid="3569851234710034416">"Wi-Fi: due barre."</string>
+    <string name="accessibility_wifi_three_bars" msgid="8134185644861380311">"Wi-Fi: tre barre."</string>
+    <string name="accessibility_wifi_signal_full" msgid="7061045677694702">"Segnale Wi-Fi completo."</string>
 </resources>
