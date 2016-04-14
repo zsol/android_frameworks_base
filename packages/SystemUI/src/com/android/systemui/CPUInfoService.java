@@ -65,6 +65,7 @@ public class CPUInfoService extends Service {
 
         private boolean mLpMode;
         private String mCPUTemp;
+        private String mGPUFreq;
         private String mPowerProfile;
         private boolean mDataAvail;
 
@@ -77,10 +78,11 @@ public class CPUInfoService extends Service {
                     String msgData = (String) msg.obj;
                     try {
                         String[] parts=msgData.split(";");
-                        mCPUTemp=parts[0];
+                        mCPUTemp = parts[0];
                         mLpMode = parts[1].equals("1");
+                        mGPUFreq = parts[2];
 
-                        String[] cpuParts=parts[2].split("\\|");
+                        String[] cpuParts=parts[3].split("\\|");
                         for(int i=0; i<cpuParts.length; i++){
                             String cpuInfo=cpuParts[i];
                             String cpuInfoParts[]=cpuInfo.split(":");
@@ -93,7 +95,7 @@ public class CPUInfoService extends Service {
                             }
                         }
                         if (mPowerProfilesSupported) {
-                            mPowerProfile = parts[3];
+                            mPowerProfile = parts[4];
                         }
                         mDataAvail = true;
                         updateDisplay();
@@ -191,6 +193,9 @@ public class CPUInfoService extends Service {
             canvas.drawText("Temp:"+mCPUTemp, RIGHT-mPaddingRight-mMaxWidth,
                 y-1, mOnlinePaint);
             y += mFH;
+            canvas.drawText("gpu:"+mGPUFreq, RIGHT-mPaddingRight-mMaxWidth,
+                y-1, mOnlinePaint);
+            y += mFH;
 
             for(int i=0; i<mCurrFreq.length; i++){
                 String s=getCPUInfoString(i);
@@ -218,7 +223,7 @@ public class CPUInfoService extends Service {
             final int NW = mPowerProfilesSupported ? (mNumCpus + 1) : mNumCpus;
 
             int neededWidth = mPaddingLeft + mPaddingRight + mMaxWidth;
-            int neededHeight = mPaddingTop + mPaddingBottom + (mFH*(1+NW));
+            int neededHeight = mPaddingTop + mPaddingBottom + (mFH*(2+NW));
             if (neededWidth != mNeededWidth || neededHeight != mNeededHeight) {
                 mNeededWidth = neededWidth;
                 mNeededHeight = neededHeight;
@@ -226,10 +231,6 @@ public class CPUInfoService extends Service {
             } else {
                 invalidate();
             }
-        }
-
-        private String toMHz(String mhzString) {
-            return new StringBuilder().append(Integer.valueOf(mhzString) / 1000).append(" MHz").toString();
         }
 
         public Handler getHandler(){
@@ -248,6 +249,11 @@ public class CPUInfoService extends Service {
         private static final String CPU_GOV_TAIL = "/cpufreq/scaling_governor";
         private static final String CPU_TEMP_HTC = "/sys/htc/cpu_temp";
         private static final String CPU_TEMP_OPPO = "/sys/class/thermal/thermal_zone0/temp";
+        private static final String GPU_FREQ_1 = "/sys/devices/fdb00000.qcom,kgsl-3d0/kgsl/kgsl-3d0/gpuclk";
+        private static final String GPU_FREQ_2 = "/sys/devices/platform/kgsl-3d0.0/kgsl/kgsl-3d0/gpuclk";
+        private static final String GPU_FREQ_3 = "/sys/devices/system/cpu/cpu0/cpufreq/gpu_cur_freq";
+        private static final String GPU_FREQ_4 = "/sys/devices/system/cpu/cpu0/cpufreq/gpu_cur_freq";
+        private static final String GPU_FREQ_5 = "/sys/class/kgsl/kgsl-3d0/gpuclk";
 
         public CurCPUThread(Handler handler, int numCpus){
             mHandler=handler;
@@ -256,6 +262,10 @@ public class CPUInfoService extends Service {
 
         public void interrupt() {
             mInterrupt = true;
+        }
+
+        private String toKHz(String mhzString) {
+            return new StringBuilder().append(Integer.valueOf(mhzString) / 1000).append(" KHz").toString();
         }
 
         @Override
@@ -271,7 +281,23 @@ public class CPUInfoService extends Service {
                     sb.append(cpuTemp == null?"0":cpuTemp);
                     sb.append(";");
                     String lpMode = CPUInfoService.readOneLine(CPU_LP_MODE);
-                    sb.append(lpMode == null?"0":lpMode);
+                    sb.append(";");
+                    String gpuFreq = CPUInfoService.readOneLine(GPU_FREQ_1);
+/* Uncomment This if your path is is not GPU_FREQ_1.
+                    if (gpuFreq == null){
+                        gpuFreq = CPUInfoService.readOneLine(GPU_FREQ_2);
+                    }
+                    if (gpuFreq == null){
+                        gpuFreq = CPUInfoService.readOneLine(GPU_FREQ_3);
+                    }
+                    if (gpuFreq == null){
+                        gpuFreq = CPUInfoService.readOneLine(GPU_FREQ_4);
+                    }
+                    if (gpuFreq == null){
+                        gpuFreq = CPUInfoService.readOneLine(GPU_FREQ_5);
+                    }
+*/
+                    sb.append(gpuFreq == null?"0":toKHz(gpuFreq));
                     sb.append(";");
 
                     for(int i=0; i<mNumCpus; i++){
