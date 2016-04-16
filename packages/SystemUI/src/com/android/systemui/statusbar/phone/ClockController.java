@@ -103,8 +103,6 @@ public class ClockController {
         mActiveClock.setAmPmStyle(mAmPmStyle);
 
         setClockAndDateStatus();
-        setTextColor(mIconTint);
-        updateFontSize();
     }
 
     private void updateSettings() {
@@ -127,19 +125,6 @@ public class ClockController {
     public void setVisibility(boolean visible) {
         if (mActiveClock != null) {
             mActiveClock.setVisibility(visible ? View.VISIBLE : View.GONE);
-        }
-    }
-
-    public void setTextColor(int iconTint) {
-        mIconTint = iconTint;
-        if (mActiveClock != null) {
-            mActiveClock.setTextColor(iconTint);
-        }
-    }
-
-    public void updateFontSize() {
-        if (mActiveClock != null) {
-            FontSizeUtils.updateFontSize(mActiveClock, R.dimen.status_bar_clock_size);
         }
     }
 
