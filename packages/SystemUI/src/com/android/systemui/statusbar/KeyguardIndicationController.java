@@ -179,7 +179,7 @@ public class KeyguardIndicationController {
         if (mPowerPluggedIn) {
             String indication = computePowerIndication();
             if (DEBUG_CHARGING_CURRENT) {
-                indication += ",  " + (mChargingCurrent / 1000) + " mA";
+                indication += ",  " + mChargingCurrent + " mA";
             }
             return indication;
         }
@@ -237,7 +237,7 @@ public class KeyguardIndicationController {
             mPowerPluggedIn = status.isPluggedIn() && isChargingOrFull;
             mPowerCharged = status.isCharged();
             mChargingCurrent = status.maxChargingCurrent;
-            mChargingSpeed = status.getChargingSpeed(mSlowThreshold, mFastThreshold);
+            mChargingSpeed = status.getChargingSpeed((mSlowThreshold / 1000), (mFastThreshold / 1000));
             updateIndication();
         }
 
