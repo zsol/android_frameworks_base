@@ -1290,7 +1290,7 @@ final class ActivityRecord {
             } else if (ATTR_RESOLVEDTYPE.equals(attrName)) {
                 resolvedType = attrValue;
             } else if (ATTR_COMPONENTSPECIFIED.equals(attrName)) {
-                componentSpecified = Boolean.valueOf(attrValue);
+                componentSpecified = Boolean.parseBoolean(attrValue);
             } else if (ATTR_USERID.equals(attrName)) {
                 userId = Integer.valueOf(attrValue);
             } else if (attrName.startsWith(TaskDescription.ATTR_TASKDESCRIPTION_PREFIX)) {
