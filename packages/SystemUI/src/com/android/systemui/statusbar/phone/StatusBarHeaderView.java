@@ -1209,7 +1209,6 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
         mQsDetailHeaderTitle.setShadowLayer(5, 0, 0, Color.BLACK);
         mWeatherLine1.setShadowLayer(5, 0, 0, Color.BLACK);
         mWeatherLine2.setShadowLayer(5, 0, 0, Color.BLACK);
-        mEditTileDoneText.setShadowLayer(5, 0, 0, Color.BLACK);
     }
 
     /**
@@ -1225,6 +1224,5 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
         mQsDetailHeaderTitle.setShadowLayer(0, 0, 0, Color.BLACK);
         mWeatherLine1.setShadowLayer(0, 0, 0, Color.BLACK);
         mWeatherLine2.setShadowLayer(0, 0, 0, Color.BLACK);
-        mEditTileDoneText.setShadowLayer(0, 0, 0, Color.BLACK);
     }
 }
