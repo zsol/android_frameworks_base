@@ -4911,6 +4911,12 @@ public final class Settings {
         public static final String DASHBOARD_FONT_STYLE = "dashboard_font_style";
 
         /**
+         * Dashboard main color switch
+         * @hide
+         */
+        public static final String DASHBOARD_CUSTOMIZATIONS = "dashboard_customizations";
+
+        /**
          * Dashboard color
          * @hide
          */
