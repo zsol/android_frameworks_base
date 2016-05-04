@@ -4936,18 +4936,6 @@ public final class Settings {
         public static final String SETTINGS_ICON_COLOR = "settings_icon_color";
 
         /**
-         * Dashboard title text size
-         * @hide
-         */
-        public static final String SETTINGS_TITLE_TEXT_SIZE = "settings_title_text_size";
-
-        /**
-         * Dashboard category text size
-         * @hide
-         */
-        public static final String SETTINGS_CATEGORY_TEXT_SIZE = "settings_category_text_size";
-
-        /**
          * Dashboard category text color
          * @hide
          */
