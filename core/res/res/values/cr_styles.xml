@@ -28,4 +28,7 @@
         <item name="windowExitAnimation">@anim/recent_screen_exit_left</item>
     </style>
 
+    <!-- Exposed Java styles for power menu  -->
+    <style name="Theme.Power.Dialog" parent="@style/Theme.DeviceDefault.Light.DarkActionBar" />
+
 </resources>
