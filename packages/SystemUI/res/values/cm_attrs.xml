@@ -30,9 +30,5 @@
         <attr name="android:title" />
         <attr name="defaultValue" format="integer"/>
     </declare-styleable>
-
-    <declare-styleable name="BatteryMeterViewDrawable">
-        <attr name="android:gravity"/>
-    </declare-styleable>
 </resources>
 
