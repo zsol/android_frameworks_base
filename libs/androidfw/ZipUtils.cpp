@@ -150,7 +150,7 @@ bail:
 
 class FileReader {
 public:
-   explicit FileReader(FILE* fp) :
+   FileReader(FILE* fp) :
        mFp(fp), mReadBuf(new unsigned char[kReadBufSize])
    {
    }
@@ -170,7 +170,7 @@ public:
 
 class FdReader {
 public:
-   explicit FdReader(int fd) :
+   FdReader(int fd) :
        mFd(fd), mReadBuf(new unsigned char[kReadBufSize])
    {
    }

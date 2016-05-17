@@ -26,7 +26,7 @@ enum {
 // This is a stub that real consumers should override.
 class BpObbActionListener: public BpInterface<IObbActionListener> {
 public:
-    explicit BpObbActionListener(const sp<IBinder>& impl)
+    BpObbActionListener(const sp<IBinder>& impl)
         : BpInterface<IObbActionListener>(impl)
     { }
 

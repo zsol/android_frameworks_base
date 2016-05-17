@@ -28,7 +28,7 @@ namespace aapt {
 struct TestValue : public Value {
     std::u16string value;
 
-    explicit TestValue(StringPiece16 str) : value(str.toString()) {
+    TestValue(StringPiece16 str) : value(str.toString()) {
     }
 
     TestValue* clone(StringPool* /*newPool*/) const override {

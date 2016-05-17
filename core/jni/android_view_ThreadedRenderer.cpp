@@ -68,7 +68,7 @@ public:
 
 class InvokeAnimationListeners : public MessageHandler {
 public:
-    explicit InvokeAnimationListeners(std::vector<OnFinishedEvent>& events) {
+    InvokeAnimationListeners(std::vector<OnFinishedEvent>& events) {
         mOnFinishedEvents.swap(events);
     }
 
@@ -108,7 +108,7 @@ private:
 
 class RootRenderNode : public RenderNode, ErrorHandler {
 public:
-    explicit RootRenderNode(JNIEnv* env) : RenderNode() {
+    RootRenderNode(JNIEnv* env) : RenderNode() {
         mLooper = Looper::getForThread();
         LOG_ALWAYS_FATAL_IF(!mLooper.get(),
                 "Must create RootRenderNode on a thread with a looper!");
@@ -197,7 +197,7 @@ private:
 
 class ContextFactoryImpl : public IContextFactory {
 public:
-    explicit ContextFactoryImpl(RootRenderNode* rootNode) : mRootNode(rootNode) {}
+    ContextFactoryImpl(RootRenderNode* rootNode) : mRootNode(rootNode) {}
 
     virtual AnimationContext* createAnimationContext(renderthread::TimeLord& clock) {
         return new AnimationContextBridge(clock, mRootNode);

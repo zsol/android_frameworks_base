@@ -56,7 +56,7 @@ enum {
 class BpMountService: public BpInterface<IMountService>
 {
 public:
-    explicit BpMountService(const sp<IBinder>& impl)
+    BpMountService(const sp<IBinder>& impl)
         : BpInterface<IMountService>(impl)
     {
     }

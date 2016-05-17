@@ -61,7 +61,7 @@ public:
 
 class DrawBatch : public Batch {
 public:
-    explicit DrawBatch(const DeferInfo& deferInfo) : mAllOpsOpaque(true),
+    DrawBatch(const DeferInfo& deferInfo) : mAllOpsOpaque(true),
             mBatchId(deferInfo.batchId), mMergeId(deferInfo.mergeId) {
         mOps.clear();
     }

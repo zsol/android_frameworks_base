@@ -39,7 +39,7 @@ using android::Surface;
 
 class NativeWindowHandle : public WindowHandle {
   public:
-    explicit NativeWindowHandle(ANativeWindow* window) : window_(window) {
+    NativeWindowHandle(ANativeWindow* window) : window_(window) {
     }
 
     virtual ~NativeWindowHandle() {

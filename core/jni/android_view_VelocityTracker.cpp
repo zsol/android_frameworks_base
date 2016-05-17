@@ -45,7 +45,7 @@ static struct {
 
 class VelocityTrackerState {
 public:
-    explicit VelocityTrackerState(const char* strategy);
+    VelocityTrackerState(const char* strategy);
 
     void clear();
     void addMovement(const MotionEvent* event);

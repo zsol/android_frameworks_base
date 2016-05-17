@@ -380,7 +380,7 @@ using namespace android;
 // on the caller already having a local JNI ref
 class LocalScopedBitmap {
 public:
-    explicit LocalScopedBitmap(jlong bitmapHandle)
+    LocalScopedBitmap(jlong bitmapHandle)
             : mBitmap(reinterpret_cast<Bitmap*>(bitmapHandle)) {}
 
     Bitmap* operator->() {

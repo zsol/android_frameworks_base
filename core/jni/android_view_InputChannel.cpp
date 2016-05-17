@@ -43,7 +43,7 @@ static struct {
 
 class NativeInputChannel {
 public:
-    explicit NativeInputChannel(const sp<InputChannel>& inputChannel);
+    NativeInputChannel(const sp<InputChannel>& inputChannel);
     ~NativeInputChannel();
 
     inline sp<InputChannel> getInputChannel() { return mInputChannel; }

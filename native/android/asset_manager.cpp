@@ -39,7 +39,7 @@ struct AAssetDir {
     size_t mCurFileIndex;
     String8 mCachedFileName;
 
-    explicit AAssetDir(AssetDir* dir) : mAssetDir(dir), mCurFileIndex(0) { }
+    AAssetDir(AssetDir* dir) : mAssetDir(dir), mCurFileIndex(0) { }
     ~AAssetDir() { delete mAssetDir; }
 };
 
@@ -48,7 +48,7 @@ struct AAssetDir {
 struct AAsset {
     Asset* mAsset;
 
-    explicit AAsset(Asset* asset) : mAsset(asset) { }
+    AAsset(Asset* asset) : mAsset(asset) { }
     ~AAsset() { delete mAsset; }
 };
 

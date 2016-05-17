@@ -37,7 +37,7 @@ private:
     sp<AStorageManager> mStorageManager;
 
 public:
-    explicit ObbActionListener(AStorageManager* mgr) :
+    ObbActionListener(AStorageManager* mgr) :
             mStorageManager(mgr)
     {}
 

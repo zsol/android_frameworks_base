@@ -129,7 +129,7 @@ class DispatchFrameCallbacks : public RenderTask {
 private:
     RenderThread* mRenderThread;
 public:
-    explicit DispatchFrameCallbacks(RenderThread* rt) : mRenderThread(rt) {}
+    DispatchFrameCallbacks(RenderThread* rt) : mRenderThread(rt) {}
 
     virtual void run() override {
         mRenderThread->dispatchFrameCallbacks();
