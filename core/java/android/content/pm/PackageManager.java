@@ -4575,7 +4575,7 @@ public abstract class PackageManager {
      * Return whether or not a specific component is protected
      * @hide
      */
-    public abstract boolean isComponentProtected(String callingPackage,
+    public abstract boolean isComponentProtected(String callingPackage, int callingUid,
             ComponentName componentName);
 
     /**
