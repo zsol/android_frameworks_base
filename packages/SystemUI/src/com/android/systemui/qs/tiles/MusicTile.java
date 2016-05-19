@@ -205,17 +205,17 @@ public class MusicTile extends QSTile<QSTile.BooleanState> {
             playbackStateUpdate(state);
         }
 
-        @Override
-        public void onClientFolderInfoBrowsedPlayer(String stringUri) { }
+//        @Override
+//        public void onClientFolderInfoBrowsedPlayer(String stringUri) { }
 
-        @Override
-        public void onClientUpdateNowPlayingEntries(long[] playList) { }
+//        @Override
+//        public void onClientUpdateNowPlayingEntries(long[] playList) { }
 
-        @Override
-        public void onClientNowPlayingContentChange() { }
+//        @Override
+//        public void onClientNowPlayingContentChange() { }
 
-        @Override
-        public void onClientPlayItemResponse(boolean success) { }
+//        @Override
+//        public void onClientPlayItemResponse(boolean success) { }
 
         @Override
         public void onClientMetadataUpdate(RemoteController.MetadataEditor data) {
