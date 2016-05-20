@@ -10,7 +10,8 @@ LOCAL_STATIC_JAVA_LIBRARIES := Keyguard \
     org.cyanogenmod.platform.internal \
     android-support-v7-palette \
     android-support-v4 \
-    android-opt-cards
+    android-opt-cards \
+    uicommon
 
 LOCAL_JAVA_LIBRARIES := telephony-common
 LOCAL_FULL_LIBS_MANIFEST_FILES := $(LOCAL_PATH)/AndroidManifest_cm.xml
