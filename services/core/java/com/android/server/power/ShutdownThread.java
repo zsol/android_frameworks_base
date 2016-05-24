@@ -640,16 +640,11 @@ public final class ShutdownThread extends Thread {
             }
         };
 
-        final String cryptoStatus = SystemProperties.get("ro.crypto.state", "unsupported");
-        final boolean isEncrypted = "encrypted".equalsIgnoreCase(cryptoStatus);
+        if (mRebootUpdate) {
+            sInstance.setRebootProgress(MOUNT_SERVICE_STOP_PERCENT, null);
 
-        if (isEncrypted) {
-            if (mRebootUpdate) {
-                sInstance.setRebootProgress(MOUNT_SERVICE_STOP_PERCENT, null);
-
-                // If it's to reboot to install update, invoke uncrypt via init service.
-                uncrypt();
-            }
+            // If it's to reboot to install update, invoke uncrypt via init service.
+            uncrypt();
         }
 
         Log.i(TAG, "Shutting down MountService");
