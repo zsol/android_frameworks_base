@@ -328,12 +328,8 @@ public class KeyguardSimPinView extends KeyguardPinBasedInputView {
             msg = rez.getString(R.string.kg_sim_pin_instructions);
         } else {
             SubscriptionInfo info = monitor.getSubscriptionInfoForSubId(mSubId);
-            if (rez.getBoolean(R.bool.kg_sim_display_name)) {
-                CharSequence displayName = info != null ? info.getDisplayName() : ""; // don't crash
-                msg = rez.getString(R.string.kg_sim_pin_instructions_multi, displayName);
-            } else {
-                msg = rez.getString(R.string.kg_sim_pin_instructions);
-            }
+            CharSequence displayName = info != null ? info.getDisplayName() : ""; // don't crash
+            msg = rez.getString(R.string.kg_sim_pin_instructions_multi, displayName);
             if (info != null) {
                 color = info.getIconTint();
             }
