@@ -128,6 +128,9 @@ public class ClockController {
         }
     }
 
+    public void setTextColor(int iconTint) {
+    }
+
     public void cleanup() {
         mSettingsObserver.unobserve();
     }
