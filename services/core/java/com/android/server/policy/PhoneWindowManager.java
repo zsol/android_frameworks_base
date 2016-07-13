@@ -2498,10 +2498,10 @@ public class PhoneWindowManager implements WindowManagerPolicy {
 
             mLidControlsSleep = Settings.System.getIntForUser(resolver,
                     Settings.System.LID_CONTROLS_SLEEP,
-                    1, UserHandle.USER_CURRENT) != 0;
+                    0, UserHandle.USER_CURRENT) != 0;
             mLidControlsWake = Settings.System.getIntForUser(resolver,
                     Settings.System.LID_CONTROLS_WAKE,
-                    1, UserHandle.USER_CURRENT) != 0;
+                    0, UserHandle.USER_CURRENT) != 0;
 
         }
         synchronized (mWindowManagerFuncs.getWindowManagerLock()) {
