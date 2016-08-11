@@ -7458,7 +7458,6 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                         mBootMsgDialog.setTitle(R.string.android_start_title);
                     }
                     mBootMsgDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                    mBootMsgDialog.setIcon(com.android.internal.R.drawable.arter97);
                     mBootMsgDialog.setIndeterminate(true);
                     mBootMsgDialog.getWindow().setType(
                             WindowManager.LayoutParams.TYPE_BOOT_PROGRESS);
@@ -7479,8 +7478,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                     mBootMsgDialog.setMessage(Html.fromHtml(msg + "<br><b>" + currentPackageName + "</b>"));
                 }
                 else {
-                    mBootMsgDialog.setMessage("Powered By arter97 optimizations\n\n" + msg   
-                    + "\n\ntemasek cm-13.0 unofficial build");
+                    mBootMsgDialog.setMessage(msg);
                 }
             }
         });
